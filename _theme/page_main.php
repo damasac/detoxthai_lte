@@ -199,7 +199,7 @@ if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
                       <!-- The user image in the navbar-->
                       <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/userimg.jpg" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                      <span id="divusername">Username</span>
+                      <span id="divusername">Admin</span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->
