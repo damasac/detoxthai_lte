@@ -68,8 +68,8 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php">สมาชิก</a></li>
-		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php">ค่ายล้างพิษตับ</a></li>
-		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php">หลักสูตรล้างพิษตับ</a></li>
+                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php">ค่ายล้างพิษตับ</a></li>
+                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php">หลักสูตรล้างพิษตับ</a></li>
               </ul>
 
             </div><!-- /.navbar-collapse -->
