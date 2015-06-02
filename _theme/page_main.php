@@ -57,10 +57,10 @@
         <nav class="navbar navbar-static-top">
           <div class="container">
             <div class="navbar-header">
-              <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>" class="navbar-brand"><b>Detox</b>Thai</a>
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                <i class="fa fa-bars"></i>
-              </button>
+                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>" class="navbar-brand"><b>Detox</b>Thai</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,6 +70,17 @@
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php">สมาชิก</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php">ค่ายล้างพิษตับ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php">หลักสูตรล้างพิษตับ</a></li>
+                
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span><span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>dev_view.php">Dev View</a></li>
+                    <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html">Example</a></li>
+                    <li class="divider"></li>
+                    <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation">Document</a></li>
+                  </ul>
+                </li>
+                
               </ul>
 
             </div><!-- /.navbar-collapse -->
@@ -173,7 +184,7 @@
                       <!-- The user image in the navbar-->
                       <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                      
+                      Username
                     </a>
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->

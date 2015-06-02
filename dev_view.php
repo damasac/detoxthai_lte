@@ -104,7 +104,7 @@
             </a>
             <div class="buttons pull-right">
                 <a class="first hidden-xs" id="display-full" href="#" data-toggle="tooltip" data-placement="bottom" title="Display Desktop - full width"><i class="fa fa-desktop fa-lg"></i></a>
-                <a class="hidden-xs" id="display-940" href="#" data-toggle="tooltip" data-placement="bottom" title="Display Tablet - 940px"><i class="fa fa-tablet fa-lg"></i></a>
+                <a class="hidden-xs" id="display-950" href="#" data-toggle="tooltip" data-placement="bottom" title="Display Tablet - 950px"><i class="fa fa-tablet fa-lg"></i></a>
                 <a class="hidden-xs" id="display-480" href="#" data-toggle="tooltip" data-placement="bottom" title="Display Phone - 480px"><i class="fa fa-mobile fa-lg"></i></a>
                 <a id="remove-frame" href="#" data-toggle="tooltip" data-placement="bottom" title="Remove frame"><i class="fa fa-times"></i></a>
             </div>
@@ -144,9 +144,9 @@
             iframe_width("100%");
         });
 
-        $("#display-940").click(function(e){
+        $("#display-950").click(function(e){
             e.preventDefault();
-            iframe_width("940px");
+            iframe_width("950px");
         });
 
         $("#display-480").click(function(e){
