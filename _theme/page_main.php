@@ -28,6 +28,13 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        @media (max-width:430px) {
+            #divusername {
+                display: none;
+            }
+        }
+    </style>
 	{$js_and_css_head}
   </head>
   <!--
@@ -184,7 +191,7 @@
                       <!-- The user image in the navbar-->
                       <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                      Username
+                      <span id="divusername">Username</span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->
