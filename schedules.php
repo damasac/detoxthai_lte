@@ -1,6 +1,6 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> สวัสดีครับ <?php eb();?>
+<?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <script src=""></script>

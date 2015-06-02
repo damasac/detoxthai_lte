@@ -1,6 +1,6 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> สวัสดีครับ <?php eb();?>
+<?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <script src=""></script>
@@ -17,7 +17,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Detox Thai</li>
+      <li class="active">SITE NAME HERE</li>
     </ol>
   </section>
 
