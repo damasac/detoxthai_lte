@@ -1,3 +1,4 @@
+<?php require_once '_theme/util.inc.php'; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,6 +13,8 @@
     <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />    
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -91,6 +94,10 @@
               </ul>
 
             </div><!-- /.navbar-collapse -->
+<?php
+
+if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
+?>  
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -220,13 +227,33 @@
                           <a href="#" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
-                          <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                          <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php" class="btn btn-default btn-flat">Sign out</a>
                         </div>
                       </li>
                     </ul>
                   </li>
                 </ul>
               </div><!-- /.navbar-custom-menu -->
+<?php
+}else{
+?>
+            <!-- Navbar Right Menu -->
+              <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+		  <li class="dropdown user user-menu">
+		    <a href="login.php"><span class="badge bg-yellow"> เข้าสู่ระบบ </span></a>
+		  </li>
+		  <li class="dropdown user user-menu">
+		    <a href="register.php"><span class="badge bg-yellow"> ลงทะเบียน </span></a>
+		  </li>
+		  <li class="dropdown user user-menu">
+		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
+		  </li>		  
+                </ul>
+              </div><!-- /.navbar-custom-menu -->
+<?php
+}
+?>
           </div><!-- /.container-fluid -->
         </nav>
       </header>
@@ -262,6 +289,18 @@
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- FastClick -->
     <script src='<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/fastclick/fastclick.min.js'></script>
+    <!-- iCheck -->
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
+  
 
     {$js_and_css_footer}
   </body>

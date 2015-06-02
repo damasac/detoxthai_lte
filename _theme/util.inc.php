@@ -4,6 +4,8 @@ session_start();
 header("Content-type:text/html; charset=UTF-8");
 //for path directory
 define("APP_WEBROOT", "detoxthai_lte/");
+//Session Prefix
+define(SESSIONPREFIX , "dtt_");
 //check login
 /*
 if(!$_SESSION['tpc_puser_id'] && !$_SESSION['tpc_puser_status'] && !$_SESSION['tpc_puser_area'] && !$_SESSION['tpc_puser_site']){
