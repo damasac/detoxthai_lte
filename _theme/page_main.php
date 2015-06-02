@@ -66,7 +66,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">หน้าแรก <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="home.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
                 <li><a href="#">สมาชิก</a></li>
 		<li><a href="#">ค่ายล้างพิษตับ</a></li>
 		<li><a href="#">หลักสูตรล้างพิษตับ</a></li>
