@@ -78,6 +78,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php" data-toggle="tooltip" data-placement="bottom" title="หน้าแรกรวมทุกศูนย์ (Portal)">หน้าแรก <span class="sr-only">(current)</span></a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php" data-toggle="tooltip" data-placement="bottom" title="สมาชิกทั้งหมดของ DetoxThai (Member)">สมาชิก</a></li>
+		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>feeds.php" data-toggle="tooltip" data-placement="bottom" title="เหตุการณ์ DetoxThai (Feeds)">เหตุการณ์</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php" data-toggle="tooltip" data-placement="bottom" title="หน้าแสดงรายการรวมทุกศูนย์ (Site)">ค่ายล้างพิษตับ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php" data-toggle="tooltip" data-placement="bottom" title="รายการแสดงหลักสูตรล้างพิษตับของทุกศูนย์ (Course)">หลักสูตรล้างพิษตับ</a></li>
                 
@@ -241,13 +242,13 @@ if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 		  <li class="dropdown user user-menu">
-		    <a href="login.php"><span class="badge bg-yellow"> เข้าสู่ระบบ </span></a>
+		    <a href="login.php"><span class="badge bg-yellow" style="font-size: 15px"> เข้าสู่ระบบ </span></a>
 		  </li>
 		  <li class="dropdown user user-menu">
-		    <a href="register.php"><span class="badge bg-yellow"> ลงทะเบียน </span></a>
+		    <a href="register.php"><span class="badge bg-yellow" style="font-size: 15px"> ลงทะเบียน </span></a>
 		  </li>
 		  <li class="dropdown user user-menu">
-		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
+		    <a href="forminput.php"><span class="badge bg-yellow" style="font-size: 15px"> บันทึกข้อมูล </span></a>
 		  </li>		  
                 </ul>
               </div><!-- /.navbar-custom-menu -->
