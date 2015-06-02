@@ -57,7 +57,7 @@
         <nav class="navbar navbar-static-top">
           <div class="container">
             <div class="navbar-header">
-              <a href="./" class="navbar-brand"><b>Detox</b>Thai</a>
+              <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>" class="navbar-brand"><b>Detox</b>Thai</a>
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                 <i class="fa fa-bars"></i>
               </button>
@@ -66,10 +66,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="home.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">สมาชิก</a></li>
-		<li><a href="#">ค่ายล้างพิษตับ</a></li>
-		<li><a href="#">หลักสูตรล้างพิษตับ</a></li>
+                <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php">หน้าแรก <span class="sr-only">(current)</span></a></li>
+                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php">สมาชิก</a></li>
+		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php">ค่ายล้างพิษตับ</a></li>
+		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php">หลักสูตรล้างพิษตับ</a></li>
               </ul>
 
             </div><!-- /.navbar-collapse -->
