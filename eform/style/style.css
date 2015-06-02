@@ -1,0 +1,88 @@
+.panel-body2{
+height: auto;box-shadow: 1px 0px 10px 1px rgba(0, 0, 0, 0.3);
+position: relative;
+padding:20px;
+}
+.panel-body{
+box-shadow: 1px 0px 10px 1px rgba(0, 0, 0, 0.3);
+position: relative;
+}
+#editForm{
+
+}
+.gFormInput{
+  padding: 6px 12px;
+  width: 100%;
+  border:hidden;
+}
+.gFormInput:hover{
+  border:1px #AAAAAA solid;
+}
+.gFormInput:focus{
+  border:1px #4D90FE solid;
+}
+.box{
+    padding:10px;
+    border-radius:3px;
+    cursor: pointer;
+}
+#editForm{
+    float: right;
+    padding-bottom:5px;
+    
+}
+#editForm button{
+  font-size:16px;
+  margin:5px;
+}
+.radioBox{
+  padding-left: 5px;
+}
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto;
+}
+.inputBox{
+  padding:10px;
+  position:relative;
+  width:250px;
+}
+.formItem{
+  padding:10px;
+  cursor: move;
+  font-size:16px;
+}
+.formItem input[type='text']{
+  width:50%;
+}
+.formItem:hover{
+    background-color:#eee;
+}
+.clearer{
+    clear: both;
+}
+#showForm-item:hover{
+    
+  background-color: #eee;
+}
+.showForm{
+  padding:5px;
+  font-size:16px;
+}
+.showForm input[type='text']{
+  width:50%;
+}
+.bg-danger{
+  padding:20px;
+  color:white;
+  font-size:16px;
+}
+.hr-form
+{
+  border:2px solid black;
+  
+}
+.heading-form{
+  
+}
