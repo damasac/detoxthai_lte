@@ -197,16 +197,16 @@ if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <!-- The user image in the navbar-->
-                      <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                      <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/userimg.jpg" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
                       <span id="divusername">Username</span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->
                       <li class="user-header">
-                        <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                        <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/userimg.jpg" class="img-circle" alt="User Image" />
                         <p>
-                          Alexander Pierce - Web Developer
+                          Administrator
                           <small>Member since Nov. 2012</small>
                         </p>
                       </li>

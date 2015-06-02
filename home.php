@@ -51,7 +51,7 @@
               </div>
           </div>
 
-<div class="row marketing" id="show_content"><div align="center"><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong><img src="http://s.exaidea.com/upload2/1/20130710/ad74aed9ec4598611f66243abfca0078.jpg"></strong></font></font></font><br></div><div><br></div>
+<div class="row marketing" id="show_content"><div align="center"><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong><img src="http://s.exaidea.com/upload2/1/20130710/ad74aed9ec4598611f66243abfca0078.jpg" class="img-responsive"></strong></font></font></font><br></div><div><br></div>
 <div><br></div>
 <div><br></div>
 <div><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong>"ล้างพิษตับ" โดย ทีมงาน "ศูนย์ธัญสมุย"</strong></font></font></font><br></div>
