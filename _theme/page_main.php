@@ -219,7 +219,16 @@
          {$content}
         </div><!-- /.container -->
       </div><!-- /.content-wrapper -->
-    </div><!-- ./wrapper -
+    </div><!-- ./wrapper -->
+    <footer class="main-footer">
+        <div class="container">
+          <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0
+          </div>
+          <strong>Copyright &copy; 2014-2015 <a href="#">Detox Thai</a>.</strong> All rights reserved.
+        </div><!-- /.container -->
+      </footer>
+
 
     <!-- REQUIRED JS SCRIPTS -->
 
