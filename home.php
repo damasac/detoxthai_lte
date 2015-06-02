@@ -32,7 +32,7 @@
 
           <div class="row">
               <div class="col-md-3">
-                <h3 class="text-muted">ไอมิวสุขภาพดี</h3>
+                <h3 class="text-muted">ศูนย์ธัญสมุย</h3>
               </div>
               <div class="col-md-9">
                 <nav>
@@ -54,9 +54,9 @@
 <div class="row marketing" id="show_content"><div align="center"><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong><img src="http://s.exaidea.com/upload2/1/20130710/ad74aed9ec4598611f66243abfca0078.jpg"></strong></font></font></font><br></div><div><br></div>
 <div><br></div>
 <div><br></div>
-<div><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong>"ล้างพิษตับ" โดย ทีมงาน "ไอมิวสุขภาพดี"</strong></font></font></font><br></div>
+<div><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong>"ล้างพิษตับ" โดย ทีมงาน "ศูนย์ธัญสมุย"</strong></font></font></font><br></div>
 <div><br></div>
-<div><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">&nbsp; &nbsp; &nbsp; &nbsp; " ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัด</font></font></font><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">กับกิจกรรมการฟื้นฟูสุขภาพ </font></font></font><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">ทีมงานไอมิวสุขภาพดี จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ ไอมิวสุขภาพดี นะค่ะ "</font></font></font></div>
+<div><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">&nbsp; &nbsp; &nbsp; &nbsp; " ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัด</font></font></font><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">กับกิจกรรมการฟื้นฟูสุขภาพ </font></font></font><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">ทีมงานศูนย์ธัญสมุย จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ ศูนย์ธัญสมุย นะค่ะ "</font></font></font></div>
 <br><br>      
 </div>          
       
