@@ -98,7 +98,7 @@
 <header>
     <nav class="frame" role="navigation">
         <div class="container-fluid">
-            <a href="https://almsaeedstudio.com" class="brand">
+            <a href="#" class="brand">
                 DAMASAC Studio
                 <small class="text-muted hidden-xs">Dev preview</small>
             </a>
