@@ -3,12 +3,14 @@ session_start();
 //encoding to utf-8
 header("Content-type:text/html; charset=UTF-8");
 //for path directory
-define("APP_WEBROOT", "thaipalliative_lte/");
+define("APP_WEBROOT", "detoxthai_lte/");
 //check login
+/*
 if(!$_SESSION['tpc_puser_id'] && !$_SESSION['tpc_puser_status'] && !$_SESSION['tpc_puser_area'] && !$_SESSION['tpc_puser_site']){
 	echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'">';
 	exit('Redirect to login page!');
 }
+*/
 
 $_vars = array();
 function sb($name){
