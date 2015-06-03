@@ -1,4 +1,3 @@
-_connection/*
+#MySQL configuration
 db.php
-/_connection/
-/_connection/*
+_connection/*
