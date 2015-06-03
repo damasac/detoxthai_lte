@@ -1,4 +1,3 @@
-<?php require_once '_theme/util.inc.php'; ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +13,7 @@
     <!-- Theme style -->
     <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
-    <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />    
+    <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -24,7 +23,7 @@
     <!--Page Load Progress Bar [ OPTIONAL ]-->
 	<link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/pace/pace.css" rel="stylesheet">
 	<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/pace/pace.js"></script>
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -63,7 +62,7 @@
   <body class="skin-blue layout-top-nav">
     <div class="wrapper">
 
-      <header class="main-header">               
+      <header class="main-header">
         <nav class="navbar navbar-static-top">
           <div class="container">
             <div class="navbar-header">
@@ -81,7 +80,7 @@
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php" data-toggle="tooltip" data-placement="bottom" title="รายการแสดงหลักสูตรล้างพิษตับของทุกศูนย์ (Course)">หลักสูตรล้างพิษตับ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php" data-toggle="tooltip" data-placement="bottom" title="สมาชิกทั้งหมดของ DetoxThai (Member)">สมาชิก</a></li>
 		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>feeds.php" data-toggle="tooltip" data-placement="bottom" title="เหตุการณ์ DetoxThai (Feeds)">เหตุการณ์</a></li>
-                
+
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span><span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
@@ -93,19 +92,19 @@
                     <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sql.php">SQL</a></li>
                   </ul>
                 </li>
-                
+
               </ul>
 
             </div><!-- /.navbar-collapse -->
 <?php
 if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
-?>  
+?>
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
 		  <li class="dropdown user user-menu">
 		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
-		  </li>			  
+		  </li>
                   <!-- Messages: style can be found in dropdown.less-->
                   <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->
@@ -253,7 +252,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 		  </li>
 		  <li class="dropdown user user-menu">
 		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
-		  </li>		  
+		  </li>
                 </ul>
               </div><!-- /.navbar-custom-menu -->
 <?php
@@ -270,7 +269,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/register.png" width=80 alt="ละทะบียน" class="margin"></a>
 	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/submitform.png" width=80 alt="บันทึกข้อมูล" class="margin"></a>
 	 </center>
-        </div><!-- /.container -->	
+        </div><!-- /.container -->
         <div class="container">
          {$content}
         </div><!-- /.container -->
@@ -291,7 +290,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery Validation -->
-    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQueryValidate/jquery.validate.js"></script>    
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQueryValidate/jquery.validate.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
@@ -311,7 +310,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
         });
       });
     </script>
-  
+
 
     {$js_and_css_footer}
   </body>
