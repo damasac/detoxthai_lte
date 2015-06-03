@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-header("Content-type:text/html; charset=UTF-8");          
-header("Cache-Control: no-store, no-cache, must-revalidate");         
+header("Content-type:text/html; charset=UTF-8");
+header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 ?>
 
@@ -17,39 +17,39 @@ $_SESSION[SESSIONPREFIX.'input_username']=$user_login;
 
 if(isset($user_login) and isset($pwd_login)) {
     include_once "_connection/db.php";
-    
+
     $sql="SELECT * FROM puser WHERE tel='".$mysqli->real_escape_string($user_login)."' OR username='".$mysqli->real_escape_string($user_login)."' OR email='".$mysqli->real_escape_string($user_login)."';";
 
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
-	$dbarr = $res->fetch_assoc(); 
+    $dbarr = $res->fetch_assoc();
 
-	if(empty($_POST['username'])) {
-		$errmsg="Error : กรุณากรอกรหัสผู้ใช้งาน";
-		//exit();
-	}
-	else if(empty($_POST['password'])) {
-		$errmsg="Error : กรุณากรอกรหัสผ่าน";
-		//exit();
-	}
-	else if($user_login!=$dbarr['username'] AND $user_login!=$dbarr['email']) {
-		$errmsg="Error : ไม่พบ User นี้";
-		//exit();
-	}
-	else if($pwd_login!=$dbarr['password']) {
-		$errmsg="Error : รหัสผ่านไม่ถูกต้อง";
-		//exit();
-	}
-	else if(($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
+    if(empty($_POST['username'])) {
+        $errmsg="Error : กรุณากรอกรหัสผู้ใช้งาน";
+        //exit();
+    }
+    else if(empty($_POST['password'])) {
+        $errmsg="Error : กรุณากรอกรหัสผ่าน";
+        //exit();
+    }
+    else if($user_login!=$dbarr['username'] AND $user_login!=$dbarr['email']) {
+        $errmsg="Error : ไม่พบ User นี้";
+        //exit();
+    }
+    else if($pwd_login!=$dbarr['password']) {
+        $errmsg="Error : รหัสผ่านไม่ถูกต้อง";
+        //exit();
+    }
+    else if(($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
         //-----------------------
 
-	$_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
+    $_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
         $_SESSION[SESSIONPREFIX.'puser_username'] = $dbarr['username'];
         $_SESSION[SESSIONPREFIX.'puser_email'] = $dbarr['email'];
-        $_SESSION[SESSIONPREFIX.'puser_tel'] = $dbarr['tel'];	
+        $_SESSION[SESSIONPREFIX.'puser_tel'] = $dbarr['tel'];
         $_SESSION[SESSIONPREFIX.'puser_status'] = $dbarr['status'];
         //-----------------------
-		//echo "success";
-	}
+        //echo "success";
+    }
 $mysqli->close();
 }
 
@@ -79,9 +79,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="_dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
     <!--Page Load Progress Bar [ OPTIONAL ]-->
-	<link href="_plugins/pace/pace.css" rel="stylesheet">
-	<script src="_plugins/pace/pace.js"></script>
-    
+    <link href="_plugins/pace/pace.css" rel="stylesheet">
+    <script src="_plugins/pace/pace.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -110,28 +110,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |---------------------------------------------------------|
   -->
   <body class="skin-blue sidebar-mini">
-    
+
      <!-- Automatic element centering -->
     <div class="lockscreen-wrapper">
         <!-- Content Header (Page header) -->
 <?php
     if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
-?>		
+?>
         <meta http-equiv="refresh" content="1;URL=<?php echo $returnurl;?>">
 <?php
     }else{
-?>		
+?>
         <meta http-equiv="refresh" content="1;URL=login.php?errmsg=<?php echo urlencode($errmsg);?>">
-<?php	
+<?php
     }
-?>    
+?>
         <div class="lockscreen-logo">
         <b>Logging in</b></a>
         </div>
         <div align="center"><img src="login/img/loading.gif" width="65" height="65" /><br>
 
         <!-- /.content -->
-      
+
     </div><!-- /.center -->
 
 
@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="_dist/js/app.min.js" type="text/javascript"></script>
-	 <!-- Slimscroll -->
+     <!-- Slimscroll -->
     <script src="_plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- FastClick -->
     <script src='_plugins/fastclick/fastclick.min.js'></script>

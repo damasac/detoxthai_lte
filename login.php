@@ -28,16 +28,35 @@
       <div class="login-box-body">
         <p class="login-box-msg">
 <?php
-  if ($_GET[errmsg] != "") {
+  $errmsg = "";
+  if (isset($_GET['s'])) {
+    $errmsg = $_GET['errmsg'];
+  }
+  if ($errmsg != "") {
 ?>
-  <i class="fa fa-circle-o text-yellow"></i> <span><?php echo $_GET[errmsg];?></span>
+  <i class="fa fa-circle-o text-yellow"></i> <span><?php echo $errmsg;?></span>
 <?php
   }
-?>  
+
+  $seeesion_name = "";
+  $seeesion_value = "";
+  $prefix = "";
+
+  if (isset($Ss_prefix)) {
+    $prefix = $Ss_prefix;
+  }
+
+  $session_name = $prefix.'input_username';
+  if (isset($_SESSION[$session_name])){
+    if ($_SESSION[$session_name] != NULL){
+      $session_value = $_SESSION[$session_name];
+    }
+  }
+?>
 	</p>
         <form action="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>chk-login.php" method="post">
           <div class="form-group has-feedback">
-            <input type="username" name="username" value="<?php echo $_SESSION[$Ss_prefix.'input_username'];?>" class="form-control" placeholder="เบอร์โทรศัพท์"/>
+            <input type="username" name="username" value="<?php echo $seeesion_value;?>" class="form-control" placeholder="เบอร์โทรศัพท์"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
@@ -45,12 +64,12 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-            <div class="col-xs-8">    
+            <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
                   <input type="checkbox"> Remember Me
                 </label>
-              </div>                        
+              </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
 	      <input type="hidden" name="returnurl" value="<?php echo $_SERVER['HTTP_REFERER'];?>">
@@ -76,5 +95,5 @@
 <?php eb();?>
 <?php sb('js_and_css_footer');?>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
