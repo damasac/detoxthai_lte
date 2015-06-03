@@ -10,35 +10,237 @@
 <?php include_once "_connection/db.php"; ?>
 
 <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h1>
-      Top Navigation
-      <small>Example 2.0</small>
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">SITE NAME HERE</li>
-    </ol>
-  </section>
+<section class="content-header">
+  <h1>
+    ค่ายล้างพิษตับ
+    <small>สร้างหรือจัดการค่ายล้างพิษตับ</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
+    <li class="active">ค่ายล้างพิษตับ</li>
+  </ol>
+</section>
 
-  <!-- Main content -->
-  <section class="content">
+<!-- Main content -->
+<section class="content">
 
-    <div class="box box-default">
-        <div class="box-header with-border">
-          <h3 class="box-title">Blank Box</h3>
-        </div>
-        <div class="box-body">
-          The great content goes here
-        </div><!-- /.box-body -->
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">ค่ายล้างพิษตับทั้งหมด</h3>
+    </div>
+    <div class="box-body">
+
+      <p class="text-right">
+        <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
+        <a class="btn btn-primary btn-flat" href="site_manage.php">จัดการศูนย์</a>
+      </p>
+      <table class="table table-bordered">
+        <tr class="active">
+          <th>
+            ลำดับ
+          </th>
+          <th>
+            ชื่อศูนย์/ลิ้งค์
+          </th>
+          <th>
+            ที่ตั้ง
+          </th>
+        </tr>
+        <?php
+        $sql = "SELECT site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
+        site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
+        FROM site_detail
+        INNER JOIN const_district ON site_district = DISTRICT_ID
+        INNER JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
+        INNER JOIN const_province ON site_province = const_province.PROVINCE_ID
+        ORDER BY id";
+
+        $result = $mysqli->query($sql);
+
+        $count = 1;
+
+        if ($result !== false) {
+          foreach($result as $row) {
+            echo "<tr><td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td></tr>";
+            $count++;
+          }
+        }
+        ?>
+      </table>
+
+    </div><!-- /.box-body -->
   </div><!-- /.box -->
 
-  </section><!-- /.content -->'
-  
+</section><!-- /.content -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">เพิ่มค่ายล้างพิษตับ</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="urlname" class="col-sm-2 control-label">URL : </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="urlname" placeholder="ชื่อคำนำหน้า URL">
+            </div>
+            <div class="col-sm-5">
+              <h4 id="url">.detoxthai.org</h4>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sitename" class="col-sm-2 control-label">ชื่อค่าย : </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="sitename" placeholder="ชื่อค่าย">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">ที่ตั้ง : </label>
+            <div class="col-sm-10">
+              <label for="province" class="control-label">จังหวัด : </label>
+              <select id="province" o class="form-control">
+                <option value="">เลือกจังหวัด</option>
+                <?php
+                  // prepare and query (direct)
+                  $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
+                  $result = $mysqli->query($sql);
+
+                  if ($result !== false) {
+                    foreach($result as $row) {
+                     echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
+                   }
+                 }
+               ?>
+             </select>
+           </div>
+         </div>
+         <div class="form-group">
+          <label for="amphur" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="amphur" class="control-label">อำเภอ : </label>
+            <select id="amphur" o class="form-control">
+              <option value="">เลือกอำเภอ/เขต</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="district" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="district" class="control-label">ตำบล : </label>
+            <select id="district" o class="form-control">
+              <option value="">เลือกตำบล/แขวง</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="houseno" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="houseno" class="control-label">บ้านเลขที่ : </label>
+            <input type="text" class="form-control" id="houseno" placeholder="บ้านเลขที่">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="villageno" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="villageno" class="control-label">หมู่ที่ : </label>
+            <input type="text" class="form-control" id="villageno" placeholder="หมู่ที่">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="muban" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="muban" class="control-label">หมู่บ้าน : </label>
+            <input type="text" class="form-control" id="muban" placeholder="หมู่บ้าน">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="postalcode" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="postalcode" class="control-label">รหัสไปรษณีย์ : </label>
+            <input type="text" class="form-control" id="postalcode" placeholder="รหัสไปรษณีย์">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tel" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="tel" class="control-label">เบอร์โทร : </label>
+            <input type="text" class="form-control" id="tel" placeholder="โทร">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mobile" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="mobile" class="control-label">มือถือ : </label>
+            <input type="text" class="form-control" id="mobile" placeholder="มือถือ">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
+      <button type="button" class="btn btn-primary btn-flat" id="btadd">เพิ่ม</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <?php eb();?>
 
 
 <?php sb('js_and_css_footer');?>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#province").change(function() {
+            //alert("Codeerror");
+            $("#amphur").empty();
+            var option = new Option("เลือกอำเภอ/เขต", "");
+            $("#amphur").append($(option));
+            $.getJSON("api/getamphur.php?province_id=" + $("#province").val(), function(data){
+              $.each(data.amphur, function(i, amphur){
+                var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
+                $("#amphur").append($(option));
+              });
+            });
+          });
+    $("#amphur").change(function() {
+      $("#district").empty();
+      var option = new Option("เลือกตำบล/แขวง", "");
+      $("#district").append($(option));
+      $.getJSON("api/getdistrict.php?amphur_id=" + $("#amphur").val(), function(data){
+        $.each(data.district, function(i, district){
+          var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
+          $("#district").append($(option));
+        });
+      });
+    });
+    $("#btadd").click(function(){
+      $.post("add_site.php",
+      {
+        site_url: $("#urlname").val(),
+        site_name: $("#sitename").val(),
+        site_province: $("#province").val(),
+        site_amphur: $("#amphur").val(),
+        site_district: $("#district").val(),
+        site_house_no: $("#houseno").val(),
+        site_village_no: $("#villageno").val(),
+        site_muban: $("#muban").val(),
+        site_postal_code: $("#postalcode").val(),
+        site_telephone: $("#tel").val(),
+        site_mobile: $("#mobile").val(),
+        site_user: 1,
+      },
+      function(data,status){
+            //alert("Data: " + data + "\nStatus: " + status);
+            location.reload();
+          });
+    });
+  });
+</script>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
