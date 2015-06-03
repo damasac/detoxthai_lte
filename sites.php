@@ -219,7 +219,7 @@
       });
     });
     $("#btadd").click(function(){
-      $.post("add_site.php",
+      $.post("site/add_site.php",
       {
         site_url: $("#urlname").val(),
         site_name: $("#sitename").val(),
@@ -236,7 +236,7 @@
       },
       function(data,status){
             //alert("Data: " + data + "\nStatus: " + status);
-            location.reload();
+            //location.reload();
           });
     });
   });

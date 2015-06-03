@@ -15,7 +15,7 @@ if ($returnurl=="") $returnurl='http://'.$_SERVER['SERVER_NAME'].'/'.APP_WEBROOT
 
 $_SESSION[SESSIONPREFIX.'input_username']=$user_login;
 
-if(isset($user_login) and isset($pwd_login)) {
+if (isset($user_login) and isset($pwd_login)) {
     include_once "_connection/db.php";
 
     $sql="SELECT * FROM puser WHERE tel='".$mysqli->real_escape_string($user_login)."' OR username='".$mysqli->real_escape_string($user_login)."' OR email='".$mysqli->real_escape_string($user_login)."';";
@@ -23,26 +23,22 @@ if(isset($user_login) and isset($pwd_login)) {
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     $dbarr = $res->fetch_assoc();
 
-    if(empty($_POST['username'])) {
+    if (empty($_POST['username'])) {
         $errmsg="Error : กรุณากรอกรหัสผู้ใช้งาน";
         //exit();
-    }
-    else if(empty($_POST['password'])) {
+    } else if (empty($_POST['password'])) {
         $errmsg="Error : กรุณากรอกรหัสผ่าน";
         //exit();
-    }
-    else if($user_login!=$dbarr['username'] AND $user_login!=$dbarr['email']) {
+    } else if ($user_login!=$dbarr['username'] AND $user_login!=$dbarr['email']) {
         $errmsg="Error : ไม่พบ User นี้";
         //exit();
-    }
-    else if($pwd_login!=$dbarr['password']) {
+    } else if ($pwd_login!=$dbarr['password']) {
         $errmsg="Error : รหัสผ่านไม่ถูกต้อง";
         //exit();
-    }
-    else if(($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
+    } else if (($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
         //-----------------------
 
-    $_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
+        $_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
         $_SESSION[SESSIONPREFIX.'puser_username'] = $dbarr['username'];
         $_SESSION[SESSIONPREFIX.'puser_email'] = $dbarr['email'];
         $_SESSION[SESSIONPREFIX.'puser_tel'] = $dbarr['tel'];
@@ -50,7 +46,7 @@ if(isset($user_login) and isset($pwd_login)) {
         //-----------------------
         //echo "success";
     }
-$mysqli->close();
+    $mysqli->close();
 }
 
 ?>
@@ -119,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 ?>
         <meta http-equiv="refresh" content="1;URL=<?php echo $returnurl;?>">
 <?php
-    }else{
+    } else {
 ?>
         <meta http-equiv="refresh" content="1;URL=login.php?errmsg=<?php echo urlencode($errmsg);?>">
 <?php
