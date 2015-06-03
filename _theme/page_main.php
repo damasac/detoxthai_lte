@@ -265,8 +265,14 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
         </nav>
       </header>
       <!-- Full Width Column -->
-
       <div class="content-wrapper">
+        <div class="container">
+	  <center>
+	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/login.png" width=80 alt="เข้าสู่ระบบ" class="margin"></a>
+	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/register.png" width=80 alt="ละทะบียน" class="margin"></a>
+	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/submitform.png" width=80 alt="บันทึกข้อมูล" class="margin"></a>
+	 </center>
+        </div><!-- /.container -->	
         <div class="container">
          {$content}
         </div><!-- /.container -->
