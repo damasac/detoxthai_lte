@@ -32,7 +32,7 @@
 
       <p class="text-right">
         <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
-        <a class="btn btn-primary btn-flat" href="site_manage.php">จัดการศูนย์</a>
+        <a class="btn btn-primary btn-flat" href="site/site_manage.php">จัดการศูนย์</a>
       </p>
       <table class="table table-bordered">
         <tr class="active">
@@ -236,7 +236,7 @@
       },
       function(data,status){
             //alert("Data: " + data + "\nStatus: " + status);
-            //location.reload();
+            location.reload();
           });
     });
   });
