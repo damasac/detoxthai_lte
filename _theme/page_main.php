@@ -98,12 +98,14 @@
 
             </div><!-- /.navbar-collapse -->
 <?php
-
-if (isset($_SESSION['SESSIONPREFIX'.'puser_id'])) {
+if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>  
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+		  <li class="dropdown user user-menu">
+		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
+		  </li>			  
                   <!-- Messages: style can be found in dropdown.less-->
                   <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->
