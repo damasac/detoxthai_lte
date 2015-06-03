@@ -74,13 +74,14 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+              
               <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php" data-toggle="tooltip" data-placement="bottom" title="หน้าแรกของศูนย์ (Portal)">หน้าแรก <span class="sr-only">(current)</span></a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php" data-toggle="tooltip" data-placement="bottom" title="หน้าแสดงรายการรวมทุกศูนย์ (Site)">ค่ายล้างพิษตับ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php" data-toggle="tooltip" data-placement="bottom" title="รายการแสดงหลักสูตรล้างพิษตับของทุกศูนย์ (Course)">หลักสูตรล้างพิษตับ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php" data-toggle="tooltip" data-placement="bottom" title="สมาชิกทั้งหมดของ DetoxThai (Member)">สมาชิก</a></li>
-		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>feeds.php" data-toggle="tooltip" data-placement="bottom" title="เหตุการณ์ DetoxThai (Feeds)">เหตุการณ์</a></li>
+                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>feeds.php" data-toggle="tooltip" data-placement="bottom" title="เหตุการณ์ DetoxThai (Feeds)">เหตุการณ์</a></li>
                 
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span><span class="caret"></span></a>
@@ -93,19 +94,32 @@
                     <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sql.php">SQL</a></li>
                   </ul>
                 </li>
-                
               </ul>
-
+              
+            <div class="nav navbar-custom-menu navbar-right">
+                <div class="row margin ">
+                    <div class="col-lg-4 col-xs-4">
+                    <a href="login.php" class="btn bg-orange" role="button">เข้าสู่ระบบ</a>
+                    </div>
+                    <div class="col-lg-4 col-xs-4">
+                    <a href="register.php" class="btn bg-orange" role="button">ลงทะเบียน</a>
+                    </div>
+                    <div class="col-lg-4 col-xs-4">
+                    <a href="forminput.php" class="btn bg-orange" role="button">บันทึกข้อมูล</a>
+                    </div>
+              </div>
+            
             </div><!-- /.navbar-collapse -->
+
 <?php
 if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>  
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-		  <li class="dropdown user user-menu">
-		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
-		  </li>			  
+                <li class="dropdown user user-menu">
+                  <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
+                </li>			  
                   <!-- Messages: style can be found in dropdown.less-->
                   <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->
@@ -240,25 +254,10 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                 </ul>
               </div><!-- /.navbar-custom-menu -->
 <?php
-}else{
-?>
-            <!-- Navbar Right Menu -->
-              <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-		  <li class="dropdown user user-menu">
-		    <a href="login.php"><span class="badge bg-yellow"> เข้าสู่ระบบ </span></a>
-		  </li>
-		  <li class="dropdown user user-menu">
-		    <a href="register.php"><span class="badge bg-yellow"> ลงทะเบียน </span></a>
-		  </li>
-		  <li class="dropdown user user-menu">
-		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
-		  </li>		  
-                </ul>
-              </div><!-- /.navbar-custom-menu -->
-<?php
 }
 ?>
+
+
           </div><!-- /.container-fluid -->
         </nav>
       </header>
