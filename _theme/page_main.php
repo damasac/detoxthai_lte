@@ -97,7 +97,7 @@
             </div><!-- /.navbar-collapse -->
 <?php
 
-if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
+if (isset($_SESSION['SESSIONPREFIX'.'puser_id'])) {
 ?>  
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
