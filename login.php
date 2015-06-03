@@ -37,7 +37,7 @@
 	</p>
         <form action="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>chk-login.php" method="post">
           <div class="form-group has-feedback">
-            <input type="username" name="username" value="<?php echo $_SESSION[$Ss_prefix.'input_username'];?>" class="form-control" placeholder="Username หรือ เบอร์โทรศัพท์"/>
+            <input type="username" name="username" value="<?php echo $_SESSION[$Ss_prefix.'input_username'];?>" class="form-control" placeholder="เบอร์โทรศัพท์"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">

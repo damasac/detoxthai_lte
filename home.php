@@ -1,6 +1,6 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> สวัสดีครับ <?php eb();?>
+<?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <script src=""></script>
@@ -23,7 +23,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="box box-primary" style="margin: 10px;">
+    <div class="box box-primary">
       <!-- row -->
       <div class="row" style="margin: 10px;">
         <div class="col-md-12">
@@ -58,7 +58,7 @@
 <div><br></div>
 <div><font color="#595959">&nbsp; &nbsp; &nbsp; &nbsp; " ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัดกับกิจกรรมการฟื้นฟูสุขภาพ ทีมงานศูนย์ธัญสมุย จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ ศูนย์ธัญสมุย นะค่ะ "</font></div>
 <br><br>      
-</div>          
+
       
       
       

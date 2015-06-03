@@ -1,6 +1,6 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> สวัสดีครับ <?php eb();?>
+<?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <script src=""></script>
@@ -23,42 +23,23 @@
 
   <!-- Main content -->
   <section class="content">
-    <div class="box box-primary" style="margin: 10px;">
+    <div class="box box-primary">
       <!-- row -->
       <div class="row" style="margin: 10px;">
         <div class="col-md-12">
 
 
 
-          <div class="row">
-              <div class="col-md-3">
-                <h3 class="text-muted">Detox Thailand</h3>
-              </div>
-              <div class="col-md-9">
-                <nav>
-                <ul class="nav nav-pills pull-right">
-                  <li role='presentation' class='active'><a href='site.php?menu=หน้าหลัก&site_name=imu'>หน้าหลัก</a></li>
-                  <li role='presentation'><a href='site.php?menu=เกี่ยวกับเรา&site_name=imu'>เกี่ยวกับเรา</a></li>
-                  <li class='dropdown'><a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>คอร์สล้างพิษตับ<span class='caret'></span></a>
-                        <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
-                          <li role='presentation'><a role='menuitem' tabindex='-1' href='site.php?menu=ปฎิทินกิจกรรมล้างพิษตับ&site_name=imu&sub_menu=1'>ปฎิทินกิจกรรมล้างพิษตับ</a></li>
-                          <li role='presentation'><a role='menuitem' tabindex='-1' href='site.php?menu=การเตรียมตัวมาเข้าค่ายล้างพิษตับ&site_name=imu&sub_menu=1'>การเตรียมตัวมาเข้าค่ายล้างพิษตับ</a></li><li role='presentation'><a role='menuitem' tabindex='-1' href='site.php?menu=รวมภาพกิจกรรมล้างพิษตับ&site_name=imu&sub_menu=1'>รวมภาพกิจกรรมล้างพิษตับ</a></li>
-                        </ul>
-                  </li>
-                  <li role='presentation'><a href='site.php?menu=ติดต่อเรา&site_name=imu'>ติดต่อเรา</a></li>
-                </ul>
-              </nav>
-              </div>
-          </div>
+          <div class="entry-content">
+            <p><img class="img-responsive" src="http://www.detoxthai.org/wp-content/themes/timeline-wp/images/headers/pine-cone.jpg" alt="582142_102480126564665_634474745_n"/></p>
+            <p>ตับเป็นอวัยวะสำคัญของร่างกาย เนื่องจากมีหน้าที่สำคัญในการขจัดสารพิษออกจากร่างกาย โดยมีตำแหน่งอยู่บริเวณช่องท้องด้านขวา หนักประมาณ 4 ปอนด์ ลักษณะของตับจะเป็นเหมือนฟองน้ำซึ่งมีรูพรุนภายในจำนวนมากและภายในช่องว่างเหล่านั้นจะมีเลือดบรรจุอยู่ สำหรับเส้นเลือดที่มาเลี้ยงตับ จะมาจาก 2 แหล่งด้วยกัน แหล่งแรกเป็นเส้นเลือดแดงที่มาจากหัวใจ แหล่งที่สองเป็นเส้นเลือดดำที่มาจากบริเวณลำไส้ ซึ่งจะนำสารอาหาร ตลอดจนสารพิษต่างๆมายังตับ ก่อนที่จะไปยังส่วนอื่นของร่างกาย ตับจึงเป็นด่านแรกที่จะรับมือกับสารพิษเหล่านั้นโดยตรง</p>
+            <center>
+              <img class="img-responsive" src="http://tunyasamui.detoxthai.org/wp-content/uploads/2015/01/406337_102679079878103_1071214236_n-300x225.jpg" alt="406337_102679079878103_1071214236_n"/><br>
+              <img class="img-responsive" src="http://tunyasamui.detoxthai.org/wp-content/uploads/2015/01/582142_102480126564665_634474745_n-300x225.jpg" alt="582142_102480126564665_634474745_n"/>
+            </center>
+          </div><!-- .entry-content -->
 
-<div class="row marketing" id="show_content"><div align="center"><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong><img src="http://s.exaidea.com/upload2/1/20130710/ad74aed9ec4598611f66243abfca0078.jpg" class="img-responsive"></strong></font></font></font><br></div><div><br></div>
-<div><br></div>
-<div><br></div>
-<div><font color="#126a9d"><font size="5"><font face="Tahoma, sans-serif, Arial, Helvetica, Garuda"><strong>"ล้างพิษตับ" โดย ทีมงาน "Detox Thailand"</strong></font></font></font><br></div>
-<div><br></div>
-<div><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">&nbsp; &nbsp; &nbsp; &nbsp; " ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัด</font></font></font><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">กับกิจกรรมการฟื้นฟูสุขภาพ </font></font></font><font color="#595959"><font size="2"><font face="Tahoma, sans-serif, Arial, Helvetica">ทีมงานDetox Thailand จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ Detox Thailand นะค่ะ "</font></font></font></div>
-<br><br>      
-</div>          
+   
       
       
       

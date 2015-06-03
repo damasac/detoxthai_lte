@@ -77,10 +77,10 @@
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php" data-toggle="tooltip" data-placement="bottom" title="หน้าแรกของศูนย์ (Portal)">หน้าแรก <span class="sr-only">(current)</span></a></li>
-                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php" data-toggle="tooltip" data-placement="bottom" title="สมาชิกทั้งหมดของ DetoxThai (Member)">สมาชิก</a></li>
-		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>feeds.php" data-toggle="tooltip" data-placement="bottom" title="เหตุการณ์ DetoxThai (Feeds)">เหตุการณ์</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php" data-toggle="tooltip" data-placement="bottom" title="หน้าแสดงรายการรวมทุกศูนย์ (Site)">ค่ายล้างพิษตับ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php" data-toggle="tooltip" data-placement="bottom" title="รายการแสดงหลักสูตรล้างพิษตับของทุกศูนย์ (Course)">หลักสูตรล้างพิษตับ</a></li>
+                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>members.php" data-toggle="tooltip" data-placement="bottom" title="สมาชิกทั้งหมดของ DetoxThai (Member)">สมาชิก</a></li>
+		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>feeds.php" data-toggle="tooltip" data-placement="bottom" title="เหตุการณ์ DetoxThai (Feeds)">เหตุการณ์</a></li>
                 
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span><span class="caret"></span></a>
@@ -89,6 +89,8 @@
                     <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html">Example</a></li>
                     <li class="divider"></li>
                     <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation">Document</a></li>
+                    <li class="divider"></li>
+                    <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sql.php">SQL</a></li>
                   </ul>
                 </li>
                 
