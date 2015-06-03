@@ -57,6 +57,8 @@
         $html_province = "";
         $html_amphur = "";
         $html_district = "";
+        $script = "";
+        $script_address = "";
 
         $result = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
           site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
@@ -93,6 +95,8 @@
               }
             }
 
+            //echo $html_province;
+
           // prepare and query (direct)
             $result = $mysqli->query('SELECT AMPHUR_ID, AMPHUR_NAME FROM const_amphur WHERE PROVINCE_ID = '.$row['site_province'].' ORDER BY AMPHUR_NAME');
             //$result->execute();
@@ -121,7 +125,7 @@
               }
             }
 
-            echo "<script>
+            $script .= "<script>
             $(document).ready(function(){
               $('#btadd".$count."').click(function(){
                 $.post('update_site.php',
@@ -147,6 +151,35 @@
 });
 </script>";
 
+            $script_address .= '<script type="text/javascript">
+  $(document).ready(function(){
+    $("#province'.$count.'").change(function() {
+            //alert("Codeerror");
+            $("#amphur'.$count.'").empty();
+            var option = new Option("เลือกอำเภอ/เขต", "");
+            $("#amphur'.$count.'").append($(option));
+            $.getJSON("../api/getamphur.php?province_id=" + $("#province'.$count.'").val(), function(data){
+              $.each(data.amphur, function(i, amphur){
+                var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
+                $("#amphur'.$count.'").append($(option));
+              });
+            });
+          });
+    $("#amphur'.$count.'").change(function() {
+      $("#district'.$count.'").empty();
+      var option = new Option("เลือกตำบล/แขวง", "");
+      $("#district'.$count.'").append($(option));
+      $.getJSON("../api/getdistrict.php?amphur_id=" + $("#amphur'.$count.'").val(), function(data){
+        $.each(data.district, function(i, district){
+          var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
+          $("#district'.$count.'").append($(option));
+        });
+      });
+    });
+
+  });
+  </script>';
+
 $box .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
 <div class='modal-dialog'>
   <div class='modal-content'>
@@ -159,7 +192,7 @@ $box .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dial
         <div class='form-group'>
           <label for='urlname".$count."' class='col-sm-2 control-label'>URL : </label>
           <div class='col-sm-5'>
-            <input type='text' class='form-control' id='urlname".$count."' placeholder='ชื่อคำนำหน้า URL' value='".$row['site_url']."'>
+            <input type='text' class='form-control' id='urlname".$count."' placeholder='ชื่อคำนำหน้า URL' value='".$row['site_url']."' disabled>
           </div>
           <div class='col-sm-5'>
             <h4 id='url'>.detoxthai.org</h4>
@@ -268,6 +301,8 @@ $count++;
 
 
 <?php sb('js_and_css_footer');?>
+  <?php echo  $script_address; ?>
+  <?php echo $script ?>
 <?php eb();?>
 
 <?php render($MasterPage);?>
