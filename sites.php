@@ -50,9 +50,9 @@
         $sql = "SELECT site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
         site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
         FROM site_detail
-        INNER JOIN const_district ON site_district = DISTRICT_ID
-        INNER JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
-        INNER JOIN const_province ON site_province = const_province.PROVINCE_ID
+        LEFT JOIN const_district ON site_district = DISTRICT_ID
+        LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
+        LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
         ORDER BY id";
 
         $result = $mysqli->query($sql);
@@ -81,11 +81,11 @@
         <h4 class="modal-title" id="myModalLabel">เพิ่มค่ายล้างพิษตับ</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" id="addform">
           <div class="form-group">
             <label for="urlname" class="col-sm-2 control-label">URL : </label>
             <div class="col-sm-5">
-              <input type="text" class="form-control" id="urlname" placeholder="ชื่อคำนำหน้า URL">
+              <input type="text" class="form-control" id="urlname" placeholder="ชื่อคำนำหน้า URL" required>
             </div>
             <div class="col-sm-5">
               <h4 id="url">.detoxthai.org</h4>
@@ -219,26 +219,50 @@
       });
     });
     $("#btadd").click(function(){
-      $.post("site/add_site.php",
-      {
-        site_url: $("#urlname").val(),
-        site_name: $("#sitename").val(),
-        site_province: $("#province").val(),
-        site_amphur: $("#amphur").val(),
-        site_district: $("#district").val(),
-        site_house_no: $("#houseno").val(),
-        site_village_no: $("#villageno").val(),
-        site_muban: $("#muban").val(),
-        site_postal_code: $("#postalcode").val(),
-        site_telephone: $("#tel").val(),
-        site_mobile: $("#mobile").val(),
-        site_user: 1,
-      },
-      function(data,status){
-            //alert("Data: " + data + "\nStatus: " + status);
-            location.reload();
-          });
+      var site_url = $("#urlname");
+      var site_name = $("#sitename");
+
+      var check_site_url = 0;
+      var check_site_name = 0;
+
+      if(!site_url.val()) {
+        site_url.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check_site_url = 1;
+      } else {
+        site_url.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(!site_name.val()) {
+        site_name.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check_site_name = 1;
+      } else {
+        site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if( 0 == check_site_url && 0 == check_site_name){
+
+        $.post("site/add_site.php",
+        {
+          site_url: $("#urlname").val(),
+          site_name: $("#sitename").val(),
+          site_province: $("#province").val(),
+          site_amphur: $("#amphur").val(),
+          site_district: $("#district").val(),
+          site_house_no: $("#houseno").val(),
+          site_village_no: $("#villageno").val(),
+          site_muban: $("#muban").val(),
+          site_postal_code: $("#postalcode").val(),
+          site_telephone: $("#tel").val(),
+          site_mobile: $("#mobile").val(),
+          site_user: 1,
+        },
+        function(data,status){
+              //alert("Data: " + data + "\nStatus: " + status);
+              location.reload();
+        });
+      }
     });
+
   });
 </script>
 <?php eb();?>
