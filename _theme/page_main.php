@@ -95,7 +95,10 @@
                   </ul>
                 </li>
               </ul>
-              
+ 
+<?php
+if (empty($_SESSION[SESSIONPREFIX.'puser_id'])) {
+?>              
             <div class="nav navbar-custom-menu navbar-right">
                 <div class="row margin ">
                     <div class="col-lg-4 col-xs-4">
@@ -108,7 +111,7 @@
                     <a href="forminput.php" class="btn bg-orange" role="button">บันทึกข้อมูล</a>
                     </div>
               </div>
-            
+<?php } ?>           
             </div><!-- /.navbar-collapse -->
 
 <?php
