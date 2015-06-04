@@ -3,12 +3,10 @@
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-  <script type="text/javascript" src="../_plugins/jQuery/jQuery-2.1.4.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../_plugins/edit/minified/themes/default.min.css">
-  <script src="../_plugins/edit/minified/jquery.sceditor.bbcode.min.js"></script>
   <style type="text/css">
-    .sceditor-container {
-      margin-left: 17px;
+    #fix_size {
+      margin: 0 auto;
+      width: 95%;
     }
   </style>
 <?php eb();?>
@@ -69,13 +67,13 @@ $edit_show = 1;
                       $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&site_name=".$site_name."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                     }
                   }
-                  if(0 == $row['display_menu'] && $menu_sub_show == 0){
-                    if(strcmp($menu, $row['menu_name']) === 0){
+                  if(0 == $row['display_menu'] && $menu_sub_show == 0) {
+                    if(strcmp($menu, $row['menu_name']) === 0) {
                       echo "<li role='presentation' class='active'><a href='index.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
-                    }else{
+                    } else {
                       echo "<li role='presentation'><a href='index.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
                     }
-                  }else{
+                  } else {
                     echo "<li class='dropdown'>
                     <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
                       ".$row['menu_name']."
@@ -131,25 +129,14 @@ $edit_show = 1;
                     $row = $result->fetch_assoc();
             }
           ?>
-          <textarea name="textarea" rows="50"><?php echo $row['content_html']; ?></textarea>
-          <div id="fix">
-          <?php
-            echo "<textarea name='textarea' rows='0' style='display: none;'></textarea>";
-            echo "<script>
-                  $('textarea').sceditor({
-                      plugins: 'bbcode',
-                      width: '95%',
-                      resizeEnabled: false,
-                      style: 'edit/minified/jquery.sceditor.default.min.css'
-                  });
-                  var html = $('textarea').sceditor('instance').fromBBCode('".trim(preg_replace('/\s+/', ' ', $row['content_html']))."');
-                  //alert(html);
-                  $('#show_content').html(html);
-                  $('.sceditor-container').hide();
-                  </script>";
-          ?>
+          <div id="fix_size">
+            <textarea name="textarea" rows="50"><?php echo $row['content_html']; ?></textarea>
           </div>
       </div>
+      <p></p>
+        <div class="col-md-12 text-center">
+          <button id="save" class="btn btn-primary btn-flat"><strong>แก้ไข</strong></button>
+        </div>
   </div>
 
 </div><!-- /.box-body -->
@@ -161,18 +148,19 @@ $edit_show = 1;
 
 
 <?php sb('js_and_css_footer');?>
-  <script>
-        $(function() {
-            // Replace all textarea's
-            // with SCEditor
-            $("textarea").sceditor({
+  <link rel="stylesheet" type="text/css" href="../_plugins/edit/minified/themes/default.min.css">
+  <script src="../_plugins/edit/minified/jquery.sceditor.bbcode.min.js"></script>
+  <script type="text/javascript">
+        $(document).ready(function() {
+          $("textarea").sceditor({
                 plugins: "bbcode",
-                width: '80%',
+                width: '98%',
                 resizeEnabled: false,
                 style: "edit/minified/jquery.sceditor.default.min.css"
             });
 
-            $( "#save" ).click(function() {
+          $("#save").click(function() {
+              //alert('Codeerror');
               var bbCode = $( 'textarea' ).sceditor( 'instance' ).val();
               //var html = $( "textarea" ).sceditor( 'instance' ).fromBBCode(bbCode);
               //alert( bbCode );
@@ -188,11 +176,11 @@ $edit_show = 1;
                 });
             });
 
-            //$('#show_content').html('cc');
+        });
 
-            });
 
-            $('#fix').hide();
+
+        $('#fix').hide();
             //alert('Codeerror');
       </script>
 <?php eb();?>
