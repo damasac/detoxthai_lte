@@ -102,42 +102,11 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+<?php /* ?>		  
 		  <li class="dropdown user user-menu">
 		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
 		  </li>
-                  <!-- Messages: style can be found in dropdown.less-->
-                  <li class="dropdown messages-menu">
-                    <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-envelope-o"></i>
-                      <span class="label label-success">4</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li class="header">You have 4 messages</li>
-                      <li>
-                        <!-- inner menu: contains the messages -->
-                        <ul class="menu">
-                          <li><!-- start message -->
-                            <a href="#">
-                              <div class="pull-left">
-                                <!-- User Image -->
-                                <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
-                              </div>
-                              <!-- Message title and timestamp -->
-                              <h4>
-                                Support Team
-                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                              </h4>
-                              <!-- The message -->
-                              <p>Why not buy a new awesome theme?</p>
-                            </a>
-                          </li><!-- end message -->
-                        </ul><!-- /.menu -->
-                      </li>
-                      <li class="footer"><a href="#">See All Messages</a></li>
-                    </ul>
-                  </li><!-- /.messages-menu -->
-
+<?php */ ?>
                   <!-- Notifications Menu -->
                   <li class="dropdown notifications-menu">
                     <!-- Menu toggle button -->
@@ -158,41 +127,6 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                         </ul>
                       </li>
                       <li class="footer"><a href="#">View all</a></li>
-                    </ul>
-                  </li>
-                  <!-- Tasks Menu -->
-                  <li class="dropdown tasks-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-flag-o"></i>
-                      <span class="label label-danger">9</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li class="header">You have 9 tasks</li>
-                      <li>
-                        <!-- Inner menu: contains the tasks -->
-                        <ul class="menu">
-                          <li><!-- Task item -->
-                            <a href="#">
-                              <!-- Task title and progress text -->
-                              <h3>
-                                Design some buttons
-                                <small class="pull-right">20%</small>
-                              </h3>
-                              <!-- The progress bar -->
-                              <div class="progress xs">
-                                <!-- Change the css width attribute to simulate progress -->
-                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                  <span class="sr-only">20% Complete</span>
-                                </div>
-                              </div>
-                            </a>
-                          </li><!-- end task item -->
-                        </ul>
-                      </li>
-                      <li class="footer">
-                        <a href="#">View all tasks</a>
-                      </li>
                     </ul>
                   </li>
                   <!-- User Account Menu -->
@@ -240,6 +174,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
               </div><!-- /.navbar-custom-menu -->
 <?php
 }else{
+  /*
 ?>
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
@@ -256,6 +191,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                 </ul>
               </div><!-- /.navbar-custom-menu -->
 <?php
+  */
 }
 ?>
           </div><!-- /.container-fluid -->
@@ -267,7 +203,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 	  <center>
 	    <table class="table" style="margin-bottom: 0px">
 	      <tr>
-		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>index.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_5_Home_s.png" alt="เข้าสู่ระบบ" class="img-responsive"></a></td>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_5_Home_s.png" alt="เข้าสู่ระบบ" class="img-responsive"></a></td>
 <?php
 if (!isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>
