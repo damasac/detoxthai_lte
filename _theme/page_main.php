@@ -265,9 +265,22 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
       <div class="content-wrapper">
         <div class="container">
 	  <center>
-	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/login.png" width=80 alt="เข้าสู่ระบบ" class="margin"></a>
-	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/register.png" width=80 alt="ละทะบียน" class="margin"></a>
-	    <a href="#"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/submitform.png" width=80 alt="บันทึกข้อมูล" class="margin"></a>
+	    <table class="table" style="margin-bottom: 0px">
+	      <tr>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>index.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_5_Home_s.png" alt="เข้าสู่ระบบ" class="img-responsive"></a></td>
+<?php
+if (!isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+?>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>login.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_1_Login_s.png" alt="เข้าสู่ระบบ" class="img-responsive"></a></td>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>register.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_2_Signup_s.png" alt="ละทะบียน" class="img-responsive"></a></td>
+<?php
+}
+?>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>submitform.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_3_DataEntry_s.png" alt="บันทึกข้อมูล" class="img-responsive"></a></td>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_4_ManageCenter_s.png" alt="จัดการศูนย์สุขภาพ" class="img-responsive"></a></td>
+		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_6_Logout_s.png" alt="ออกจากระบบ" class="img-responsive"></a></td>
+	      </tr>
+	    </table>
 	 </center>
         </div><!-- /.container -->
         <div class="container">
