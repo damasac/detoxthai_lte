@@ -278,7 +278,13 @@ if (!isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>
 		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>submitform.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_3_DataEntry_s.png" alt="บันทึกข้อมูล" class="img-responsive"></a></td>
 		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_4_ManageCenter_s.png" alt="จัดการศูนย์สุขภาพ" class="img-responsive"></a></td>
+<?php
+if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+?>
 		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_6_Logout_s.png" alt="ออกจากระบบ" class="img-responsive"></a></td>
+<?php
+}
+?>
 	      </tr>
 	    </table>
 	 </center>
