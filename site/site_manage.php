@@ -49,6 +49,9 @@
             จัดการหน้าเว็บ
           </th>
           <th>
+            จัดการหลักสูตร
+          </th>
+          <th>
           </th>
         </tr>
         <?php
@@ -75,6 +78,7 @@
             echo "<tr><td>".$count."</td>
             <td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td>
             <td><a href='index.php?site_name=".$row['site_url']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-wrench'></a></td>
+            <td><a href='schedules.php?site_name=".$row['site_url']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-calendar'></a></td>
             <td>
               <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'><i class='fa fa-fw fa-pencil'></i></button>
               <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'><i class='fa fa-fw fa-trash'></i></a>

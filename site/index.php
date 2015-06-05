@@ -113,7 +113,7 @@ $edit_show = 1;
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                 <li role="presentation"><a role="menuitem" tabindex="-1" href="menu.php?site_name=<?php echo $site_name; ?>">แก้ไขเมนู</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="site_schedule.php?site_url=<?php echo $site_name; ?>">กำหนดการหลักสูตร</a></li>
+                <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="site_schedule.php?site_url=<?php echo $site_name; ?>">กำหนดการหลักสูตร</a></li> -->
               </ul>
             </li>
             <?php } ?>
