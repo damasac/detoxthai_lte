@@ -1,0 +1,276 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50617
+Source Host           : localhost:3306
+Source Database       : detoxthai_lte
+
+Target Server Type    : MYSQL
+Target Server Version : 50617
+File Encoding         : 65001
+
+Date: 2015-06-05 19:15:21
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for tbl_dunp_fields
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_dunp_fields`;
+CREATE TABLE `tbl_dunp_fields` (
+  `vardata` varchar(100) DEFAULT NULL,
+  `vartype` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of tbl_dunp_fields
+-- ----------------------------
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c6', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c7', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b3c8', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a1b6', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a2b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a2b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a2b3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p0a2b4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a2b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a2b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a3b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a4b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a4b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a6', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a7b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a7b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a7b3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a8b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a8b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a9', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b1c1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b2c1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b1c2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b2c2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b1c3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b2c3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b1c4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b2c4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b1c5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a10b2c5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a11b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a11b1c1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a11b1c4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a12b1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a12b2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a12b3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p1a12b4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c6', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c7', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c8', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c9', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c10', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c11', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c12', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c13', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c14', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c15', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c16', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c17', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b1c18', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c6', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c6', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c6', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c6', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c6', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c7', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c7', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c7', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c7', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c7', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c8', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c8', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c8', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c8', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c8', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c9', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c9', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c9', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c9', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c9', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c10', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c10', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c10', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c10', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c10', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c11', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c11', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c11', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c11', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c11', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c12', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c12', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c12', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c12', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c12', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c13', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c13', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c13', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c13', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c13', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c14', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c14', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c14', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c14', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c14', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c15', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c15', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c15', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c15', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c15', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c16', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c16', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c16', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c16', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c16', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c17', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c17', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c17', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c17', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c17', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b2c18', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b3c18', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b4c18', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b5c18', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p2a13b6c18', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3q5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a6', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a7', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a8', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a9', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a10', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3q5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a11', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3q5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a12', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3q5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a13', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a14', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a15', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3q5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a16', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3q5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a17', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p3a18', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a2', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a3', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a4', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a5', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a6', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a7', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p4a8', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g1c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g1c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g1c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g1c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g1c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g2c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g2c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g2c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g2c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g2c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g3c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g3c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g3c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g3c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g3c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g4c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g4c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g4c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g4c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g4c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g5c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g5c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g5c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g5c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g5c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g6c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g6c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g6c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g6c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g6c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g7c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g7c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g7c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g7c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g7c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g8c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g8c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g8c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g8c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g8c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g9c1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g9c2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g9c3', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g9c4', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a21g9c5', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a22q1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a22q2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a23q1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a23q2', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a24q1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p5a25q1', 'mediumtext');
+INSERT INTO `tbl_dunp_fields` VALUES ('p6a26', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p6a26q1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p6a27', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p6a27q1', 'varchar(250)');
+INSERT INTO `tbl_dunp_fields` VALUES ('p6a28', 'mediumtext');
