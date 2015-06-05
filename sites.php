@@ -16,8 +16,7 @@
     <small>สร้างหรือจัดการค่ายล้างพิษตับ</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
-    <li class="active">ค่ายล้างพิษตับ</li>
+    <li><a href="sites.php"><i class="fa fa-home"></i> ค่ายล้างพิษตับ</a></li>
   </ol>
 </section>
 

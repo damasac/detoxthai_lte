@@ -24,7 +24,6 @@
                 VALUES ('$site_name', '$site_url', '$site_province', '$site_amphur', '$site_district',
                         '$site_house_no', '$site_village_no', '$site_muban', '$site_postal_code',
                         '$site_telephone', '$site_mobile', '$site_user')");
-    //$result->execute();
 
     /** Add menu main. */
     $result = $mysqli->query("INSERT INTO
@@ -37,13 +36,11 @@
 
 [color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]        \" ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัด[/font][/size][/color][color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]กับกิจกรรมการฟื้นฟูสุขภาพ [/font][/size][/color][color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]ทีมงาน".$site_name." จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ ".$site_name." นะค่ะ \"[/font][/size][/color]')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_menu (menu_name, display_menu, content_id, site_name)
-                VALUES ('หน้าหลัก', '0', $last_id, '$site_url')");
-    //$result->execute();
+                site_menu (menu_order, menu_name, display_menu, content_id, site_name)
+                VALUES (1, 'หน้าหลัก', '0', $last_id, '$site_url')");
 
     /** Add menu about. */
     $result = $mysqli->query("INSERT INTO
@@ -55,29 +52,24 @@
 [color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]บ้านสุขภาพล้างพิษตับ \"[/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][color=#274e13]".$site_name."[/color][/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\" จึงเกิดขึ้นด้วยคำแนะนำจากผู้เห็นประโยชน์จากการล้างพิษตับ และหวังอยากให้คนอื่นๆ หันมาดูแลตนเองด้วยการเรียนรู้ศาสตร์แห่งธรรมชาติบำบัดที่ไม่ต้องพึ่งพายาจากสถานพยาบาลจนต้องทานยาเป็นอาหาร แต่จะมาใส่ใจการกินอยู่เลือกอาหารเป็นยาแทน โดยจะใช้ระยะเวลา 3 วัน 2 คืน (ล้างพิษตับ แบบสั้น) ในการเข้าร่วมกิจกรรม[/font][/size][/color][/left]
 ')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_menu (menu_name, display_menu, content_id, site_name)
-                VALUES ('เกี่ยวกับเรา', '0', $last_id, '$site_url')");
-    //$result->execute();
+                site_menu (menu_order, menu_name, display_menu, content_id, site_name)
+                VALUES (2,'เกี่ยวกับเรา', '0', $last_id, '$site_url')");
 
     /** Add menu course. */
     $result = $mysqli->query("INSERT INTO
                 site_content (content_html)
                 VALUES ('เพิ่มเนื้อหาเว็บไซต์')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_menu (menu_name, display_menu, content_id, site_name)
-                VALUES ('คอร์สล้างพิษตับ', '0', $last_id, '$site_url')");
-    //$result->execute();
+                site_menu (menu_order, menu_name, display_menu, content_id, site_name)
+                VALUES (3, 'คอร์สล้างพิษตับ', '0', $last_id, '$site_url')");
     $last_menu_main = $mysqli->insert_id;
 
-    /** Add sub menu. */
     $result = $mysqli->query("INSERT INTO
                 site_content (content_html)
                 VALUES ('[color=#000000][font=Tahoma, sans-serif, Arial, Helvetica][color=#660000]ปฎิทินกิจกรรมของบ้านสุขภาพล้างพิษตับ ปี 2558[/color][/font][/color]
@@ -90,13 +82,11 @@
 [b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][u]เดือน มิถุนายน 2558[/u]
 ...[/font][/size][/color][/b]')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_submenu (menu_name, status_menu, main_menu_id, content_id, site_name)
-                VALUES ('ปฎิทินกิจกรรมล้างพิษตับ', '0', '$last_menu_main', $last_id, '$site_url')");
-    //$result->execute();
+                site_submenu (menu_order, menu_name, status_menu, main_menu_id, content_id, site_name)
+                VALUES (1, 'ปฎิทินกิจกรรมล้างพิษตับ', '0', '$last_menu_main', $last_id, '$site_url')");
 
     /** Add sub menu. */
     $result = $mysqli->query("INSERT INTO
@@ -221,13 +211,11 @@
 
 [color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]2 นอกจากทำตามข้อ 1 แล้ว เพิ่มการสวนทวารด้วยน้ำอุ่น หรือน้ำกาแฟ เช้า-เย็น[/font][/size][/color]')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_submenu (menu_name, status_menu, main_menu_id, content_id, site_name)
-                VALUES ('การเตรียมตัวมาเข้าค่ายล้างพิษตับ', '0', '$last_menu_main', $last_id, '$site_url')");
-    //$result->execute();
+                site_submenu (menu_order, menu_name, status_menu, main_menu_id, content_id, site_name)
+                VALUES (2, 'การเตรียมตัวมาเข้าค่ายล้างพิษตับ', '0', '$last_menu_main', $last_id, '$site_url')");
 
     /** Add sub menu */
     $result = $mysqli->query("INSERT INTO
@@ -239,13 +227,11 @@
 [center][img]http://www.wellnesscity.co.th/images/program-liver-flush-1.jpg[/img][/center]
 ')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_submenu (menu_name, status_menu, main_menu_id, content_id, site_name)
-                VALUES ('รวมภาพกิจกรรมล้างพิษตับ', '0', '$last_menu_main', $last_id, '$site_url')");
-    //$result->execute();
+                site_submenu (menu_order, menu_name, status_menu, main_menu_id, content_id, site_name)
+                VALUES (3, 'รวมภาพกิจกรรมล้างพิษตับ', '0', '$last_menu_main', $last_id, '$site_url')");
 
     /** Add menu contact */
     /** Add menu about. */
@@ -258,12 +244,10 @@
 [center][size=4][color=#000000][font=Tahoma, sans-serif, Arial, Helvetica]- เวลาทำการ [/font][/color][b][color=#000000][font=Tahoma, sans-serif, Arial, Helvetica]08.30 - 18.00 น.[/font][/color][/b][color=#000000][font=Tahoma, sans-serif, Arial, Helvetica] (ทุกวัน..ไม่มีวันหยุด) [/font][/color][/size][/center]
 ')");
 
-    //$result->execute();
     $last_id = $mysqli->insert_id;
 
     $result = $mysqli->query("INSERT INTO
-                site_menu (menu_name, display_menu, content_id, site_name)
-                VALUES ('ติดต่อเรา', '0', $last_id, '$site_url')");
-    //$result->execute();
+                site_menu (menu_order, menu_name, display_menu, content_id, site_name)
+                VALUES (4, 'ติดต่อเรา', '0', $last_id, '$site_url')");
 ?>
 

@@ -20,26 +20,21 @@ $site_name = $_GET['site_name'];
 isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
 
 if ('' == $menu) {
-    //echo 'Codeerrors';
     $result = $mysqli->query("SELECT menu_name
     FROM site_menu
     WHERE site_name = '$site_name'
-    ORDER BY id");
-  //$result->execute();
+    AND display_menu = 0
+    ORDER BY menu_order");
     $row = $result->fetch_assoc();
     $count = $result->num_rows;
-    //echo $count;
-      //print_r($row);
     if (0 == $count) {
         $menu_exit = 0;
     } else {
         echo "<script>
                window.location.href = 'index.php?menu=".$row['menu_name']."&site_name=".$site_name."'".";
               </script>";
-        //header('Location: index.php?menu='.$row['menu_name']."&site_name=".$site_name);
     }
 } else {
-    //echo 'error';
     $menu_exit = 1;
 }
 
@@ -53,9 +48,8 @@ $edit_show = 1;
     <small>แก้ไขเนื้อหาหรือเมนูของเว็บ</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> หน้าหลัก</a></li>
-    <li><a href="#">ค่ายล้างพิษตับ</a></li>
-    <li><a href="#">จัดการศูนย์</a></li>
+    <li><a href="../sites.php"><i class="fa fa-home"></i> ค่ายล้างพิษตับ</a></li>
+    <li><a href="site_manage.php">จัดการศูนย์</a></li>
     <li class="active">จัดการหน้าเว็บ</li>
   </ol>
 </section>
@@ -73,16 +67,14 @@ $edit_show = 1;
           <nav>
             <ul class="nav nav-pills pull-right">
             <?php
-              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_name = '$site_name' ORDER BY id");
-              //$result->execute();
+              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_name = '$site_name' AND display_menu = 0 ORDER BY menu_order");
 
             if ($result !== false) {
               foreach($result as $row) {
 
                     $menu_sub_show = 0;
                     $html_sub_menu = "";
-                    $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." ORDER BY id");
-                  //$getSubMenu->execute();
+                    $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 ORDER BY menu_order");
                     if ($getSubMenu !== false) {
                         $count = $getSubMenu->num_rows;
                         if (0 < $count) {
@@ -92,7 +84,7 @@ $edit_show = 1;
                             $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&site_name=".$site_name."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                     }
                     }
-                    if (0 == $row['display_menu'] && $menu_sub_show == 0) {
+                    if ($menu_sub_show == 0) {
                         if (strcmp($menu, $row['menu_name']) === 0) {
                             echo "<li role='presentation' class='active'><a href='index.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
                         } else {
@@ -116,7 +108,7 @@ $edit_show = 1;
             <?php if (0 !== $edit_show) {?>
             <li class="dropdown">
               <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                ผู้ดูแลระบบ
+                <strong>ผู้ดูแลระบบ</strong>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
@@ -141,7 +133,6 @@ $edit_show = 1;
           WHERE menu_name = '$menu' AND
           site_name = '$site_name'
           ORDER BY site_menu.id");
-                    //$result->execute();
         $row = $result->fetch_assoc();
     } else {
         $result = $mysqli->query("SELECT menu_name, status_menu, content_id, content_html
@@ -150,7 +141,6 @@ $edit_show = 1;
           WHERE menu_name = '$menu' AND
           site_name = '$site_name'
           ORDER BY site_submenu.id");
-                    //$result->execute();
         $row = $result->fetch_assoc();
     }
     ?>
@@ -185,10 +175,7 @@ $edit_show = 1;
     });
 
     $("#save").click(function() {
-              //alert('Codeerror');
               var bbCode = $( 'textarea' ).sceditor( 'instance' ).val();
-              //var html = $( "textarea" ).sceditor( 'instance' ).fromBBCode(bbCode);
-              //alert( bbCode );
               $.post("edit_content.php",
               {
                 id: <?php echo $row['content_id']; ?>,
@@ -196,7 +183,6 @@ $edit_show = 1;
                 token: $('#token').val(),
               },
               function(data,status){
-                    //alert("Data: " + data + "\nStatus: " + status);
                     location.reload();
                   });
             });
@@ -206,8 +192,7 @@ $edit_show = 1;
 
 
   $('#fix').hide();
-            //alert('Codeerror');
-          </script>
+  </script>
         <?php eb();?>
 
         <?php render($MasterPage);?>
