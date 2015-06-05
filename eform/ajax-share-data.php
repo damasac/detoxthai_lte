@@ -1,5 +1,5 @@
 
-<?php include "../_connection/db_sql.php"; ?>
+<?php include "../_connection/db_eform.php"; ?>
 <?php 
 	    $sql = "SELECT * FROM `formmain` WHERE `formid`='".$_GET["id"]."'";
 	    

@@ -1,7 +1,7 @@
 
 <?php
     error_reporting(0);   
-    include_once("../_connection/db_sql.php");
+    include_once("../_connection/db_eform.php");
     $id = $_POST["id"];
     $typeQuestion = $_POST["typeQuestion"];
     $idexplode = explode("_",$id);

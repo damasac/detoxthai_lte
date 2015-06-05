@@ -12,7 +12,7 @@ if($public_delete==0){
 }else{
     $buttonDel = "";
 }
-    include "../_connection/db_sql.php"; ?>
+    include "../_connection/db_eform.php"; ?>
     <button onclick="viewform(<?php echo $id;?>)" class="btn btn-warning btn-block" <?php echo $buttonEdit;?>>แก้ไข</button>
     <button onclick="deleteform(<?php echo $id?>)" class="btn btn-danger btn-block" <?php echo $buttonDel;?>>ลบ</button>
 <?php ?>

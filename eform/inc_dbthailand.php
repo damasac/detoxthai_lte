@@ -1,5 +1,5 @@
 <?php
- include_once("../_connection/db_sql.php");
+ include_once("../_connection/db_eform.php");
  $sqlProvince = mysqli_query($con,"SELECT * FROM const_province ") or die(mysql_error());
 ?>
 <div class="row">

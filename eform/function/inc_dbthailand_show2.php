@@ -1,5 +1,5 @@
 <?php
- include_once("db_sql.php");
+ include_once("db_eform.php");
 
  $sqlProvince = mysqli_query($con,"SELECT * FROM `const_province`") or die(mysqli_error());
  $sqlCount = mysqli_query($con,"SELECT * FROM `formfield` WHERE `fieldtype`='dbthailand' ");
