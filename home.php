@@ -53,6 +53,13 @@ $arrMenu = array();
 
 ?>
 
+<?php
+    $result_name_site = $mysqli->query("SELECT site_name, create_date
+                    FROM site_detail
+                    WHERE site_url = '$site_name'");
+    $site_name_desc = $result_name_site->fetch_assoc();
+?>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
@@ -61,19 +68,12 @@ $arrMenu = array();
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">SITE NAME HERE</li>
+    <li class="active"><?php echo $site_name_desc['site_name']; ?></li>
   </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
-
-  <?php
-    $result_name_site = $mysqli->query("SELECT site_name, create_date
-                    FROM site_detail
-                    WHERE site_url = '$site_name'");
-    $site_name_desc = $result_name_site->fetch_assoc();
-  ?>
 
   <div class="box box-default">
     <div class="box-body">
