@@ -1,6 +1,6 @@
 <?php
     error_reporting(0);
-    include "../_connection/db_sql.php";
+    include "../_connection/db_eform.php";
 ?>
 <?php
     

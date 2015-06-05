@@ -1,5 +1,5 @@
 <?php
- include_once("../_connection/db_sql.php");
+ include_once("../_connection/db_eform.php");
  error_reporting(0);
 $task = $_GET["task"];
 $mophID = $_GET["mophID"];
