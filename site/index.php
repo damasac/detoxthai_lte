@@ -39,6 +39,8 @@ if ('' == $menu) {
 }
 
 $edit_show = 1;
+$arrMenu = array();
+
 ?>
 
 <!-- Content Header (Page header) -->
@@ -56,12 +58,18 @@ $edit_show = 1;
 
 <!-- Main content -->
 <section class="content">
+  <?php
+    $result_name_site = $mysqli->query("SELECT site_name, create_date
+                    FROM site_detail
+                    WHERE site_url = '$site_name'");
+    $site_name_desc = $result_name_site->fetch_assoc();
+  ?>
 
   <div class="box box-default">
     <div class="box-body">
       <div class="row">
         <div class="col-md-3">
-          <h3 class="text-muted">ธัญญสมุย</h3>
+          <h3 class="text-muted"><?php echo $site_name_desc['site_name']; ?></h3>
         </div>
         <div class="col-md-9">
           <nav>
@@ -82,6 +90,7 @@ $edit_show = 1;
                         }
                     foreach($getSubMenu as $submenu) {
                             $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&site_name=".$site_name."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
+                            array_push($arrMenu, $submenu['menu_name']);
                     }
                     }
                     if ($menu_sub_show == 0) {
@@ -91,15 +100,28 @@ $edit_show = 1;
                             echo "<li role='presentation'><a href='index.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
                         }
                     } else {
-                        echo "<li class='dropdown'>
-                    <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
-                      ".$row['menu_name']."
-                      <span class='caret'></span>
-                    </a>
-                    <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
-                      ".$html_sub_menu."
-                    </ul>
-                  </li>";
+                        $active_sub_menu = array_search($menu, $arrMenu);
+                        if (is_numeric($active_sub_menu)) {
+                          echo "<li class='dropdown active'>
+                                <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
+                                  ".$row['menu_name']."
+                                  <span class='caret'></span>
+                                </a>
+                                <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
+                                  ".$html_sub_menu."
+                                </ul>
+                              </li>";
+                        } else {
+                                echo "<li class='dropdown'>
+                                <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
+                                  ".$row['menu_name']."
+                                  <span class='caret'></span>
+                                </a>
+                                <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
+                                  ".$html_sub_menu."
+                                </ul>
+                              </li>";
+                        }
                     }
                 }
             }
@@ -121,7 +143,7 @@ $edit_show = 1;
         </nav>
       </div>
     </div>
-
+     <p><hr/></p>
     <div class="row marketing" id="show_content">
     <?php
       $sub_menu = 0;
@@ -153,7 +175,6 @@ $edit_show = 1;
       <button id="save" class="btn btn-primary btn-flat"><strong>แก้ไข</strong></button>
     </div>
   </div>
-
 </div><!-- /.box-body -->
 </div><!-- /.box -->
 
