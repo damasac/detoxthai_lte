@@ -1,5 +1,5 @@
 <?php
-include_once "../_connection/db.php";
+include_once "../_connection/db_base.php";
 
 $id = $_POST['id'];
 $menuorder = $_POST['menuorder'];

@@ -12,7 +12,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include_once "../_connection/db.php"; ?>
+<?php include_once "../_connection/db_base.php"; ?>
 
 <?php
 

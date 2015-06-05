@@ -16,7 +16,7 @@ if ($returnurl=="") $returnurl='http://'.$_SERVER['SERVER_NAME'].'/'.APP_WEBROOT
 $_SESSION[SESSIONPREFIX.'input_username']=$user_login;
 
 if (isset($user_login) and isset($pwd_login)) {
-    include_once "_connection/db.php";
+    include_once "_connection/db_base.php";
 
     $sql="SELECT * FROM puser WHERE tel='".$mysqli->real_escape_string($user_login)."' OR username='".$mysqli->real_escape_string($user_login)."' OR email='".$mysqli->real_escape_string($user_login)."';";
 

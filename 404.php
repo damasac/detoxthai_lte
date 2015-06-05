@@ -7,7 +7,6 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include_once "_connection/db.php"; ?>
 
 <!-- Content Header (Page header) -->
   <section class="content-header">

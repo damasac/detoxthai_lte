@@ -1,5 +1,5 @@
 <?php
-    include_once "../_connection/db.php";
+    include_once "../_connection/db_base.php";
 
     $site_id = $_POST['site_id'];
     $site_name = $_POST['site_name'];

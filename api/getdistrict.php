@@ -1,6 +1,6 @@
 <?php
 
-include_once "../_connection/db.php";
+include_once "../_connection/db_base.php";
 
 $amphur_id = quote_smart($_GET['amphur_id']);
 

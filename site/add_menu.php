@@ -1,5 +1,5 @@
 <?php
-    include_once "../_connection/db.php";
+    include_once "../_connection/db_base.php";
 
     /*if(!isset($_COOKIE['detoxthai'])){
       header('Location: http://www.detoxthai.org/');

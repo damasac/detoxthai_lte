@@ -1,6 +1,6 @@
 <?php
 
-include_once "../_connection/db.php";
+include_once "../_connection/db_base.php";
 
 $province_id = quote_smart($_GET['province_id']);
 
