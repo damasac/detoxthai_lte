@@ -60,7 +60,7 @@
 
         if ($result !== false) {
           foreach($result as $row) {
-            echo "<tr><td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td></tr>";
+            echo "<tr><td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td><td>".$row['address']."</td></tr>";
             $count++;
           }
         }
@@ -72,8 +72,8 @@
 
 </section><!-- /.content -->
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -16,13 +16,13 @@
 
 <?php
 
-$site_name = $_GET['site_name'];
+$id = $_GET['id'];
 isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
 
 if ('' == $menu) {
     $result = $mysqli->query("SELECT menu_name
     FROM site_menu
-    WHERE site_name = '$site_name'
+    WHERE site_id = '$id'
     AND display_menu = 0
     ORDER BY menu_order");
     $row = $result->fetch_assoc();
@@ -31,7 +31,7 @@ if ('' == $menu) {
         $menu_exit = 0;
     } else {
         echo "<script>
-               window.location.href = 'index.php?menu=".$row['menu_name']."&site_name=".$site_name."'".";
+               window.location.href = 'index.php?menu=".$row['menu_name']."&id=".$id."'".";
               </script>";
     }
 } else {
@@ -46,8 +46,8 @@ $arrMenu = array();
 <?php
     $result_name_site = $mysqli->query("SELECT site_name, create_date
                     FROM site_detail
-                    WHERE site_url = '$site_name'");
-    $site_name_desc = $result_name_site->fetch_assoc();
+                    WHERE id = '$id'");
+    $id_desc = $result_name_site->fetch_assoc();
 ?>
 
 <!-- Content Header (Page header) -->
@@ -70,13 +70,13 @@ $arrMenu = array();
     <div class="box-body">
       <div class="row">
         <div class="col-md-3">
-          <h3 class="text-muted"><?php echo $site_name_desc['site_name']; ?></h3>
+          <h3 class="text-muted"><?php echo $id_desc['site_name']; ?></h3>
         </div>
         <div class="col-md-9">
           <nav>
             <ul class="nav nav-pills pull-right">
             <?php
-              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_name = '$site_name' AND display_menu = 0 ORDER BY menu_order");
+              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$id' AND display_menu = 0 ORDER BY menu_order");
 
             if ($result !== false) {
               foreach($result as $row) {
@@ -90,15 +90,15 @@ $arrMenu = array();
                             $menu_sub_show = 1;
                         }
                     foreach($getSubMenu as $submenu) {
-                            $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&site_name=".$site_name."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
+                            $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&id=".$id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                             array_push($arrMenu, $submenu['menu_name']);
                     }
                     }
                     if ($menu_sub_show == 0) {
                         if (strcmp($menu, $row['menu_name']) === 0) {
-                            echo "<li role='presentation' class='active'><a href='index.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
+                            echo "<li role='presentation' class='active'><a href='index.php?menu=".trim($row['menu_name'])."&id=".$id."'>".trim($row['menu_name'])."</a></li>";
                         } else {
-                            echo "<li role='presentation'><a href='index.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
+                            echo "<li role='presentation'><a href='index.php?menu=".trim($row['menu_name'])."&id=".$id."'>".trim($row['menu_name'])."</a></li>";
                         }
                     } else {
                         $active_sub_menu = array_search($menu, $arrMenu);
@@ -135,8 +135,8 @@ $arrMenu = array();
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="menu.php?site_name=<?php echo $site_name; ?>">แก้ไขเมนู</a></li>
-                <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="site_schedule.php?site_url=<?php echo $site_name; ?>">กำหนดการหลักสูตร</a></li> -->
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="menu.php?id=<?php echo $id; ?>">แก้ไขเมนู</a></li>
+                <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="site_schedule.php?site_url=<?php echo $id; ?>">กำหนดการหลักสูตร</a></li> -->
               </ul>
             </li>
             <?php } ?>
@@ -154,7 +154,7 @@ $arrMenu = array();
           FROM site_menu
           INNER JOIN site_content ON site_menu.content_id = site_content.id
           WHERE menu_name = '$menu' AND
-          site_name = '$site_name'
+          site_id = '$id'
           ORDER BY site_menu.id");
         $row = $result->fetch_assoc();
     } else {
@@ -162,7 +162,7 @@ $arrMenu = array();
           FROM site_submenu
           INNER JOIN site_content ON site_submenu.content_id = site_content.id
           WHERE menu_name = '$menu' AND
-          site_name = '$site_name'
+          site_id = '$id'
           ORDER BY site_submenu.id");
         $row = $result->fetch_assoc();
     }
@@ -202,7 +202,7 @@ $arrMenu = array();
               {
                 id: <?php echo $row['content_id']; ?>,
                 content_html: bbCode,
-                token: $('#token').val(),
+                //token: $('#token').val(),
               },
               function(data,status){
                     location.reload();

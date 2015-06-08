@@ -11,7 +11,7 @@
 
 <?php
     /** init */
-    $site_name = $_GET['site_name'];
+    $id = $_GET['id'];
 ?>
 
 <!-- Content Header (Page header) -->
@@ -23,7 +23,7 @@
     <ol class="breadcrumb">
       <li><a href="../site.php"><i class="fa fa-home"></i> ค่ายล้างพิษตับ</a></li>
       <li><a href="site_manage.php">จัดการศูนย์</a></li>
-      <li><a href="index.php?site_name=<?php echo $site_name; ?>">จัดการหน้าเว็บ</a></li>
+      <li><a href="index.php?id=<?php echo $id; ?>">จัดการหน้าเว็บ</a></li>
       <li class="active">จัดการเมนู</li>
     </ol>
   </section>
@@ -52,7 +52,7 @@
             </tr>
              <?php
                 // prepare and query (direct)
-                $result = $mysqli->query("SELECT id, menu_order, menu_name, display_menu FROM site_menu WHERE site_name = '$site_name' ORDER BY menu_order");
+                $result = $mysqli->query("SELECT id, menu_order, menu_name, display_menu FROM site_menu WHERE site_id = '$id' ORDER BY menu_order");
                 $count = 1;
                 // display it
                 if ($result !== false) {
@@ -68,15 +68,15 @@
                         foreach($getSubMenu as $submenu) {
                             $html_sub_menu .= "<tr>
                                                 <td>- ".$submenu['menu_name']."</td>
-                                                <td><a type='button' href=edit_sub_menu.php?id=".$submenu['id']."&site_name=".$site_name." class='btn btn-primary btn-flat'><i class='fa fa-fw fa-pencil'></i></a>
-                                                <a type='button' href=delete_sub_menu.php?id=".$submenu['id']."&site_name=".$site_name." class='btn btn-danger btn-flat'><i class='fa fa-fw fa-trash'></i></a></td>
+                                                <td><a type='button' href=edit_sub_menu.php?id=".$submenu['id']."&site_id=".$id." class='btn btn-primary btn-flat'><i class='fa fa-fw fa-pencil'></i></a>
+                                                <a type='button' href=delete_sub_menu.php?id=".$submenu['id']."&site_id=".$id." class='btn btn-danger btn-flat'><i class='fa fa-fw fa-trash'></i></a></td>
                                                 </tr>";
                         }
 
                         echo "<tr>
                                 <td>".$row['menu_order']."</td>
                                 <td>".$row['menu_name']."<p></p><table class='table table-bordered'>".$html_sub_menu."</table></td><td>".$disstatus."</td>
-                                <td><a type='button' href=edit_menu.php?id=".$row['id']."&site_name=".$site_name." class='btn btn-primary btn-flat'><i class='fa fa-fw fa-pencil'></i></a> <a type='button' href=delete_menu.php?id=".$row['id']."&site_name=".$site_name." class='btn btn-danger btn-flat'><i class='fa fa-fw fa-trash'></i></a></td></tr>";
+                                <td><a type='button' href=edit_menu.php?id=".$row['id']."&site_id=".$id." class='btn btn-primary btn-flat'><i class='fa fa-fw fa-pencil'></i></a> <a type='button' href=delete_menu.php?id=".$row['id']."&site_id=".$id." class='btn btn-danger btn-flat'><i class='fa fa-fw fa-trash'></i></a></td></tr>";
                         $count++;
                     }
                 }
@@ -85,7 +85,7 @@
         <p></p>
         <p class="text-center">
             <!-- Button trigger modal -->
-            <!-- <a href="index.php?site_name=<?php echo $site_name; ?>" class="btn btn-primary btn-flat">
+            <!-- <a href="index.php?site_name=<?php echo $id; ?>" class="btn btn-primary btn-flat">
              กลับ
             </a> -->
             <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">
@@ -149,7 +149,7 @@
                     <select class="form-control" id="mainmenu">
                         <?php
                             // prepare and query (direct)
-                            $result = $mysqli->query("SELECT id, menu_name FROM site_menu WHERE site_name = '$site_name' ORDER BY id");
+                            $result = $mysqli->query("SELECT id, menu_name FROM site_menu WHERE site_id = '$id' ORDER BY id");
                             // display it
                             if ($result !== false) {
                                 foreach($result as $row) {
@@ -195,7 +195,7 @@
                   display: $("#display").val(),
                   subdisplay: $("#subdisplay").val(),
                   mainmenu: $("#mainmenu").val(),
-                  site_name: '<?php echo $site_name; ?>',
+                  site_id: '<?php echo $id; ?>',
                 },
                 function(data,status){
                   location.reload();

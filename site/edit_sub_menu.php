@@ -12,10 +12,10 @@
 <?php
 
   /** init */
-  $site_name = $_GET['site_name'];
+  $site_id = $_GET['site_id'];
   $id = $_GET['id'];
 
-  $result = $mysqli->query("SELECT id, menu_order, menu_name, status_menu, main_menu_id FROM site_submenu WHERE site_name = '$site_name' AND id = '$id'");
+  $result = $mysqli->query("SELECT id, menu_order, menu_name, status_menu, main_menu_id FROM site_submenu WHERE site_id = '$site_id' AND id = '$id'");
   $row = $result->fetch_assoc();
 
 ?>
@@ -72,7 +72,7 @@
           <div class="col-sm-9">
             <select class="form-control" id="main_menu">
               <?php
-                $result_sub_menu = $mysqli->query("SELECT id, menu_name FROM site_menu WHERE site_name = '$site_name' ORDER BY menu_order");
+                $result_sub_menu = $mysqli->query("SELECT id, menu_name FROM site_menu WHERE site_id = '$site_id' ORDER BY menu_order");
                 while ($row_sub_menu = $result_sub_menu->fetch_assoc()) {
                   if ($row['main_menu_id'] == $row_sub_menu['id']) {
                     echo '<option value='.$row_sub_menu['id'].' selected>'.$row_sub_menu['menu_name'].'</option>';
@@ -126,7 +126,7 @@
             },
             function(data,status){
               //alert(data);
-              window.location.href = 'menu.php?site_name=<?php echo $site_name; ?>';
+              window.location.href = 'menu.php?id=<?php echo $site_id; ?>';
             });
         });
     });
