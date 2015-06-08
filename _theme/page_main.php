@@ -69,7 +69,7 @@
                 <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#navbar-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>" class="navbar-brand"><b>Detox</b>Thai</a>
+                <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>" class="navbar-brand"><span class="fa fa-home"></span>  <b>Detox</b>Thai</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
