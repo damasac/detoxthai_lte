@@ -3,9 +3,7 @@
 <?php sb('title');?> Liver flushing registry [Form]<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link rel="stylesheet" href="script/bootstrap-theme.min.css">
 <link rel="stylesheet" href="script/bootstrap-slider.css">
-<link rel="stylesheet" href="js-select2/select2.css">
 <link rel="stylesheet" href="css/datepicker.css">
 
 <style>
@@ -126,8 +124,11 @@
                               <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
                             </div>
                             <div class="form-group col-md-3">
-                                 <label for="name" style="font-weight: bold;">สถานที่ทำการ Detox</label><br>
-                                <input type="text" class="form-control" id="location">
+                               
+                                <label for="name" style="font-weight: bold;">สถานที่ทำการ Detox</label><br>
+                                <select id="location" class="form-control">
+                                    <option value='0'>เลือกสถานที่ทำการ Detox</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-3">    
                                 <button class="margin btn btn-success btn-flat btn-lg" id="AddForm">  เพิ่มประวัติการ Detox</button>
@@ -215,9 +216,7 @@
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
-<script type="text/javascript" src="js-select2/select2.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="bootstrap-select/bootstrap-select.js"></script>
 
 <script>
     $(function(){
@@ -327,6 +326,40 @@
       }
       
   </script>
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<script>
+    $( document ).ready(function() {
+        //---
+        $("#location").select2();
+        
+        $(".select2-input").keyup(function(event){
+            var jsonAPI = "ajax-search-site.php?task=site&key=";
+            var key = $(this).val();
+            $("#location").html("<option value='0'>- สถานที่ทำการ Detox -</option>");
+            $.getJSON(jsonAPI+key,
+                function(result){
+                    $.each(result, function(i, field){
+                        $("#location").append("<option value="+field.id+" >"+field.site_name+"</option>");
+                    });
+                     $("#location").append("<option value=10000001>ที่บ้าน</option>");
+                    $("#location").append("<option value=10000002 >อื่นๆ</option>");
+            });
+        });
+        var jsonAPI = "ajax-search-site.php?task=site&key=";
+        var key = '';
+        $("#location").html("<option value='0'>- สถานที่ทำการ Detox -</option>");
+        $.getJSON(jsonAPI+key,
+            function(result){
+                $.each(result, function(i, field){
+                    $("#location").append("<option value="+field.id+" >"+field.site_name+"</option>");
+                });
+        });
+        $("#location").append("<option value=10000001>ที่บ้าน</option>");
+        $("#location").append("<option value=10000002 >อื่นๆ</option>");
+    });
+        //---
+</script>
 <?php eb();?>
  
 <?php render($MasterPage);?>
