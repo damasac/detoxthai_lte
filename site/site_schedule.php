@@ -1,0 +1,282 @@
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+
+<?php sb('title');?> Liver flushing registry <?php eb();?>
+
+<?php sb('js_and_css_head'); ?>
+<link rel="stylesheet" href="../_plugins/datepicker/datepicker3.css">
+<style type="text/css">
+  .sceditor-container {
+    height: 700px;
+  }
+  iframe {
+    height: 82% !important;
+    width: 97% !important;
+  }
+</style>
+<?php eb();?>
+
+<?php
+function getDateThai($strDate)
+{
+  $strYear = date("Y",strtotime($strDate))+543;
+  $strMonth= date("n",strtotime($strDate));
+  $strDay= date("j",strtotime($strDate));
+  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+  $strMonthThai=$strMonthCut[$strMonth];
+  return "$strDay $strMonthThai $strYear";
+}
+
+isset($_GET['site_url']) ? $site_url = $_GET['site_url'] :  $site_url = '';
+
+?>
+
+<?php sb('content');?>
+<?php include_once "../_connection/db_base.php"; ?>
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    จัดการหลักสูตรล้างพิษตับ
+    <small>เพิ่ม แก้ไข ลบ หลักสูตรล้างพิษตับ</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">SITE NAME HERE</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="box box-default">
+    <div class="box-header with-border">
+      <h3 class="box-title">หลักสูตรล้างพิษตับทั้งหมด</h3>
+    </div>
+    <div class="box-body">
+      <p class="text-left col-xs-2" style="margin-left: -15px;">
+        <button class="btn btn-block btn-primary btn-flat" data-toggle="modal" data-target="#myModal">เพิ่มหลักสูตรล้างพิษตับ</button>
+      </p>
+      <table class="table table-bordered">
+        <tr class="active">
+          <th>
+            ลำดับ
+          </th>
+          <th>
+            วันที่เริ่ม
+          </th>
+          <th>
+            วันที่สิ้นสุด
+          </th>
+          <th>
+            ราคา/คน
+          </th>
+          <th>
+            ชื่อหลักสูตร
+          </th>
+          <th>
+            รายละเอียด
+          </th>
+          <th>
+          </th>
+        </tr>
+        <?php
+        $count = 1;
+        $modal = "";
+        // prepare and query (direct)
+        $result = $mysqli->query("SELECT id, schedule_name, schedule_date, schedule_end_date, price_per_person, schedule_desc FROM site_schedule WHERE site_url = '$site_url' ORDER BY id");
+        if ($result !== false) {
+          foreach($result as $row) {
+            echo "<tr>
+            <td>".$count."</td>
+            <td>".getDateThai($row['schedule_date'])."</td>
+            <td>".getDateThai($row['schedule_end_date'])."</td>
+            <td>".$row['price_per_person']." บาท</td>
+            <td>".$row['schedule_name']."</td>
+            <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
+            <td><a href='edit_schedule.php?id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</a></td>
+          </tr>";
+
+          $modal .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+          <div class='modal-dialog'>
+            <div class='modal-content'>
+              <div class='modal-header'>
+                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                <h4 class='modal-title' id='myModalLabel'>รายละเอียด</h4>
+              </div>
+              <div class='modal-body'>
+                ".html_entity_decode($row['schedule_desc'])."
+              </div>
+              <div class='modal-footer'>
+                <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+              </div>
+            </div>
+          </div>
+        </div>";
+        $count++;
+      }
+    }
+    ?>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">เพิ่มหลักสูตรล้างพิษตับ</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="schedulename" class="col-sm-2 control-label">ชื่อหลักสูตร</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="schedulename" placeholder="ชื่อหลักสูตร">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
+              <div class="col-sm-10">
+                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
+              <div class="col-sm-10">
+                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="user_qty" class="col-sm-2 control-label">จำนวนคน</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="user_qty" placeholder="จำนวนคน" value="">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="price" class="col-sm-2 control-label">ราคา/คน</label>
+              <label class="sr-only" for="price">ราคา/คน</label>
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <div class="input-group-addon">฿</div>
+                  <input type="number" class="form-control" id="price" placeholder="ราคา">
+                  <div class="input-group-addon">.00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลักสูตร</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
+          <button type="button" id="btadd" class="btn btn-primary btn-flat">เพิ่ม</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <?php
+  echo $modal;
+  ?>
+</div><!-- /.box-body -->
+</div><!-- /.box -->
+
+</section><!-- /.content -->
+
+<?php eb();?>
+
+
+<?php sb('js_and_css_footer');?>
+<link rel="stylesheet" type="text/css" href="../_plugins/edit/minified/themes/default.min.css">
+<script src="../_plugins/edit/minified/jquery.sceditor.bbcode.min.js"></script>
+<script type="text/javascript" src="../_plugins/datepicker/bootstrap-datepicker.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $("#scheduledate").datepicker();
+    $("#scheduledateend").datepicker();
+
+    $("textarea").sceditor({
+      plugins: "bbcode",
+      width: '98%',
+      resizeEnabled: false,
+      style: "edit/minified/jquery.sceditor.default.min.css"
+    });
+
+    $("#btadd").click(function(){
+
+      var schedulename = $("#schedulename");
+      var scheduledate = $("#scheduledate");
+      var scheduledateend = $("#scheduledateend");
+      var user_qty = $("#user_qty");
+      var price = $("#price");
+
+      var check = 0;
+
+      if(!schedulename.val()) {
+        schedulename.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check = 1;
+      } else {
+        schedulename.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(!scheduledate.val()) {
+        scheduledate.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check = 1;
+      } else {
+        scheduledate.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(!scheduledateend.val()) {
+        scheduledateend.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check = 1;
+      } else {
+        scheduledateend.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(!user_qty.val()) {
+        user_qty.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check = 1;
+      } else {
+        user_qty.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(!price.val()) {
+        price.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check = 1;
+      } else {
+        price.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(0 == check){
+
+        var bbCode = $( 'textarea' ).sceditor( 'instance' ).val();
+        var html = $('textarea').sceditor('instance').fromBBCode(bbCode);
+        $.post("add_schedule.php",
+        {
+          schedulename: $("#schedulename").val(),
+          scheduledate: $("#scheduledate").val(),
+          scheduledateend : $("#scheduledateend").val(),
+          user_qty : $("#user_qty").val(),
+          price : $("#price").val(),
+          scheduledesc: html,
+          site_url: '<?php echo $site_url; ?>',
+        },
+        function(data,status){
+                      //alert("Data: " + data + "\nStatus: " + status);
+                      location.reload();
+                    });
+      }
+    });
+  });
+</script>
+<?php eb();?>
+
+<?php render($MasterPage);?>
