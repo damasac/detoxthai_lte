@@ -201,11 +201,11 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
       <div class="content-wrapper">
         <div class="container">
 	  <center>
-	    <table class="table" style="margin-bottom: 0px">
+	    <table class="table" style="margin-bottom: 0px;">
 	      <tr>
 		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>home.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_5_Home_s.png" alt="เข้าสู่ระบบ" class="img-responsive"></a></td>
 <?php
-if (!isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+if (empty($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>
 		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>login.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_1_Login_s.png" alt="เข้าสู่ระบบ" class="img-responsive"></a></td>
 		<td><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>register.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_2_Signup_s.png" alt="ละทะบียน" class="img-responsive"></a></td>
