@@ -5,51 +5,6 @@
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">
 <link rel="stylesheet" href="css/datepicker.css">
-
-<style>
-    .form-group.paddingleft {
-          padding-bottom: 5px;
-          padding-left: 50px;
-    }
-    .form-group.fix {
-          padding-bottom: 5px;
-    }
-    .form-control.fix {
-          width: 270px !important;
-    }
-    .p3tableheader {
-      background-color: #ccc;
-    }
-    .radio.p3paddingleft {
-      padding-left: 50px;
-    }
-    .form-control.fix2 {
-          width: 40px !important;
-    }
-    input[type=radio] {
-    border: 0px;
-    width: 20px;
-    height: 20px;
-   }
-    input[type=checkbox]
-    {
-      margin: auto;
-      width: 19px;
-      height: 19px;
-    }
-    .textindent{
-      text-indent: 1.5em;
-    }
-    .table-responsive.fix {
-      overflow-x: hidden;
-    }
-    .showError{
-      padding:20px;
-      background-color:#FE2B2B;
-      border-radius:2px;
-      color:white;
-    }
-</style>
   
 <?php eb();?>
 
@@ -164,7 +119,7 @@
                       <td><?php echo $data["location"]?></td>
                       <td><?php echo System_ShowDate($data["startdate"])." ถึง ".System_ShowDate($data["enddate"])?></td>
                       <td><?php echo System_showDate($data["createdate"]);?></td>
-                      <td><button class="btn btn-primary" onclick='window.location.href="index.php?form_id=<?php echo $data["id"]; ?>"'> ตรวจสอบ </button>
+                      <td><button class="btn btn-primary" onclick='window.location.href="input.php?form_id=<?php echo $data["id"]; ?>"'> ตรวจสอบ </button>
                       <button class="btn btn-danger" onclick='deleteForm(<?php echo $data["id"];?>);'> ลบ </button></td>
                     </tr> 
                     <?php $i++; }?>
@@ -175,35 +130,6 @@
                 </div>
             </div>            
             
-            <?php
-            if(isset($_GET["form_id"])){
-                $form_id =$_GET["form_id"];
-            }else{
-                $form_id='';
-            }
-            ?>
-            <input type="hidden" class="form-control" value="<?php echo $form_id;?>" id="form_id" />
-            <?php
-                $sqlSelectValue =  "SELECT * FROM `tbl_surveyform` WHERE ref_id_create='".$form_id."' ";
-                $querySelectValue = $conn->query($sqlSelectValue);
-                $dataform = $querySelectValue->fetch_assoc();
-            ?>
-            <div id="formsurvey" style="display:none;">
-                
-            <!-------------------------- form 1-2-->
-            <?php include_once "form_consent.php";include_once "form_person.php";include_once "form_1.php";include_once "form_2.php"; ?>
-            
-            <!-------------------------- form 3-4-->
-            <?php include_once "form_3.php"; ?>
-            <?php include_once "form_4.php"; ?>
-            
-            <!-------------------------- form 5-6-->
-            <?php include_once "form_5.php"; ?>
-            <?php include_once "form_6.php"; ?>
-            </div>
-
-
-
           </div><!-- /.box-body -->
     </div><!-- /.box -->
 
@@ -280,7 +206,7 @@
         }else{
           $.ajax({
                   type: "POST",
-                  url: "db_connect.php?task=insertBlank",
+                  url: "../_connection/db_form.php?task=insertBlank",
                   data:{
                     startdate:startdate,
                     enddate:enddate,
@@ -291,7 +217,8 @@
                   },
                   success: function(returndata){
                     $("#form_id").val(returndata);
-                    $("#formsurvey").show();
+                    //$("#formsurvey").show();
+                    parent.location='input.php?form_id='+returndata;
                 }
             }); 
           }
@@ -302,7 +229,7 @@
       $("#doDelete").click(function(){
                 $.ajax({
                   type: "POST",
-                  url: "db_connect.php?task=deleteForm",
+                  url: "../_connection/db_form.php?task=deleteForm",
                   data:{
                     form_id:form_id,
                     user_id:user_id
