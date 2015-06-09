@@ -23,7 +23,8 @@
 
     <div class="login-box">
       <div class="login-logo">
-        <a href="../index2.html"><b>Detox</b>Thailand</a>
+        <!--<a href="../index2.html"><b>Detox</b>Thailand</a>-->
+	สมัครสมาชิก
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">
@@ -60,7 +61,7 @@
             <div class="col-xs-8">    
               <div class="checkbox icheck">
                 <label>
-                  <input type="checkbox"> I agree to the <a href="#">terms</a>
+                  <input type="checkbox"> ฉันยอมรับ <a href="#">เงื่อนไข</a>
                 </label>
               </div>                        
             </div><!-- /.col -->
@@ -71,12 +72,12 @@
         </form>        
 
         <div class="social-auth-links text-center">
-          <p>- OR -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
+          <p>- หรือ -</p>
+          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> เข้าใช้งานโดยใช้ เฟซบุ๊ค</a>
+          <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> เข้าใช้งานโดยใช้  Google+</a>
         </div>
 
-        <a href="login.html" class="text-center">I already have a membership</a>
+        <a href="login.html" class="text-center">ฉันเป็นสมาชิกอยู่แต่เดิม</a>
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 
