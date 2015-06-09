@@ -15,7 +15,13 @@
 
 <?php
   isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
-   isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+  isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+
+  if('' == $detoxthai){
+    echo "<script>
+            window.location.href = '../login.php';
+          </script>";
+  }
 ?>
 
 <?php sb('content');?>
