@@ -24,8 +24,10 @@
 <!-- Main content -->
 <section class="content">
   <?php
+  isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+
   $result = $mysqli->query("SELECT COUNT(id) AS sitecount
-    FROM site_detail WHERE create_user = 1");
+    FROM site_detail WHERE create_user = ".$detoxthai);
   $row = $result->fetch_assoc();
   ?>
 
@@ -68,7 +70,7 @@
           LEFT JOIN const_district ON site_district = DISTRICT_ID
           LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
           LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
-          WHERE create_user = 1
+          WHERE create_user = ".$detoxthai."
           ORDER BY id");
         //$result->execute();
         $count = 1;
@@ -145,7 +147,7 @@
                   site_postal_code: $('#postalcode".$count."').val(),
                   site_telephone: $('#tel".$count."').val(),
                   site_mobile: $('#mobile".$count."').val(),
-                  site_user: 1,
+                  site_user: ".$detoxthai.",
                 },
                 function(data,status){
                   location.reload();

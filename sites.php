@@ -28,11 +28,17 @@
       <h3 class="box-title">ค่ายล้างพิษตับทั้งหมด</h3>
     </div>
     <div class="box-body">
-
+      <?php
+        isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+        if (isset($detoxthai)) {
+      ?>
       <p class="text-right">
         <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
         <a class="btn btn-primary btn-flat" href="site/site_manage.php">จัดการศูนย์</a>
       </p>
+      <?php
+        }
+      ?>
       <table class="table table-bordered">
         <tr class="active">
           <th>
