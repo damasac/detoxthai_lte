@@ -11,17 +11,24 @@
 </style>
 <?php eb();?>
 
+<?php include_once "_connection/db_base.php"; ?>
+
 <?php
   /** Get sub domain. */
-  //$site_name = explode(".",$_SERVER['SERVER_NAME']);
-  //$sub_domain =  $site_name[sizeof($site_name) - 3];
+  //$site_id = explode(".",$_SERVER['SERVER_NAME']);
+  //$sub_domain =  $site_id[sizeof($site_id) - 3];
 
   /** Test constant value.  */
-  $site_name = 'imu';
+  $sub_domain = 'imu';
+
+  $result = $mysqli->query("SELECT id
+            FROM site_detail
+            WHERE site_url = '$sub_domain'");
+  $row_id = $result->fetch_assoc();
+  $site_id = $row_id['id'];
 ?>
 
 <?php sb('content');?>
-<?php include_once "_connection/db_base.php"; ?>
 
 <?php
 
@@ -32,7 +39,7 @@ isset($_GET['sub_menu']) ? $sub_menu = $_GET['sub_menu'] :  $sub_menu = 0;
 if ('' == $menu) {
     $result = $mysqli->query("SELECT menu_name
     FROM site_menu
-    WHERE site_name = '$site_name'
+    WHERE site_id = '$site_id'
     AND display_menu = 0
     ORDER BY menu_order");
     $row = $result->fetch_assoc();
@@ -41,7 +48,7 @@ if ('' == $menu) {
         $menu_exit = 0;
     } else {
         echo "<script>
-               window.location.href = 'home.php?menu=".$row['menu_name']."&site_name=".$site_name."'".";
+               window.location.href = 'home.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
               </script>";
     }
 } else {
@@ -56,19 +63,19 @@ $arrMenu = array();
 <?php
     $result_name_site = $mysqli->query("SELECT site_name, create_date
                     FROM site_detail
-                    WHERE site_url = '$site_name'");
-    $site_name_desc = $result_name_site->fetch_assoc();
+                    WHERE id = '$site_id'");
+    $site_id_desc = $result_name_site->fetch_assoc();
 ?>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
     Content Management
-    <small>สำหรับ site (เปลี่ยนไปตาม URL)</small>
+    <small>สำหรับ Central site (Fixed ไม่เปลี่ยนไปตาม URL)</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active"><?php echo $site_name_desc['site_name']; ?></li>
+    <li class="active"><?php echo $site_id_desc['site_name']; ?></li>
   </ol>
 </section>
 
@@ -79,13 +86,13 @@ $arrMenu = array();
     <div class="box-body">
       <div class="row">
         <div class="col-md-3">
-          <h3 class="text-muted"><?php echo $site_name_desc['site_name']; ?></h3>
+          <h3 class="text-muted"><?php echo $site_id_desc['site_name']; ?></h3>
         </div>
         <div class="col-md-9">
           <nav>
             <ul class="nav nav-pills pull-right">
             <?php
-              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_name = '$site_name' AND display_menu = 0 ORDER BY menu_order");
+              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$site_id' AND display_menu = 0 ORDER BY menu_order");
 
             if ($result !== false) {
               foreach($result as $row) {
@@ -99,15 +106,15 @@ $arrMenu = array();
                             $menu_sub_show = 1;
                         }
                     foreach($getSubMenu as $submenu) {
-                            $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='home.php?menu=".trim($submenu['menu_name'])."&site_name=".$site_name."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
+                            $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='home.php?menu=".trim($submenu['menu_name'])."&site_id=".$site_id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                             array_push($arrMenu, $submenu['menu_name']);
                     }
                     }
                     if ($menu_sub_show == 0) {
                         if (strcmp($menu, $row['menu_name']) === 0) {
-                            echo "<li role='presentation' class='active'><a href='home.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
+                            echo "<li role='presentation' class='active'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
                         } else {
-                            echo "<li role='presentation'><a href='home.php?menu=".trim($row['menu_name'])."&site_name=".$site_name."'>".trim($row['menu_name'])."</a></li>";
+                            echo "<li role='presentation'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
                         }
                     } else {
                         //print_r($arrMenu);
@@ -150,7 +157,7 @@ $arrMenu = array();
                                       FROM site_menu
                                       INNER JOIN site_content ON site_menu.content_id = site_content.id
                                       WHERE menu_name = '$menu' AND
-                                      site_name = '$site_name'
+                                      site_id = '$site_id'
                                       ORDER BY site_menu.id");
                     $row = $result->fetch_assoc();
           } else {
@@ -158,7 +165,7 @@ $arrMenu = array();
                                       FROM site_submenu
                                       INNER JOIN site_content ON site_submenu.content_id = site_content.id
                                       WHERE menu_name = '$menu' AND
-                                      site_name = '$site_name'
+                                      site_id = '$site_id'
                                       ORDER BY site_submenu.id");
                     $row = $result->fetch_assoc();
           }
@@ -167,8 +174,8 @@ $arrMenu = array();
       </div>
       <p><hr/></p>
       <footer class="footer">
-        <?php $year_create = explode("-",$site_name_desc['create_date']) ?>
-        <p>&copy; <?php echo $site_name_desc['site_name']." ".$year_create[0]; ?></p>
+        <?php $year_create = explode("-",$site_id_desc['create_date']) ?>
+        <p>&copy; <?php echo $site_id_desc['site_name']." ".$year_create[0]; ?></p>
       </footer>
     </div><!-- /.box-body -->
   </div><!-- /.box -->
