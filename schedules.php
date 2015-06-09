@@ -1,6 +1,6 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> ศูนย์สุขภาพองค์รวม <?php eb();?>
+<?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="_plugins/datepicker/datepicker3.css">
@@ -37,8 +37,8 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    จัดการหลักสูตรล้างพิษตับ
-    <small>เพิ่ม แก้ไข ลบ หลักสูตรล้างพิษตับ</small>
+    จัดการหลักสูตรสุขภาพองค์รวม
+    <small>เพิ่ม แก้ไข ลบ หลักสูตร</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -51,7 +51,7 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">หลักสูตรล้างพิษตับทั้งหมด</h3>
+      <h3 class="box-title">หลักสูตรทั้งหมด</h3>
     </div>
     <div class="box-body">
       <table class="table table-bordered">
