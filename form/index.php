@@ -116,7 +116,12 @@
                     while($data = $query->fetch_assoc()){?>
                     <tr id='trForm_<?php echo $data["id"]?>'>
                       <td><?php echo $i;?></td>
-                      <td><?php echo $data["location"]?></td>
+                      <td><?php if($data["location"] =='10000001'){ echo 'บ้าน';} else if($data['location']=='10000002') {echo 'อื่นๆ'; } else {
+                    $sql = "select `site_name` from site_detail where id='".$data['location']."';";
+                    $res = $conn->query($sql);
+                    $dbarr = $res->fetch_assoc();
+                    echo $dbarr['site_name'];
+                    }?> </td>
                       <td><?php echo System_ShowDate($data["startdate"])." ถึง ".System_ShowDate($data["enddate"])?></td>
                       <td><?php echo System_showDate($data["createdate"]);?></td>
                       <td><button class="btn btn-primary" onclick='window.location.href="input.php?form_id=<?php echo $data["id"]; ?>"'> ตรวจสอบ </button>
