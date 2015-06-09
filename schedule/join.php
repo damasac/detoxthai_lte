@@ -13,6 +13,11 @@
 
 <?php include_once "../_connection/db_base.php"; ?>
 
+<?php
+  isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
+   isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+?>
+
 <?php sb('content');?>
 
 <!-- Content Header (Page header) -->
@@ -57,16 +62,13 @@
 <script>
   $(document).ready(function(){
     $("#btnjoin").click(function(){
-      $.post("add_menu.php",
+      $.post("create_join.php",
       {
-        menuorder: $("#menuorder").val(),
-        menuname: $("#menuname").val(),
-        display: $("#display").val(),
-        subdisplay: $("#subdisplay").val(),
-        mainmenu: $("#mainmenu").val(),
+        schedule_id: <?php echo $schedule_id; ?>,
+        user_id: <?php echo $detoxthai; ?>,
       },
       function(data,status){
-        location.reload();
+        window.location.href = '../schedules.php';
       });
     });
   });
