@@ -27,6 +27,7 @@ function getDateThai($strDate)
 }
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
+isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
 ?>
 
@@ -82,6 +83,22 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
         $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule ORDER BY id");
         if ($result !== false) {
           foreach($result as $row) {
+
+            $result_check = $mysqli->query("SELECT count(*) AS join_status
+                                FROM site_join
+                                WHERE schedule_id = '".$row['id']."'
+                                AND user_id = '".$detoxthai."'");
+            $row_check = $result_check->fetch_assoc();
+
+            //echo $row_check['join_status'];
+
+            if (0 < $row_check['join_status']) {
+              $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                            <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+            } else {
+              $btn_join = "<a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>";
+            }
+
             echo "<tr>
             <td>".$count."</td>
             <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
@@ -102,7 +119,7 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
               </div>
               <div class='modal-body'>
                 <p class='text-right'>
-                  <a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>
+                  ".$btn_join."
                 </p>
                 <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>

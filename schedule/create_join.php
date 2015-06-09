@@ -7,4 +7,5 @@
     $result = $mysqli->query("INSERT INTO
                 site_join (schedule_id, user_id)
                 VALUES ('$schedule_id', '$user_id')");
+
 ?>

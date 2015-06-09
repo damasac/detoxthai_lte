@@ -74,7 +74,7 @@
         user_id: <?php echo $detoxthai; ?>,
       },
       function(data,status){
-        window.location.href = '../schedules.php';
+        window.location.href = 'payment_detail.php?schedule_id=<?php echo $schedule_id; ?>';
       });
     });
   });
