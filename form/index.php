@@ -1,6 +1,6 @@
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> ศูนย์สุขภาพองค์รวม <?php eb();?>
+<?php sb('title');?> Liver flushing registry [Form]<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">

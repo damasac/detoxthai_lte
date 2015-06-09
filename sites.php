@@ -12,11 +12,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    สร้าง หรือจัดการ ศูนย์สุขภาพองค์รวม
-
+    ค่ายล้างพิษตับ
+    <small>สร้างหรือจัดการค่ายล้างพิษตับ</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="sites.php"><i class="fa fa-home"></i> ศูนย์สุขภาพ</a></li>
+    <li><a href="sites.php"><i class="fa fa-home"></i> ค่ายล้างพิษตับ</a></li>
   </ol>
 </section>
 
@@ -25,7 +25,7 @@
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">รายชื้อทั้งหมดของศูนย์สุขภาพองค์รวม</h3>
+      <h3 class="box-title">ค่ายล้างพิษตับทั้งหมด</h3>
     </div>
     <div class="box-body">
       <?php
