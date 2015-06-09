@@ -3,7 +3,7 @@ function AutoSave(field,form_id) {
     //alert("fields = "+field+" value = "+value+" form_id = "+form_id);
      $.ajax({
                 type: "POST",
-                url: "db_connect.php?task=updateAuto",
+                url: "../_connection/db_form.php?task=updateAuto",
                 data:{
                     form_id:form_id,
                     field:field,
@@ -87,7 +87,7 @@ function AutoSaveRadio(field, form_id, val) {
     alert("fields = "+field+" value = "+value+" form_id = "+form_id);
      $.ajax({
                 type: "POST",
-                url: "db_connect.php?task=updateAuto",
+                url: "../_connection/db_form.php?task=updateAuto",
                 data:{
                     form_id:form_id,
                     field:field,
