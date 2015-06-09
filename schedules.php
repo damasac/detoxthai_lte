@@ -102,7 +102,7 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
               </div>
               <div class='modal-body'>
                 <p class='text-right'>
-                  <a type='button' href='join_schedule.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>
+                  <a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>
                 </p>
                 <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>

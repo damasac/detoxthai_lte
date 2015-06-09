@@ -3,10 +3,13 @@
 <?php
   isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
-   /** Set cookie. */
+  /** Set cookie. */
   if (!isset($detoxthai)) {
       $domain='detoxthai.dev';
       setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), '/', $domain, false);
+
+      /** Test. */
+      //setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), "/");
   }
 ?>
 
