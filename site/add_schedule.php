@@ -7,10 +7,12 @@
     $scheduledateend = $_POST['scheduledateend'];
     $price = $_POST['price'];
     $user_qty = $_POST['user_qty'];
-    $scheduledesc = htmlspecialchars($_POST['scheduledesc']);
+    $scheduledesc = $_POST['scheduledesc'];
+    $payment = $_POST['payment'];
+    $afterpayment = $_POST['afterpayment'];
     $site_id = $_POST['site_id'];
 
     $result = $mysqli->query("INSERT INTO
-                site_schedule (schedule_name, schedule_date, schedule_desc, site_id, schedule_end_date, user_qty, price_per_person)
-                VALUES ('$schedulename', STR_TO_DATE('$scheduledate', '%m/%d/%Y'), '$scheduledesc', '$site_id', STR_TO_DATE('$scheduledateend', '%m/%d/%Y'), $user_qty, $price)");
+                site_schedule (schedule_name, schedule_date, schedule_desc, site_id, schedule_end_date, user_qty, price_per_person, schedule_payment, schedule_after_payment)
+                VALUES ('$schedulename', STR_TO_DATE('$scheduledate', '%m/%d/%Y'), '$scheduledesc', '$site_id', STR_TO_DATE('$scheduledateend', '%m/%d/%Y'), $user_qty, $price, '$payment', '$afterpayment')");
 ?>

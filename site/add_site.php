@@ -34,9 +34,9 @@
 
 
 
-[color=#126a9d][size=5][font=Tahoma, sans-serif, Arial, Helvetica, Garuda][b]\"ล้างพิษตับ\" โดย ทีมงาน \"".$site_id."\"[/b][/font][/size][/color]
+[color=#126a9d][size=5][font=Tahoma, sans-serif, Arial, Helvetica, Garuda][b]\"ล้างพิษตับ\" โดย ทีมงาน \"".$site_name."\"[/b][/font][/size][/color]
 
-[color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]        \" ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัด[/font][/size][/color][color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]กับกิจกรรมการฟื้นฟูสุขภาพ [/font][/size][/color][color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]ทีมงาน".$site_id." จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ ".$site_id." นะค่ะ \"[/font][/size][/color]')");
+[color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]        \" ยินดีต้อนรับ ... ผู้รักสุขภาพทุกท่าน ที่ต้องการ ล้างพิษตับ ด้วยวิธีธรรมชาติบำบัด[/font][/size][/color][color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]กับกิจกรรมการฟื้นฟูสุขภาพ [/font][/size][/color][color=#595959][size=2][font=Tahoma, sans-serif, Arial, Helvetica]ทีมงาน".$site_name." จัดคอร์สล้างพิษตับนี้ขึ้นมาด้วยใจที่มุ่งหวังอยากจะให้ผู้ที่สนใจในเรื่องการล้างพิษตับ ได้มีสุขภาพที่ดี และได้รับความรู้ในการดูแลสุขภาพของตนโดยอาศัยวิธีธรรมชาติบำบัดเพื่อสามารถนำกลับไปปฎิบัติ ใช้ที่บ้านได้ ... โดยให้เสียค่าใช้จ่ายน้อยที่สุด แล้วพบกันที่ ".$site_name." นะค่ะ \"[/font][/size][/color]')");
 
     $last_id = $mysqli->insert_id;
 
@@ -49,9 +49,9 @@
                 site_content (content_html)
                 VALUES ('[left][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]        การจัด [/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]คอร์สล้างพิษตับ[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] นิ่วในถุงน้ำดี นิ่วในท่อน้ำดีตับ และล้างลำไส้ ด้วยวิธีธรรมชาติบำบัดนั้น เป็นการเข้าค่ายเพื่อฟื้นฟูร่างกาย จากการเจ็บป่วยเรื้อรังโดยไม่ทราบสาเหตุ ซึ่ง [/font][/size][/color][u][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]ไม่ใช่การรักษาโรค แต่เป็นการเรียนรู้ที่จะเป็นหมอเพื่อรักษาตัวเอง[/font][/size][/color][/u][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] ซึ่งเหมาะสำหรับทุกคนที่สุขภาพร่างกายยังพอแข็งแรง สามารถช่วยเหลือตัวเองได้ และมีความมุ่งมั่นที่จะีมีสุขภาพที่ดีต่อไป[/font][/size][/color][/left]
 
-[left][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]โดย \"[/font][/size][/color][color=#126a9d][font=Tahoma, sans-serif, Arial, Helvetica, Garuda][b][size=2]".$site_id."[/size][/b][/font][/color][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\"[/font][/size][/color][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] ได้อาศัยองค์ความรู้จากที่ได้รับการถ่ายทอดมา จากโครงการสุขภาพองค์รวม 8 อ. ของ [/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]อ.ขวัญดิน สิงห์คำ[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] และ [/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]อ.แก่นฟ้า แสนเมือง[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] ผู้ริเริ่ม \"[/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]หลักสูตร ล้างพิษตับ[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\" ซึ่ง[/font][/size][/color][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]ท่านได้ค้นคว้า วิจัย พัฒนาสูตร ทดลองกับทั้งตัวเองและจากประสบการณ์ดูแลสุขภาพให้กับชาวชุมชนสันติอโศก แล้วได้นำวิชาความรู้นั้นมาถ่ายทอด เผยแพร่ ทำให้ผู้เข้ารับการอบรมได้รับประโยชน์เป็นจำนวนมาก [/font][/size][/color][/left]
+[left][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]โดย \"[/font][/size][/color][color=#126a9d][font=Tahoma, sans-serif, Arial, Helvetica, Garuda][b][size=2]".$site_name."[/size][/b][/font][/color][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\"[/font][/size][/color][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] ได้อาศัยองค์ความรู้จากที่ได้รับการถ่ายทอดมา จากโครงการสุขภาพองค์รวม 8 อ. ของ [/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]อ.ขวัญดิน สิงห์คำ[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] และ [/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]อ.แก่นฟ้า แสนเมือง[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica] ผู้ริเริ่ม \"[/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]หลักสูตร ล้างพิษตับ[/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\" ซึ่ง[/font][/size][/color][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]ท่านได้ค้นคว้า วิจัย พัฒนาสูตร ทดลองกับทั้งตัวเองและจากประสบการณ์ดูแลสุขภาพให้กับชาวชุมชนสันติอโศก แล้วได้นำวิชาความรู้นั้นมาถ่ายทอด เผยแพร่ ทำให้ผู้เข้ารับการอบรมได้รับประโยชน์เป็นจำนวนมาก [/font][/size][/color][/left]
 [left]
-[color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]บ้านสุขภาพล้างพิษตับ \"[/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][color=#274e13]".$site_id."[/color][/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\" จึงเกิดขึ้นด้วยคำแนะนำจากผู้เห็นประโยชน์จากการล้างพิษตับ และหวังอยากให้คนอื่นๆ หันมาดูแลตนเองด้วยการเรียนรู้ศาสตร์แห่งธรรมชาติบำบัดที่ไม่ต้องพึ่งพายาจากสถานพยาบาลจนต้องทานยาเป็นอาหาร แต่จะมาใส่ใจการกินอยู่เลือกอาหารเป็นยาแทน โดยจะใช้ระยะเวลา 3 วัน 2 คืน (ล้างพิษตับ แบบสั้น) ในการเข้าร่วมกิจกรรม[/font][/size][/color][/left]
+[color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]บ้านสุขภาพล้างพิษตับ \"[/font][/size][/color][b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][color=#274e13]".$site_name."[/color][/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]\" จึงเกิดขึ้นด้วยคำแนะนำจากผู้เห็นประโยชน์จากการล้างพิษตับ และหวังอยากให้คนอื่นๆ หันมาดูแลตนเองด้วยการเรียนรู้ศาสตร์แห่งธรรมชาติบำบัดที่ไม่ต้องพึ่งพายาจากสถานพยาบาลจนต้องทานยาเป็นอาหาร แต่จะมาใส่ใจการกินอยู่เลือกอาหารเป็นยาแทน โดยจะใช้ระยะเวลา 3 วัน 2 คืน (ล้างพิษตับ แบบสั้น) ในการเข้าร่วมกิจกรรม[/font][/size][/color][/left]
 ')");
 
     $last_id = $mysqli->insert_id;
@@ -147,7 +147,7 @@
 
 [color=#000000][font=Tahoma, sans-serif, Arial, Helvetica][color=#660000]กำหนดการคอร์สล้างพิษ (สูตรสั้น)[/color][/font][/color]
 
-[b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][color=#274e13]ณ ".$site_id." [ระยะเวลา 3 วัน 2 คืน][/color][/font][/size][/color][/b]
+[b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][color=#274e13]ณ ".$site_name." [ระยะเวลา 3 วัน 2 คืน][/color][/font][/size][/color][/b]
 
 [b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica][u]วันที่ 1[/u][/font][/size][/color][/b][color=#000000][size=2][font=Tahoma, sans-serif, Arial, Helvetica]     [/font][/size][/color]
 
@@ -239,7 +239,7 @@
     /** Add menu about. */
     $result = $mysqli->query("INSERT INTO
                 site_content (content_html)
-                VALUES ('[center][size=5][font=Tahoma, sans-serif, Arial, Helvetica][color=#000000]ช่องทางการติดต่อ \"[/color][b][color=#ff3366]".$site_id."[/color][/b][color=#000000]\"[/color][/font][/size][/center]
+                VALUES ('[center][size=5][font=Tahoma, sans-serif, Arial, Helvetica][color=#000000]ช่องทางการติดต่อ \"[/color][b][color=#ff3366]".$site_name."[/color][/b][color=#000000]\"[/color][/font][/size][/center]
 
 [center][b][color=#000000][font=Tahoma, sans-serif, Arial, Helvetica][color=#660000][size=4]โทรศัพท์ : ".$site_telephone."[/size][/color][/font][/color][/b][/center]
 

@@ -19,8 +19,8 @@
 function getDateThai($strDate)
 {
   $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("n",strtotime($strDate));
-  $strDay= date("j",strtotime($strDate));
+  $strMonth= date("j",strtotime($strDate));
+  $strDay= date("n",strtotime($strDate));
   $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
   $strMonthThai=$strMonthCut[$strMonth];
   return "$strDay $strMonthThai $strYear";
@@ -81,9 +81,10 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
         </tr>
         <?php
         $count = 1;
+        $script = "";
         $modal = "";
         // prepare and query (direct)
-        $result = $mysqli->query("SELECT id, schedule_name, user_qty, schedule_date, schedule_end_date, price_per_person, schedule_desc FROM site_schedule WHERE site_id = '$site_id' ORDER BY id");
+        $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE site_id = '$site_id' ORDER BY id");
         if ($result !== false) {
           foreach($result as $row) {
             echo "<tr>
@@ -93,11 +94,11 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
             <td>".$row['user_qty']." คน</td>
             <td>".number_format($row['price_per_person'])." บาท</td>
             <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
-            <td><a href='edit_schedule.php?id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</a></td>
+            <td><a href='edit_schedule.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."&site_id=".$site_id."' class='btn btn-danger btn-flat'>ลบ</a></td>
           </tr>";
 
-          $modal .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-          <div class='modal-dialog'>
+          $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+          <div class='modal-dialog modal-lg'>
             <div class='modal-content'>
               <div class='modal-header'>
                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
@@ -109,8 +110,12 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
                 <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
                 <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
-
-                ".html_entity_decode($row['schedule_desc'])."
+                <p><strong>รายละเอียด :<hr/></strong><p>
+                <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
+                <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
+                <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
+                <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
+                <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
               </div>
               <div class='modal-footer'>
                 <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
@@ -118,6 +123,31 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
             </div>
           </div>
         </div>";
+        $script .= "$('#detail".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
+        $script .= "$('#payment".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
+        $script .= "$('#afterpayment".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
+
         $count++;
       }
     }
@@ -292,13 +322,13 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
       if(0 == check){
 
         var bbCode_detail = $('#detail').sceditor('instance').val();
-        var html_detail = $('#detail').sceditor('instance').fromBBCode(bbCode);
+        //var html_detail = $('#detail').sceditor('instance').fromBBCode(bbCode_detail);
 
         var bbCode_payment = $('#payment').sceditor('instance').val();
-        var html_payment = $('#payment').sceditor('instance').fromBBCode(bbCode);
+        //var html_payment = $('#payment').sceditor('instance').fromBBCode(bbCode_payment);
 
         var bbCode_afterpayment = $('#afterpayment').sceditor('instance').val();
-        var html_afterpayment = $('#afterpayment').sceditor('instance').fromBBCode(bbCode);
+        //var html_afterpayment = $('#afterpayment').sceditor('instance').fromBBCode(bbCode_afterpayment);
 
         $.post("add_schedule.php",
         {
@@ -307,7 +337,9 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
           scheduledateend : $("#scheduledateend").val(),
           user_qty : $("#user_qty").val(),
           price : $("#price").val(),
-          scheduledesc: html,
+          scheduledesc: bbCode_detail,
+          payment : bbCode_payment,
+          afterpayment : bbCode_afterpayment,
           site_id: '<?php echo $site_id; ?>',
         },
         function(data,status){
@@ -316,6 +348,8 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
                     });
       }
     });
+
+    <?php echo $script; ?>
 });
 </script>
 <?php eb();?>
