@@ -15,17 +15,18 @@
 
 <?php
   /** Get sub domain. */
-  //$site_id = explode(".",$_SERVER['SERVER_NAME']);
-  //$sub_domain =  $site_id[sizeof($site_id) - 3];
+  $site_id = explode(".",$_SERVER['SERVER_NAME']);
+  $sub_domain =  $site_id[sizeof($site_id) - 3];
 
-  /** Test constant value.  */
-  $sub_domain = 'imu';
-
-  $result = $mysqli->query("SELECT id
+  if ('www' == $sub_domain) {
+    $site_id = 1;
+  } else {
+    $result = $mysqli->query("SELECT id
             FROM site_detail
             WHERE site_url = '$sub_domain'");
-  $row_id = $result->fetch_assoc();
-  $site_id = $row_id['id'];
+    $row_id = $result->fetch_assoc();
+    $site_id = $row_id['id'];
+  }
 ?>
 
 <?php sb('content');?>

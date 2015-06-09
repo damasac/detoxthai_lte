@@ -29,15 +29,7 @@
   //$site_id = explode(".",$_SERVER['SERVER_NAME']);
   //$sub_domain =  $site_id[sizeof($site_id) - 3];
 
-  /** Test constant value.  */
-  $sub_domain = 'imu';
-
-  $result = $mysqli->query("SELECT id
-            FROM site_detail
-            WHERE site_url = '$sub_domain'");
-  $row_id = $result->fetch_assoc();
-
-  /** Test id */
+  /** Fixed. id */
   $site_id = 1;
 ?>
 
