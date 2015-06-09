@@ -253,7 +253,7 @@
           site_postal_code: $("#postalcode").val(),
           site_telephone: $("#tel").val(),
           site_mobile: $("#mobile").val(),
-          site_user: 1,
+          site_user: <?php echo $_COOKIE['detoxthai'] ?>,
         },
         function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);

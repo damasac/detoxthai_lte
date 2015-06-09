@@ -1,5 +1,15 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
+<?php
+  isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+
+   /** Set cookie. */
+  if (!isset($detoxthai)) {
+      $domain='detoxthai.dev';
+      setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), '/', $domain, false);
+  }
+?>
+
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
@@ -14,6 +24,7 @@
 <?php include_once "_connection/db_base.php"; ?>
 
 <?php
+
   /** Get sub domain. */
   //$site_id = explode(".",$_SERVER['SERVER_NAME']);
   //$sub_domain =  $site_id[sizeof($site_id) - 3];
@@ -25,7 +36,9 @@
             FROM site_detail
             WHERE site_url = '$sub_domain'");
   $row_id = $result->fetch_assoc();
-  $site_id = $row_id['id'];
+
+  /** Test id */
+  $site_id = 1;
 ?>
 
 <?php sb('content');?>
@@ -71,7 +84,7 @@ $arrMenu = array();
 <section class="content-header">
   <h1>
     Content Management
-    <small>สำหรับ Central site (Fixed ไม่เปลี่ยนไปตาม URL)</small>
+    <small>สำหรับ site (เปลี่ยนไปตาม URL)</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
