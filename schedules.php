@@ -36,8 +36,8 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    จัดการหลักสูตรล้างพิษตับ
-    <small>เพิ่ม แก้ไข ลบ หลักสูตรล้างพิษตับ</small>
+    จัดการหลักสูตรสุขภาพองค์รวม
+    <small>เพิ่ม แก้ไข ลบ หลักสูตร</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -50,7 +50,7 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">หลักสูตรล้างพิษตับทั้งหมด</h3>
+      <h3 class="box-title">หลักสูตรทั้งหมด</h3>
     </div>
     <div class="box-body">
       <table class="table table-bordered">
@@ -102,7 +102,7 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
               </div>
               <div class='modal-body'>
                 <p class='text-right'>
-                  <a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>
+                  <a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>สมัครเข้าร่วมหลักสูตร</a>
                 </p>
                 <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>

@@ -59,8 +59,8 @@
 <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      บันทึกข้อมูล
-      <small>Example 2.0</small>
+      บันทึกข้อมูลการล้างพิษตับ
+      <small>สำหรับฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
