@@ -1,6 +1,6 @@
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> Liver flushing registry [Form]<?php eb();?>
+<?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">
@@ -15,7 +15,7 @@
   <section class="content-header">
     <h1>
       บันทึกข้อมูลการล้างพิษตับ
-      <small> สำหรับฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
+      <small> เพื่อร่วมสร้างองค์ความรู้ ในฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
