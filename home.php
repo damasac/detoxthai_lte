@@ -71,7 +71,7 @@ $arrMenu = array();
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Content Management
+    Content Management 
     <small>สำหรับ site (เปลี่ยนไปตาม URL)</small>
   </h1>
   <ol class="breadcrumb">

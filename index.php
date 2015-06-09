@@ -13,7 +13,7 @@
   }
 ?>
 
-<?php sb('title');?> ศูนย์สุขภาพองค์รวม <?php eb();?>
+<?php sb('title');?> ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <style type="text/css">

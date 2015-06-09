@@ -14,7 +14,7 @@
 <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      บันทึกข้อมูลการล้างพิษตับ
+      บันทึกข้อมูลการล้างพิษตับ 
       <small>สำหรับฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
