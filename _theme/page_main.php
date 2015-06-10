@@ -140,8 +140,8 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
                       <span id="divusername">
 	
-			<?php  echo $_SESSION[SESSIONPREFIX."puser_fname"]; ?>
-		      </span>
+                    <?php if(isset($_SESSION[SESSIONPREFIX."puser_fname"])) echo $_SESSION[SESSIONPREFIX."puser_fname"]; else echo "Guest"; ?>
+                    </span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->
