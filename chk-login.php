@@ -11,6 +11,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 $user_login = (($_POST['username']));
 $pwd_login = sha1(md5($_POST['password']));
 $returnurl=$_POST['returnurl'];
+
 if ($returnurl=="") $returnurl='http://'.$_SERVER['SERVER_NAME'].'/'.APP_WEBROOT;
 
 $_SESSION[SESSIONPREFIX.'input_username']=$user_login;
@@ -40,9 +41,11 @@ if (isset($user_login) and isset($pwd_login)) {
 
         $_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
         $_SESSION[SESSIONPREFIX.'puser_username'] = $dbarr['username'];
-        $_SESSION[SESSIONPREFIX.'puser_email'] = $dbarr['email'];
+        $_SESSION[SESSIONPREFIX.'puser_fname'] = $dbarr['fname'];
+        $_SESSION[SESSIONPREFIX.'puser_lname'] = $dbarr['lname'];
         $_SESSION[SESSIONPREFIX.'puser_tel'] = $dbarr['tel'];
         $_SESSION[SESSIONPREFIX.'puser_status'] = $dbarr['status'];
+        $_SESSION[SESSIONPREFIX.'puser_create_date'] = $dbarr['createdate'];
         //-----------------------
         //echo "success";
     }

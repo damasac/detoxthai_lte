@@ -5,7 +5,7 @@
     <title>{$title}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Fav icon -->
-    <link rel="shortcut icon" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>/img/favicon.ico">
     <!-- Bootstrap 3.3.4 -->
     <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
@@ -104,7 +104,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-<?php /* ?>
+<?php /* ?>		  
 		  <li class="dropdown user user-menu">
 		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
 		  </li>
@@ -138,15 +138,22 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       <!-- The user image in the navbar-->
                       <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/userimg.jpg" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                      <span id="divusername">Admin</span>
+                      <span id="divusername">
+	
+			<?php  echo $_SESSION[SESSIONPREFIX."puser_fname"]; ?>
+		      </span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->
                       <li class="user-header">
                         <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/userimg.jpg" class="img-circle" alt="User Image" />
                         <p>
-                          Administrator
-                          <small>Member since Nov. 2012</small>
+                          <?php echo $_SESSION[SESSIONPREFIX."puser_fname"]." ".$_SESSION[SESSIONPREFIX."puser_lname"]; ?>
+                          <small>
+			    
+			  <?php echo $_SESSION[SESSIONPREFIX."puser_create_date"];?>
+			  
+			  </small>
                         </p>
                       </li>
                       <!-- Menu Body -->
@@ -215,7 +222,7 @@ if (empty($_SESSION[SESSIONPREFIX.'puser_id'])) {
 }
 ?>
 		<td><center><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>form"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_3_DataEntry_s.png" alt="บันทึกข้อมูล" class="img-responsive"></a></center></td>
-		<td><center><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>site/site_manage.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_4_ManageCenter_s.png" alt="จัดการศูนย์สุขภาพ" class="img-responsive"></a></center></td>
+		<td><center><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_4_ManageCenter_s.png" alt="จัดการศูนย์สุขภาพ" class="img-responsive"></a></center></td>
 <?php
 if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>
