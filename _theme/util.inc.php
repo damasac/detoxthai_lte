@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 //encoding to utf-8
 header("Content-type:text/html; charset=UTF-8");
 //for path directory
-define("APP_WEBROOT", "/detoxthai_lte/");
+define("APP_WEBROOT", "detoxthai_lte/");
 //Session Prefix
 define('SESSIONPREFIX' , "dtt_");
 //check login
