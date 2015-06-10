@@ -24,10 +24,10 @@
 <!-- Main content -->
 <section class="content">
   <?php
-  isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+  //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
   $result = $mysqli->query("SELECT COUNT(id) AS sitecount
-    FROM site_detail WHERE create_user = ".$detoxthai);
+    FROM site_detail WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']);
   $row = $result->fetch_assoc();
   ?>
 
@@ -73,7 +73,7 @@
           LEFT JOIN const_district ON site_district = DISTRICT_ID
           LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
           LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
-          WHERE create_user = ".$detoxthai."
+          WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']."
           ORDER BY id");
         //$result->execute();
         $count = 1;
@@ -152,7 +152,7 @@
                 site_postal_code: $('#postalcode".$count."').val(),
                 site_telephone: $('#tel".$count."').val(),
                 site_mobile: $('#mobile".$count."').val(),
-                site_user: ".$detoxthai.",
+                site_user: ".$_SESSION[SESSIONPREFIX.'puser_id'].",
               },
               function(data,status){
                 location.reload();
@@ -305,7 +305,7 @@ $count++;
 <?php
   $result_count_manage = $mysqli->query("SELECT COUNT(*) AS count_manage
     FROM site_manage_user
-    WHERE site_manage_user.user_id = '$detoxthai'");
+    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
   $manage_site_count = $result_count_manage->fetch_assoc();
 ?>
 <hr/>
@@ -334,7 +334,7 @@ $count++;
   $count = 1;
   $result_user_manage = $mysqli->query("SELECT site_id
     FROM site_manage_user
-    WHERE site_manage_user.user_id = '$detoxthai'");
+    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
 
   if ($result_user_manage !== false) {
     foreach ($result_user_manage as $row_user_manage) {
@@ -380,7 +380,7 @@ $count++;
           site_postal_code: $('#postalcode_ex".$count."').val(),
           site_telephone: $('#tel_ex".$count."').val(),
           site_mobile: $('#mobile_ex".$count."').val(),
-          site_user: ".$detoxthai.",
+          site_user: ".$_SESSION[SESSIONPREFIX.'puser_id'].",
         },
         function(data,status){
           location.reload();

@@ -29,8 +29,8 @@
     </div>
     <div class="box-body">
       <?php
-        isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-        if ('' != $detoxthai) {
+        //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+        if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
       ?>
       <p class="text-right">
         <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
@@ -274,7 +274,7 @@
           site_postal_code: $("#postalcode").val(),
           site_telephone: $("#tel").val(),
           site_mobile: $("#mobile").val(),
-          site_user: <?php echo $_COOKIE['detoxthai'] ?>,
+          site_user: <?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>,
         },
         function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
