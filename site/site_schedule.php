@@ -15,6 +15,8 @@
 </style>
 <?php eb();?>
 
+<?php include_once "../_connection/db_base.php"; ?>
+
 <?php
 function getDateThai($strDate)
 {
@@ -28,10 +30,33 @@ function getDateThai($strDate)
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 
+/** Check security. */
+$check_point = 0;
+
+$result = $mysqli->query("SELECT COUNT(*) check_secu
+    FROM site_manage_user
+    WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+    AND site_id = '$site_id'");
+$row = $result->fetch_assoc();
+
+if (0 == $row['check_secu']) {
+  $check_point = 1;
+}
+
+$result = $mysqli->query("SELECT COUNT(*) check_secu
+    FROM site_detail
+    WHERE create_user = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+    AND id = '$site_id'");
+$row = $result->fetch_assoc();
+
+if (0 == $row['check_secu'] && $check_point) {
+  echo 'การเข้าถึงข้อมูลถูกปฏิเสธ';
+  exit;
+}
+
 ?>
 
 <?php sb('content');?>
-<?php include_once "../_connection/db_base.php"; ?>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">

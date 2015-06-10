@@ -1,12 +1,38 @@
 <?php
 
-    include_once "../_connection/db_base.php";
+    require_once '../_theme/util.inc.php';
 
-    if(!isset($_COOKIE['detoxthai'])){
-      header('Location: http://www.detoxthai.org/');
+    if(!isset($_SESSION)){
+        session_start();
     }
 
+    include_once "../_connection/db_base.php";
+
     $site_id = $_GET['site_id'];
+
+    /** Check security. */
+    $check_point = 0;
+
+    $result = $mysqli->query("SELECT COUNT(*) check_secu
+        FROM site_manage_user
+        WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+        AND site_id = '$site_id'");
+    $row = $result->fetch_assoc();
+
+    if (0 == $row['check_secu']) {
+      $check_point = 1;
+    }
+
+    $result = $mysqli->query("SELECT COUNT(*) check_secu
+        FROM site_detail
+        WHERE create_user = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+        AND id = '$site_id'");
+    $row = $result->fetch_assoc();
+
+    if (0 == $row['check_secu'] && $check_point) {
+      echo 'การเข้าถึงข้อมูลถูกปฏิเสธ';
+      exit;
+    }
 
     $result = $mysqli->query("SELECT COUNT(id) AS checkuser
                                 FROM site_detail WHERE create_user = 1 AND id = '$site_id'");

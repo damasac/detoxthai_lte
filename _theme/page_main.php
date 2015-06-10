@@ -104,7 +104,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-<?php /* ?>		  
+<?php /* ?>
 		  <li class="dropdown user user-menu">
 		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
 		  </li>
@@ -215,7 +215,7 @@ if (empty($_SESSION[SESSIONPREFIX.'puser_id'])) {
 }
 ?>
 		<td><center><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>form"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_3_DataEntry_s.png" alt="บันทึกข้อมูล" class="img-responsive"></a></center></td>
-		<td><center><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_4_ManageCenter_s.png" alt="จัดการศูนย์สุขภาพ" class="img-responsive"></a></center></td>
+		<td><center><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>site/site_manage.php"><img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/Detox_4_ManageCenter_s.png" alt="จัดการศูนย์สุขภาพ" class="img-responsive"></a></center></td>
 <?php
 if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 ?>
