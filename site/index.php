@@ -19,6 +19,30 @@
 $id = $_GET['id'];
 isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
 
+/** Check security. */
+$check_point = 0;
+
+$result = $mysqli->query("SELECT COUNT(*) check_secu
+    FROM site_manage_user
+    WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+    AND site_id = '$id'");
+$row = $result->fetch_assoc();
+
+if (0 == $row['check_secu']) {
+  $check_point = 1;
+}
+
+$result = $mysqli->query("SELECT COUNT(*) check_secu
+    FROM site_detail
+    WHERE create_user = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+    AND id = '$id'");
+$row = $result->fetch_assoc();
+
+if (0 == $row['check_secu'] && $check_point) {
+  echo 'การเข้าถึงข้อมูลถูกปฏิเสธ';
+  exit;
+}
+
 if ('' == $menu) {
     $result = $mysqli->query("SELECT menu_name
     FROM site_menu
