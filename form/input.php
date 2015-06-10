@@ -84,22 +84,33 @@
             <div class="row">
                 <div class="col-lg-12">
                 <h3>
-                    xxxx
+                <?php
+                if(isset($_GET["form_id"])){
+                    $form_id =$_GET["form_id"];
+                }else{
+                    $form_id='';
+                }
+                ?>
+                <?php
+                include_once("system_function.php");
+                $sql = "SELECT * FROM `tbl_surveyuser` WHERE id='".$form_id."';";
+                $query = $conn->query($sql);
+                $data = $query->fetch_assoc();
+                if($data["location"] =='10000001'){ $dbarr['site_name'] = 'บ้าน';} else if($data['location']=='10000002') {$dbarr['site_name']= 'อื่นๆ'; } else {
+                   $sql = "select `site_name` from site_detail where id='".$data['location']."';";
+                   $res = $conn->query($sql);
+                   $dbarr = $res->fetch_assoc();
+                }
+                ?>
+                    สถานที่ <code><?php echo $dbarr['site_name'];?></code> วันที่ <code><?php echo System_ShowDate($data['startdate']);?></code> ถึง <code><?php echo System_ShowDate($data['enddate']);?></code>
                 </h3>
                 
-                <hr>
                 
                 
                 </div>
             </div>            
             
-            <?php
-            if(isset($_GET["form_id"])){
-                $form_id =$_GET["form_id"];
-            }else{
-                $form_id='';
-            }
-            ?>
+            
             <input type="hidden" class="form-control" value="<?php echo $form_id;?>" id="form_id" />
             <?php
                 $sqlSelectValue =  "SELECT * FROM `tbl_surveyform` WHERE ref_id_create='".$form_id."' ";

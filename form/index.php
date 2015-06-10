@@ -36,7 +36,7 @@
     $user_id = '6';
     $user_email = 'kongvut@gmail.com';
     $user_name = 'kongvut';
-    $sql = "SELECT * FROM `tbl_surveyuser` WHERE user_id='".$user_id."' ";
+    $sql = "SELECT * FROM `tbl_surveyuser` WHERE user_id='".$user_id."' ORDER BY id ASC";
     //echo $sql;
     $query = $conn->query($sql);
 ?>
