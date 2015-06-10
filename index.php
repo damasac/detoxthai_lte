@@ -92,6 +92,13 @@ $arrMenu = array();
 
   <div class="box box-default">
     <div class="box-body">
+        <?php
+            //Developer mode
+            echo "Print SESSION [Developer mode]<br><pre>";
+            print_r($_SESSION);
+            echo "</pre>";
+            //end mode
+          ?>
       <div class="row">
         <div class="col-md-3">
           <h3 class="text-muted"><?php echo $site_id_desc['site_name']; ?></h3>
