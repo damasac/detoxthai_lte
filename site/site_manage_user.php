@@ -63,9 +63,9 @@ if (0 == $row['check_secu'] && $check_point) {
           <th>
             ชื่อผู้ใช้
           </th>
-          <th>
+          <!-- <th>
             ชื่อ - นามสกุล
-          </th>
+          </th> -->
           <th>
           </th>
         </tr>
@@ -73,14 +73,15 @@ if (0 == $row['check_secu'] && $check_point) {
         $count = 1;
         $result = $mysqli->query("SELECT username, CONCAT(  fname, ' ', lname) AS name
           FROM site_manage_user
-          JOIN puser ON site_manage_user.user_id = puser.id");
+          JOIN puser ON site_manage_user.user_id = puser.id
+          WHERE site_id = $site_id");
 
         if ($result !== false) {
           foreach ($result as $row) {
             echo "<tr>";
             echo "<td>".$count."</td>";
             echo "<td>".$row['username']."</td>";
-            echo "<td>".$row['name']."</td>";
+            //echo "<td>".$row['name']."</td>";
             echo "<td>
             <button class='btn btn-danger btn-flat' id='btndel'>
               <i class='fa fa-fw fa-trash'></i>
@@ -94,7 +95,7 @@ if (0 == $row['check_secu'] && $check_point) {
         ?>
       </table>
       <p></p>
-      <div class="col-sm-offset-5 col-sm-2 text-center">
+      <div class="col-sm-offset-4 col-sm-4 text-center">
         <div class="btn-group">
           <select class="form-control" id="user_id">
             <?php
@@ -128,7 +129,11 @@ if (0 == $row['check_secu'] && $check_point) {
         user_id: $('#user_id').val(),
       },
       function(data,status){
-        location.reload();
+        if (!data) {
+          location.reload();
+        }else{
+          alert(data);
+        }
       });
     });
 

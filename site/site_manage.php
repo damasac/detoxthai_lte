@@ -36,6 +36,16 @@
       <h3 class="box-title">ศูนย์ล้างพิษตับของท่าน <code>มีทั้งหมด <?php echo $row['sitecount']; ?> ศูนย์</code></h3>
     </div>
     <div class="box-body">
+      <?php
+        //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+        if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+      ?>
+      <p class="text-right">
+        <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
+      </p>
+      <?php
+        }
+      ?>
       <table class="table table-bordered">
         <tr class="active">
           <th>
@@ -535,12 +545,215 @@ $box .= "<div class='modal fade' id='myModal_ex".$count."' tabindex='-1' role='d
 
 </section><!-- /.content -->
 
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">เพิ่มค่ายล้างพิษตับ</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" id="addform">
+          <div class="form-group">
+            <label for="urlname" class="col-sm-2 control-label">URL : </label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="urlname" placeholder="ชื่อคำนำหน้า URL" required>
+            </div>
+            <div class="col-sm-5">
+              <h4 id="url">.detoxthai.org</h4>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sitename" class="col-sm-2 control-label">ชื่อค่าย : </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="sitename" placeholder="ชื่อค่าย">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-2 control-label">ที่ตั้ง : </label>
+            <div class="col-sm-10">
+              <label for="province" class="control-label">จังหวัด : </label>
+              <select id="province" o class="form-control">
+                <option value="">เลือกจังหวัด</option>
+                <?php
+                  // prepare and query (direct)
+                  $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
+                  $result = $mysqli->query($sql);
+
+                  if ($result !== false) {
+                    foreach($result as $row) {
+                     echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
+                   }
+                 }
+               ?>
+             </select>
+           </div>
+         </div>
+         <div class="form-group">
+          <label for="amphur" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="amphur" class="control-label">อำเภอ : </label>
+            <select id="amphur" o class="form-control">
+              <option value="">เลือกอำเภอ/เขต</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="district" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="district" class="control-label">ตำบล : </label>
+            <select id="district" o class="form-control">
+              <option value="">เลือกตำบล/แขวง</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="houseno" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="houseno" class="control-label">บ้านเลขที่ : </label>
+            <input type="text" class="form-control" id="houseno" placeholder="บ้านเลขที่">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="villageno" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="villageno" class="control-label">หมู่ที่ : </label>
+            <input type="text" class="form-control" id="villageno" placeholder="หมู่ที่">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="muban" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="muban" class="control-label">หมู่บ้าน : </label>
+            <input type="text" class="form-control" id="muban" placeholder="หมู่บ้าน">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="postalcode" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="postalcode" class="control-label">รหัสไปรษณีย์ : </label>
+            <input type="text" class="form-control" id="postalcode" placeholder="รหัสไปรษณีย์">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tel" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="tel" class="control-label">เบอร์โทร : </label>
+            <input type="text" class="form-control" id="tel" placeholder="โทร">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mobile" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="mobile" class="control-label">มือถือ : </label>
+            <input type="text" class="form-control" id="mobile" placeholder="มือถือ">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
+      <button type="button" class="btn btn-primary btn-flat" id="btadd">เพิ่ม</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <?php eb();?>
 
 
 <?php sb('js_and_css_footer');?>
 <?php echo  $script_address; ?>
 <?php echo $script ?>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#province").change(function() {
+            //alert("Codeerror");
+            $("#amphur").empty();
+            var option = new Option("เลือกอำเภอ/เขต", "");
+            $("#amphur").append($(option));
+            $.getJSON("../api/getamphur.php?province_id=" + $("#province").val(), function(data){
+              $.each(data.amphur, function(i, amphur){
+                var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
+                $("#amphur").append($(option));
+              });
+            });
+          });
+    $("#amphur").change(function() {
+      $("#district").empty();
+      var option = new Option("เลือกตำบล/แขวง", "");
+      $("#district").append($(option));
+      $.getJSON("../api/getdistrict.php?amphur_id=" + $("#amphur").val(), function(data){
+        $.each(data.district, function(i, district){
+          var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
+          $("#district").append($(option));
+        });
+      });
+    });
+    $("#btadd").click(function(){
+      var site_url = $("#urlname");
+
+      var check_site_exit = 0;
+      $.post("../site/check_exit_site.php",
+        {
+          site_url: $("#urlname").val(),
+        },
+        function(data,status){
+              //alert("Data: " + data + "\nStatus: " + status);
+              if(0 < data){
+                alert('URL นี้มีการใช้งานแล้ว');
+                check_site_exit = 1;
+              }
+        });
+
+
+      var site_name = $("#sitename");
+
+      var check_site_url = 0;
+      var check_site_name = 0;
+
+      if(!site_url.val()) {
+        site_url.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check_site_url = 1;
+      } else {
+        site_url.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if(!site_name.val()) {
+        site_name.closest('.form-group').removeClass('has-success').addClass('has-error');
+        check_site_name = 1;
+      } else {
+        site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
+      }
+
+      if( 0 == check_site_url && 0 == check_site_name && 0 == check_site_exit){
+
+        $.post("../site/add_site.php",
+        {
+          site_url: $("#urlname").val(),
+          site_name: $("#sitename").val(),
+          site_province: $("#province").val(),
+          site_amphur: $("#amphur").val(),
+          site_district: $("#district").val(),
+          site_house_no: $("#houseno").val(),
+          site_village_no: $("#villageno").val(),
+          site_muban: $("#muban").val(),
+          site_postal_code: $("#postalcode").val(),
+          site_telephone: $("#tel").val(),
+          site_mobile: $("#mobile").val(),
+          site_user: <?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>,
+        },
+        function(data,status){
+              //alert("Data: " + data + "\nStatus: " + status);
+              location.reload();
+        });
+      }
+    });
+
+  });
+</script>
 <?php eb();?>
 
 <?php render($MasterPage);?>

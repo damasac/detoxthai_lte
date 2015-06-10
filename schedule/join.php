@@ -15,9 +15,8 @@
 
 <?php
   isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
-  isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
-  if('' == $detoxthai){
+  if(!isset($_SESSION[SESSIONPREFIX.'puser_id'])){
     echo "<script>
             window.location.href = '../login.php';
           </script>";
@@ -71,7 +70,7 @@
       $.post("create_join.php",
       {
         schedule_id: <?php echo $schedule_id; ?>,
-        user_id: <?php echo $detoxthai; ?>,
+        user_id: <?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>,
       },
       function(data,status){
         window.location.href = 'payment_detail.php?schedule_id=<?php echo $schedule_id; ?>';

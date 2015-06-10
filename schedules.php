@@ -19,15 +19,15 @@
 function getDateThai($strDate)
 {
   $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("j",strtotime($strDate));
-  $strDay= date("n",strtotime($strDate));
+  $strMonth= date("n",strtotime($strDate));
+  $strDay= date("j",strtotime($strDate));
   $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
   $strMonthThai=$strMonthCut[$strMonth];
   return "$strDay $strMonthThai $strYear";
 }
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
-isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+//isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
 $site_name = explode(".",$_SERVER['SERVER_NAME']);
 $sub_domain =  $site_name[sizeof($site_name) - 3];
@@ -80,14 +80,14 @@ if('' == $all){
               $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' ORDER BY id");
               if ($result !== false) {
                 foreach($result as $row) {
-                  echo "<option value=".$row['site_name']." selected>".$row['site_name']."</option>";
+                  echo "<option value=".$row['id']." selected>".$row['site_name']."</option>";
                 }
               }
             }else{
               $result = $mysqli->query("SELECT id, site_url, site_name FROM site_detail ORDER BY id");
               if ($result !== false) {
                 foreach($result as $row) {
-                  echo "<option value=".$row['site_url'].">".$row['site_name']."</option>";
+                  echo "<option value=".$row['id'].">".$row['site_name']."</option>";
                 }
               }
             }
@@ -97,6 +97,7 @@ if('' == $all){
       </div>
       <p></p>
       <br/><br/>
+      <div id="show_table">
       <table class="table table-bordered" id="show_content">
         <tr class="active">
           <th>
@@ -127,17 +128,23 @@ if('' == $all){
         if ($result !== false) {
           foreach($result as $row) {
 
-            $result_check = $mysqli->query("SELECT count(*) AS join_status
+            $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
               FROM site_join
               WHERE schedule_id = '".$row['id']."'
-              AND user_id = '".$detoxthai."'");
+              AND user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
             $row_check = $result_check->fetch_assoc();
 
             //echo $row_check['join_status'];
 
             if (0 < $row_check['join_status']) {
-              $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
-              <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+              if (0 == $row_check['payment_upload_status']) {
+                echo $row_check['payment_upload_status'];
+                $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+              } else {
+                $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                <a type='button' class='btn btn-success btn-flat'>การจ่ายเงินเรียบร้อยแล้ว</a>";
+              }
             } else {
               $btn_join = "<a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>";
             }
@@ -211,6 +218,7 @@ $count++;
 }
 ?>
 </table>
+</div>
 
 <!-- Modal -->
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -293,6 +301,7 @@ $count++;
 <?php
 echo $modal;
 ?>
+<div id="show_modal"></div>
 </div><!-- /.box-body -->
 </div><!-- /.box -->
 
@@ -401,7 +410,6 @@ echo $modal;
           site_id: '<?php echo $site_id; ?>',
         },
         function(data,status){
-                      //alert("Data: " + data + "\nStatus: " + status);
                       location.reload();
                     });
       }
@@ -410,24 +418,20 @@ echo $modal;
 $("#sch").change(function(){
   var sch = $("#sch").val();
   if (0 == sch) {
-      //alert('codeerror');
-      //$('#show_table').html('');
       window.location.assign("schedules.php?site=all")
     }else{
-     $.post("schedule_api.php",
+     $.post("schedule/schedule_api.php",
      {
       site_url: sch,
     },
     function(data,status){
-              //alert(data);
               var res = data.split(":codeerror:");
               console.log(res);
-              //location.reload();
               $('#show_table').html(res[0]);
+              var res_script = res[1].split(":codeerror_script:");
               $('#show_modal').html(res[1]);
             });
    }
-  //alert(sch);
 });
 
 <?php echo $script; ?>

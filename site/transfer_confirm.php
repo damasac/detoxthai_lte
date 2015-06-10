@@ -16,17 +16,17 @@
 <?php
 isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
 
-isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+//isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
 $result_schedule_name = $mysqli->query("SELECT schedule_name
   FROM site_schedule
-  WHERE id = '$schedule_id'");
+  WHERE id = '".$schedule_id."'");
 $schedule_name = $result_schedule_name->fetch_assoc();
 
 
 $result_user_name = $mysqli->query("SELECT CONCAT(fname, ' ', lname) AS name
   FROM puser
-  WHERE id = '$detoxthai'");
+  WHERE id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
 $user_name = $result_user_name->fetch_assoc();
 
 ?>
@@ -55,7 +55,7 @@ $user_name = $result_user_name->fetch_assoc();
       <br/>
       <form action="upload.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
-          <input type="hidden" name="user_id" value="<?php echo $detoxthai; ?>">
+          <input type="hidden" name="user_id" value="<?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>">
           <input type="hidden" name="schedule_id" value="<?php echo $schedule_id; ?>">
           <label for="exampleInputFile">ไฟล์ภาพเท่านั้น</label>
           <input name="fileToUpload" id="fileToUpload" type="file">
