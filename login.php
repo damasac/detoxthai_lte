@@ -38,7 +38,7 @@ print_r($user_profile);
 if ($user) {
 	if($_GET["code"] != "")
 	{
-				$objConnect = mysql_connect("mysql","webmaster","xpctc2004x") or die(mysql_error());
+				$objConnect = mysql_connect("mysql","webmaster","xpctc2004x");
 				$objDB = mysql_select_db("detoxthai_lte");
 				mysql_query("SET NAMES UTF8");
 				$strSQL ="  INSERT INTO  tb_facebook (FACEBOOK_ID,NAME,LINK,CREATE_DATE) 
