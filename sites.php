@@ -50,6 +50,7 @@
           <th>
             ที่ตั้ง
           </th>
+          <th>ติดตาม</th>
         </tr>
         <?php
         $sql = "SELECT site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
@@ -66,7 +67,11 @@
 
         if ($result !== false) {
           foreach($result as $row) {
-            echo "<tr><td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td><td>".$row['address']."</td></tr>";
+            echo "<tr>
+                  <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+                  <td>".$row['address']."</td>
+                  <td><button type='button' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-thumbs-o-up'></i></button></td>
+                  </tr>";
             $count++;
           }
         }
