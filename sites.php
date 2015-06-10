@@ -225,6 +225,21 @@
     });
     $("#btadd").click(function(){
       var site_url = $("#urlname");
+
+      var check_site_exit = 0;
+      $.post("site/check_exit_site.php",
+        {
+          site_url: $("#urlname").val(),
+        },
+        function(data,status){
+              //alert("Data: " + data + "\nStatus: " + status);
+              if(0 < data){
+                alert('URL นี้มีการใช้งานแล้ว');
+                check_site_exit = 1;
+              }
+        });
+
+
       var site_name = $("#sitename");
 
       var check_site_url = 0;
@@ -244,7 +259,7 @@
         site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
       }
 
-      if( 0 == check_site_url && 0 == check_site_name){
+      if( 0 == check_site_url && 0 == check_site_name && 0 == check_site_exit){
 
         $.post("site/add_site.php",
         {

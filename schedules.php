@@ -29,6 +29,22 @@ function getDateThai($strDate)
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
+$site_name = explode(".",$_SERVER['SERVER_NAME']);
+$sub_domain =  $site_name[sizeof($site_name) - 3];
+
+//$all = $_GET['site'];
+isset($_GET['site']) ? $all = $_GET['site'] :  $all = '';
+
+if('' == $all){
+      if ("www" === $sub_domain) {
+          //header('Location: index.php?site=all');
+          echo "<script>
+                  window.location.href = 'schedules.php?site=all';
+                </script>";
+      }
+}
+
+
 ?>
 
 <?php sb('content');?>
@@ -54,6 +70,33 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
       <h3 class="box-title">หลักสูตรทั้งหมด</h3>
     </div>
     <div class="box-body">
+      <div class="form-group">
+        <label for="sch" class="col-sm-1 control-label">หลักสูตร</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="sch">
+            <option value="0">หลักสูตรทั้งหมด</option>
+            <?php
+            if("all" != $all){
+              $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' ORDER BY id");
+              if ($result !== false) {
+                foreach($result as $row) {
+                  echo "<option value=".$row['site_name']." selected>".$row['site_name']."</option>";
+                }
+              }
+            }else{
+              $result = $mysqli->query("SELECT id, site_url, site_name FROM site_detail ORDER BY id");
+              if ($result !== false) {
+                foreach($result as $row) {
+                  echo "<option value=".$row['site_url'].">".$row['site_name']."</option>";
+                }
+              }
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <p></p>
+      <br/><br/>
       <table class="table table-bordered">
         <tr class="active">
           <th>
@@ -85,16 +128,16 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
           foreach($result as $row) {
 
             $result_check = $mysqli->query("SELECT count(*) AS join_status
-                                FROM site_join
-                                WHERE schedule_id = '".$row['id']."'
-                                AND user_id = '".$detoxthai."'");
+              FROM site_join
+              WHERE schedule_id = '".$row['id']."'
+              AND user_id = '".$detoxthai."'");
             $row_check = $result_check->fetch_assoc();
 
             //echo $row_check['join_status'];
 
             if (0 < $row_check['join_status']) {
               $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
-                            <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+              <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
             } else {
               $btn_join = "<a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>";
             }
@@ -126,130 +169,130 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
                 <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
                 <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
                 <p><strong>รายละเอียด :<hr/></strong><p>
-                <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
-                <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
-                <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
-                <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
-                <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
-              </div>
-              <div class='modal-footer'>
-                <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+                  <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
+                  <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
+                    <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
+                    <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
+                      <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
+                    </div>
+                    <div class='modal-footer'>
+                      <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>";
+              $script .= "$('#detail".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
+$script .= "$('#payment".$count."').sceditor({
+  plugins: 'bbcode',
+  width: '98%',
+  toolbar: 'justify',
+  readOnly: 'true',
+  resizeEnabled: false,
+  style: 'edit/minified/jquery.sceditor.default.min.css'
+});";
+$script .= "$('#afterpayment".$count."').sceditor({
+  plugins: 'bbcode',
+  width: '98%',
+  toolbar: 'justify',
+  readOnly: 'true',
+  resizeEnabled: false,
+  style: 'edit/minified/jquery.sceditor.default.min.css'
+});";
+
+$count++;
+}
+}
+?>
+</table>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">เพิ่มหลักสูตรล้างพิษตับ</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="schedulename" class="col-sm-2 control-label">ชื่อหลักสูตร</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="schedulename" placeholder="ชื่อหลักสูตร">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
+            <div class="col-sm-10">
+              <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
+            <div class="col-sm-10">
+              <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="user_qty" class="col-sm-2 control-label">จำนวนคน</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="user_qty" placeholder="จำนวนคน" value="">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">ราคา/คน</label>
+            <label class="sr-only" for="price">ราคา/คน</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <div class="input-group-addon">฿</div>
+                <input type="number" class="form-control" id="price" placeholder="ราคา">
+                <div class="input-group-addon">.00</div>
               </div>
             </div>
           </div>
-        </div>";
-        $script .= "$('#detail".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
-        $script .= "$('#payment".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
-        $script .= "$('#afterpayment".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
 
-        $count++;
-      }
-    }
-    ?>
-  </table>
+          <div class="form-group">
+            <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลักสูตร</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="detail" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
+            </div>
+          </div>
 
-  <!-- Modal -->
-  <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">เพิ่มหลักสูตรล้างพิษตับ</h4>
-        </div>
-        <div class="modal-body">
-          <form class="form-horizontal">
-            <div class="form-group">
-              <label for="schedulename" class="col-sm-2 control-label">ชื่อหลักสูตร</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="schedulename" placeholder="ชื่อหลักสูตร">
-              </div>
+          <div class="form-group">
+            <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดการโอนเงิน</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="payment" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
             </div>
-            <div class="form-group">
-              <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
-              <div class="col-sm-10">
-                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
-              <div class="col-sm-10">
-                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
-              </div>
-            </div>
+          </div>
 
-            <div class="form-group">
-              <label for="user_qty" class="col-sm-2 control-label">จำนวนคน</label>
-              <div class="col-sm-10">
-                <input type="number" class="form-control" id="user_qty" placeholder="จำนวนคน" value="">
-              </div>
+          <div class="form-group">
+            <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลังการโอนเงินเรียบร้อยแล้ว</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="afterpayment" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
             </div>
-
-            <div class="form-group">
-              <label for="price" class="col-sm-2 control-label">ราคา/คน</label>
-              <label class="sr-only" for="price">ราคา/คน</label>
-              <div class="col-sm-10">
-                <div class="input-group">
-                  <div class="input-group-addon">฿</div>
-                  <input type="number" class="form-control" id="price" placeholder="ราคา">
-                  <div class="input-group-addon">.00</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลักสูตร</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" id="detail" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดการโอนเงิน</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" id="payment" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลังการโอนเงินเรียบร้อยแล้ว</label>
-              <div class="col-sm-10">
-                <textarea class="form-control" id="afterpayment" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
-          <button type="button" id="btadd" class="btn btn-primary btn-flat">เพิ่ม</button>
-        </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
+        <button type="button" id="btadd" class="btn btn-primary btn-flat">เพิ่ม</button>
       </div>
     </div>
   </div>
+</div>
 
-  <?php
-  echo $modal;
-  ?>
+<?php
+echo $modal;
+?>
 </div><!-- /.box-body -->
 </div><!-- /.box -->
 
@@ -364,7 +407,7 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
       }
     });
 
-    <?php echo $script; ?>
+<?php echo $script; ?>
 });
 </script>
 <?php eb();?>
