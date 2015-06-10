@@ -6,7 +6,7 @@
   /** Set cookie. */
   if (!isset($detoxthai)) {
       $domain='detoxthai.dev';
-      setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), '/', $domain, false);
+      setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
 
       /** Test. */
       //setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), "/");
@@ -56,7 +56,7 @@ if ('' == $menu) {
         $menu_exit = 0;
     } else {
         echo "<script>
-               window.location.href = 'home.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
+               window.location.href = 'index.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
               </script>";
     }
 } else {

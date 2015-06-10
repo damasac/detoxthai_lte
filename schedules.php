@@ -36,12 +36,12 @@ $sub_domain =  $site_name[sizeof($site_name) - 3];
 isset($_GET['site']) ? $all = $_GET['site'] :  $all = '';
 
 if('' == $all){
-      if ("www" === $sub_domain) {
+  if ("www" === $sub_domain) {
           //header('Location: index.php?site=all');
-          echo "<script>
-                  window.location.href = 'schedules.php?site=all';
-                </script>";
-      }
+    echo "<script>
+    window.location.href = 'schedules.php?site=all';
+  </script>";
+}
 }
 
 
@@ -97,7 +97,7 @@ if('' == $all){
       </div>
       <p></p>
       <br/><br/>
-      <table class="table table-bordered">
+      <table class="table table-bordered" id="show_content">
         <tr class="active">
           <th>
             ลำดับ
@@ -406,6 +406,29 @@ echo $modal;
                     });
       }
     });
+
+$("#sch").change(function(){
+  var sch = $("#sch").val();
+  if (0 == sch) {
+      //alert('codeerror');
+      //$('#show_table').html('');
+      window.location.assign("schedules.php?site=all")
+    }else{
+     $.post("schedule_api.php",
+     {
+      site_url: sch,
+    },
+    function(data,status){
+              //alert(data);
+              var res = data.split(":codeerror:");
+              console.log(res);
+              //location.reload();
+              $('#show_table').html(res[0]);
+              $('#show_modal').html(res[1]);
+            });
+   }
+  //alert(sch);
+});
 
 <?php echo $script; ?>
 });
