@@ -18,6 +18,15 @@ isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_i
 
 isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
+$detoxthai="2";
+
+$sql1 = "SELECT site_id FROM `site_schedule` WHERE id='".$schedule_id."'";
+$query1 = $mysqli->query($sql1) or die(mysqli_error($mysqli));
+$data1 = $query1->fetch_assoc();
+$sql2 = "SELECT * FROM `site_detail` WHERE id='".$data1["site_id"]."' AND create_user='".$_SESSION[SESSIONPREFIX."puser_id"]."' ";
+$query2 = $mysqli->query($sql2) or die(mysqli_error($query1));
+$num2 = $query2->num_rows;
+
 ?>
 
 <?php sb('content');?>
@@ -45,6 +54,18 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
             <a href="../schedules.php" class="btn btn-block btn-primary btn-lg btn-flat">กลับหน้าหลักสูตร</a>
           </div>
         </div>
+      </div>
+      <br>
+      <div class="row">
+        <?php
+          if($num2==1){
+            ?>
+          <div style="float:right;padding-right:10px; ">
+           <button class="btn btn-primary btn-md btn-flat" onclick="add();">เพิ่มผู้เข้าร่วมหลักสูตร</button>
+          </div>
+            <?php
+            }
+          ?>
       </div>
       <p></p>
       <table class="table table-bordered">
@@ -137,7 +158,28 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
 
 
 <?php sb('js_and_css_footer');?>
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
+  function add(){
+        dialogPopWindow = BootstrapDialog.show({
+                    title: "เพิ่มผู้เข้าร่วมหลักสูตร",
+                    cssClass: 'popup-dialog',
+                    closable: true,
+                    closeByBackdrop: false,
+                    closeByKeyboard: false,
+                    size:'size-wide',
+                    draggable: false,
+                    message: $('<div></div>').load("form_adduser.php", function(data){
+                    }),
+                    onshown: function(dialogRef){ 
+                    },
+                    onhidden: function(dialogRef){ 
+                    }
+         });
+    }
   $(document).ready(function(){
     $("#btnpayment").click(function(){
       $.post("check_payment.php",
@@ -150,6 +192,7 @@ isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai 
       });
     });
   });
+
 </script>
 <?php eb();?>
 
