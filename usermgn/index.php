@@ -21,16 +21,8 @@
 
     $MenuSetting = "user";
     include_once("inc_menu.php");
-    $sql = "SELECT * FROM `tbl_job`";
-    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
-    while($data = $query->fetch_assoc()){
-        //echo $data["id"]."  ".$data["job_name"]."<br>";
-    }
-    $sql2 = "SELECT * FROM `tbl_job`";
-    $query2 = $mysqli->query($sql2);
-    $numtotal = $query2->num_rows;
-    $a = ceil($numtotal/5);
-    
+
+
 ?>
 <div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
@@ -116,11 +108,11 @@
                     draggable: false,
                     message: $('<div></div>').load("form_deleteuser.php?id="+id, function(data){
                     }),
-                    onshown: function(dialogRef){ 
+                    onshown: function(dialogRef){
                     },
-                    onhidden: function(dialogRef){ 
+                    onhidden: function(dialogRef){
                     }
-                    
+
          });
     }
     function editUser(id,hcode) {
@@ -135,11 +127,11 @@
                     draggable: false,
                     message: $('<div></div>').load("form_edituser.php?hcode="+hcode+"&id="+id, function(data){
                     }),
-                    onshown: function(dialogRef){ 
+                    onshown: function(dialogRef){
                     },
-                    onhidden: function(dialogRef){ 
+                    onhidden: function(dialogRef){
                     }
-                    
+
             });
     }
     $("#area").on("change",function(){
@@ -165,11 +157,11 @@
                     draggable: false,
                     message: $('<div></div>').load("form_adduser.php?hcode="+hcode, function(data){
                     }),
-                    onshown: function(dialogRef){ 
+                    onshown: function(dialogRef){
                     },
-                    onhidden: function(dialogRef){ 
+                    onhidden: function(dialogRef){
                     }
-                    
+
             });
         }
 }
@@ -197,7 +189,7 @@
                         return ;
                     }else{
                         $("#dataSelectUser").html("<tr><td></td></tr>");
-                        
+
                         $.each(result, function(i, field){
                             console.log(field);
                             $("#dataSelectUser").html();
@@ -222,9 +214,9 @@
                                         { "title": "Name" },
                                         { "title": "Other" },
                                     ]
-                                } );   
+                                } );
                               //$("#dataSelectUser").append("<tr><td>"+field.username+"</td><td>"+field.email+"</td><td>"+field.fname+"</td><td>"+field.lname+"</td><td>"+statusName+"</td><td>"+field.createdate+"</td><td><button class='btn btn-warning btn-xs' onclick='editUser("+field.id+","+field.hcode+")'>แก้ไข</button>&nbsp;<button class='btn btn-danger btn-xs' onclick='deleteUser("+field.id+")'>ลบ</button></td></tr>");
-                         
+
                     });
                     }
             });
@@ -254,5 +246,5 @@
 <script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
 <link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
