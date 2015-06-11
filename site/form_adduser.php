@@ -3,6 +3,7 @@
   chk_login();
   $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
+  
   isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
 
   isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
@@ -116,9 +117,11 @@
     function addUser(){
       var puser_id = $("#puser_id").val();
       var schedule_id = <?php echo $schedule_id; ?>;
+      var site_id = <?php echo $_GET["site_id"];?>;
             $.post("ball-sql.php?task=addUserFind",
 	    {
 	      schedule_id : schedule_id,
+	      site_id:site_id,
 	      user_id : puser_id
 	    },
 	    function(data,status){
@@ -126,8 +129,9 @@
 		//code
 		$("#valAddUser").show();
 		$("#valAddUser").html("สมาชิกนี้อยู่ในหลักสูตรแล้วกรุณาตรวจสอบ");
+	      }else{
+	        location.reload();
 	      }
-	      location.reload();
 	    });
     }
     function findUser(){
@@ -248,7 +252,7 @@
                       }
                       else{
                         //code
-       location.reload();
+			//location.reload();
                       }
 
 		    },

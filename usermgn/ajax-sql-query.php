@@ -27,7 +27,10 @@
 	    $sql = "INSERT INTO `puser`(`username`,`password`,`fname`,`lname`,`tel`,`status`,`createdate`)
 	    VALUES('".$_POST["tel"]."','".$password."','".$_POST["fname"]."','".$_POST["lname"]."','".$_POST["tel"]."','1','".$date."')";
 	    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
+
+
 	}
+	
     }
     if($task=="getData"){
         if($_GET["status"]==1){
