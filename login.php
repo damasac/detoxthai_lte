@@ -16,6 +16,9 @@ $facebook = new Facebook(array(
   'secret' => 'a09e48c084788e337b7092e46f7cd057',
 ));
 
+/** Define value. */
+$user_profile = '';
+
 // Get User ID
 $user = $facebook->getUser();
 
@@ -41,7 +44,7 @@ if ($user) {
 				$objConnect = mysql_connect("mysql","webmaster","xpctc2004x");
 				$objDB = mysql_select_db("detoxthai_lte");
 				mysql_query("SET NAMES UTF8");
-				$strSQL ="  INSERT INTO  tb_facebook (FACEBOOK_ID,NAME,LINK,CREATE_DATE) 
+				$strSQL ="  INSERT INTO  tb_facebook (FACEBOOK_ID,NAME,LINK,CREATE_DATE)
 					VALUES
 					('".trim($user_profile["id"])."',
 					'".trim($user_profile["name"])."',
@@ -92,13 +95,13 @@ if ($user) {
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '418140078352087',
-    cookie     : true,  // enable cookies to allow the server to access 
+    cookie     : true,  // enable cookies to allow the server to access
                         // the session
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.2' // use version 2.2
   });
 
-  // Now that we've initialized the JavaScript SDK, we call 
+  // Now that we've initialized the JavaScript SDK, we call
   // FB.getLoginStatus().  This function gets the state of the
   // person visiting this page and can return one of three states to
   // the callback you provide.  They can be:

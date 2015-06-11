@@ -14,6 +14,8 @@ function getDateThai($strDate)
 
 $site_url = $_POST['site_url'];
 
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+
 $table = "<table class='table table-bordered' id='show_content'>
     <tr class='active'>
       <th>
@@ -47,7 +49,7 @@ if ($result !== false) {
     $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
       FROM site_join
       WHERE schedule_id = '".$row['id']."'
-      AND user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
+      AND user_id = '".$session."'");
     $row_check = $result_check->fetch_assoc();
 
             //echo $row_check['join_status'];

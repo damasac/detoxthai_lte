@@ -50,10 +50,10 @@
           <th>
             ที่ตั้ง
           </th>
-          <th>ติดตาม</th>
+          <th></th>
         </tr>
         <?php
-        $sql = "SELECT site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
+        $sql = "SELECT site_detail.id AS site_id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
         site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
         FROM site_detail
         LEFT JOIN const_district ON site_district = DISTRICT_ID
@@ -67,10 +67,23 @@
 
         if ($result !== false) {
           foreach($result as $row) {
+
+            $result_follow = $mysqli->query("SELECT COUNT(*) AS check_follow
+                FROM site_follow
+                WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+                AND site_id = '".$row['site_id']."'");
+            $row_follow = $result_follow->fetch_assoc();
+
+            if (0 == $row_follow['check_follow']) {
+              $btn_follow = "<a type='button' href='site/site_follow.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-heart'></i> ติดตาม</a>";
+            } else {
+              $btn_follow = "<a type='button' href='site/site_unfollow.php?site_id=".$row['site_id']."' class='btn btn-default btn-flat'><i class='fa fa-fw fa-heart'></i> ยกเลิกการติดตาม</a>";
+            }
+
             echo "<tr>
                   <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
                   <td>".$row['address']."</td>
-                  <td><button type='button' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-thumbs-o-up'></i></button></td>
+                  <td>".$btn_follow."</td>
                   </tr>";
             $count++;
           }
