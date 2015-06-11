@@ -42,46 +42,39 @@
                   <table class="table table-hover">
                     <tr>
                       <th>ลำดับ</th>
-                      <th>ชื่อ - สกุล</th>
+                      <th>ชื่อเรียกขาน</th>
                       <th>วันที่สมัคร</th>
                       <th>Follow</th>
                     </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><button class="btn btn-block btn-default btn-sm">Follow</button></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Alexander Pierce</td>
-                      <td>11-7-2014</td>
-                      <td><button class="btn btn-block btn-default btn-sm">Follow</button></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Bob Doe</td>
-                      <td>11-7-2014</td>
-                      <td><button class="btn btn-block btn-default btn-sm">Follow</button></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Mike Doe</td>
-                      <td>11-7-2014</td>
-                      <td><button class="btn btn-block btn-default btn-sm">Follow</button></td>
-                    </tr>
+                    <?php
+                      $result = $mysqli->query("SELECT `id`, `username`, `password`, `email`, `fname`, `lname`, `status`, `hcode`, `area`, `district`, `amphur`, `province`, `tel`, `createdate`
+                                                FROM puser");
+                      $count = 1;
+                      if ($result !== false) {
+                        foreach($result as $row) {
+                          echo "<tr>";
+                          echo "<td>".$count."</td>";
+                          echo "<td>".$row['username']."</td>";
+                          echo "<td>".$row['createdate']."</td>";
+                          echo "<td><button class='btn btn-block btn-default btn-sm'>Follow</button></td>";
+                          echo "</tr>";
+
+                          $count++;
+                        }
+                      }
+                    ?>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div>
           </div>
 
-  </section><!-- /.content -->'
-  
+  </section><!-- /.content -->
+
 <?php eb();?>
 
 
 <?php sb('js_and_css_footer');?>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
