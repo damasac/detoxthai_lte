@@ -341,15 +341,14 @@ $count++;
     <th>
       จัดการหลักสูตร
     </th>
-    <th>
-    </th>
   </tr>
   <?php
-  $count = 1;
+  //$count = 1;
   $result_user_manage = $mysqli->query("SELECT site_id
     FROM site_manage_user
     WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
 
+  $count_exit = 0;
   if ($result_user_manage !== false) {
     foreach ($result_user_manage as $row_user_manage) {
 
@@ -361,184 +360,18 @@ $count++;
         LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
         WHERE site_detail.id = ".$row_user_manage['site_id']."
         ORDER BY id");
-        //$result->execute();
-      $count = 1;
-                // display it
+
       if ($result !== false) {
         foreach($result as $row) {
-          echo "<tr><td>".$count."</td>
+          echo "<tr><td>".$count_exit."</td>
           <td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td>
           <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-wrench'></a></td>
           <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-calendar'></a></td>
-          <td>
-            <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal_ex".$count."'><i class='fa fa-fw fa-pencil'></i></button>
-          </td>
         </tr>";
+
       }
     }
-
-    $script .= "<script>
-    $(document).ready(function(){
-      $('#btadd_ex".$count."').click(function(){
-        $.post('update_site.php',
-        {
-          site_id: ".$row['id'].",
-          site_url: $('#urlname_ex".$count."').val(),
-          site_name: $('#sitename_ex".$count."').val(),
-          site_province: $('#province_ex".$count."').val(),
-          site_amphur: $('#amphur_ex".$count."').val(),
-          site_district: $('#district_ex".$count."').val(),
-          site_house_no: $('#houseno_ex".$count."').val(),
-          site_village_no: $('#villageno_ex".$count."').val(),
-          site_muban: $('#muban_ex".$count."').val(),
-          site_postal_code: $('#postalcode_ex".$count."').val(),
-          site_telephone: $('#tel_ex".$count."').val(),
-          site_mobile: $('#mobile_ex".$count."').val(),
-          site_user: ".$_SESSION[SESSIONPREFIX.'puser_id'].",
-        },
-        function(data,status){
-          location.reload();
-        });
-});
-});
-</script>";
-
-$script_address .= '<script type="text/javascript">
-$(document).ready(function(){
-  $("#province_ex'.$count.'").change(function() {
-            //alert("Codeerror");
-    $("#amphur_ex'.$count.'").empty();
-    var option = new Option("เลือกอำเภอ/เขต", "");
-    $("#amphur_ex'.$count.'").append($(option));
-    $.getJSON("../api/getamphur.php?province_id=" + $("#province_ex'.$count.'").val(), function(data){
-      $.each(data.amphur, function(i, amphur){
-        var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
-        $("#amphur_ex'.$count.'").append($(option));
-      });
-});
-});
-$("#amphur_ex'.$count.'").change(function() {
-  $("#district_ex'.$count.'").empty();
-  var option = new Option("เลือกตำบล/แขวง", "");
-  $("#district_ex'.$count.'").append($(option));
-  $.getJSON("../api/getdistrict.php?amphur_id=" + $("#amphur_ex'.$count.'").val(), function(data){
-    $.each(data.district, function(i, district){
-      var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
-      $("#district_ex'.$count.'").append($(option));
-    });
-});
-});
-
-});
-</script>';
-
-$box .= "<div class='modal fade' id='myModal_ex".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-<div class='modal-dialog'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      <h4 class='modal-title' id='myModalLabel'>เพิ่มศูนย์ล้างพิษตับ</h4>
-    </div>
-    <div class='modal-body'>
-      <form class='form-horizontal'>
-        <div class='form-group'>
-          <label for='urlname_ex".$count."' class='col-sm-2 control-label'>URL : </label>
-          <div class='col-sm-5'>
-            <input type='text' class='form-control' id='urlname_ex".$count."' placeholder='ชื่อคำนำหน้า URL' value='".$row['site_url']."'>
-          </div>
-          <div class='col-sm-5'>
-            <h4 id='url'>.detoxthai.org</h4>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='sitename_ex".$count."' class='col-sm-2 control-label'>ชื่อศูนย์ : </label>
-          <div class='col-sm-10'>
-            <input type='text' class='form-control' id='sitename_ex".$count."' placeholder='ชื่อศูนย์' value='".$row['site_name']."'>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='' class='col-sm-2 control-label'>ที่ตั้ง : </label>
-          <div class='col-sm-10'>
-            <label for='province_ex".$count."' class='control-label'>จังหวัด : </label>
-            <select id='province_ex".$count."' class='form-control'>
-              <option value=''>เลือกจังหวัด</option>
-              ".$html_province."
-            </select>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='amphur' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='amphur_ex".$count."' class='control-label'>อำเภอ : </label>
-            <select id='amphur_ex".$count."' o class='form-control'>
-              <option value=''>เลือกอำเภอ/เขต</option>
-              ".$html_amphur."
-            </select>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='district' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='district_ex".$count."' class='control-label'>ตำบล : </label>
-            <select id='district_ex".$count."' o class='form-control'>
-              <option value=''>เลือกตำบล/แขวง</option>
-              ".$html_district."
-            </select>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='houseno_ex".$count."' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='houseno_ex".$count."' class='control-label'>บ้านเลขที่ : </label>
-            <input type='text' class='form-control' id='houseno_ex".$count."' placeholder='บ้านเลขที่' value='".$row['site_house_no']."'>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='villageno_ex".$count."' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='villageno_ex".$count."' class='control-label'>หมู่ที่ : </label>
-            <input type='text' class='form-control' id='villageno_ex".$count."' placeholder='หมู่ที่' value='".$row['site_village_no']."'>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='muban_ex".$count."' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='muban_ex".$count."' class='control-label'>หมู่บ้าน : </label>
-            <input type='text' class='form-control' id='muban_ex".$count."' placeholder='หมู่บ้าน' value='".$row['site_muban']."'>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='postalcode_ex".$count."' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='postalcode_ex".$count."' class='control-label'>รหัสไปรษณีย์ : </label>
-            <input type='text' class='form-control' id='postalcode_ex".$count."' placeholder='รหัสไปรษณีย์' value='".$row['site_postal_code']."'>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='tel_ex".$count."' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='tel_ex".$count."' class='control-label'>โทร : </label>
-            <input type='text' class='form-control' id='tel_ex".$count."' placeholder='โทร' value='".$row['site_telephone']."'>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='mobile_ex".$count."' class='col-sm-2 control-label'></label>
-          <div class='col-sm-10'>
-            <label for='mobile_ex".$count."' class='control-label'>มือถือ : </label>
-            <input type='text' class='form-control' id='mobile_ex".$count."' placeholder='มือถือ' value='".$row['site_mobile']."'>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class='modal-footer'>
-      <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>ยกเลิก</button>
-      <button type='button' class='btn btn-primary btn-flat' id='btadd_ex".$count."'>แก้ไข</button>
-    </div>
-  </div>
-</div>
-</div>";
-
-    $count++;
+    $count_exit++;
 }
 }
 ?>
