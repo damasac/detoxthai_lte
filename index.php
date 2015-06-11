@@ -1,6 +1,8 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+
 isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
 /** Set cookie. */
@@ -33,25 +35,7 @@ $site_id = 1;
 ?>
 
 <?php sb('notifications');?>
-<!-- Menu toggle button -->
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  <i class="fa fa-bell-o"></i>
-  <span class="label label-warning">10</span>
-</a>
-<ul class="dropdown-menu">
-  <li class="header">You have 10 notifications</li>
-  <li>
-    <!-- Inner Menu: contains the notifications -->
-    <ul class="menu">
-      <li><!-- start notification -->
-        <a href="#">
-          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-        </a>
-      </li><!-- end notification -->
-    </ul>
-  </li>
-  <li class="footer"><a href="#">View all</a></li>
-</ul>
+  <?php include_once 'notifications.php'; ?>
 <?php eb();?>
 
 <?php sb('content');?>

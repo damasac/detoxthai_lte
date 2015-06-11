@@ -11,6 +11,10 @@
 </style>
 <?php eb();?>
 
+<?php sb('notifications');?>
+  <?php include_once 'notifications.php'; ?>
+<?php eb();?>
+
 <?php include_once "_connection/db_base.php"; ?>
 
 <?php

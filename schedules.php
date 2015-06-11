@@ -15,6 +15,10 @@
 </style>
 <?php eb();?>
 
+<?php sb('notifications');?>
+  <?php include_once 'notifications.php'; ?>
+<?php eb();?>
+
 <?php
 function getDateThai($strDate)
 {
