@@ -1,6 +1,6 @@
 <?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
-<?php sb('title');?> User Setting <?php eb();?>
+<?php sb('title');?> สมาชิก<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <style>
@@ -16,141 +16,84 @@
           </ol>
 <?php eb();?>
 <?php sb('content');?>
-<?php include "../_connection/db.php"; ?>
+<?php include "../_connection/db_base.php"; ?>
 <?php
 
     $MenuSetting = "user";
     include_once("inc_menu.php");
-    $status = $_SESSION["tpc_puser_status"];
-    if($status==1){
-        $condition = "";
+    $sql = "SELECT * FROM `tbl_job`";
+    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
+    while($data = $query->fetch_assoc()){
+        //echo $data["id"]."  ".$data["job_name"]."<br>";
     }
-    else if($status==2 || $status==3){
-        $condition = "AND status!='1'";
-    }
-    else if($status==4){
-        $condition = "AND status NOT IN (1,2,3)";
-    }
-    $sqlSelectUser = "SELECT  * FROM `puser`
-    WHERE
-    `area`='".$_SESSION["tpc_puser_area"]."'
-    AND `province`='".$_SESSION["tpc_puser_province"]."'
-    AND `hcode`='".$_SESSION["tpc_puser_hcode"]."'
-    ".$condition."
-    ";
+    $sql2 = "SELECT * FROM `tbl_job`";
+    $query2 = $mysqli->query($sql2);
+    $numtotal = $query2->num_rows;
+    $a = ceil($numtotal/5);
     
-    $querySelectUser = $mysqli->query($sqlSelectUser);
-    function getTypeUser($status){
-        $typeUser;
-        if($status==1){
-            $typeUser="Super Admin";
-        }else if($status==2){
-            $typeUser="Admin Area";
-        }
-        else if($status==3){
-            $typeUser="Admin Province";
-        }
-        else if($status==4){
-            $typeUser="Admin Site";
-        }
-        else if($status==5){
-            $typeUser="User Site";
-        }
-        return $typeUser;
-    }
 ?>
-<div class="box">
+<div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
     <span style="float: right">
         <button class="btn btn-info btn-flat" onclick="refresh_data();"><i class="fa fa-refresh"></i> โหลดข้อมูลใหม่</button>
-        <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มผู้ใช้งาน</button>
+        <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
     </span>
 <span >
+    <br><br><br>
     <div class="row">
-        <?php if($_SESSION["tpc_puser_status"]==1){?>
-        <div class="col-lg-3">
-        <select class="form-control" id="area" name="area" >
-           <option value="0">- เลือกเขต -</option>
-            <?php for($i=1;$i<=13;$i++){?>
-                <option value="<?php echo $i?>"
-                    <?php if($_SESSION["tpc_puser_area"]==$i){echo "selected";}else{echo "";}?>
-                                >เขตบริการสุขภาพที่ <?php echo $i;?></option>
-           <?php }?>
-        </select>
-        </div>
-        <?php }else {}?>
-        <?php if($_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==1){?>
-        <div class="col-lg-2">
-        <?php
-                    $sqlProvince = "SELECT * FROM `all_hospital_zone` WHERE zone_code='".$_SESSION["tpc_puser_area"]."' ";
-                    $queryProvince = $mysqli->query($sqlProvince);
-        ?>
-        <select class="form-control" id="province" name="province" >
-            <option value="0">- เลือกจังหวัด -</option>
-            <?php while($dataProvince = $queryProvince->fetch_assoc()){?>
-                <option value="<?php echo $dataProvince["provincecode"];?>"
-                <?php if($_SESSION["tpc_puser_province"]==$dataProvince["provincecode"]){echo "selected";}else{echo "";}?>
-                ><?php echo $dataProvince["province"]?></option>
-            <?php }?>
-        </select>
-        </div>
-        <?php }?>
-        <?php if($_SESSION["tpc_puser_status"]==3 || $_SESSION["tpc_puser_status"]==2 || $_SESSION["tpc_puser_status"]==1 || $_SESSION["tpc_puser_status"]==4){?>
-        <div class="col-lg-3">
-        <?php
-                    $sqlHospital = "SELECT `hcode`,`name` FROM `all_hospital_thai` WHERE provincecode='".$_SESSION["tpc_puser_province"]."' ORDER BY hcode";
-                    $queryHospital = $mysqli->query($sqlHospital);
-        ?>
-            <select class="form-control" id="hospital" name="hospital"  >
-                <option value="0">- เลือกโรงพยาบาล -</option>
-                <?php while($dataHospital = $queryHospital->fetch_assoc()){?>
-                    <option value="<?php echo $dataHospital["hcode"];?>"
-                    <?php if($_SESSION["tpc_puser_hcode"]==$dataHospital["hcode"]){echo "selected";}else{echo "";}?>
-                    ><?php echo $dataHospital["hcode"]?> : <?php echo $dataHospital["name"]?></option>
-                <?php }?>
-            </select>
-        </div>
-        <?php }?>
+        <ul class="users-list clearfix">
+            <li>
+              <img src="../_dist/img/user1-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Alexander Pierce</a>
+              <span class="users-list-date">Today</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user8-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Norman</a>
+              <span class="users-list-date">Yesterday</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user7-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Jane</a>
+              <span class="users-list-date">12 Jan</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user6-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">John</a>
+              <span class="users-list-date">12 Jan</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user2-160x160.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Alexander</a>
+              <span class="users-list-date">13 Jan</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user5-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Sarah</a>
+              <span class="users-list-date">14 Jan</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user4-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Nora</a>
+              <span class="users-list-date">15 Jan</span>
+            </li>
+            <li>
+              <img src="../_dist/img/user3-128x128.jpg" alt="User Image"/>
+              <a class="users-list-name" href="#">Nadia</a>
+              <span class="users-list-date">15 Jan</span>
+            </li>
+          </ul><!-- /.users-list -->
     </div>
-</span>
-<input type="hidden" id="areaVal" name="areaVal" value="<?php echo $_SESSION["tpc_puser_area"]?>">
-<input type="hidden" id="provinceVal" name="provinceVal" value="<?php echo $_SESSION["tpc_puser_province"]?>">
-<input type="hidden" id="hospitalVal" name="hospitalVal" value="<?php echo $_SESSION["tpc_puser_hcode"]?>">
-<input type="hidden" id="statusVal" name="statusVal" value="<?php echo $_SESSION["tpc_puser_status"]?>">
-  <?php  //echo "<pre>"; print_r($_SESSION);?>
-<!--<div class="box-title">จัดการสมาชิก-->
+    <div class="box-tools pull-right">
+        <ul class="pagination pagination-sm inline">
+          <li><a href="#">&laquo;</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
 
-<!--</div>--><br><br><br>
-
-<table id="userTable" class="table table-striped table-bordered" cellspacing="0">
-        <thead>
-            <tr>
-                <th>ชื่อผู้ใช้</th>
-                <th>อีเมลล์</th>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
-                <th>สถานะ</th>
-                <th>วันที่สร้าง</th>
-                <th>จัดการ</th>
-            </tr>
-        </thead>
-        <tbody id="dataSelectUser">
-            <?php while($dataSelectUser = $querySelectUser->fetch_assoc()){?>
-            <tr>
-                <td><?php echo $dataSelectUser["username"];?></td>
-                <td><?php echo $dataSelectUser["email"];?></td>
-                <td><?php echo $dataSelectUser["fname"];?></td>
-                <td><?php echo $dataSelectUser["lname"];?></td>
-                <td><?php echo getTypeUser($dataSelectUser["status"]);?></td>
-                <td><?php echo $dataSelectUser["createdate"];?></td>
-                <td>
-                    <button class='btn btn-warning btn-xs' onclick="editUser('<?php echo $dataSelectUser['id'];?>','<?php echo $dataSelectUser['hcode']?>')">แก้ไข</button>
-                    <button class='btn btn-danger btn-xs' onclick="deleteUser('<?php echo $dataSelectUser['id'];?>')">ลบ</button>
-                </td>
-            </tr>
-            <?php }?>
-        </tbody>
-    </table>
 </div>
 </div>
 </div>
