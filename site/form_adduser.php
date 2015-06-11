@@ -1,19 +1,56 @@
 <?php
-  require_once '../_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';
+  require_once '../_theme/util.inc.php';
+  chk_login();
+  $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
- 
+  isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
+
+  isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
 ?>
   <section class="content">
+    <div class="form-group">
+      <label>ค้นหาสมาชิก </label>	    <code id="valTelFind" style="display:none;"></code>
+      <div class="form-group has-feedback">
+      <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="telFind" name="telFind"
+	    data-inputmask="'mask': ['9999999999']" data-mask
+	    data-toggle="tooltip" data-placement="top" title=""/>
 
-    <div class="login-box">
-      <div class="login-logo">
-        <a href="index.php"><b>Detox</b>Thailand</a>
-      </div><!-- /.login-logo -->
-      <div class="login-box-body">
+	  <span class="glyphicon glyphicon-phone-alt form-control-feedback" ></span>
+	  
+      </div>
+      <div style="float: right;">
+      <button class="btn btn-success" onclick="findUser()"><i class="fa fa-search"></i></button>
+      </div>
+    </div><br><br>
+    
+      <div  id="showUser" style="display:none;">
+	<div class="alert alert-default ">
+                    <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                    <h4>	<i class="icon fa fa-check"></i> ค้นพบผู้ใช้งาน </h4>
+		    Username :: <span id='shwUsername'></span><br>
+		    ชื่อ :: <span id='shwFname'></span><br>
+		    นามสกุล :: <span id='shwLname'></span><br>
+		    <input type="hidden" id="puser_id" name="puser_id" value=""/>
+		    <br>
+		      <button class="btn btn-success " onclick="addUser()">เพิ่มสมาชิกเข้าสู่ศูนย์</button><code id="valAddUser" style="display:none;"></code>
+                  </div>
+      </div>
+      <div  id="showUser2" style="display:none;">
+	<div class="alert alert-warning alert-dismissable ">
+                    <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+                    <h4>	<i class="icon fa fa-fw fa-remove"></i> ไม่พบสมาชิกนี้ </h4>
+		    <button class="btn btn-success " onclick="addNewUser()">เพิ่มสมาชิกใหม่</button>
+                  </div>
+      </div>
+
+      <div id="formUser" style="display:none;">
+    <div class="login-box" >
+    
+      <div class="login-box-body" >
 		  <h3>สมัครสมาชิก</h3>
         <p class="login-box-msg">
-
+	
 	</p>
           <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="ชื่อ" id="fname" name="fname"/><code id="valFname" style="display:none;"></code>
@@ -32,7 +69,7 @@
           </div>
           <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="รหัสผ่าน" id="password" name="password"
-	    data-toggle="tooltip" data-placement="top" title="กรอกรหัสผ่านตั้งแต่ 6 ตัวขึ้นไป"
+	    data-toggle="tooltip" data-placement="top" title="ระบุรหัสผ่านตั้งแต่ 6 ตัวขึ้นไป"
 	    /><code id="valPassword" style="display:none;"></code>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
@@ -57,7 +94,7 @@
         <a href="login.html" class="text-center">I already have a membership</a>-->
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
-
+      </div>
   </section><!-- /.content -->'
 
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
@@ -69,7 +106,74 @@
   $("[data-mask]").inputmask();
 </script>
 <script>
+  function addNewUser() {
+    //code
+    var telUser = $("#telFind").val();
+    $("#tel").val(telUser);
+    $("#formUser").show();
+    $("#showUser2").hide();
+  }
+    function addUser(){
+      var puser_id = $("#puser_id").val();
+      var schedule_id = <?php echo $schedule_id; ?>;
+            $.post("ball-sql.php?task=addUserFind",
+	    {
+	      schedule_id : schedule_id,
+	      user_id : puser_id
+	    },
+	    function(data,status){
+	      if (data==1) {
+		//code
+		$("#valAddUser").show();
+		$("#valAddUser").html("สมาชิกนี้อยู่ในหลักสูตรแล้วกรุณาตรวจสอบ");
+	      }
+	      location.reload();
+	    });
+    }
+    function findUser(){
+      
+      var user_id = $("#telFind").val();
+      if (user_id=="") {
+	$("#valTelFind").show();
+	$("#valTelFind").html("กรุณาระบุเบอร์โทรศัพท์");
+	return ;
+      }else{
+	$.ajax({
+		    url: "ball-sql.php?task=findUser",
+		    type: "post",
+		    dataType: "json",
+		    data: {
+                      user_id:user_id
+                      },
+		    success: function(data){
+
+		      if (data!=0) {
+			$("#showUser2").hide();
+			$("#formUser").hide();
+			$("#showUser").show();
+			$("#shwUsername").html(data.username);
+			$("#shwFname").html(data.fname);
+			$("#shwLname").html(data.lname);
+			$("#puser_id").val(data.id);
+		      }else if(data==0){
+			$("#formUser").hide();
+			$("#showUser2").show();
+			$("#shwUsername").html("");
+			$("#shwFname").html("");
+			$("#shwLname").html("");
+			$("#puser_id").val("");
+			$("#showUser").hide();
+		      }
+
+		    },
+		    error:function(){
+			alert("failure");
+		    }
+		});
+      }
+    }
      function saveUser() {
+    
     //code
     var username = $("#username").val();
     var tel = $("#tel").val();
@@ -80,28 +184,28 @@
         
     if (fname=="") {
       $("#valFname").show();
-      $("#valFname").html("กรุณากรอกชื่อ");
+      $("#valFname").html("กรุณาระบุชื่อ");
       return ;
     }else{
       $("#valFname").hide();
     }
     if (lname=="") {
       $("#valLname").show();
-      $("#valLname").html("กรุณากรอกนามสกุล");
+      $("#valLname").html("กรุณาระบุนามสกุล");
       return ;
     }else{
       $("#valLname").hide();
     }
     if (tel=="") {
       $("#valTel").show();
-      $("#valTel").html("กรุณากรอกเบอร์โทรศัพท์");
+      $("#valTel").html("กรุณาระบุเบอร์โทรศัพท์");
       return ;
     }else{
       $("#valTel").hide();
     }
     if (password=="") {
       $("#valPassword").show();
-      $("#valPassword").html("กรุณากรอกรหัสผ่าน");
+      $("#valPassword").html("กรุณาระบุรหัสผ่าน");
       return ;
     }
     else{
@@ -109,7 +213,7 @@
     }
     if (password<6) {
       $("#valPassword").show();
-      $("#valPassword").html("กรุณากรอกรหัสผ่าน 6 ตัวขึ้นไป");
+      $("#valPassword").html("กรุณาระบุรหัสผ่าน 6 ตัวขึ้นไป");
       return ;
     }else{
       $("#valPassword").hide();
@@ -126,7 +230,7 @@
   }
   function goAjaxSave(username,password,tel,fname,lname){
       $.ajax({
-		    url: "usermgn/ajax-sql-query.php?task=addUserNormal",
+		    url: "../usermgn/ajax-sql-query.php?task=addUserNormal",
 		    type: "post",
 		    data: {
                       username:username,
@@ -144,7 +248,7 @@
                       }
                       else{
                         //code
-                        location.href="login.php";
+       location.reload();
                       }
 
 		    },

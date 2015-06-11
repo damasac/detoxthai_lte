@@ -1,4 +1,4 @@
-<?php require_once '../_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
@@ -18,9 +18,6 @@ isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_i
 
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
-//isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-
-//$detoxthai="2";
 
 $sql1 = "SELECT site_id FROM `site_schedule` WHERE id='".$schedule_id."'";
 $query1 = $mysqli->query($sql1) or die(mysqli_error($mysqli));
@@ -174,7 +171,7 @@ $num2 = $query2->num_rows;
                     closeByKeyboard: false,
                     size:'size-wide',
                     draggable: false,
-                    message: $('<div></div>').load("form_adduser.php", function(data){
+                    message: $('<div></div>').load("form_adduser.php?schedule_id=<?php echo $schedule_id ?>", function(data){
                     }),
                     onshown: function(dialogRef){
                     },
