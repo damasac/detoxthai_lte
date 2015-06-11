@@ -9,8 +9,10 @@ define("APP_WEBROOT", "detoxthai_lte/");
 //Session Prefix
 define('SESSIONPREFIX' , "dtt_");
 //check login
-if(empty($_SESSION['dtt_puser_id']) && empty($_SESSION['dtt_puser_username']) && basename($_SERVER["SCRIPT_FILENAME"]) <> 'login.php'){
+$arr_file = array("login.php", "index.php", "home.php");
+if(empty($_SESSION['dtt_puser_id']) && empty($_SESSION['dtt_puser_username']) && !in_array(basename($_SERVER["SCRIPT_FILENAME"]), $arr_file)){
 	echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'login.php">';
+	unset($arr_file);
 	exit('Redirect to login page!');
 }
 
