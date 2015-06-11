@@ -16,14 +16,16 @@
 <?php
 isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
 
-isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
-$detoxthai="2";
+//isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+
+//$detoxthai="2";
 
 $sql1 = "SELECT site_id FROM `site_schedule` WHERE id='".$schedule_id."'";
 $query1 = $mysqli->query($sql1) or die(mysqli_error($mysqli));
 $data1 = $query1->fetch_assoc();
-$sql2 = "SELECT * FROM `site_detail` WHERE id='".$data1["site_id"]."' AND create_user='".$_SESSION[SESSIONPREFIX."puser_id"]."' ";
+$sql2 = "SELECT * FROM `site_detail` WHERE id='".$data1["site_id"]."' AND create_user='".$session."' ";
 $query2 = $mysqli->query($sql2) or die(mysqli_error($query1));
 $num2 = $query2->num_rows;
 
@@ -174,9 +176,9 @@ $num2 = $query2->num_rows;
                     draggable: false,
                     message: $('<div></div>').load("form_adduser.php", function(data){
                     }),
-                    onshown: function(dialogRef){ 
+                    onshown: function(dialogRef){
                     },
-                    onhidden: function(dialogRef){ 
+                    onhidden: function(dialogRef){
                     }
          });
     }
@@ -185,7 +187,7 @@ $num2 = $query2->num_rows;
       $.post("check_payment.php",
       {
         schedule_id : <?php echo $schedule_id; ?>,
-        user_id : <?php echo $detoxthai; ?>
+        user_id : <?php echo $session; ?>
       },
       function(data,status){
         location.reload();
