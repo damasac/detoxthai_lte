@@ -16,7 +16,7 @@ $result = $mysqli->query("SELECT site_schedule.schedule_name
 
 if ($result !== false) {
   foreach($result as $row) {
-    array_push($notificationArray, array("url" => "#", "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "คุณได้เข้าร่วม ".$row['schedule_name']));
+    array_push($notificationArray, array("url" => "#", "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "คุณได้เข้าร่วมหลักสูตร ".$row['schedule_name']));
     //echo $row['schedule_name'];
   }
 }

@@ -123,7 +123,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="sitename" class="col-sm-2 control-label">ชื่อค่าย : </label>
+            <label for="sitename" class="col-sm-2 control-label">ชื่อค่ายล้างพิษ : </label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="sitename" placeholder="ชื่อค่าย">
             </div>
@@ -310,6 +310,13 @@
     });
 
   });
+</script>
+<script src="../_plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script>
+  $("[data-mask]").inputmask();
+  $("#urlname").inputmask("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 </script>
 <?php eb();?>
 

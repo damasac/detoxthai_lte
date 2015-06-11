@@ -6,6 +6,7 @@
     }*/
 
     $site_url = $_POST['site_url'];
+    $site_url = str_replace("_", "", $site_url);
     $site_name = $_POST['site_name'];
     $site_province = $_POST['site_province'];
     $site_amphur = $_POST['site_amphur'];
@@ -69,10 +70,10 @@
 
     $result = $mysqli->query("INSERT INTO
                 site_menu (menu_order, menu_name, display_menu, content_id, site_id)
-                VALUES (3, 'คอร์สล้างพิษตับ', '0', $last_id, '$last_id_site')");
+                VALUES (3, 'เกี่ยวกับการล้างพิษ', '0', $last_id, '$last_id_site')");
     $last_menu_main = $mysqli->insert_id;
 
-    $result = $mysqli->query("INSERT INTO
+    /*$result = $mysqli->query("INSERT INTO
                 site_content (content_html)
                 VALUES ('[color=#000000][font=Tahoma, sans-serif, Arial, Helvetica][color=#660000]ปฎิทินกิจกรรมของบ้านสุขภาพล้างพิษตับ ปี 2558[/color][/font][/color]
 
@@ -88,7 +89,7 @@
 
     $result = $mysqli->query("INSERT INTO
                 site_submenu (menu_order, menu_name, status_menu, main_menu_id, content_id, site_id)
-                VALUES (1, 'ปฎิทินกิจกรรมล้างพิษตับ', '0', '$last_menu_main', $last_id, '$last_id_site')");
+                VALUES (1, 'ปฎิทินกิจกรรมล้างพิษตับ', '0', '$last_menu_main', $last_id, '$last_id_site')");*/
 
     /** Add sub menu. */
     $result = $mysqli->query("INSERT INTO
