@@ -9,12 +9,10 @@ define("APP_WEBROOT", "detoxthai_lte/");
 //Session Prefix
 define('SESSIONPREFIX' , "dtt_");
 //check login
-/*
-if(!$_SESSION['tpc_puser_id'] && !$_SESSION['tpc_puser_status'] && !$_SESSION['tpc_puser_area'] && !$_SESSION['tpc_puser_site']){
-	echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'">';
+if(empty($_SESSION['dtt_puser_id']) && empty($_SESSION['dtt_puser_username']) && basename($_SERVER["SCRIPT_FILENAME"]) <> 'login.php'){
+	echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'login.php">';
 	exit('Redirect to login page!');
 }
-*/
 
 $_vars = array();
 function sb($name){
