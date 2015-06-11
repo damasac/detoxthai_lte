@@ -9,6 +9,10 @@
 <?php sb('content');?>
 <?php include_once "_connection/db_base.php"; ?>
 
+<?php
+  isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+?>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
@@ -30,7 +34,7 @@
     <div class="box-body">
       <?php
         //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-        if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+        if (isset($session)) {
       ?>
       <p class="text-right">
         <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
@@ -70,7 +74,7 @@
 
             $result_follow = $mysqli->query("SELECT COUNT(*) AS check_follow
                 FROM site_follow
-                WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+                WHERE user_id = '".$session."'
                 AND site_id = '".$row['site_id']."'");
             $row_follow = $result_follow->fetch_assoc();
 
@@ -292,7 +296,7 @@
           site_postal_code: $("#postalcode").val(),
           site_telephone: $("#tel").val(),
           site_mobile: $("#mobile").val(),
-          site_user: <?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>,
+          site_user: <?php echo $session; ?>,
         },
         function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
