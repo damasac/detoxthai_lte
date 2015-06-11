@@ -47,7 +47,7 @@
                       <th>Follow</th>
                     </tr>
                     <?php
-                      $result = $mysqli->query("SELECT `id`, `username`, `password`, `email`, `fname`, `lname`, `status`, `hcode`, `area`, `district`, `amphur`, `province`, `tel`, `createdate`
+                      $result = $mysqli->query("SELECT `id`, `username`, `password`, `email`, `fname`, `lname`, `status`, `hcode`, `area`, `district`, `amphur`, `province`, `tel`, DATE_FORMAT(`createdate`,'%d-%m-%Y') AS `createdate`
                                                 FROM puser");
                       $count = 1;
                       if ($result !== false) {
