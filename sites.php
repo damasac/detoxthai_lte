@@ -38,7 +38,7 @@
     <div class="box-body">
       <?php
         //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-        if (isset($session)) {
+        if ('' != $session) {
       ?>
       <p class="text-right">
         <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
