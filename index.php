@@ -1,16 +1,16 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php
-  isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
-  /** Set cookie. */
-  if (!isset($detoxthai)) {
-      $domain='detoxthai.dev';
-      setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
+/** Set cookie. */
+if (!isset($detoxthai)) {
+  $domain='detoxthai.dev';
+  setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
 
-      /** Test. */
+  /** Test. */
       //setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), "/");
-  }
+}
 ?>
 
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
@@ -28,9 +28,31 @@
 
 <?php
 
-  /** Fixed. id */
-  $site_id = 1;
+/** Fixed. id */
+$site_id = 1;
 ?>
+
+<?php sb('notifications');?>
+<!-- Menu toggle button -->
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+  <i class="fa fa-bell-o"></i>
+  <span class="label label-warning">10</span>
+</a>
+<ul class="dropdown-menu">
+  <li class="header">You have 10 notifications</li>
+  <li>
+    <!-- Inner Menu: contains the notifications -->
+    <ul class="menu">
+      <li><!-- start notification -->
+        <a href="#">
+          <i class="fa fa-users text-aqua"></i> 5 new members joined today
+        </a>
+      </li><!-- end notification -->
+    </ul>
+  </li>
+  <li class="footer"><a href="#">View all</a></li>
+</ul>
+<?php eb();?>
 
 <?php sb('content');?>
 
@@ -41,22 +63,22 @@ isset($_GET['sub_menu']) ? $sub_menu = $_GET['sub_menu'] :  $sub_menu = 0;
 
 
 if ('' == $menu) {
-    $result = $mysqli->query("SELECT menu_name
+  $result = $mysqli->query("SELECT menu_name
     FROM site_menu
     WHERE site_id = '$site_id'
     AND display_menu = 0
     ORDER BY menu_order");
-    $row = $result->fetch_assoc();
-    $count = $result->num_rows;
-    if (0 == $count) {
-        $menu_exit = 0;
-    } else {
-        echo "<script>
-               window.location.href = 'index.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
-              </script>";
-    }
+  $row = $result->fetch_assoc();
+  $count = $result->num_rows;
+  if (0 == $count) {
+    $menu_exit = 0;
+  } else {
+    echo "<script>
+    window.location.href = 'index.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
+  </script>";
+}
 } else {
-    $menu_exit = 1;
+  $menu_exit = 1;
 }
 
 $edit_show = 1;
@@ -65,10 +87,10 @@ $arrMenu = array();
 ?>
 
 <?php
-    $result_name_site = $mysqli->query("SELECT site_name, create_date
-                    FROM site_detail
-                    WHERE id = '$site_id'");
-    $site_id_desc = $result_name_site->fetch_assoc();
+$result_name_site = $mysqli->query("SELECT site_name, create_date
+  FROM site_detail
+  WHERE id = '$site_id'");
+$site_id_desc = $result_name_site->fetch_assoc();
 ?>
 
 <!-- Content Header (Page header) -->
@@ -88,13 +110,13 @@ $arrMenu = array();
 
   <div class="box box-default">
     <div class="box-body">
-        <?php
+      <?php
             //Developer mode
-            echo "Print SESSION [Developer mode]<br><pre>";
-            print_r($_SESSION);
-            echo "</pre>";
+      echo "Print SESSION [Developer mode]<br><pre>";
+      print_r($_SESSION);
+      echo "</pre>";
             //end mode
-          ?>
+      ?>
       <div class="row">
         <div class="col-md-3">
           <h3 class="text-muted"><?php echo $site_id_desc['site_name']; ?></h3>
@@ -102,94 +124,94 @@ $arrMenu = array();
         <div class="col-md-9">
           <nav>
             <ul class="nav nav-pills pull-right">
-            <?php
+              <?php
               $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$site_id' AND display_menu = 0 ORDER BY menu_order");
 
-            if ($result !== false) {
-              foreach($result as $row) {
+              if ($result !== false) {
+                foreach($result as $row) {
 
-                    $menu_sub_show = 0;
-                    $html_sub_menu = "";
-                    $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 ORDER BY menu_order");
-                    if ($getSubMenu !== false) {
-                        $count = $getSubMenu->num_rows;
-                        if (0 < $count) {
-                            $menu_sub_show = 1;
-                        }
+                  $menu_sub_show = 0;
+                  $html_sub_menu = "";
+                  $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 ORDER BY menu_order");
+                  if ($getSubMenu !== false) {
+                    $count = $getSubMenu->num_rows;
+                    if (0 < $count) {
+                      $menu_sub_show = 1;
+                    }
                     foreach($getSubMenu as $submenu) {
-                            $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='home.php?menu=".trim($submenu['menu_name'])."&site_id=".$site_id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
-                            array_push($arrMenu, $submenu['menu_name']);
+                      $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='home.php?menu=".trim($submenu['menu_name'])."&site_id=".$site_id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
+                      array_push($arrMenu, $submenu['menu_name']);
                     }
-                    }
-                    if ($menu_sub_show == 0) {
-                        if (strcmp($menu, $row['menu_name']) === 0) {
-                            echo "<li role='presentation' class='active'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
-                        } else {
-                            echo "<li role='presentation'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
-                        }
+                  }
+                  if ($menu_sub_show == 0) {
+                    if (strcmp($menu, $row['menu_name']) === 0) {
+                      echo "<li role='presentation' class='active'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
                     } else {
-                        //print_r($arrMenu);
-                        $active_sub_menu = array_search($menu, $arrMenu);
-                        if (is_numeric($active_sub_menu)) {
-                          echo "<li class='dropdown active'>
-                                <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
-                                  ".$row['menu_name']."
-                                  <span class='caret'></span>
-                                </a>
-                                <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
-                                  ".$html_sub_menu."
-                                </ul>
-                              </li>";
-                        } else {
-                                echo "<li class='dropdown'>
-                                <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
-                                  ".$row['menu_name']."
-                                  <span class='caret'></span>
-                                </a>
-                                <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
-                                  ".$html_sub_menu."
-                                </ul>
-                              </li>";
-                        }
-
+                      echo "<li role='presentation'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
                     }
+                  } else {
+                        //print_r($arrMenu);
+                    $active_sub_menu = array_search($menu, $arrMenu);
+                    if (is_numeric($active_sub_menu)) {
+                      echo "<li class='dropdown active'>
+                      <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
+                        ".$row['menu_name']."
+                        <span class='caret'></span>
+                      </a>
+                      <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
+                        ".$html_sub_menu."
+                      </ul>
+                    </li>";
+                  } else {
+                    echo "<li class='dropdown'>
+                    <a id='drop1' href='#' class='dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' role='button' aria-expanded='false'>
+                      ".$row['menu_name']."
+                      <span class='caret'></span>
+                    </a>
+                    <ul class='dropdown-menu' role='menu' aria-labelledby='drop1'>
+                      ".$html_sub_menu."
+                    </ul>
+                  </li>";
                 }
+
+              }
             }
-            ?>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <p><hr/></p>
-    <div class="row marketing" id="show_content">
-          <?php
-          if (1 != $sub_menu) {
-            $result = $mysqli->query("SELECT menu_name, display_menu, content_id, content_html
-                                      FROM site_menu
-                                      INNER JOIN site_content ON site_menu.content_id = site_content.id
-                                      WHERE menu_name = '$menu' AND
-                                      site_id = '$site_id'
-                                      ORDER BY site_menu.id");
-                    $row = $result->fetch_assoc();
-          } else {
-            $result = $mysqli->query("SELECT menu_name, status_menu, content_id, content_html
-                                      FROM site_submenu
-                                      INNER JOIN site_content ON site_submenu.content_id = site_content.id
-                                      WHERE menu_name = '$menu' AND
-                                      site_id = '$site_id'
-                                      ORDER BY site_submenu.id");
-                    $row = $result->fetch_assoc();
           }
-            echo "<textarea name='textarea' rows='0' style='display: none;'></textarea>";
           ?>
-      </div>
-      <p><hr/></p>
-      <footer class="footer">
-        <?php $year_create = explode("-",$site_id_desc['create_date']) ?>
-        <p>&copy; <?php echo $site_id_desc['site_name']." ".$year_create[0]; ?></p>
-      </footer>
-    </div><!-- /.box-body -->
-  </div><!-- /.box -->
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <p><hr/></p>
+  <div class="row marketing" id="show_content">
+    <?php
+    if (1 != $sub_menu) {
+      $result = $mysqli->query("SELECT menu_name, display_menu, content_id, content_html
+        FROM site_menu
+        INNER JOIN site_content ON site_menu.content_id = site_content.id
+        WHERE menu_name = '$menu' AND
+        site_id = '$site_id'
+        ORDER BY site_menu.id");
+      $row = $result->fetch_assoc();
+    } else {
+      $result = $mysqli->query("SELECT menu_name, status_menu, content_id, content_html
+        FROM site_submenu
+        INNER JOIN site_content ON site_submenu.content_id = site_content.id
+        WHERE menu_name = '$menu' AND
+        site_id = '$site_id'
+        ORDER BY site_submenu.id");
+      $row = $result->fetch_assoc();
+    }
+    echo "<textarea name='textarea' rows='0' style='display: none;'></textarea>";
+    ?>
+  </div>
+  <p><hr/></p>
+  <footer class="footer">
+    <?php $year_create = explode("-",$site_id_desc['create_date']) ?>
+    <p>&copy; <?php echo $site_id_desc['site_name']." ".$year_create[0]; ?></p>
+  </footer>
+</div><!-- /.box-body -->
+</div><!-- /.box -->
 
 </section><!-- /.content -->
 
@@ -201,18 +223,18 @@ $arrMenu = array();
 <script src="_plugins/edit/minified/jquery.sceditor.bbcode.min.js"></script>
 
 <script>
-$(document).ready(function() {
-  <?php
+  $(document).ready(function() {
+    <?php
     echo "$('textarea').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-            });
-            var html = $('textarea').sceditor('instance').fromBBCode('".trim(preg_replace('/[\n\r]/', '\n', $row['content_html']))."');
+      plugins: 'bbcode',
+      width: '98%',
+      resizeEnabled: false,
+      style: 'edit/minified/jquery.sceditor.default.min.css'
+    });
+  var html = $('textarea').sceditor('instance').fromBBCode('".trim(preg_replace('/[\n\r]/', '\n', $row['content_html']))."');
             //alert(html);
-            $('#show_content').html(html);
-            $('.sceditor-container').hide();";
+  $('#show_content').html(html);
+  $('.sceditor-container').hide();";
   ?>
 });
 </script>

@@ -104,32 +104,14 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
             <!-- Navbar Right Menu -->
               <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-<?php /* ?>		  
+<?php /* ?>
 		  <li class="dropdown user user-menu">
 		    <a href="forminput.php"><span class="badge bg-yellow"> บันทึกข้อมูล </span></a>
 		  </li>
 <?php */ ?>
                   <!-- Notifications Menu -->
                   <li class="dropdown notifications-menu">
-                    <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-bell-o"></i>
-                      <span class="label label-warning">10</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li class="header">You have 10 notifications</li>
-                      <li>
-                        <!-- Inner Menu: contains the notifications -->
-                        <ul class="menu">
-                          <li><!-- start notification -->
-                            <a href="#">
-                              <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                            </a>
-                          </li><!-- end notification -->
-                        </ul>
-                      </li>
-                      <li class="footer"><a href="#">View all</a></li>
-                    </ul>
+                    {$notifications}
                   </li>
                   <!-- User Account Menu -->
                   <li class="dropdown user user-menu">
@@ -139,7 +121,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>img/userimg.jpg" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
                       <span id="divusername">
-	
+
                     <?php if(isset($_SESSION[SESSIONPREFIX."puser_fname"])) echo $_SESSION[SESSIONPREFIX."puser_fname"]; else echo "Guest"; ?>
                     </span>
                     </a>
@@ -150,9 +132,9 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                         <p>
                           <?php echo $_SESSION[SESSIONPREFIX."puser_fname"]." ".$_SESSION[SESSIONPREFIX."puser_lname"]; ?>
                           <small>
-			    
+
 			  <?php echo $_SESSION[SESSIONPREFIX."puser_create_date"];?>
-			  
+
 			  </small>
                         </p>
                       </li>
