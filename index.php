@@ -1,4 +1,4 @@
-<?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';?>
 
 <?php
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';

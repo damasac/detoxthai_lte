@@ -1,6 +1,6 @@
 <?php
 
-    require_once '../_theme/util.inc.php';
+    require_once '../_theme/util.inc.php'; chk_login();
 
     if(!isset($_SESSION)){
         session_start();

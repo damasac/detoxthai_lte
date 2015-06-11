@@ -1,5 +1,5 @@
 <?php
-    require_once '../_theme/util.inc.php';
+    require_once '../_theme/util.inc.php'; chk_login();
     include_once "../_connection/db_base.php";
 
     isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';

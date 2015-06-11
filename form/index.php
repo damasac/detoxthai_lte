@@ -1,4 +1,4 @@
-<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; chk_login(); chk_login(); $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
@@ -33,9 +33,9 @@
 <?php
     include_once("system_function.php");
     //session user
-    $user_id = '6';
-    $user_email = 'kongvut@gmail.com';
-    $user_name = 'kongvut';
+    $user_id = $_SESSION['dtt_puser_id'];
+
+    $user_name = $_SESSION['dtt_puser_fname'].'  '.$_SESSION['dtt_puser_lname'];
     $sql = "SELECT * FROM `tbl_surveyuser` WHERE user_id='".$user_id."' ORDER BY id ASC";
     //echo $sql;
     $query = $conn->query($sql);
@@ -88,8 +88,6 @@
                             <div class="form-group col-md-3">    
                                 <button class="margin btn btn-success btn-flat btn-lg" id="AddForm">  เพิ่มประวัติการ Detox</button>
                                 <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
-                                <input type="hidden" id="user_name" value="<?php echo $user_name;?>">
-                                <input type="hidden" id="user_email" value="<?php echo $user_email;?>">
                             </div>
                         </div>
             
@@ -195,8 +193,6 @@
         var startdate = startDateSplit[2]+"/"+startDateSplit[1]+"/"+startDateSplit[0];
         var enddate = endDateSplit[2]+"/"+endDateSplit[1]+"/"+endDateSplit[0];
         var user_id = $("#user_id").val();
-        var user_name = $("#user_name").val();
-        var user_email = $("#user_email").val();
         
         //console.log(startDate+endDate);
         if (startDate=="" || endDate=="" || location=="") {
@@ -216,8 +212,6 @@
                     startdate:startdate,
                     enddate:enddate,
                     user_id:user_id,
-                    user_name:user_name,
-                    user_email:user_email,
                     location:location
                   },
                   success: function(returndata){
