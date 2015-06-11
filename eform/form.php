@@ -1,5 +1,5 @@
 <?php error_reporting(0); ?>
-<?php require_once '../_theme/util.inc.php'; chk_login(); chk_login(); $MasterPage = 'page_main.php';?>
+<?php require_once '../_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Ez Form <?php eb();?>
 

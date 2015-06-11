@@ -1,5 +1,5 @@
 <?php
-require_once '../_theme/util.inc.php'; chk_login(); chk_login();
+require_once '../_theme/util.inc.php'; chk_login();
 include_once "../_connection/db_base.php";
 
 function getDateThai($strDate)

@@ -1,5 +1,5 @@
 <?php
-  require_once '../_theme/util.inc.php'; chk_login(); chk_login(); $MasterPage = 'page_main.php';
+  require_once '../_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
  
 
