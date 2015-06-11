@@ -6,6 +6,10 @@
 <script src=""></script>
 <?php eb();?>
 
+<?php sb('notifications');?>
+  <?php include_once '../notifications.php'; ?>
+<?php eb();?>
+
 <?php sb('content');?>
 <?php include_once "../_connection/db_base.php"; ?>
 

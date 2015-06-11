@@ -11,6 +11,10 @@
 </style>
 <?php eb();?>
 
+<?php sb('notifications');?>
+  <?php include_once '../notifications.php'; ?>
+<?php eb();?>
+
 <?php include_once "../_connection/db_base.php"; ?>
 
 <?php
@@ -61,7 +65,7 @@ $user_name = $result_user_name->fetch_assoc();
           <input name="fileToUpload" id="fileToUpload" type="file">
           <p class="help-block">อัพโหลดรายละเอียดการจ่ายเงิน ที่เป็นไฟล์ภาพเท่านั้น</p>
         </div>
-        <input type="submit" class="btn btn-primary" value="อัพโหลดภาพ" name="submit">
+        <input type="submit" class="btn btn-primary btn-flat" value="อัพโหลดภาพ" name="submit">
       </form>
     </div><!-- /.box-body -->
   </div><!-- /.box -->
