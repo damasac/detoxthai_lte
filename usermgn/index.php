@@ -21,71 +21,48 @@
 
     $MenuSetting = "user";
     include_once("inc_menu.php");
-
-
+    $site_id = explode(".",$_SERVER['SERVER_NAME']);
+    $sub_domain =  $site_id[sizeof($site_id) - 3];
+    if ('www' == $sub_domain) {
+      $site_id = 1;
+    } else {
+      $result = $mysqli->query("SELECT id
+              FROM site_detail
+              WHERE site_url = '$sub_domain'");
+      $row_id = $result->fetch_assoc();
+      $site_id = $row_id['id'];
+    }
+  if($site_id==1){
+    $sql1 = "SELECT * FROM `puser`";
+    $query1 = $mysqli->query($sql1);
+  }else{
+    $sql1 = "SELECT * FROM `puser` INNER JOIN site_follow ON puser.id = site_follow.user_id WHERE site_follow.site_id='".$site_id."'";
+    $query1 = $mysqli->query($sql1);
+  }
 ?>
 <div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
     <span style="float: right">
-        <button class="btn btn-info btn-flat" onclick="refresh_data();"><i class="fa fa-refresh"></i> โหลดข้อมูลใหม่</button>
         <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
-    </span>
-<span >
-    <br><br><br>
-    <div class="row">
-        <ul class="users-list clearfix">
-            <li>
-              <img src="../_dist/img/user1-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Alexander Pierce</a>
-              <span class="users-list-date">Today</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user8-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Norman</a>
-              <span class="users-list-date">Yesterday</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user7-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Jane</a>
-              <span class="users-list-date">12 Jan</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user6-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">John</a>
-              <span class="users-list-date">12 Jan</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user2-160x160.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Alexander</a>
-              <span class="users-list-date">13 Jan</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user5-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Sarah</a>
-              <span class="users-list-date">14 Jan</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user4-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Nora</a>
-              <span class="users-list-date">15 Jan</span>
-            </li>
-            <li>
-              <img src="../_dist/img/user3-128x128.jpg" alt="User Image"/>
-              <a class="users-list-name" href="#">Nadia</a>
-              <span class="users-list-date">15 Jan</span>
-            </li>
-          </ul><!-- /.users-list -->
-    </div>
-    <div class="box-tools pull-right">
-        <ul class="pagination pagination-sm inline">
-          <li><a href="#">&laquo;</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>
-    </div>
-
+    </span><br><br><br>
+    <table id="userTable" class="table table-hover">
+        <thead>
+            <tr>
+                <th>ลำดับ</th>
+                <th>ชื่อ</th>
+                <th>เบอร์โทรศัพท์</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i=1;while($data1 = $query1->fetch_assoc()){?>
+            <tr>
+                <td><?php echo $i;?></td>
+                <td><?php echo $data1["fname"]." ".$data1["lname"];?></td>
+                <td><?php echo $data1["tel"];?></td>
+            </tr>
+            <?php $i++;}?>
+        </tbody>
+    </table>
 </div>
 </div>
 </div>
@@ -148,7 +125,7 @@
                return ;
         }else{
             dialogPopWindow = BootstrapDialog.show({
-                    title: "เพิ่มผู้ใช้งาน",
+                    title: "เพิิ่มสมาชิกเข้าสู่ศูนย์",
                     cssClass: 'popup-dialog',
                     closable: true,
                     closeByBackdrop: false,

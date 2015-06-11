@@ -4,7 +4,6 @@
   $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
   
-  isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
 
   isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
@@ -116,7 +115,6 @@
   }
     function addUser(){
       var puser_id = $("#puser_id").val();
-      var schedule_id = <?php echo $schedule_id; ?>;
       var site_id = <?php echo $_GET["site_id"];?>;
             $.post("ball-sql.php?task=addUserFind",
 	    {

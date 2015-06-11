@@ -31,6 +31,7 @@
     $row_id = $result->fetch_assoc();
     $site_id = $row_id['id'];
   }
+
 ?>
 
 <?php sb('content');?>
