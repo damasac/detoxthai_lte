@@ -28,10 +28,6 @@
 
 <?php
 
-  /** Get sub domain. */
-  //$site_id = explode(".",$_SERVER['SERVER_NAME']);
-  //$sub_domain =  $site_id[sizeof($site_id) - 3];
-
   /** Fixed. id */
   $site_id = 1;
 ?>

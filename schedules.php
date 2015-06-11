@@ -27,7 +27,7 @@ function getDateThai($strDate)
 }
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
-//isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
 $site_name = explode(".",$_SERVER['SERVER_NAME']);
 $sub_domain =  $site_name[sizeof($site_name) - 3];
@@ -131,7 +131,7 @@ if('' == $all){
             $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
               FROM site_join
               WHERE schedule_id = '".$row['id']."'
-              AND user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
+              AND user_id = '".$session."'");
             $row_check = $result_check->fetch_assoc();
 
             //echo $row_check['join_status'];
