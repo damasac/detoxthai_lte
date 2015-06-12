@@ -29,15 +29,6 @@
 
   <!-- Main content -->
   <section class="content">
-
-    <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Input Form</h3>
-            <div class="pull-right">
-                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
-                <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
-            </div>
-          </div>
 <?php
     include_once("system_function.php");
     //session user
@@ -56,6 +47,21 @@
     //echo $sql;
     $query = $conn->query($sql);
 ?>
+<?php
+    $sqlSelectValue =  "SELECT status FROM `tbl_surveyprivate` WHERE ref_id_user='".$_SESSION['dtt_user_form']."' ";
+    $querySelectValue = $conn->query($sqlSelectValue);
+    $dataform = $querySelectValue->fetch_assoc();
+    
+if($dataform['status']+0) { ?>
+    <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Input Form</h3>
+            <div class="pull-right">
+                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
+                <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
+            </div>
+          </div>
+
           <div class="box-body">
             
             <div class="row">
@@ -85,28 +91,30 @@
                 <hr>
                 
                 <div class="text-center">
-                        <div class="row form-inline">
-                            <div class="form-group col-md-3">
-                                <label for="name" style="font-weight: bold;">เลือกวันที่ต้องการบันทึกข้อมูล</label><br>
-                                <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="name" style="font-weight: bold;">ถึง</label><br>
-                              <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
-                            </div>
-                            <div class="form-group col-md-3">
-                               
-                                <label for="name" style="font-weight: bold;">สถานที่ทำการ Detox</label><br>
-                                <select id="location" class="form-control">
-                                    <option value='0'>เลือกสถานที่ทำการ Detox</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-3">    
-                                <button class="margin btn btn-success btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
-                                <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
-                            </div>
+                        <div class="row alert alert-success">
+                            
+                                <div class="form-group col-md-3">
+                                    <label for="name" style="font-weight: bold;"><h4>เลือกวันที่ต้องการบันทึกข้อมูล</h4></label><br>
+                                    <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="name" style="font-weight: bold;"><h4>ถึง</h4></label><br>
+                                  <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                                </div>
+                                <div class="form-group col-md-3">
+                                   
+                                    <label for="name" style="font-weight: bold;"><h4>สถานที่ทำการ Detox</h4></label><br>
+                                    <select id="location" class="form-control">
+                                        <option value='0'>เลือกสถานที่ทำการ Detox</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">    
+                                    <button class="margin btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
+                                    <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
+                                </div>
+
+                            
                         </div>
-            
                 </div>
 
                 <hr>
@@ -151,8 +159,21 @@
             
           </div><!-- /.box-body -->
     </div><!-- /.box -->
+<?php } else { ?>
+ <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Input Form</h3>
+          </div>
 
-
+          <div class="box-body">
+            <div class="text-center">
+                <h2>ท่านยังไม่เคยบันทึกข้อมูลการล้างพิษตับเลย</h2>
+                <a href="form_private.php" class="btn btn-success btn-lg btn-flat"><li class="fa fa-plus"></li> กรอกข้อมูลส่วนบุคคล</a>
+                <hr>
+            </div>
+          </div>
+ </div>
+<?php } ?>
   </section><!-- /.content -->'
   
 <?php eb();?>

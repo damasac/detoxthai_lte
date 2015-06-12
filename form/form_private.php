@@ -104,13 +104,26 @@
                 $query = $conn->query($sql) or die($conn->error());
             }
             
-                $sqlSelectValue =  "SELECT * FROM `tbl_surveyprivate` WHERE ref_id_user='".$_SESSION['dtt_puser_id']."' ";
+                $sqlSelectValue =  "SELECT * FROM `tbl_surveyprivate` WHERE ref_id_user='".$_SESSION['dtt_user_form']."' ";
                 $querySelectValue = $conn->query($sqlSelectValue);
                 $dataform = $querySelectValue->fetch_assoc();
             ?>
             <div id="formsurvey">
             <!-------------------------- form 1-2-->
             <?php include_once "form_consent.php"; include_once "form_person.php";?>
+            
+            <hr>
+            <h3><b>*หมายเหตุ เมื่อท่านกดปุ่ม "<u>ข้อมูลทั้งหมดถูกต้อง</u>" ข้อมูลจะถูกจัดเก็บเป็นความลับ และถ้าต้องการแก้ไข ต้องส่งคำขอแก้ข้อมูล เพื่อเสนอแก้ไขต่อไป</b></h3>
+            <div class="pull-right">
+            <?php if(($dataform['status']+0)) { ?>
+            <a class="btn btn-danger btn-lg btn-flat"><li class="fa fa-lock"></li> ข้อมูลถูกจัดเก็บเป็นความลับแล้ว</a>
+            <a class="btn btn-info btn-lg btn-flat"><li class="fa fa-pencil-square-o"></li> เสนอแก้ไขข้อมูล</a>
+            <?php } else { ?>
+            <a id="btnChkdata" class="btn btn-success btn-lg btn-flat"><li class="fa fa-check"></li> ข้อมูลทั้งหมดถูกต้อง</a>
+            <?php } ?>
+            </div>
+            <br><br>
+            <hr>
             
             </div>
 
@@ -126,7 +139,29 @@
 
 
 <?php sb('js_and_css_footer');?>
+<?php if(!($dataform['status']+0)) { ?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
+<?php } else { ?>
+<script>
+    $("input").prop('disabled', true);
+    $("select").prop('disabled', true);
+</script>
+<?php } ?>
+
+<script>
+    $( "#btnChkdata" ).click(function() {
+        var chk = confirm("ยืนว่า ข้อมูลทั้งหมดถูกต้อง.");
+        if (chk) {
+           var user_id =$('#form_id').val();
+            $.post( "ajax.php",
+                { user_id: user_id, task:'setFormPrivate' },
+                function( data ) {
+                    parent.location='index.php';
+                });
+        }
+        
+    });
+</script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 

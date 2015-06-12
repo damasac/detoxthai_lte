@@ -4,9 +4,11 @@
 		</u></p>
 		<div class="table-responsive">
 		<table class="table table-hover" style="border: 1.5px solid #99CC00;">
+		<form id="form_person">
 		<tr><td>
 		<strong>1. ข้อมูลที่อย่ของผู้ตอบแบบสอบถาม</strong>
-		<form class="form-inline">
+		
+		<div class="form-inline">
 			<input type="hidden" id="form_id" value="<?php echo $_SESSION['dtt_user_form'];?>" />
 			<br/>
 	  		<div class="form-group paddingleft fix">
@@ -169,13 +171,13 @@
 			    </label>
 			    <input type="text" class="form-control fix" id="p0a1b6" placeholder="E-mail" value="<?php echo $dataform["p0a1b6"];?>" onblur="validateEmail_private('p0a1b6',$('#form_id').val());">
 		  	</div>
-		</form>
+		</div>
 		</td></tr>
 		<tr><td>
 		<strong>2. ข้อมูลที่อยู่ของผู้ที่สามารถติดต่อท่านได้สะดวกในกรณีที่ติดต่อท่านไม่ได้</strong>
 		<br/>
 		<br/>
-		<form class="form-inline">
+		<div class="form-inline">
 			<div class="form-group paddingleft fix">
 				    <label for="p0a2b1c1">2.1 ชื่อ</label>
 				    <input type="text" class="form-control fix" id="p0a2b1c1" placeholder="ชื่อ" onblur="AutoSave_private('p0a2b1c1',$('#form_id').val())" value="<?php echo $dataform["p0a2b1c1"]; ?>">
@@ -199,7 +201,9 @@
 				    <label for="p0a2b4">2.4 E-mail</label>
 				    <input type="text" class="form-control fix" id="p0a2b4" placeholder="E-mail" value="<?php echo $dataform["p0a2b4"];?>" onblur="validateEmail_private('p0a2b4',$('#form_id').val());">
 			</div>
-		</form>
+		</div>
+		
 		</td></tr>
+		</form>
 		</table>
 		</div>

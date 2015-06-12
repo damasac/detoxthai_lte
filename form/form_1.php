@@ -215,13 +215,13 @@
 			</tr>
 			<tr>
 				<td>
-					<form class="form-inline">
+					
 					<div class="form-group">
 					    <label for="p1a9">9. โปรดระบุเหตุผลหลัก ที่ท่านมารับการล้างพิษตับครั้งนี้</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a9" placeholder="เหตุผล"> -->
 					    <textarea class='form-control' rows='3' id="p1a9" onblur="AutoSave('p1a9',$('#form_id').val())" ><?php echo $dataform["p1a9"]; ?></textarea>
 		  			</div>
-		  			</form>
+		  		
 				</td>
 			</tr>
 			<tr>
