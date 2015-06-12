@@ -49,7 +49,8 @@ if (0 == $row['check_secu'] && $check_point) {
     <small>เพิ่มผู้ดูแลศูนย์</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษ</a></li>
+    <li><a href="site_manage.php">จัดการศูนย์</a></li>
     <li class="active">เพิ่มผู้ดูแลศูนย์</li>
   </ol>
 </section>

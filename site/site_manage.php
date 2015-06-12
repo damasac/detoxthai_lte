@@ -20,7 +20,7 @@
     <small>จัดการหรือแก้ไขส่วนต่างๆ ของศูนย์</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="../sites.php"><i class="fa fa-home"></i> ค่ายล้างพิษตับ</a></li>
+    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษตับ</a></li>
     <li class="active">จัดการศูนย์</li>
   </ol>
 </section>

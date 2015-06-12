@@ -14,6 +14,9 @@
 <?php include_once "../_connection/db_base.php"; ?>
 
 <?php
+
+isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
+
 isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
 
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
@@ -38,7 +41,9 @@ $num2 = $query2->num_rows;
     <small>รายชื่อผู้เข้าร่วม</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษ</a></li>
+    <li><a href="site_manage.php">จัดการศูนย์</a></li>
+    <li><a href="site_schedule.php?site_id=<?php echo $site_id; ?>">จัดการหลักสูตรล้างพิษ</a></li>
     <li class="active">รายชื่อผู้เข้าร่วม</li>
   </ol>
 </section>
@@ -48,13 +53,13 @@ $num2 = $query2->num_rows;
 
   <div class="box box-default">
     <div class="box-body">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-sm-offset-5 col-sm-2 text-center">
           <div class="btn-group">
             <a href="../schedules.php" class="btn btn-block btn-primary btn-lg btn-flat">กลับหน้าหลักสูตร</a>
           </div>
         </div>
-      </div>
+      </div> -->
       <br>
       <div class="row">
         <?php

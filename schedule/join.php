@@ -32,7 +32,7 @@
     <small>ยืนยันการเข้าร่วม</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="../schedules.php"><i class="fa fa-calendar"></i> หลักสูตรสุขภาพองค์รวม</a></li>
     <li class="active">เข้าร่วมหลักสูตร</li>
   </ol>
 </section>
