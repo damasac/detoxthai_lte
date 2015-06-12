@@ -41,6 +41,11 @@
   }
 
 ?>
+<?php
+  echo "<pre>";
+  print_r($_SESSION);
+  echo "</pre>";
+?>
 <div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
     <?php
@@ -90,7 +95,19 @@
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
     function goForm(id) {
-        location.href="../form/index.php?user_id="+id;
+        
+        $.post("ball-sql.php?task=saveSession",
+        {
+          id:id,
+        },
+        function(data,status){
+
+          //if (data==1) {
+          //}else{
+        //location.href="index.php";
+          //}
+        });
+
     }
     function leaveSite(id){
         var user_id = id;
