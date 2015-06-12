@@ -3,7 +3,7 @@
   chk_login();
   $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
-  
+
 
   isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
@@ -17,13 +17,13 @@
 	    data-toggle="tooltip" data-placement="top" title=""/>
 
 	  <span class="glyphicon glyphicon-phone-alt form-control-feedback" ></span>
-	  
+
       </div>
       <div style="float: right;">
       <button class="btn btn-success" onclick="findUser()"><i class="fa fa-search"></i></button>
       </div>
     </div><br><br>
-    
+
       <div  id="showUser" style="display:none;">
 	<div class="alert alert-default ">
                     <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
@@ -46,11 +46,11 @@
 
       <div id="formUser" style="display:none;">
     <div class="login-box" >
-    
+
       <div class="login-box-body" >
 		  <h3>สมัครสมาชิก</h3>
         <p class="login-box-msg">
-	
+
 	</p>
           <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="ชื่อ" id="fname" name="fname"/><code id="valFname" style="display:none;"></code>
@@ -78,8 +78,8 @@
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
           <div class="row">
-            <div class="col-xs-7">    
-              
+            <div class="col-xs-7">
+
             </div><!-- /.col -->
             <div class="col-xs-5">
               <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="saveUser();">สมัครสมาชิก</button>
@@ -134,7 +134,7 @@
 	    });
     }
     function findUser(){
-      
+
       var user_id = $("#telFind").val();
       if (user_id=="") {
 	$("#valTelFind").show();
@@ -176,7 +176,7 @@
       }
     }
      function saveUser() {
-    
+
     //code
     var username = $("#username").val();
     var tel = $("#tel").val();
@@ -186,7 +186,7 @@
     var password2 = $("#password2").val();
       var site_id = <?php echo $_GET["site_id"];?>;
       var schedule_id = <?php echo $_GET["schedule_id"];?>;
-        
+
     if (fname=="") {
       $("#valFname").show();
       $("#valFname").html("กรุณาระบุชื่อ");
@@ -255,7 +255,7 @@
                       }
                       else{
                         //code
-			//location.reload();
+			location.reload();
                       }
 
 		    },

@@ -19,7 +19,6 @@
 	$sql1 = "SELECT * FROM `puser` WHERE username='".$_POST["tel"]."' ";
 	$query1 = $mysqli->query($sql1);
 	$num1 = $query1->num_rows;
-	//echo $num1;
 	if($num1==1){
 	    echo "1";
 	    exit;
@@ -32,7 +31,7 @@
 	    VALUES('".$_POST["site_id"]."','".$user_id."')";
 	    $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
 	}
-	
+
     }
     if($task=="addUserNormal2"){
 	$password = sha1(md5($_POST["password"]));
@@ -50,11 +49,12 @@
 	    $user_id = $mysqli->insert_id;
 	    $sql2 = "INSERT INTO `site_follow`(site_id,user_id)
 	    VALUES('".$_POST["site_id"]."','".$user_id."')";
-	    $sql = "INSERT INTO `site_join`(schedule_id,user_id,payment_status,payment_upload_status)
+        $query2 = $mysqli->query($sql2) or die(mysqli_error($mysqli));
+	    $sql3 = "INSERT INTO `site_join`(schedule_id,user_id,payment_status,payment_upload_status)
 	    VALUES('".$_POST["schedule_id"]."','".$user_id."','0','0')";
-	    $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
+	    $query3 = $mysqli->query($sql3) or die(mysqli_error($mysqli));
 	}
-	
+
     }
     if($task=="getData"){
         if($_GET["status"]==1){
@@ -82,7 +82,7 @@
         else if($_GET["status"]==4){
             $condition = "WHERE hcode='".$_GET["hcode"]."'  AND status NOT IN (1,2,3)";
         }
-        
+
         $sql = "SELECT * FROM `puser`  ".$condition." ";
         $query = $mysqli->query($sql);
 	while($data = $query->fetch_assoc()){
@@ -106,7 +106,7 @@
             echo "2";
             exit;
         }else{
-    
+
                 $sql = "INSERT INTO `thaipalliative_lte`.`puser` (
                 `username`,
                 `password`,
@@ -136,7 +136,7 @@
                         '".$province."',
                         '".$date."'
                 );
-        
+
                 ";
        $query =   $mysqli->query($sql) or die(mysqli_error($mysqli));
             if($query){

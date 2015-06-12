@@ -166,6 +166,9 @@ $site_id_desc = $result_name_site->fetch_assoc();
     </div>
   </div>
   <p><hr/></p>
+  <div class="col-md-12 text-right">
+      <button id="save" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</button>
+  </div>
   <div class="row marketing" id="show_content">
     <?php
     if (1 != $sub_menu) {

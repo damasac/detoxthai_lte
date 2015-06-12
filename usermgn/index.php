@@ -49,9 +49,11 @@
         $query2 = $mysqli->query($sql2) or die(mysqli_error($query1));
         $num2 = $query2->num_rows;
     ?>
+    <?php if($num2==1){?>
     <span style="float: right">
         <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
     </span><br><br><br>
+    <?php }?>
 
     <table id="userTable" class="table table-hover">
         <thead>
@@ -59,6 +61,9 @@
                 <th>ลำดับ</th>
                 <th>ชื่อ</th>
                 <th>เบอร์โทรศัพท์</th>
+                <?php if($num2==1){?>
+                <th>จัดการ</th>
+                <?php }?>
             </tr>
         </thead>
         <tbody>
@@ -67,6 +72,9 @@
                 <td><?php echo $i;?></td>
                 <td><?php echo $data1["fname"]." ".$data1["lname"];?></td>
                 <td><?php echo $data1["tel"];?></td>
+                <td>
+                    <button class="btn btn-success">กรอกข้อมูล</button>
+                </td>
             </tr>
             <?php $i++;}?>
         </tbody>
@@ -157,7 +165,7 @@
             });
 
         }
-           
+
 </script>
 <script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
 <script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
