@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50617
-Source Host           : localhost:3306
+Source Server         : online.detoxthai
+Source Server Version : 50537
+Source Host           : 61.19.254.15:3306
 Source Database       : detoxthai_lte
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50537
 File Encoding         : 65001
 
-Date: 2015-06-12 21:45:00
+Date: 2015-06-12 23:40:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `tbl_surveyprivate`;
 CREATE TABLE `tbl_surveyprivate` (
   `ref_id_user` int(10) NOT NULL,
+  `status` varchar(10) DEFAULT NULL,
   `p0a1b1c1` varchar(250) DEFAULT NULL,
   `p0a1b1c2` varchar(255) DEFAULT NULL,
   `p0a1b2` varchar(250) DEFAULT NULL,
