@@ -41,12 +41,13 @@
 <?php
     include_once("system_function.php");
     //session user
-    if($_SESSION['dtt_user_form']<> $_SESSION['dtt_puser_id']){
-        $user_id = $_SESSION['dtt_user_form'];
+    if(isset($_SESSION['dtt_user_form'])){
+        if($_SESSION['dtt_user_form']<> $_SESSION['dtt_puser_id'])
+            $user_id = $_SESSION['dtt_user_form'];
     }else{
         $user_id = $_SESSION['dtt_puser_id'];
     }
-     $sql = "SELECT fname, lname FROM `puser` WHERE id='".$user_id."';";
+    $sql = "SELECT fname, lname FROM `puser` WHERE id='".$user_id."';";
     $query = $conn->query($sql);
     $data = $query->fetch_assoc();
     
