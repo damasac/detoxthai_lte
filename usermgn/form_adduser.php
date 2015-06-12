@@ -39,7 +39,7 @@
                   </div>
       </div>
       <div  id="showUser2" style="display:none;">
-	<div class="alert alert-warning alert-dismissable ">
+	<div class="alert alert-default">
                     <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
                     <h4>	<i class="icon fa fa-fw fa-remove"></i> ไม่พบสมาชิกนี้ </h4>
 		    <button class="btn btn-success " onclick="addNewUser()">เพิ่มสมาชิกใหม่</button>
@@ -125,18 +125,18 @@
 	      user_id : puser_id
 	    },
 	    function(data,status){
+	      console.log(data);
 	      if (data==1) {
 		//code
 		$("#valAddUser").show();
 		$("#valAddUser").html("สมาชิกนี้อยู่ในหลักสูตรแล้วกรุณาตรวจสอบ");
 
 	      }else{
-	        //location.reload();
+	        location.reload();
 	      }
 	    });
     }
     function findUser(){
-
       var user_id = $("#telFind").val();
       if (user_id=="") {
 	$("#valTelFind").show();
@@ -151,7 +151,7 @@
                       user_id:user_id
                       },
 		    success: function(data){
-
+		      console.log(data);
 		      if (data!=0) {
 			$("#showUser2").hide();
 			$("#formUser").hide();

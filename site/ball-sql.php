@@ -13,7 +13,7 @@
         }
     }
     if($task=="addUserFind"){
-        $sqlUser = "SELECT * FROM `site_join` WHERE schedule_id='".$_POST["schedule_id"]."' AND user_id='".$_POST["user_id"]."' ";
+        $sqlUser = "SELECT * FROM `site_join` WHERE schedule_id='".$_POST["schedule_id"]."' AND user_id='".$_POST["user_id"]."' AND  ";
         $queryUser = $mysqli->query($sqlUser);
 
         $numUser = $queryUser->num_rows;
