@@ -12,7 +12,6 @@
 		$startdate = $_POST["startdate"];
 		$enddate = $_POST["enddate"];
 		$user_id = $_POST["user_id"];
-		$user_name = $_POST["user_name"];
 		$location = $_POST["location"];
 		$createdate = date("Y-m-d H:i:s");
 	}
@@ -33,8 +32,8 @@
 	if($task=="insertBlank"){
 		
 		
-		$sqlInsert1 =  "INSERT INTO `tbl_surveyuser`(`startdate`,`enddate`,`createdate`,`location`,`user_id`,`user_name`)
-		VALUES('".$startdate."','".$enddate."','".$createdate."','".$location."','".$user_id."','".$user_name."')
+		$sqlInsert1 =  "INSERT INTO `tbl_surveyuser`(`startdate`,`enddate`,`createdate`,`location`,`user_id`)
+		VALUES('".$startdate."','".$enddate."','".$createdate."','".$location."','".$user_id."')
 		";
 		
 		$sqlquery1 = $conn->query($sqlInsert1) or die($conn->error());
@@ -52,7 +51,7 @@
 		
 	}
 	if($task=="updateAuto"){
-		
+				
 		$sqlUpdate = "UPDATE `tbl_surveyform`
 				SET `".$field."`='".$value."'
 				WHERE `ref_id_create`='".$form_id."' ";
@@ -61,6 +60,16 @@
 		
 		
 	}
+	else if($task=="updateAuto_private"){
+		$sqlUpdate = "UPDATE `tbl_surveyprivate`
+				SET `".$field."`='".$value."'
+				WHERE `ref_id_user`='".$form_id."' ";
+		echo $sqlUpdate;
+		$sqlQuery = $conn->query($sqlUpdate) or die($conn->error());
+		
+		
+	}
+	
 	if($task=="deleteForm"){
 		$sql1 = "DELETE FROM `tbl_surveyform`
 				WHERE `ref_id_create`='".$form_id."'";
