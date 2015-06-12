@@ -14,8 +14,8 @@ $result = $mysqli->query("SELECT site_schedule.schedule_name
                           JOIN site_schedule ON site_join.schedule_id = site_schedule.id
                           WHERE user_id = '".$session."'");
 
-if ($result !== false) {
-  foreach($result as $row) {
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
     array_push($notificationArray, array("url" => "#", "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "คุณได้เข้าร่วมหลักสูตร ".$row['schedule_name']));
     //echo $row['schedule_name'];
   }

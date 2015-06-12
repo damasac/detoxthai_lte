@@ -81,8 +81,9 @@ if (0 == $row['check_secu'] && $check_point) {
           JOIN puser ON site_manage_user.user_id = puser.id
           WHERE site_id = $site_id");
 
-        if ($result !== false) {
-          foreach ($result as $row) {
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+          //foreach ($result as $row) {
             echo "<tr>";
             echo "<td>".$count."</td>";
             echo "<td>".$row['username']."</td>";
@@ -106,8 +107,8 @@ if (0 == $row['check_secu'] && $check_point) {
             <?php
             $result = $mysqli->query("SELECT id, username FROM puser");
 
-            if ($result !== false) {
-              foreach ($result as $row) {
+            if ($result->num_rows > 0) {
+              while($row = $result->fetch_assoc()) {
                 echo "<option value='".$row['id']."'>".$row['username']."</option>";
               }
             }

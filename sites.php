@@ -74,8 +74,8 @@
 
         $count = 1;
 
-        if ($result !== false) {
-          foreach($result as $row) {
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
 
             $result_follow = $mysqli->query("SELECT COUNT(*) AS check_follow
                 FROM site_follow
@@ -140,8 +140,8 @@
                   $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
                   $result = $mysqli->query($sql);
 
-                  if ($result !== false) {
-                    foreach($result as $row) {
+                  if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
                      echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
                    }
                  }

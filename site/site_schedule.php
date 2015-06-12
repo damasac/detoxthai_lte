@@ -118,8 +118,8 @@ if (0 == $row['check_secu'] && $check_point) {
         $modal = "";
         // prepare and query (direct)
         $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE site_id = '$site_id' ORDER BY id");
-        if ($result !== false) {
-          foreach($result as $row) {
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
             echo "<tr>
             <td>".$count."</td>
             <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>

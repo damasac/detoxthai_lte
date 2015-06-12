@@ -106,18 +106,20 @@ $arrMenu = array();
             <?php
               $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$id' AND display_menu = 0 ORDER BY menu_order");
 
-            if ($result !== false) {
-              foreach($result as $row) {
+            if ($result->num_rows > 0) {
+              while($row = $result->fetch_assoc()) {
 
                     $menu_sub_show = 0;
                     $html_sub_menu = "";
                     $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 ORDER BY menu_order");
-                    if ($getSubMenu !== false) {
+                    if ($getSubMenu->num_rows > 0) {
+                    //if ($getSubMenu !== false) {
                         $count = $getSubMenu->num_rows;
                         if (0 < $count) {
                             $menu_sub_show = 1;
                         }
-                    foreach($getSubMenu as $submenu) {
+                    while($submenu = $getSubMenu->fetch_assoc()) {
+                    //foreach($getSubMenu as $submenu) {
                             $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&id=".$id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                             array_push($arrMenu, $submenu['menu_name']);
                     }

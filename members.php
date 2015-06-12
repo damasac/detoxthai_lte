@@ -51,8 +51,8 @@
                       $result = $mysqli->query("SELECT `id`, `username`, `password`, `email`, `fname`, `lname`, `status`, `hcode`, `area`, `district`, `amphur`, `province`, `tel`, DATE_FORMAT(`createdate`,'%d-%m-%Y') AS `createdate`
                                                 FROM puser");
                       $count = 1;
-                      if ($result !== false) {
-                        foreach($result as $row) {
+                      if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
                           echo "<tr>";
                           echo "<td>".$count."</td>";
                           echo "<td>".$row['username']."</td>";

@@ -55,8 +55,8 @@
                 $result = $mysqli->query("SELECT id, menu_order, menu_name, display_menu FROM site_menu WHERE site_id = '$id' ORDER BY menu_order");
                 $count = 1;
                 // display it
-                if ($result !== false) {
-                    foreach($result as $row) {
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
                         if(0 == $row['display_menu']){
                             $disstatus = "<span class='glyphicon glyphicon-ok text-success' aria-hidden='true'></span>";
                         }else{
@@ -65,7 +65,8 @@
 
                         $html_sub_menu = "";
                         $getSubMenu = $mysqli->query("SELECT id, menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." ORDER BY menu_order");
-                        foreach($getSubMenu as $submenu) {
+                        while($submenu = $getSubMenu->fetch_assoc()) {
+                        //foreach($getSubMenu as $submenu) {
                             $html_sub_menu .= "<tr>
                                                 <td>- ".$submenu['menu_name']."</td>
                                                 <td><a type='button' href=edit_sub_menu.php?id=".$submenu['id']."&site_id=".$id." class='btn btn-primary btn-flat'><i class='fa fa-fw fa-pencil'></i></a>
@@ -151,8 +152,8 @@
                             // prepare and query (direct)
                             $result = $mysqli->query("SELECT id, menu_name FROM site_menu WHERE site_id = '$id' ORDER BY id");
                             // display it
-                            if ($result !== false) {
-                                foreach($result as $row) {
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
                                     echo "<option value='".$row['id']."'>".$row['menu_name']."</option>";
                                 }
                             }

@@ -94,8 +94,8 @@
         //$result->execute();
         $count = 1;
                 // display it
-        if ($result !== false) {
-          foreach($result as $row) {
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
             echo "<tr><td>".$count."</td>
             <td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td>
             <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-wrench'></a></td>
@@ -111,8 +111,10 @@
           $result = $mysqli->query('SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME');
             //$result->execute();
           // display it
-          if ($result !== false) {
-            foreach($result as $province) {
+          if ($result->num_rows > 0) {
+            while($province = $result->fetch_assoc()) {
+            //while($province = mysqli_fetch_assoc($result)) {
+            //foreach($result as $province) {
               if($row['site_province'] == $province['PROVINCE_ID']){
                 $html_province .= '<option value='.$province['PROVINCE_ID'].' selected>'.$province['PROVINCE_NAME'].'</option>';
               }else{
@@ -127,8 +129,9 @@
           $result = $mysqli->query('SELECT AMPHUR_ID, AMPHUR_NAME FROM const_amphur WHERE PROVINCE_ID = '.$row['site_province'].' ORDER BY AMPHUR_NAME');
             //$result->execute();
           // display it
-          if ($result !== false) {
-            foreach($result as $amphur) {
+          if ($result->num_rows > 0) {
+            while($amphur = $result->fetch_assoc()) {
+            //foreach($result as $amphur) {
               if($row['site_amphur'] == $amphur['AMPHUR_ID']){
                 $html_amphur .= '<option value='.$amphur['AMPHUR_ID'].' selected>'.$amphur['AMPHUR_NAME'].'</option>';
               }else{
@@ -141,8 +144,9 @@
           $result = $mysqli->query('SELECT DISTRICT_ID, DISTRICT_NAME FROM const_district WHERE AMPHUR_ID = '.$row['site_amphur'].' ORDER BY DISTRICT_NAME');
             //$result->execute();
           // display it
-          if ($result !== false) {
-            foreach($result as $district) {
+          if ($result->num_rows > 0) {
+            while($district = $result->fetch_assoc()) {
+            //foreach($result as $district) {
               if($row['site_district'] == $district['DISTRICT_ID']){
                 $html_district .= '<option value='.$district['DISTRICT_ID'].' selected>'.$district['DISTRICT_NAME'].'</option>';
               }else{
@@ -353,8 +357,10 @@ $count++;
     AND site_manage_user.delete_at IS NULL");
 
   $count_exit = 1;
-  if ($result_user_manage !== false) {
-    foreach ($result_user_manage as $row_user_manage) {
+  if ($result_user_manage->num_rows > 0) {
+  //if ($result_user_manage !== false) {
+    while($row_user_manage = $result_user_manage->fetch_assoc()) {
+    //foreach ($result_user_manage as $row_user_manage) {
 
       $result = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
         site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
@@ -366,8 +372,8 @@ $count++;
         AND site_detail.delete_at IS NULL
         ORDER BY id");
 
-      if ($result !== false) {
-        foreach($result as $row) {
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
           echo "<tr><td>".$count_exit."</td>
           <td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td>
           <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-wrench'></a></td>
@@ -422,8 +428,8 @@ $count++;
                   $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
                   $result = $mysqli->query($sql);
 
-                  if ($result !== false) {
-                    foreach($result as $row) {
+                  if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
                      echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
                    }
                  }

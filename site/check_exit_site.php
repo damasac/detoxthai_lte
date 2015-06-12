@@ -1,11 +1,12 @@
 <?php
 include_once "../_connection/db_base.php";
 
-$site_url = $_POST['site_url'];
+$site_url = str_replace("_", "", $_POST['site_url']);
 
 $result = $mysqli->query("SELECT COUNT(*) AS check_exit
     FROM site_detail
-    WHERE site_url = '$site_url'");
+    WHERE site_url = '$site_url'
+    AND delete_at IS NULL");
 
 $check_exit = $result->fetch_assoc();
 

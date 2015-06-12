@@ -81,15 +81,15 @@ if('' == $all){
             <?php
             if("all" != $all){
               $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' AND delete_at IS NULL ORDER BY id");
-              if ($result !== false) {
-                foreach($result as $row) {
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
                   echo "<option value=".$row['id']." selected>".$row['site_name']."</option>";
                 }
               }
             }else{
               $result = $mysqli->query("SELECT id, site_url, site_name FROM site_detail WHERE delete_at IS NULL ORDER BY id");
-              if ($result !== false) {
-                foreach($result as $row) {
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
                   echo "<option value=".$row['id'].">".$row['site_name']."</option>";
                 }
               }
@@ -128,8 +128,8 @@ if('' == $all){
         $modal = "";
         // prepare and query (direct)
         $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE delete_at IS NULL ORDER BY id");
-        if ($result !== false) {
-          foreach($result as $row) {
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
 
             $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
               FROM site_join

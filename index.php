@@ -110,18 +110,20 @@ $site_id_desc = $result_name_site->fetch_assoc();
               <?php
               $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$site_id' AND display_menu = 0 AND delete_at IS NULL ORDER BY menu_order");
 
-              if ($result !== false) {
-                foreach($result as $row) {
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
 
                   $menu_sub_show = 0;
                   $html_sub_menu = "";
                   $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 AND delete_at IS NULL ORDER BY menu_order");
-                  if ($getSubMenu !== false) {
+                  if ($getSubMenu->num_rows > 0) {
+                  //if ($getSubMenu !== false) {
                     $count = $getSubMenu->num_rows;
                     if (0 < $count) {
                       $menu_sub_show = 1;
                     }
-                    foreach($getSubMenu as $submenu) {
+                    while($submenu = $getSubMenu->fetch_assoc()) {
+                    //foreach($getSubMenu as $submenu) {
                       $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&site_id=".$site_id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                       array_push($arrMenu, $submenu['menu_name']);
                     }
@@ -166,9 +168,22 @@ $site_id_desc = $result_name_site->fetch_assoc();
     </div>
   </div>
   <p><hr/></p>
+  <?php
+  $result_check_secu = $mysqli->query("SELECT COUNT(*) AS check_secu
+                                      FROM site_detail
+                                      WHERE
+                                      id = 1
+                                      AND create_user = '$session'");
+  $check_secu = $result_check_secu->fetch_assoc();
+  //echo $check_secu['check_secu'];
+  if (0 < $check_secu['check_secu']) {
+  ?>
   <div class="col-md-12 text-right">
-      <button id="save" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</button>
+      <a href="site/index.php?menu=<?php echo $menu ?>&id=1" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
   </div>
+  <?php
+  }
+  ?>
   <div class="row marketing" id="show_content">
     <?php
     if (1 != $sub_menu) {

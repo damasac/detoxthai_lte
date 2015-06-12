@@ -97,8 +97,8 @@ $num2 = $query2->num_rows;
           FROM site_join
           LEFT JOIN puser ON site_join.user_id = puser.id
           WHERE schedule_id = '$schedule_id'");
-        if ($result !== false) {
-          foreach($result as $row) {
+        if ($result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
 
             if (0 == $row['payment_status']) {
               $txt_status = "ยังไม่จ่ายเงิน";
