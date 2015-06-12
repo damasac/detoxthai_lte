@@ -46,8 +46,11 @@
     }else{
         $user_id = $_SESSION['dtt_puser_id'];
     }
-
-    $user_name = $_SESSION['dtt_puser_fname'].'  '.$_SESSION['dtt_puser_lname'];
+     $sql = "SELECT fname, lname FROM `puser` WHERE id='".$user_id."';";
+    $query = $conn->query($sql);
+    $data = $query->fetch_assoc();
+    
+    $user_name = $data['fname'].'  '.$data['lname'];
     $sql = "SELECT * FROM `tbl_surveyuser` WHERE user_id='".$user_id."' ORDER BY id ASC";
     //echo $sql;
     $query = $conn->query($sql);
