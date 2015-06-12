@@ -4,10 +4,6 @@
   $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
 
-  //isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
-  //print_r($_GET);
-
-  //isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
 ?>
   <section class="content">
