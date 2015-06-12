@@ -79,7 +79,7 @@
             <div class="box-header with-border">
             <h3 class="box-title">Input Form</h3>
             <div class="pull-right">
-                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> บันทึกข้อมูลการล้างพิษตับ</a>
+                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
             </div>
           </div>
@@ -94,7 +94,7 @@
             
             <div class="row">
                 <div class="col-lg-12">
-                <h3>
+ 
                 <?php
                 if(isset($_GET["form_id"])){
                     $form_id =$_GET["form_id"];
@@ -113,8 +113,7 @@
                    $dbarr = $res->fetch_assoc();
                 }
                 ?>
-                    สถานที่ <code><?php echo $dbarr['site_name'];?></code> วันที่ <code><?php echo System_ShowDate($data['startdate']);?></code> ถึง <code><?php echo System_ShowDate($data['enddate']);?></code>
-                </h3>
+
                 
                 
                 

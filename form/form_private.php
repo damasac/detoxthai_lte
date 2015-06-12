@@ -80,7 +80,7 @@
             <div class="box-header with-border">
             <h3 class="box-title">Input Form</h3>
             <div class="pull-right">
-                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> บันทึกข้อมูลการล้างพิษตับ</a>
+                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
             </div>
           </div>
@@ -93,9 +93,18 @@
                 </div>
             </div>
             
-            <input type="hidden" class="form-control" value="<?php echo $_SESSION['dtt_puser_id'];?>" id="dtt_puser_id" />
+            <input type="hidden" class="form-control" value="<?php echo $_SESSION['dtt_user_form'];?>" id="form_id" />
             <?php
-                $sqlSelectValue =  "SELECT * FROM `tbl_surveyperson` WHERE ref_id_user='".$_SESSION['dtt_puser_id']."' ";
+            $sql = "SELECT ref_id_user FROM tbl_surveyprivate WHERE ref_id_user = '".$_SESSION['dtt_user_form']."';";
+            $query = $conn->query($sql) or die($conn->error());
+            $data = $query->fetch_assoc();
+            
+            if(!$data['ref_id_user']){
+                $sql = "INSERT INTO `tbl_surveyprivate`(`ref_id_user`) VALUES('".$_SESSION['dtt_user_form']."')";
+                $query = $conn->query($sql) or die($conn->error());
+            }
+            
+                $sqlSelectValue =  "SELECT * FROM `tbl_surveyprivate` WHERE ref_id_user='".$_SESSION['dtt_puser_id']."' ";
                 $querySelectValue = $conn->query($sqlSelectValue);
                 $dataform = $querySelectValue->fetch_assoc();
             ?>

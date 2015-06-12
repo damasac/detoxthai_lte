@@ -34,7 +34,7 @@
           <div class="box-header with-border">
             <h3 class="box-title">Input Form</h3>
             <div class="pull-right">
-                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> บันทึกข้อมูลการล้างพิษตับ</a>
+                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
             </div>
           </div>
@@ -42,10 +42,10 @@
     include_once("system_function.php");
     //session user
     if(isset($_SESSION['dtt_user_form'])){
-        if($_SESSION['dtt_user_form']<> $_SESSION['dtt_puser_id'])
-            $user_id = $_SESSION['dtt_user_form'];
+        $user_id = $_SESSION['dtt_user_form'];         
     }else{
         $user_id = $_SESSION['dtt_puser_id'];
+        $_SESSION['dtt_user_form']=$_SESSION['dtt_puser_id'];
     }
     $sql = "SELECT fname, lname FROM `puser` WHERE id='".$user_id."';";
     $query = $conn->query($sql);
@@ -60,7 +60,7 @@
             
             <div class="row">
                 <div class="col-lg-12">
-                <div class="showError" id="showDelete"style="display:none;">
+                <div class="alert alert-danger" id="showDelete"style="display:none;">
                   ยืนยันการลบแบบบันทึก ?
                   <div class="pull-right">
                   <button class="btn btn-success" id="doDelete">ใช่</button>&nbsp;&nbsp;&nbsp;
@@ -220,6 +220,11 @@
             $('#showError').show('fast').delay(2000).fadeOut(300);
             $("#showError").html("วันที่สิ้นสุดมากกว่าวันที่เริ่มต้น");
           return ;
+        }
+        else if(location == '0'){
+            $('#showError').show('fast').delay(2000).fadeOut(300);
+            $("#showError").html("โปรดเลือกสถานที่");
+          return ;
         }else{
           $.ajax({
                   type: "POST",
@@ -266,7 +271,13 @@
                        alert(field+form_id);
                        //AutoSave(field,form_id);
       }
-      
+      //hide
+      $('#startDate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
+       $('#endDate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
   </script>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>

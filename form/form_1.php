@@ -8,14 +8,7 @@
 			<tr>
 				<td>
 					<form class="form-inline">
-					<div class="form-group">
-					    <label for="p1a1b1">1. ชื่อ</label>
-					    <input type="text" class="form-control fix" id="p1a1b1" placeholder="ชื่อ" onblur="AutoSave('p1a1b1',$('#form_id').val())" value="<?php echo $dataform["p1a1b1"]; ?>">
-		  			</div>
-		  			<div class="form-group">
-					    <label for="p1a1b2">นามสกุล</label>
-					    <input type="text" class="form-control fix" id="p1a1b2" placeholder="นามสกุล" onblur="AutoSave('p1a1b2',$('#form_id').val())" value="<?php echo $dataform["p1a1b2"]; ?>">
-		  			</div>
+					<h3>บันทึกการล้างพิษตับ ระหว่าง <code><?php echo System_ShowDate($data['startdate']);?></code> ถึง <code><?php echo System_ShowDate($data['enddate']);?></code> ณ สถานที่ <code><?php echo $dbarr['site_name'];?></code></h3>
 		  			</form>
 				</td>
 			</tr>
