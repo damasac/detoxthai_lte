@@ -17,7 +17,6 @@
                 <tr>
                   <td>
                         <div class="from-group">
-                          <?php if($dataform["p4a1"]==1){echo "checked";}else{echo "";}?>
                             <label for="name" style="font-weight: bold;">15. <b>ในช่วง 30 วันที่ผ่านมา</b> ท่านมีปัญหาใน <code>การเคลื่อนไหว</code> หรือไม่</label>
                             <div><input type="radio" name="p4a<?php $i=1; echo $i;?>" id="p4a<?php echo $i;?>" value="1"  <?php if($dataform["p4a1"]==1){echo "checked";}else{echo "";}?>><sub>1</sub> ไม่มีปัญหาในการเดิน</div>
                             <div><input type="radio" name="p4a<?php echo $i;?>" id="p4a<?php echo $i;?>" value="2"  <?php if($dataform["p4a1"]==2){echo "checked";}else{echo "";}?>><sub>2</sub> มีปัญหาในการเดินบ้าง</div>

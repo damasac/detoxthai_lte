@@ -41,7 +41,11 @@
 <?php
     include_once("system_function.php");
     //session user
-    $user_id = $_SESSION['dtt_puser_id'];
+    if($_SESSION['dtt_user_form']<> $_SESSION['dtt_puser_id']){
+        $user_id = $_SESSION['dtt_user_form'];
+    }else{
+        $user_id = $_SESSION['dtt_puser_id'];
+    }
 
     $user_name = $_SESSION['dtt_puser_fname'].'  '.$_SESSION['dtt_puser_lname'];
     $sql = "SELECT * FROM `tbl_surveyuser` WHERE user_id='".$user_id."' ORDER BY id ASC";
