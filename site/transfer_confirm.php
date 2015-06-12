@@ -44,7 +44,7 @@ $user_name = $result_user_name->fetch_assoc();
     <small>รายชื่อผู้เข้าร่วม</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="../schedules.php"><i class="fa fa-calendar"></i> หลักสูตรสุขภาพองค์รวม</a></li>
     <li class="active">รายชื่อผู้เข้าร่วม</li>
   </ol>
 </section>

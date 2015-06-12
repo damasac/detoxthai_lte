@@ -57,12 +57,11 @@ if('' == $all){
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    จัดการหลักสูตรสุขภาพองค์รวม
+    หลักสูตรสุขภาพองค์รวม
     <small>เพิ่ม แก้ไข ลบ หลักสูตร</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">SITE NAME HERE</li>
+    <li class="active"><i class="fa fa-calendar"></i> หลักสูตรสุขภาพองค์รวม</li>
   </ol>
 </section>
 

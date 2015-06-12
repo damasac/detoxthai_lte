@@ -65,12 +65,13 @@ if (0 == $row['check_secu'] && $check_point) {
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    จัดการหลักสูตรล้างพิษตับ
-    <small>เพิ่ม แก้ไข ลบ หลักสูตรล้างพิษตับ</small>
+    จัดการหลักสูตรล้างพิษ
+    <small>เพิ่ม แก้ไข ลบ หลักสูตรล้างพิษ</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">SITE NAME HERE</li>
+    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษ</a></li>
+    <li><a href="site_manage.php">จัดการศูนย์</a></li>
+    <li class="active">จัดการหลักสูตรล้างพิษ</li>
   </ol>
 </section>
 
@@ -79,11 +80,11 @@ if (0 == $row['check_secu'] && $check_point) {
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">หลักสูตรล้างพิษตับทั้งหมด</h3>
+      <h3 class="box-title">หลักสูตรล้างพิษทั้งหมด</h3>
     </div>
     <div class="box-body">
       <p class="text-left col-xs-2" style="margin-left: -15px;">
-        <button class="btn btn-block btn-primary btn-flat" data-toggle="modal" data-target="#myModal">เพิ่มหลักสูตรล้างพิษตับ</button>
+        <button class="btn btn-block btn-primary btn-flat" data-toggle="modal" data-target="#myModal">เพิ่มหลักสูตรล้างพิษ</button>
       </p>
       <table class="table table-bordered">
         <tr class="active">
@@ -126,7 +127,7 @@ if (0 == $row['check_secu'] && $check_point) {
             <td>".$row['user_qty']." คน</td>
             <td>".number_format($row['price_per_person'])." บาท</td>
             <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
-            <td><a type='button' href='list_join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-eye'></i></a></td>
+            <td><a type='button' href='list_join.php?schedule_id=".$row['id']."&site_id=".$site_id."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-eye'></i></a></td>
             <td><a href='edit_schedule.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."&site_id=".$site_id."' class='btn btn-danger btn-flat'>ลบ</a></td>
           </tr>";
 
@@ -193,7 +194,7 @@ if (0 == $row['check_secu'] && $check_point) {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">เพิ่มหลักสูตรล้างพิษตับ</h4>
+          <h4 class="modal-title" id="myModalLabel">เพิ่มหลักสูตรล้างพิษ</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal">
