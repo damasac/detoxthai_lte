@@ -56,7 +56,7 @@ if ($result !== false) {
 
     if (0 < $row_check['join_status']) {
       if (0 == $row_check['payment_upload_status']) {
-        echo $row_check['payment_upload_status'];
+        //echo $row_check['payment_upload_status'];
         $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
         <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
     } else {

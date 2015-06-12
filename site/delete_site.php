@@ -39,13 +39,16 @@
     //$result->execute();
     //$row = $result->fetch(PDO::FETCH_ASSOC);
 
-    $result = $mysqli->query("SELECT site_url
-                            FROM site_detail WHERE id = '$site_id'");
-    $row = $result->fetch_assoc();
-
     if($result->num_rows > 0){
-        $result = $mysqli->query("DELETE FROM site_detail WHERE id = '$site_id'");
-        $result = $mysqli->query("DELETE FROM site_menu WHERE site_name = '".$row['site_url']."'");
+        /** Delete site_detail. */
+        $result = $mysqli->query("UPDATE site_detail SET delete_at = NOW() WHERE id = '$site_id'");
+        /** Delete site_menu. */
+        $result = $mysqli->query("UPDATE site_menu SET delete_at = NOW() WHERE site_id = '$site_id'");
+        /** Delete site_submenu. */
+        $result = $mysqli->query("UPDATE site_submenu SET delete_at = NOW() WHERE site_id = '$site_id'");
+        /** Delete site_schedule. */
+        $result = $mysqli->query("UPDATE site_schedule SET delete_at = NOW() WHERE site_id = '$site_id'");
+
         //$result->execute();
         //$host  = $_SERVER['HTTP_HOST'];
         header('location: site_manage.php');

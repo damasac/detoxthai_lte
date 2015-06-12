@@ -80,14 +80,14 @@ if('' == $all){
             <option value="0">หลักสูตรทั้งหมด</option>
             <?php
             if("all" != $all){
-              $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' ORDER BY id");
+              $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' AND delete_at IS NULL ORDER BY id");
               if ($result !== false) {
                 foreach($result as $row) {
                   echo "<option value=".$row['id']." selected>".$row['site_name']."</option>";
                 }
               }
             }else{
-              $result = $mysqli->query("SELECT id, site_url, site_name FROM site_detail ORDER BY id");
+              $result = $mysqli->query("SELECT id, site_url, site_name FROM site_detail WHERE delete_at IS NULL ORDER BY id");
               if ($result !== false) {
                 foreach($result as $row) {
                   echo "<option value=".$row['id'].">".$row['site_name']."</option>";
@@ -127,7 +127,7 @@ if('' == $all){
         $script = "";
         $modal = "";
         // prepare and query (direct)
-        $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule ORDER BY id");
+        $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE delete_at IS NULL ORDER BY id");
         if ($result !== false) {
           foreach($result as $row) {
 
@@ -141,7 +141,7 @@ if('' == $all){
 
             if (0 < $row_check['join_status']) {
               if (0 == $row_check['payment_upload_status']) {
-                echo $row_check['payment_upload_status'];
+                //echo $row_check['payment_upload_status'];
                 $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
                 <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
               } else {

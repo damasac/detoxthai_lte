@@ -31,7 +31,8 @@
   //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
   $result = $mysqli->query("SELECT COUNT(id) AS sitecount
-    FROM site_detail WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']);
+    FROM site_detail WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']
+    ." AND delete_at IS NULL");
   $row = $result->fetch_assoc();
   ?>
 
@@ -88,6 +89,7 @@
           LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
           LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
           WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']."
+          AND site_detail.delete_at IS NULL
           ORDER BY id");
         //$result->execute();
         $count = 1;
@@ -319,7 +321,8 @@ $count++;
 <?php
   $result_count_manage = $mysqli->query("SELECT COUNT(*) AS count_manage
     FROM site_manage_user
-    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
+    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+    AND site_manage_user.delete_at IS NULL");
   $manage_site_count = $result_count_manage->fetch_assoc();
 ?>
 <hr/>
@@ -346,9 +349,10 @@ $count++;
   //$count = 1;
   $result_user_manage = $mysqli->query("SELECT site_id
     FROM site_manage_user
-    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
+    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+    AND site_manage_user.delete_at IS NULL");
 
-  $count_exit = 0;
+  $count_exit = 1;
   if ($result_user_manage !== false) {
     foreach ($result_user_manage as $row_user_manage) {
 
@@ -359,6 +363,7 @@ $count++;
         LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
         LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
         WHERE site_detail.id = ".$row_user_manage['site_id']."
+        AND site_detail.delete_at IS NULL
         ORDER BY id");
 
       if ($result !== false) {

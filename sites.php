@@ -67,6 +67,7 @@
         LEFT JOIN const_district ON site_district = DISTRICT_ID
         LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
         LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
+        WHERE site_detail.delete_at IS NULL
         ORDER BY id";
 
         $result = $mysqli->query($sql);
