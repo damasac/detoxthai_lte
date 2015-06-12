@@ -41,7 +41,11 @@
   }
 
 ?>
-<div class="box box-primary direct-chat direct-chat-primary">
+<?php
+    print_r($_SESSION);
+?>
+<div class="box box-primary dir
+ect-chat direct-chat-primary">
 <div class="box-header">
     <?php
         $sql2 = "SELECT * FROM `site_detail` WHERE id='".$site_id."' AND create_user='".$_SESSION[SESSIONPREFIX."puser_id"]."' ";
@@ -90,7 +94,17 @@
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
     function goForm(id) {
-        location.href="../form/index.php?user_id="+id;
+        $.post("ball-sql.php?task=saveSession",
+        {
+          user_id : id
+        },
+        function(data,status){
+          //if (data==1) {
+          //}else{
+            location.href="../form/index.php";
+            //location.reload();
+          //}
+        });
     }
     function leaveSite(id){
         var user_id = id;

@@ -23,10 +23,7 @@
         }else{
         $sql = "INSERT INTO `site_join`(schedule_id,user_id,payment_status,payment_upload_status)
         VALUES('".$_POST["schedule_id"]."','".$_POST["user_id"]."','0','0')";
-        $sql2 = "INSERT INTO `site_follow`(site_id,user_id)
-        VALUES('".$_POST["site_id"]."','".$_POST["user_id"]."')";
         $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
-        $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
         }
     }
 ?>
