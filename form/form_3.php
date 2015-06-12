@@ -57,16 +57,16 @@
                                           <td><?php echo $question["$i"];?></td>
                                           <td >
                                             <input type="hidden" id="selectValue" value="<?php echo $dataform["p3a$i"];?>"/>
-                                            <input type="radio" class="form-control" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v1" value="1" <?php if($dataform["p3a$i"]==1){echo "checked";}else{echo "";}?>>
+                                            <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v1" value="1" <?php if($dataform["p3a$i"]==1){echo "checked";}else{echo "";}?>>
                                           </td>
                                           <td>
-                                            <input type="radio" class="form-control" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v2" value="2" <?php if($dataform["p3a$i"]==2){echo "checked";}else{echo "";}?>>
+                                            <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v2" value="2" <?php if($dataform["p3a$i"]==2){echo "checked";}else{echo "";}?>>
                                           </td>
                                           <td>
-                                            <input type="radio" class="form-control" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v3" value="3" <?php if($dataform["p3a$i"]==3){echo "checked";}else{echo "";}?>>
+                                            <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v3" value="3" <?php if($dataform["p3a$i"]==3){echo "checked";}else{echo "";}?>>
                                           </td>
                                           <td>
-                                            <input type="radio" class="form-control" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v4" value="4" <?php if($dataform["p3a$i"]==4){echo "checked";}else{echo "";}?>>
+                                            <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v4" value="4" <?php if($dataform["p3a$i"]==4){echo "checked";}else{echo "";}?>>
                                           </td>
                                         </tr>
                                     <?php }?>

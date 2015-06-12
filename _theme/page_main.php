@@ -8,6 +8,10 @@
     <link rel="shortcut icon" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>/img/favicon.ico">
     <!-- Bootstrap 3.3.4 -->
     <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- jQuery 2.1.4 -->
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQuery/jQuery-2.1.4.min.js"></script>
+     <!-- Bootstrap 3.3.2 JS -->
+    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Font Awesome Icons -->
     <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/icon-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
@@ -233,12 +237,8 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 
     <!-- REQUIRED JS SCRIPTS -->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery Validation -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQueryValidate/jquery.validate.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_dist/js/app.min.js" type="text/javascript"></script>
 	 <!-- Slimscroll -->
@@ -248,15 +248,14 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
     <!-- iCheck -->
     <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     <script>
-      $(function () {
-        $('input').iCheck({
-          checkboxClass: 'icheckbox_square-blue',
-          radioClass: 'iradio_square-blue',
-          increaseArea: '20%' // optional
-        });
-      });
+      //$(function () {
+      //  $('input').iCheck({
+      //    checkboxClass: 'icheckbox_square-blue',
+      //    radioClass: 'iradio_square-blue',
+      //    increaseArea: '20%' // optional
+      //  });
+      //});
     </script>
-
 
     {$js_and_css_footer}
   </body>

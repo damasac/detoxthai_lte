@@ -84,7 +84,7 @@ function validateEmail(field,form_id) {
 } 
 function AutoSaveRadio(field, form_id, val) {
     var value = val;
-    alert("fields = "+field+" value = "+value+" form_id = "+form_id);
+    //alert("fields = "+field+" value = "+value+" form_id = "+form_id);
      $.ajax({
                 type: "POST",
                 url: "../_connection/db_form.php?task=updateAuto",

@@ -59,13 +59,13 @@
 			</tr>
 			<script>
 			$(document).ready(function(){
-
+/*
 				$("#p1a4b2").empty();
 			    	var option = new Option("เลือกอำเภอ/เขต", "");
     				$("#p1a4b2").append($(option));
 					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getamphur.php?province_id=" + $("#p1a4b1").val(), function(data){
 						$.each(data.amphur, function(i, amphur){
-						if(amphur.AMPHUR_ID == <?php echo $dataform["p1a4b2"]; ?>){
+						if(amphur.AMPHUR_ID == <?php echo $dataform["p1a4b2"]+0; ?>){
 							var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
 							option.setAttribute("selected","selected");
 						}else{
@@ -86,7 +86,7 @@
 						});
 			  		});
 				});
-
+*/
 				//$("#p1a4b1").select2();
 				//$("#p1a4b2").select2();
 				//$("#p1a5").select2();

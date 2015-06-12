@@ -132,20 +132,6 @@
                               <input style="background: green;" class="from-control"
                                      id="p4a7" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
                                      data-slider-value="<?php if($dataform["p4a7"]!=""){echo $dataform["p4a7"];}else{echo "0";}?>"/></div>
-                            <script>
-                              var originalVal;
-                              $('#p4a7').slider().on('slideStart', function(ev){
-                                      originalVal = $('#p4a7').data('slider').getValue();
-                                        AutoSave("p4a7",$("#form_id").val());
-                                  });
-                                  $('#p4a7').slider().on('slideStop', function(ev){
-                                      var newVal = $('#p4a7').data('slider').getValue();
-                                      if(originalVal != newVal) {
-                                          //console.log(originalVal+"  2");
-                                          AutoSave("p4a7",$("#form_id").val());
-                                      }
-                                  });
-                            </script>
                         </div>
                   </td>
                 </tr>
@@ -173,11 +159,3 @@
 	background: green;
 }
 </style>
-
- <script type='text/javascript'>
-    // With JQuery
-    $("#p4a7").slider({
-            tooltip: 'always'
-    });
-    
-</script>

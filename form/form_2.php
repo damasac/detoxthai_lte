@@ -2,7 +2,7 @@
 		<table class="table table-hover" style="border: 1.5px solid #AA66CC;">
 			<tr>
 				<td class="p3tableheader" style="background-color: #AA66CC;color: #FFFFFF;">
-					<strong>ตอนที่ 2 ผลการล้างพิษตับในครั้งที่ผ่านมา</strong>
+					<strong>ตอนที่ 2 ผลการล้างพิษตับในครั้งที่ผ่านมา (กรอกครั้งเดียว)</strong>
 				</td>
 			</tr>
 			<tr>

@@ -8,6 +8,10 @@
   
 <?php eb();?>
 
+<?php sb('notifications');?>
+  <?php include_once '../notifications.php'; ?>
+<?php eb();?>
+
 <?php sb('content');?>
 <?php include_once "../_connection/db_form.php"; ?>
 
@@ -29,6 +33,10 @@
     <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">Input Form</h3>
+            <div class="pull-right">
+                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> บันทึกข้อมูลการล้างพิษตับ</a>
+                <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
+            </div>
           </div>
 <?php
     include_once("system_function.php");
@@ -56,7 +64,7 @@
             
             <div class="row">
                 <div class="col-lg-12">
-                <div class="showError" id="showError" style="display:none;"></div>
+                <div class="alert alert-danger" id="showError" style="display:none;"></div>
                 </div>
             </div>
             
@@ -86,7 +94,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">    
-                                <button class="margin btn btn-success btn-flat btn-lg" id="AddForm">  เพิ่มประวัติการ Detox</button>
+                                <button class="margin btn btn-success btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
                                 <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
                             </div>
                         </div>

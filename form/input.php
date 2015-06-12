@@ -28,14 +28,14 @@
     }
     input[type=radio] {
     border: 0px;
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
    }
     input[type=checkbox]
     {
-      margin: auto;
-      width: 19px;
-      height: 19px;
+        margin: auto;
+      width: 25px;
+      height: 100%;
     }
     .textindent{
       text-indent: 1.5em;
@@ -51,6 +51,10 @@
     }
 </style>
   
+<?php eb();?>
+
+<?php sb('notifications');?>
+  <?php include_once '../notifications.php'; ?>
 <?php eb();?>
 
 <?php sb('content');?>
@@ -72,12 +76,19 @@
   <section class="content">
 
     <div class="box box-primary">
-       
+            <div class="box-header with-border">
+            <h3 class="box-title">Input Form</h3>
+            <div class="pull-right">
+                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> บันทึกข้อมูลการล้างพิษตับ</a>
+                <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
+            </div>
+          </div>
+
           <div class="box-body">
             
             <div class="row">
                 <div class="col-lg-12">
-                <div class="showError" id="showError" style="display:none;"></div>
+                <div class="alert alert-danger" id="showError" style="display:none;"></div>
                 </div>
             </div>
             
@@ -119,7 +130,7 @@
             ?>
             <div id="formsurvey">
             <!-------------------------- form 1-2-->
-            <?php include_once "form_consent.php";include_once "form_person.php";include_once "form_1.php";include_once "form_2.php"; ?>
+            <?php include_once "form_1.php";include_once "form_2.php"; ?>
             
             <!-------------------------- form 3-4-->
             <?php include_once "form_3.php"; ?>
@@ -148,6 +159,54 @@
 
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+
+<script type='text/javascript'>
+    // With JQuery
+    $("#p4a7").slider({
+            tooltip: 'always'
+    });
+    
+    $("#p1a10").click(function(){
+    if ($("#p1a10").is(":checked")) {
+      $("#tableHide1").fadeOut();
+      $("#p1a10").val("0");
+      AutoSave("p1a10",$("#form_id").val());
+    }else{
+      $("#p1a10").val("1");
+      $("#tableHide1").fadeIn();
+      AutoSave("p1a10",$("#form_id").val());
+    }
+  });
+$("#p2a1").click(function(){
+  if ($("#p2a1").is(":checked")) {
+      $("#p2a1").val("0");
+      $("#labelHide2").fadeOut();
+      $("#tableHide2").fadeOut();
+       AutoSave("p2a1",$("#form_id").val());
+    }else{
+      $("#p2a1").val("1");
+      $("#tableHide2").fadeIn();
+      $("#tableHide2").fadeIn();
+      AutoSave("p2a1",$("#form_id").val());
+    }
+  });
+//
+var originalVal;
+$('#p4a7').slider().on('slideStart', function(ev){
+    originalVal = $('#p4a7').data('slider').getValue();
+      AutoSave("p4a7",$("#form_id").val());
+});
+$('#p4a7').slider().on('slideStop', function(ev){
+    var newVal = $('#p4a7').data('slider').getValue();
+    if(originalVal != newVal) {
+        //console.log(originalVal+"  2");
+        AutoSave("p4a7",$("#form_id").val());
+    }
+});
+</script>
+
+
+
 <?php eb();?>
  
 <?php render($MasterPage);?>
