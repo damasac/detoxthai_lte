@@ -27,8 +27,32 @@
 	    $sql = "INSERT INTO `puser`(`username`,`password`,`fname`,`lname`,`tel`,`status`,`createdate`)
 	    VALUES('".$_POST["tel"]."','".$password."','".$_POST["fname"]."','".$_POST["lname"]."','".$_POST["tel"]."','1','".$date."')";
 	    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
-
-
+	    $user_id = $mysqli->insert_id;
+	    $sql2 = "INSERT INTO `site_follow`(site_id,user_id)
+	    VALUES('".$_POST["site_id"]."','".$user_id."')";
+	    $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
+	}
+	
+    }
+    if($task=="addUserNormal2"){
+	$password = sha1(md5($_POST["password"]));
+	$sql1 = "SELECT * FROM `puser` WHERE username='".$_POST["tel"]."' ";
+	$query1 = $mysqli->query($sql1);
+	$num1 = $query1->num_rows;
+	//echo $num1;
+	if($num1==1){
+	    echo "1";
+	    exit;
+	}else{
+	    $sql = "INSERT INTO `puser`(`username`,`password`,`fname`,`lname`,`tel`,`status`,`createdate`)
+	    VALUES('".$_POST["tel"]."','".$password."','".$_POST["fname"]."','".$_POST["lname"]."','".$_POST["tel"]."','1','".$date."')";
+	    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
+	    $user_id = $mysqli->insert_id;
+	    $sql2 = "INSERT INTO `site_follow`(site_id,user_id)
+	    VALUES('".$_POST["site_id"]."','".$user_id."')";
+	    $sql = "INSERT INTO `site_join`(schedule_id,user_id,payment_status,payment_upload_status)
+	    VALUES('".$_POST["schedule_id"]."','".$user_id."','0','0')";
+	    $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
 	}
 	
     }

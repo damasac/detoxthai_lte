@@ -116,6 +116,7 @@
     function addUser(){
       var puser_id = $("#puser_id").val();
       var site_id = <?php echo $_GET["site_id"];?>;
+      var schedule_id = <?php echo $_GET["schedule_id"];?>;
             $.post("ball-sql.php?task=addUserFind",
 	    {
 	      schedule_id : schedule_id,
@@ -183,6 +184,8 @@
     var lname = $("#lname").val();
     var password = $("#password").val();
     var password2 = $("#password2").val();
+      var site_id = <?php echo $_GET["site_id"];?>;
+      var schedule_id = <?php echo $_GET["schedule_id"];?>;
         
     if (fname=="") {
       $("#valFname").show();
@@ -228,18 +231,20 @@
     }else{
       $("#valPassword2").hide();
     }
-    goAjaxSave(username,password,tel,fname,lname);
+    goAjaxSave(username,password,tel,fname,lname,site_id,schedule_id);
   }
-  function goAjaxSave(username,password,tel,fname,lname){
+  function goAjaxSave(username,password,tel,fname,lname,site_id,schedule_id){
       $.ajax({
-		    url: "../usermgn/ajax-sql-query.php?task=addUserNormal",
+		    url: "../usermgn/ajax-sql-query.php?task=addUserNormal2",
 		    type: "post",
 		    data: {
                       username:username,
                       password:password,
                       tel:tel,
                       fname:fname,
-                      lname:lname
+                      lname:lname,
+		      site_id:site_id,
+		      schedule_id:schedule_id
                       },
 		    success: function(data){
 

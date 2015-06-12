@@ -4,9 +4,10 @@
   $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
   
-  isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
+  //isset($_GET['schedule_id']) ? $schedule_id = $_GET['schedule_id'] :  $schedule_id = '';
+  //print_r($_GET);
 
-  isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+  //isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
 ?>
   <section class="content">
@@ -116,11 +117,10 @@
   }
     function addUser(){
       var puser_id = $("#puser_id").val();
-      var schedule_id = <?php echo $schedule_id; ?>;
       var site_id = <?php echo $_GET["site_id"];?>;
-            $.post("ball-sql.php?task=addUserFind",
+
+	    $.post("ajax-sql-query.php?task=addUserFind",
 	    {
-	      schedule_id : schedule_id,
 	      site_id:site_id,
 	      user_id : puser_id
 	    },
@@ -130,7 +130,7 @@
 		$("#valAddUser").show();
 		$("#valAddUser").html("สมาชิกนี้อยู่ในหลักสูตรแล้วกรุณาตรวจสอบ");
 	      }else{
-	        location.reload();
+	        //location.reload();
 	      }
 	    });
     }
@@ -185,7 +185,7 @@
     var lname = $("#lname").val();
     var password = $("#password").val();
     var password2 = $("#password2").val();
-        
+    var site_id = <?php echo $_GET["site_id"]?>;
     if (fname=="") {
       $("#valFname").show();
       $("#valFname").html("กรุณาระบุชื่อ");
@@ -230,9 +230,9 @@
     }else{
       $("#valPassword2").hide();
     }
-    goAjaxSave(username,password,tel,fname,lname);
+    goAjaxSave(username,password,tel,fname,lname,site_id);
   }
-  function goAjaxSave(username,password,tel,fname,lname){
+  function goAjaxSave(username,password,tel,fname,lname,site_id){
       $.ajax({
 		    url: "../usermgn/ajax-sql-query.php?task=addUserNormal",
 		    type: "post",
@@ -241,7 +241,8 @@
                       password:password,
                       tel:tel,
                       fname:fname,
-                      lname:lname
+                      lname:lname,
+		      site_id:site_id
                       },
 		    success: function(data){
 

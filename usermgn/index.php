@@ -42,9 +42,17 @@
 ?>
 <div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
+    <?php
+        //print_r($_SESSION);
+        $sql2 = "SELECT * FROM `site_detail` WHERE id='".$site_id."' AND create_user='".$_SESSION[SESSIONPREFIX."puser_id"]."' ";
+        //echo $sql2;
+        $query2 = $mysqli->query($sql2) or die(mysqli_error($query1));
+        $num2 = $query2->num_rows;
+    ?>
     <span style="float: right">
         <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
     </span><br><br><br>
+
     <table id="userTable" class="table table-hover">
         <thead>
             <tr>
@@ -74,56 +82,9 @@
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
-    function deleteUser(id){
-        dialogPopWindow = BootstrapDialog.show({
-                    title: "ลบผู้ใช้งาน",
-                    cssClass: 'popup-dialog',
-                    closable: true,
-                    closeByBackdrop: false,
-                    closeByKeyboard: false,
-                    size:'size-wide',
-                    draggable: false,
-                    message: $('<div></div>').load("form_deleteuser.php?id="+id, function(data){
-                    }),
-                    onshown: function(dialogRef){
-                    },
-                    onhidden: function(dialogRef){
-                    }
-
-         });
-    }
-    function editUser(id,hcode) {
-        //code
-        dialogPopWindow = BootstrapDialog.show({
-                    title: "แก้ไขผู้ใช้งาน",
-                    cssClass: 'popup-dialog',
-                    closable: true,
-                    closeByBackdrop: false,
-                    closeByKeyboard: false,
-                    size:'size-wide',
-                    draggable: false,
-                    message: $('<div></div>').load("form_edituser.php?hcode="+hcode+"&id="+id, function(data){
-                    }),
-                    onshown: function(dialogRef){
-                    },
-                    onhidden: function(dialogRef){
-                    }
-
-            });
-    }
-    $("#area").on("change",function(){
-            $("#hospital").html("<option value='0'>- เลือกโรงพยาบาล -</option>");
-            $("#hospital").select2();
-        });
-    $("#hospital").select2();
-    function popup_custom(hcode) {
-        var hcode = $("#hospital").val();
-        var area = $("#area").val();
-        var province = $("#province").val();
-        if (hcode=="0") {
-               alert("กรุณาเลือกโรงพยาบาลก่อน");
-               return ;
-        }else{
+    function popup_custom() {
+            var site_id = <?php echo $site_id;?>;
+            var user_id = <?php echo $_SESSION[SESSIONPREFIX."puser_id"];?>;
             dialogPopWindow = BootstrapDialog.show({
                     title: "เพิิ่มสมาชิกเข้าสู่ศูนย์",
                     cssClass: 'popup-dialog',
@@ -132,16 +93,14 @@
                     closeByKeyboard: false,
                     size:'size-wide',
                     draggable: false,
-                    message: $('<div></div>').load("form_adduser.php?hcode="+hcode, function(data){
+                    message: $('<div></div>').load("form_adduser.php?site_id="+site_id+"&user_id="+user_id, function(data){
                     }),
                     onshown: function(dialogRef){
                     },
                     onhidden: function(dialogRef){
                     }
-
             });
-        }
-}
+    }
     $(document).ready(function() {
         $('#userTable').dataTable({
           "bPaginate": true,
@@ -192,33 +151,14 @@
                                         { "title": "Other" },
                                     ]
                                 } );
-                              //$("#dataSelectUser").append("<tr><td>"+field.username+"</td><td>"+field.email+"</td><td>"+field.fname+"</td><td>"+field.lname+"</td><td>"+statusName+"</td><td>"+field.createdate+"</td><td><button class='btn btn-warning btn-xs' onclick='editUser("+field.id+","+field.hcode+")'>แก้ไข</button>&nbsp;<button class='btn btn-danger btn-xs' onclick='deleteUser("+field.id+")'>ลบ</button></td></tr>");
 
                     });
                     }
             });
 
         }
-            $("#area").on("change",function(){
-                var area = $(this).val();
-                    $.getJSON("ajax-area-loaddata.php?task=areaProvince&area="+area+"",function(result){
-                        $("#province").html("<option value='0'>- เลือกจังหวัด -</option>");
-                        $.each(result, function(i, field){
-                              $("#province").append("<option value="+field.provincecode+" >"+field.province+"</option>");
-                        });
-                  });
-            });
-            $("#province").on("change",function(){
-                var province = $(this).val();
-                    $.getJSON("ajax-area-loaddata.php?task=provinceHospital&province="+province+"",function(result){
-                        $("#hospital").html("<option value='0'>- เลือกโรงพยาบาล -</option>");
-                            $("#hospital").select2();
-                        $.each(result, function(i, field){
-                              $("#hospital").append("<option value="+field.hcode+" >"+field.hcode+" : "+field.name+"</option>");
-                        });
-                  });
-            });
-        </script>
+           
+</script>
 <script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
 <script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
 <link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
