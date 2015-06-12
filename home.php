@@ -27,7 +27,8 @@
   } else {
     $result = $mysqli->query("SELECT id
             FROM site_detail
-            WHERE site_url = '$sub_domain'");
+            WHERE site_url = '$sub_domain'
+            AND delete_at IS NULL");
     $row_id = $result->fetch_assoc();
     $site_id = $row_id['id'];
   }
@@ -47,6 +48,7 @@ if ('' == $menu) {
     FROM site_menu
     WHERE site_id = '$site_id'
     AND display_menu = 0
+    AND delete_at IS NULL
     ORDER BY menu_order");
     $row = $result->fetch_assoc();
     $count = $result->num_rows;
@@ -69,7 +71,8 @@ $arrMenu = array();
 <?php
     $result_name_site = $mysqli->query("SELECT site_name, create_date
                     FROM site_detail
-                    WHERE id = '$site_id'");
+                    WHERE id = '$site_id'
+                    AND delete_at IS NULL");
     $site_id_desc = $result_name_site->fetch_assoc();
 ?>
 
@@ -97,14 +100,14 @@ $arrMenu = array();
           <nav>
             <ul class="nav nav-pills pull-right">
             <?php
-              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$site_id' AND display_menu = 0 ORDER BY menu_order");
+              $result = $mysqli->query("SELECT id, menu_name, display_menu FROM site_menu WHERE site_id = '$site_id' AND display_menu = 0 AND delete_at IS NULL ORDER BY menu_order");
 
             if ($result !== false) {
               foreach($result as $row) {
 
                     $menu_sub_show = 0;
                     $html_sub_menu = "";
-                    $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 ORDER BY menu_order");
+                    $getSubMenu = $mysqli->query("SELECT menu_name FROM site_submenu WHERE main_menu_id = ".$row['id']." AND status_menu = 0 AND delete_at IS NULL ORDER BY menu_order");
                     if ($getSubMenu !== false) {
                         $count = $getSubMenu->num_rows;
                         if (0 < $count) {
@@ -163,6 +166,7 @@ $arrMenu = array();
                                       INNER JOIN site_content ON site_menu.content_id = site_content.id
                                       WHERE menu_name = '$menu' AND
                                       site_id = '$site_id'
+                                      AND site_menu.delete_at IS NULL
                                       ORDER BY site_menu.id");
                     $row = $result->fetch_assoc();
           } else {
@@ -171,6 +175,7 @@ $arrMenu = array();
                                       INNER JOIN site_content ON site_submenu.content_id = site_content.id
                                       WHERE menu_name = '$menu' AND
                                       site_id = '$site_id'
+                                      AND site_submenu.delete_at IS NULL
                                       ORDER BY site_submenu.id");
                     $row = $result->fetch_assoc();
           }

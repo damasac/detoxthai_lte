@@ -36,16 +36,15 @@
     $sql1 = "SELECT * FROM `puser`";
     $query1 = $mysqli->query($sql1);
   }else{
-    $sql1 = "SELECT * FROM `puser` INNER JOIN site_follow ON puser.id = site_follow.user_id WHERE site_follow.site_id='".$site_id."'";
+    $sql1 = "SELECT puser.id,puser.fname,puser.lname,puser.tel FROM `puser` INNER JOIN site_follow ON puser.id = site_follow.user_id WHERE site_follow.site_id='".$site_id."' AND delete_at is NULL ";
     $query1 = $mysqli->query($sql1);
   }
+
 ?>
 <div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
     <?php
-        //print_r($_SESSION);
         $sql2 = "SELECT * FROM `site_detail` WHERE id='".$site_id."' AND create_user='".$_SESSION[SESSIONPREFIX."puser_id"]."' ";
-        //echo $sql2;
         $query2 = $mysqli->query($sql2) or die(mysqli_error($query1));
         $num2 = $query2->num_rows;
     ?>
@@ -54,16 +53,13 @@
         <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
     </span><br><br><br>
     <?php }?>
-
     <table id="userTable" class="table table-hover">
         <thead>
             <tr>
                 <th>ลำดับ</th>
                 <th>ชื่อ</th>
                 <th>เบอร์โทรศัพท์</th>
-                <?php if($num2==1){?>
                 <th>จัดการ</th>
-                <?php }?>
             </tr>
         </thead>
         <tbody>
@@ -73,8 +69,11 @@
                 <td><?php echo $data1["fname"]." ".$data1["lname"];?></td>
                 <td><?php echo $data1["tel"];?></td>
                 <td>
-                    <button class="btn btn-success">กรอกข้อมูล</button>
+                <?php if($num2==1){?>
+                    <button class="btn btn-success" onclick="goForm(<?php echo $data1["id"]; ?>);">กรอกข้อมูล</button>
+                    <button class="btn btn-warning" onclick="leaveSite(<?php echo $data1["id"]; ?>);">ย้ายสมาชิกออกจากศูนย์</button>
                 </td>
+                <?php }?>
             </tr>
             <?php $i++;}?>
         </tbody>
@@ -90,6 +89,25 @@
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <script>
+    function goForm(id) {
+        location.href="../form/index.php?user_id="+id;
+    }
+    function leaveSite(id){
+        var user_id = id;
+        var site_id = <?php echo $site_id;?>;
+        $.post("ball-sql.php?task=leaveSite",
+        {
+          site_id:site_id,
+          user_id : user_id
+        },
+        function(data,status){
+            console.log(data);
+          //if (data==1) {
+          //}else{
+            location.reload();
+          //}
+        });
+    }
     function popup_custom() {
             var site_id = <?php echo $site_id;?>;
             var user_id = <?php echo $_SESSION[SESSIONPREFIX."puser_id"];?>;
