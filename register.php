@@ -1,5 +1,9 @@
 <?php require_once '_theme/util.inc.php';  $MasterPage = 'page_main.php';?>
-
+<?php
+if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+  echo '<meta http-equiv="refresh" content="0;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'">';
+}
+?>
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
