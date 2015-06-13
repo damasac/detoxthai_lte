@@ -1,3 +1,4 @@
 #MySQL configuration
 _connection/*
 sh.exe.stackdump
+*.php
