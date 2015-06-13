@@ -66,15 +66,12 @@
             <span class="glyphicon glyphicon-phone-alt form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="รหัสผ่าน" id="password" name="password"
+            <input type="text" class="form-control" placeholder="รหัสผ่าน" id="password" name="password"
 	    data-toggle="tooltip" data-placement="top" title="ระบุรหัสผ่านตั้งแต่ 6 ตัวขึ้นไป"
 	    /><code id="valPassword" style="display:none;"></code>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-          <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="รหัสผ่านอีกครั้ง" id="password2" name="password2"/><code id="valPassword2" style="display:none;"></code>
-            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-          </div>
+
           <div class="row">
             <div class="col-xs-7">
 
@@ -107,6 +104,7 @@
   function addNewUser() {
     var telUser = $("#telFind").val();
     $("#tel").val(telUser);
+    $("#password").val(telUser);
     $("#formUser").show();
     $("#showUser2").hide();
   }
@@ -180,7 +178,6 @@
     var fname = $("#fname").val();
     var lname = $("#lname").val();
     var password = $("#password").val();
-    var password2 = $("#password2").val();
     var site_id = <?php echo $_GET["site_id"]?>;
     if (fname=="") {
       $("#valFname").show();
@@ -218,14 +215,7 @@
     }else{
       $("#valPassword").hide();
     }
-    if (password2 != password || password2<6) {
-      //code
-      $("#valPassword2").show();
-      $("#valPassword2").html("รหัสผ่านไม่ตรงกัน");
-      return ;
-    }else{
-      $("#valPassword2").hide();
-    }
+   
     goAjaxSave(username,password,tel,fname,lname,site_id);
   }
   function goAjaxSave(username,password,tel,fname,lname,site_id){

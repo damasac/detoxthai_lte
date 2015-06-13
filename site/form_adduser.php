@@ -28,9 +28,22 @@
 	<div class="alert alert-default ">
                     <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
                     <h4>	<i class="icon fa fa-check"></i> ค้นพบผู้ใช้งาน </h4>
-		    Username :: <span id='shwUsername'></span><br>
-		    ชื่อ :: <span id='shwFname'></span><br>
-		    นามสกุล :: <span id='shwLname'></span><br>
+		    <p>Username :: <span id='shwUsername'></span></p>
+		    <p>ชื่อ :: <span id='shwFname'></span></p>
+		    <p>นามสกุล :: <span id='shwLname'></span></p><br>
+		    สถานะการจ่ายเงิน
+		  <div class="radio">
+		    <label>
+		      <input type="radio" name="payment_status" id="payment_status" value="1" >
+			จ่ายเงินแล้ว
+		      </label>
+		  </div>
+		  <div class="radio">
+		    <label>
+		      <input type="radio" name="payment_status" id="payment_status" value="0" checked>
+		      ยังไม่จ่าย
+		    </label>
+		  </div>
 		    <input type="hidden" id="puser_id" name="puser_id" value=""/>
 		    <br>
 		      <button class="btn btn-success " onclick="addUser()">เพิ่มสมาชิกเข้าสู่ศูนย์</button><code id="valAddUser" style="display:none;"></code>
@@ -53,14 +66,17 @@
 
 	</p>
           <div class="form-group has-feedback">
+	    <label>ชื่อ</label>
             <input type="text" class="form-control" placeholder="ชื่อ" id="fname" name="fname"/><code id="valFname" style="display:none;"></code>
             <span class="glyphicon glyphicon-user form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
+	    <label>นามสกุล</label>
             <input type="email" class="form-control" placeholder="นามสกุล" id="lname" name="lname"/><code id="valLname" style="display:none;"></code>
             <span class="glyphicon glyphicon-user form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
+	    <label>เบอร์โทรศัพท์</label>
             <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="tel" name="tel"
 	    data-inputmask="'mask': ['9999999999']" data-mask
 	    data-toggle="tooltip" data-placement="top" title="ใช้แทน Username ในการเข้าสู่ระบบ"/>
@@ -68,15 +84,26 @@
             <span class="glyphicon glyphicon-phone-alt form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="รหัสผ่าน" id="password" name="password"
+	    	    <label>รหัสผ่าน</label>
+            <input type="text" class="form-control" placeholder="รหัสผ่าน" id="password" name="password"
 	    data-toggle="tooltip" data-placement="top" title="ระบุรหัสผ่านตั้งแต่ 6 ตัวขึ้นไป"
 	    /><code id="valPassword" style="display:none;"></code>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-          <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="รหัสผ่านอีกครั้ง" id="password2" name="password2"/><code id="valPassword2" style="display:none;"></code>
-            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-          </div>
+ <label>สถานะการจ่ายเงิน</label>
+		  <div class="radio">
+		    <label>
+		      <input type="radio" name="payment_status2" id="payment_status2" value="1" >
+			จ่ายเงินแล้ว
+		      </label>
+		  </div>
+		  <div class="radio">
+		    <label>
+		      <input type="radio" name="payment_status2" id="payment_status2" value="0" checked>
+		      ยังไม่จ่าย
+		    </label>
+		  </div>
+                  </div>
           <div class="row">
             <div class="col-xs-7">
 
@@ -110,6 +137,7 @@
     //code
     var telUser = $("#telFind").val();
     $("#tel").val(telUser);
+    $("#password").val(telUser);
     $("#formUser").show();
     $("#showUser2").hide();
   }
@@ -117,11 +145,14 @@
       var puser_id = $("#puser_id").val();
       var site_id = <?php echo $_GET["site_id"];?>;
       var schedule_id = <?php echo $_GET["schedule_id"];?>;
+      var payment_status = $("#payment_status:checked").val();
+
             $.post("ball-sql.php?task=addUserFind",
 	    {
 	      schedule_id : schedule_id,
 	      site_id:site_id,
-	      user_id : puser_id
+	      user_id : puser_id,
+	      payment_status : payment_status
 	    },
 	    function(data,status){
 	      if (data==1) {
@@ -176,16 +207,15 @@
       }
     }
      function saveUser() {
-
     //code
     var username = $("#username").val();
     var tel = $("#tel").val();
     var fname = $("#fname").val();
     var lname = $("#lname").val();
     var password = $("#password").val();
-    var password2 = $("#password2").val();
-      var site_id = <?php echo $_GET["site_id"];?>;
-      var schedule_id = <?php echo $_GET["schedule_id"];?>;
+    var payment_status2 = $("#payment_status2:checked").val();
+    var site_id = <?php echo $_GET["site_id"];?>;
+    var schedule_id = <?php echo $_GET["schedule_id"];?>;
 
     if (fname=="") {
       $("#valFname").show();
@@ -223,17 +253,10 @@
     }else{
       $("#valPassword").hide();
     }
-    if (password2 != password || password2<6) {
-      //code
-      $("#valPassword2").show();
-      $("#valPassword2").html("รหัสผ่านไม่ตรงกัน");
-      return ;
-    }else{
-      $("#valPassword2").hide();
-    }
-    goAjaxSave(username,password,tel,fname,lname,site_id,schedule_id);
+
+    goAjaxSave(username,password,tel,fname,lname,payment_status2,site_id,schedule_id);
   }
-  function goAjaxSave(username,password,tel,fname,lname,site_id,schedule_id){
+  function goAjaxSave(username,password,tel,fname,lname,payment_status2,site_id,schedule_id){
       $.ajax({
 		    url: "../usermgn/ajax-sql-query.php?task=addUserNormal2",
 		    type: "post",
@@ -243,6 +266,7 @@
                       tel:tel,
                       fname:fname,
                       lname:lname,
+		      payment_status:payment_status2,
 		      site_id:site_id,
 		      schedule_id:schedule_id
                       },

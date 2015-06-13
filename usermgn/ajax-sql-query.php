@@ -49,9 +49,9 @@
 	    $user_id = $mysqli->insert_id;
 	    $sql2 = "INSERT INTO `site_follow`(site_id,user_id)
 	    VALUES('".$_POST["site_id"]."','".$user_id."')";
-        $query2 = $mysqli->query($sql2) or die(mysqli_error($mysqli));
+	    $query2 = $mysqli->query($sql2) or die(mysqli_error($mysqli));
 	    $sql3 = "INSERT INTO `site_join`(schedule_id,user_id,payment_status,payment_upload_status)
-	    VALUES('".$_POST["schedule_id"]."','".$user_id."','0','0')";
+	    VALUES('".$_POST["schedule_id"]."','".$user_id."','".$_POST["payment_status"]."','0')";
 	    $query3 = $mysqli->query($sql3) or die(mysqli_error($mysqli));
 	}
 

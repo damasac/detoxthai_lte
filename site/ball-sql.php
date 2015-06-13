@@ -13,7 +13,7 @@
         }
     }
     if($task=="addUserFind"){
-        $sqlUser = "SELECT * FROM `site_join` WHERE schedule_id='".$_POST["schedule_id"]."' AND user_id='".$_POST["user_id"]."' AND  ";
+        $sqlUser = "SELECT * FROM `site_join` WHERE schedule_id='".$_POST["schedule_id"]."' AND user_id='".$_POST["user_id"]."'  ";
         $queryUser = $mysqli->query($sqlUser);
 
         $numUser = $queryUser->num_rows;
@@ -22,7 +22,7 @@
             exit;
         }else{
         $sql = "INSERT INTO `site_join`(schedule_id,user_id,payment_status,payment_upload_status)
-        VALUES('".$_POST["schedule_id"]."','".$_POST["user_id"]."','0','0')";
+        VALUES('".$_POST["schedule_id"]."','".$_POST["user_id"]."','".$_POST["payment_status"]."','0')";
         $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
         }
     }
