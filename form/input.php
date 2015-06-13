@@ -168,10 +168,10 @@
     $("#p1a10").click(function(){
     if ($("#p1a10").is(":checked")) {
       $("#tableHide1").fadeOut();
-      $("#p1a10").val("0");
+      $("#p1a10").val("1");
       AutoSave("p1a10",$("#form_id").val());
     }else{
-      $("#p1a10").val("1");
+      $("#p1a10").val("0");
       $("#tableHide1").fadeIn();
       AutoSave("p1a10",$("#form_id").val());
     }

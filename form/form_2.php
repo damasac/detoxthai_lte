@@ -9,13 +9,13 @@
 				<td>
 					<div class="checkbox">
 					  	<label>
-						    <input type="checkbox" id="p2a1" value="<?php echo $dataform["p2a1"]?>" <?php if($dataform["p2a1"]==0){echo "checked";}else{echo "";}?>>
-						    ไม่เคยล้างพิษตับมาก่อน ครั้งนี้เป็นครั้งแรก --> <code>ข้ามไปตอบตอนที่ 3</code>
+						    <input type="checkbox" id="p2a1" value="<?php echo $dataform["p2a1"]?>" <?php if($dataform["p2a1"]==1){echo "checked";}?>>
+						    &nbsp;&nbsp;ไม่เคยล้างพิษตับมาก่อน ครั้งนี้เป็นครั้งแรก --> <code>ข้ามไปตอบตอนที่ 3</code>
 					  	</label>
 					</div>
 					<script>
 						$(function(){
-							if ($("#p2a1").val()==0) {
+							if ($("#p2a1").val()==1) {
 								$("#labelHide2").hide();
 								$("#tableHide2").hide();
 							}else{
@@ -87,32 +87,44 @@
 								<textarea class="form-control" rows="3" id="p2a13b6c1"></textarea>
 							</td>
 						</tr> -->
-						
+					<script>
+						function add_tr(args) {
+                            $('#'+args).fadeIn();
+                        }
+						$(document).ready(function(){
+							$('#section2_1').show();
+						});
+					</script>
 					<?php
 		  			for($i = 1; $i < 19; $i++){
-		  				echo "<tr>
+						if($dataform["p2a13b1c{$i}"] OR $dataform["p2a13b2c{$i}"] OR $dataform["p2a13b3c{$i}"] OR $dataform["p2a13b4c{$i}"] OR $dataform["p2a13b5c{$i}"] OR $dataform["p2a13b6c{$i}"]){
+							$classcss='';
+						}else{
+							$classcss = "divhide";
+						}
+						echo "<tr id='section2_{$i}' class='{$classcss}'>
 							<td>
 					    		<form class='form-inline'>
 								<div class='form-group'>
 								    แก้วที่
-								    <input type='text' class='form-control fix2' id='p2a13b1c".$i."' onblur=AutoSave('p2a13b1c{$i}',$('#form_id').val()) value=".$dataform["p2a13b1c{$i}"].">
+								    <input type='text' class='form-control fix2' onclick=add_tr('section2_".($i+1)."'); id='p2a13b1c".$i."' onblur=AutoSave('p2a13b1c{$i}',$('#form_id').val()) value=".$dataform["p2a13b1c{$i}"].">
 					  			</div>
 					  			</form>
 							</td>
 							<td>
-								<textarea class='form-control' rows='3' id='p2a13b2c".$i."' onblur=AutoSave('p2a13b2c{$i}',$('#form_id').val())>".$dataform["p2a13b2c{$i}"]."</textarea>
+								<textarea class='form-control' rows='3' id='p2a13b2c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b2c{$i}',$('#form_id').val())>".$dataform["p2a13b2c{$i}"]."</textarea>
 							</td>
 							<td>
-								<textarea class='form-control' rows='3' id='p2a13b3c".$i."' onblur=AutoSave('p2a13b3c{$i}',$('#form_id').val())>".$dataform["p2a13b3c{$i}"]."</textarea>
+								<textarea class='form-control' rows='3' id='p2a13b3c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b3c{$i}',$('#form_id').val())>".$dataform["p2a13b3c{$i}"]."</textarea>
 							</td>
 							<td>
-								<textarea class='form-control' rows='3' id='p2a13b4c".$i."' onblur=AutoSave('p2a13b4c{$i}',$('#form_id').val())>".$dataform["p2a13b4c{$i}"]."</textarea>
+								<textarea class='form-control' rows='3' id='p2a13b4c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b4c{$i}',$('#form_id').val())>".$dataform["p2a13b4c{$i}"]."</textarea>
 							</td>
 							<td>
-								<textarea class='form-control' rows='3' id='p2a13b5c".$i."' onblur=AutoSave('p2a13b5c{$i}',$('#form_id').val())>".$dataform["p2a13b5c{$i}"]."</textarea>
+								<textarea class='form-control' rows='3' id='p2a13b5c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b5c{$i}',$('#form_id').val())>".$dataform["p2a13b5c{$i}"]."</textarea>
 							</td>
 							<td>
-								<textarea class='form-control' rows='3' id='p2a13b6c".$i."' onblur=AutoSave('p2a13b6c{$i}',$('#form_id').val())>".$dataform["p2a13b6c{$i}"]."</textarea>
+								<textarea class='form-control' rows='3' id='p2a13b6c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b6c{$i}',$('#form_id').val())>".$dataform["p2a13b6c{$i}"]."</textarea>
 							</td>
 						</tr>";
 					}

@@ -231,7 +231,7 @@
 					    <label>10. โปรดระบุอาการหลักๆ หรือโรคที่ได้รับการวินิจฉัยจากแพทย์</label>
 		  			</div>
 		  			<label class="checkbox-inline">
-					  	<input type="checkbox" id="p1a10" value="<?Php echo $dataform["p1a10"];?>"<?php if($dataform["p1a10"]==0){echo "checked";}else{echo "value='0'";}?>> ไม่มีอาการป่วยใดๆ
+					  	<input type="checkbox" id="p1a10" value="<?php echo $dataform["p1a10"]; ?>" <?php if($dataform["p1a10"]==1){echo "checked";} ?>> &nbsp;&nbsp;ไม่มีอาการป่วยใดๆ
 					</label>
 					<div class="form-group">
 					    <code>--> ข้ามไปตอบข้อ 11</code>
@@ -239,13 +239,23 @@
 					<script>
 						$(function(){
 							if ($("#p1a10").val()==0) {
-								$("#tableHide1").hide();
-							}else{
 								$("#tableHide1").show();
+							}else{
+								$("#tableHide1").hide();
 							}
 							});
 					</script>
 		  			</form>
+					<style>
+						.divhide{
+							display: none;
+						}
+					</style>
+					<script>
+						$(document).ready(function(){
+							$('#p1a10b3c1').show();
+						});
+					</script>
 		  			<table class="table table-bordered table-hover" id="tableHide1">
 		  				<thead>
 		  				<tr class="p3tableheader">
@@ -261,23 +271,31 @@
 		  				echo "<script>
 		  				$(document).ready(function(){
 		  					$('#p1a10b2c".$i."').datepicker();
-
+							
 		  					$('#p1a10b2c{$i}').datepicker().on('hide', function(ev) {
   								AutoSave('p1a10b2c{$i}',$('#form_id').val());
 							});
 							$('input[name=p1a10b3c{$i}]').change(function(e) {
 							  	var val = $(this).val();
 							  	AutoSaveRadio('p1a10b3c{$i}', $('#form_id').val(), val);
+								$('#p1a10b3c".($i+1)."').slideDown();
 							});
 		  				});
 		  				</script>";
 		  				$val = $dataform["p1a10b3c{$i}"];
+						$radioyes1='';
+						$radioyes2='';
 		  				if($dataform["p1a10b3c{$i}"] == "1"){
-		  					$radioyes = " checked";
+		  					$radioyes1 = " checked";
+							$classcss = '';
+		  				}else if($dataform["p1a10b3c{$i}"] == "2"){
+		  					$radioyes2 = " checked";
+							$classcss = '';
 		  				}else{
-		  					$radiono = " checked";
+		  					//$radiono = " checked";
+							$classcss = "divhide";
 		  				}
-		  				echo "<tr>
+		  				echo "<tr id='p1a10b3c{$i}' class='{$classcss}'>
 		  					<td>
 		  						<textarea class='form-control' rows='3' id='p1a10b1c".$i."' onblur=AutoSave('p1a10b1c{$i}',$('#form_id').val())>".$dataform["p1a10b1c{$i}"]."</textarea>
 		  					</td>
@@ -288,13 +306,13 @@
 		  						<form class='form-inline'>
 									<div class='radio'>
 									  	<label>
-									    	<input type='radio' name='p1a10b3c".$i."' id='codeerror".$i."' value='1' ".$radioyes.">
-									    	ใช่ {$val}
+									    	<input type='radio' name='p1a10b3c".$i."' id='codeerror".$i."' value='1' ".$radioyes1.">
+									    	ใช่
 									  	</label>
 									</div>
 									<div class='radio'>
 									  	<label>
-									    	<input type='radio' name='p1a10b3c".$i."' id='codeerror".$i."' value='2' ".$radiono.">
+									    	<input type='radio' name='p1a10b3c".$i."' id='codeerror".$i."' value='2' ".$radioyes2.">
 									    	ไม่ใช่
 									  	</label>
 									</div>

@@ -13,6 +13,11 @@
                     </tr>
                     <tr>
                         <td>
+                            <script>
+                                $(document).ready(function(){
+                                    $('#section5_1').show();
+                                });
+                            </script>
                                 <table class="table table-striped table-bordered table-hover" style="width:100%;">
                                     <thead>
                                         <tr>
@@ -29,23 +34,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php for($i=1;$i<=9;$i++){?>
-                                        <tr>
+                                    <?php for($i=1;$i<=9;$i++){
+                                    if($dataform["p5a21g{$i}c1"] OR $dataform["p5a21g{$i}c2"] OR $dataform["p5a21g{$i}c3"] OR $dataform["p5a21g{$i}c4"] OR $dataform["p5a21g{$i}c5"]){
+                                        $classcss='';
+                                    }else{
+                                        $classcss = "divhide";
+                                    }
+                                    ?>
+                                        <tr id='section5_<?php echo $i; ?>' class='<?php echo $classcss; ?>'>
                                             <td class="text-center">แก้วที่ <?php echo $i;?></td>
                                             <td  class="text-center">
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c1" cols="10"
+                                                onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                 onblur="AutoSave('<?php echo "p5a21g".$i."c1";?>',$('#form_id').val())"><?php echo $dataform["p5a21g".$i."c1"];?></textarea></td>
                                             <td  class="text-center">
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c2" cols="10"
+                                                onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c2";?>',$('#form_id').val())"><?php echo $dataform["p5a21g".$i."c2"];?></textarea></td>
                                             <td  class="text-center">
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c3" cols="10"
+                                                onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                onblur="AutoSave('<?php echo "p5a21g".$i."c3";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c3"];?></textarea></td>
                                             <td  class="text-center">
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c4" cols="10"
+                                                onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c4";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c4"];?></textarea></td>
                                             <td  class="text-center">
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c5" cols="10"
+                                                onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c5";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c5"];?> </textarea></td>
                                         </tr>
                                     <?php }?>

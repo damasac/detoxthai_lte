@@ -19,7 +19,7 @@
                                 <div><input type="radio" name="p6a26" id="p6a26" value="3" <?php if($dataform["p6a26"]==3){echo "checked";}else{echo "";}?>><sub>3</sub> ทำแน่นอน โดยจะทำด้วยตนเองเองที่บ้าน</div>
                                 <div><input type="radio" name="p6a26" id="p6a26" value="4" <?php if($dataform["p6a26"]==4){echo "checked";}else{echo "";}?>><sub>4</sub> ยังไม่แน่ใจ</div>
                                 <div><input type="radio" name="p6a26" id="p6a26" value="5" <?php if($dataform["p6a26"]==5){echo "checked";}else{echo "";}?>><sub>5</sub> จะไม่ทำอีกเลย เพราะ</div>
-                                <br><input type="text" class="form-control" name="p6a26q1" id="p6a26q1" onblur="AutoSave('p6a26q1',$('#form_id').val())" value="<?php echo $dataform["p6a26q1"];?>">
+                                <br><input type="text" placeholder="เพราะ..." class="form-control" name="p6a26q1" id="p6a26q1" onblur="AutoSave('p6a26q1',$('#form_id').val())" value="<?php echo $dataform["p6a26q1"];?>">
                             </div>
                             </td>
                         </tr>
@@ -37,7 +37,7 @@
                                 <div><input type="radio" name="p6a27" id="p6a27" value="2" <?php if($dataform["p6a27"]==2){echo "checked";}else{echo "";}?>><sub>2</sub> ยังไม่แน่ใจ</div>
                                 <div><input type="radio" name="p6a27" id="p6a27" value="3" <?php if($dataform["p6a27"]==3){echo "checked";}else{echo "";}?>><sub>3</sub> ไม่แนะนำเลย เพราะ</div>
                                 <br>
-                                <input type="text" class="form-control" name="p6a27q1" id="p6a27q1" onblur="AutoSave('p6a27q1',$('#form_id').val())" value="<?php echo $dataform["p6a27q1"];?>">
+                                <input type="text" placeholder="เพราะ..." class="form-control" name="p6a27q1" id="p6a27q1" onblur="AutoSave('p6a27q1',$('#form_id').val())" value="<?php echo $dataform["p6a27q1"];?>">
                             </div>
                             </td>
                         </tr>
