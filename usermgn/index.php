@@ -42,6 +42,9 @@ $MasterPage = 'page_main.php';?>
   }
 
 ?>
+<?php
+    print_r($_SESSION);
+?>
 <div class="box box-primary dir
 ect-chat direct-chat-primary">
 <div class="box-header">
@@ -114,10 +117,10 @@ ect-chat direct-chat-primary">
         },
         function(data,status){
             console.log(data);
-          if (data==1) {
-          }else{
+          //if (data==1) {
+          //}else{
             location.reload();
-          }
+          //}
         });
     }
     function popup_custom() {
