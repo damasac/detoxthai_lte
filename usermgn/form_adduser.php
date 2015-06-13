@@ -105,7 +105,6 @@
 </script>
 <script>
   function addNewUser() {
-    //code
     var telUser = $("#telFind").val();
     $("#tel").val(telUser);
     $("#formUser").show();
