@@ -45,14 +45,14 @@
         }
         
     }
-    if($task="saveSession"){
+    if($task=="saveSession"){
         $_SESSION["dtt_user_form"] = $_POST["user_id"];
     }
-    if($task=="leaveSite"){
-        echo "OK!";
-        $sql = "UPDATE `site_follow` SET delete_at=NOW() WHERE site_id='".$_POST["site_id"]."' AND user_id='".$_POST["user_id"]."' ";
+    if($task=="outSite"){
         
-        $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
+        $sql = "UPDATE `site_follow` SET delete_at=NOW() WHERE site_id='".$_POST["site_id"]."' AND user_id='".$_POST["user_id"]."' ";
+
+        $query = $mysqli->query($sql) or die(mysql_error($mysqli));
 
     }
 ?>

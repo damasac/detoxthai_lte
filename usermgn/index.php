@@ -40,7 +40,6 @@ $MasterPage = 'page_main.php';?>
     $sql1 = "SELECT puser.id,puser.fname,puser.lname,puser.tel FROM `puser` INNER JOIN site_follow ON puser.id = site_follow.user_id WHERE site_follow.site_id='".$site_id."' AND delete_at is NULL ";
     $query1 = $mysqli->query($sql1);
   }
-
 ?>
 <div class="box box-primary dir
 ect-chat direct-chat-primary">
@@ -107,7 +106,7 @@ ect-chat direct-chat-primary">
     function leaveSite(id){
         var user_id = id;
         var site_id = <?php echo $site_id;?>;
-        $.post("ball-sql.php?task=leaveSite",
+        $.post("ball-sql.php?task=outSite",
         {
           site_id:site_id,
           user_id : user_id
