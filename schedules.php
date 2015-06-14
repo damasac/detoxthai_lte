@@ -1,3 +1,18 @@
+<?php
+isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
+
+$site_name = explode(".",$_SERVER['SERVER_NAME']);
+$sub_domain =  $site_name[sizeof($site_name) - 3];
+
+//$all = $_GET['site'];
+isset($_GET['site']) ? $all = $_GET['site'] :  $all = '';
+
+if('' == $all){
+  if ("www" === $sub_domain) {
+      header('Location: schedules.php?site=all');
+  }
+}
+?>
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
@@ -16,7 +31,7 @@
 <?php eb();?>
 
 <?php sb('notifications');?>
-  <?php include_once 'notifications.php'; ?>
+<?php include_once 'notifications.php'; ?>
 <?php eb();?>
 
 <?php
@@ -30,24 +45,7 @@ function getDateThai($strDate)
   return "$strDay $strMonthThai $strYear";
 }
 
-isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
-
-$site_name = explode(".",$_SERVER['SERVER_NAME']);
-$sub_domain =  $site_name[sizeof($site_name) - 3];
-
-//$all = $_GET['site'];
-isset($_GET['site']) ? $all = $_GET['site'] :  $all = '';
-
-if('' == $all){
-  if ("www" === $sub_domain) {
-          //header('Location: index.php?site=all');
-    echo "<script>
-    window.location.href = 'schedules.php?site=all';
-  </script>";
-}
-}
-
 
 ?>
 
@@ -101,104 +99,104 @@ if('' == $all){
       <p></p>
       <br/><br/>
       <div id="show_table">
-      <table class="table table-bordered" id="show_content">
-        <tr class="active">
-          <th>
-            ลำดับ
-          </th>
-          <th>
-            วันที่
-          </th>
-          <th>
-            ชื่อหลักสูตร
-          </th>
-          <th>
-            จำนวนที่รับ
-          </th>
-          <th>
-            ราคา/คน
-          </th>
-          <th>
-            รายละเอียด
-          </th>
-        </tr>
-        <?php
-        $count = 1;
-        $script = "";
-        $modal = "";
+        <table class="table table-bordered" id="show_content">
+          <tr class="active">
+            <th>
+              ลำดับ
+            </th>
+            <th>
+              วันที่
+            </th>
+            <th>
+              ชื่อหลักสูตร
+            </th>
+            <th>
+              จำนวนที่รับ
+            </th>
+            <th>
+              ราคา/คน
+            </th>
+            <th>
+              รายละเอียด
+            </th>
+          </tr>
+          <?php
+          $count = 1;
+          $script = "";
+          $modal = "";
         // prepare and query (direct)
-        $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE delete_at IS NULL ORDER BY id");
-        if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
+          $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE delete_at IS NULL ORDER BY id");
+          if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
 
-            $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
-              FROM site_join
-              WHERE schedule_id = '".$row['id']."'
-              AND user_id = '".$session."'");
-            $row_check = $result_check->fetch_assoc();
+              $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
+                FROM site_join
+                WHERE schedule_id = '".$row['id']."'
+                AND user_id = '".$session."'");
+              $row_check = $result_check->fetch_assoc();
 
             //echo $row_check['join_status'];
 
-            if (0 < $row_check['join_status']) {
-              if (0 == $row_check['payment_upload_status']) {
+              if (0 < $row_check['join_status']) {
+                if (0 == $row_check['payment_upload_status']) {
                 //echo $row_check['payment_upload_status'];
-                $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
-                <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+                  $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                  <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+                } else {
+                  $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                  <a type='button' class='btn btn-success btn-flat'>การจ่ายเงินเรียบร้อยแล้ว</a>";
+                }
               } else {
-                $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
-                <a type='button' class='btn btn-success btn-flat'>การจ่ายเงินเรียบร้อยแล้ว</a>";
+                $btn_join = "<a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>";
               }
-            } else {
-              $btn_join = "<a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>";
-            }
 
-            echo "<tr>
-            <td>".$count."</td>
-            <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
-            <td>".$row['schedule_name']."</td>
-            <td>".$row['user_qty']." คน</td>
-            <td>".number_format($row['price_per_person'])." บาท</td>
-            <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
-          </tr>";
+              echo "<tr>
+              <td>".$count."</td>
+              <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
+              <td>".$row['schedule_name']."</td>
+              <td>".$row['user_qty']." คน</td>
+              <td>".number_format($row['price_per_person'])." บาท</td>
+              <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
+            </tr>";
 
-          $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-          <div class='modal-dialog modal-lg'>
-            <div class='modal-content'>
-              <div class='modal-header'>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                <h4 class='modal-title' id='myModalLabel'>
-                  รายละเอียด
-                </h4>
-              </div>
-              <div class='modal-body'>
-                <p class='text-right'>
-                  ".$btn_join."
-                </p>
-                <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
-                <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
-                <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
-                <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
-                <p><strong>รายละเอียด :<hr/></strong><p>
-                  <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
-                  <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
-                    <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
-                    <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
-                      <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
-                    </div>
-                    <div class='modal-footer'>
-                      <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+            $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-lg'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  <h4 class='modal-title' id='myModalLabel'>
+                    รายละเอียด
+                  </h4>
+                </div>
+                <div class='modal-body'>
+                  <p class='text-right'>
+                    ".$btn_join."
+                  </p>
+                  <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
+                  <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
+                  <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
+                  <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
+                  <p><strong>รายละเอียด :<hr/></strong><p>
+                    <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
+                    <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
+                      <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
+                      <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
+                        <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
+                      </div>
+                      <div class='modal-footer'>
+                        <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>";
-              $script .= "$('#detail".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
+                </div>";
+                $script .= "$('#detail".$count."').sceditor({
+                  plugins: 'bbcode',
+                  width: '98%',
+                  toolbar: 'justify',
+                  readOnly: 'true',
+                  resizeEnabled: false,
+                  style: 'edit/minified/jquery.sceditor.default.min.css'
+                });";
 $script .= "$('#payment".$count."').sceditor({
   plugins: 'bbcode',
   width: '98%',
@@ -413,28 +411,28 @@ echo $modal;
           site_id: '<?php echo $site_id; ?>',
         },
         function(data,status){
-                      location.reload();
-                    });
+          location.reload();
+        });
       }
     });
 
 $("#sch").change(function(){
   var sch = $("#sch").val();
   if (0 == sch) {
-      window.location.assign("schedules.php?site=all")
-    }else{
-     $.post("schedule/schedule_api.php",
-     {
-      site_url: sch,
-    },
-    function(data,status){
-              var res = data.split(":codeerror:");
-              console.log(res);
-              $('#show_table').html(res[0]);
-              var res_script = res[1].split(":codeerror_script:");
-              $('#show_modal').html(res[1]);
-            });
-   }
+    window.location.assign("schedules.php?site=all")
+  }else{
+   $.post("schedule/schedule_api.php",
+   {
+    site_url: sch,
+  },
+  function(data,status){
+    var res = data.split(":codeerror:");
+    console.log(res);
+    $('#show_table').html(res[0]);
+    var res_script = res[1].split(":codeerror_script:");
+    $('#show_modal').html(res[1]);
+  });
+ }
 });
 
 <?php echo $script; ?>

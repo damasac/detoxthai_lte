@@ -1,3 +1,40 @@
+<?php include_once "_connection/db_base.php"; ?>
+<?php
+isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
+
+/** Get sub domain. */
+$site_id = explode(".",$_SERVER['SERVER_NAME']);
+$sub_domain =  $site_id[sizeof($site_id) - 3];
+
+if ('www' == $sub_domain) {
+  $site_id = 1;
+} else {
+  $result = $mysqli->query("SELECT id
+          FROM site_detail
+          WHERE site_url = '$sub_domain'
+          AND delete_at IS NULL");
+  $row_id = $result->fetch_assoc();
+  $site_id = $row_id['id'];
+}
+
+if ('' == $menu) {
+    $result = $mysqli->query("SELECT menu_name
+    FROM site_menu
+    WHERE site_id = '$site_id'
+    AND display_menu = 0
+    AND delete_at IS NULL
+    ORDER BY menu_order");
+    $row = $result->fetch_assoc();
+    $count = $result->num_rows;
+    if (0 == $count) {
+        $menu_exit = 0;
+    } else {
+        header("Location: home.php?menu=".$row['menu_name']."&site_id=".$site_id);
+    }
+} else {
+    $menu_exit = 1;
+}
+?>
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
@@ -15,53 +52,11 @@
   <?php include_once 'notifications.php'; ?>
 <?php eb();?>
 
-<?php include_once "_connection/db_base.php"; ?>
-
-<?php
-  /** Get sub domain. */
-  $site_id = explode(".",$_SERVER['SERVER_NAME']);
-  $sub_domain =  $site_id[sizeof($site_id) - 3];
-
-  if ('www' == $sub_domain) {
-    $site_id = 1;
-  } else {
-    $result = $mysqli->query("SELECT id
-            FROM site_detail
-            WHERE site_url = '$sub_domain'
-            AND delete_at IS NULL");
-    $row_id = $result->fetch_assoc();
-    $site_id = $row_id['id'];
-  }
-
-?>
-
 <?php sb('content');?>
 
 <?php
 
-isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
 isset($_GET['sub_menu']) ? $sub_menu = $_GET['sub_menu'] :  $sub_menu = 0;
-
-
-if ('' == $menu) {
-    $result = $mysqli->query("SELECT menu_name
-    FROM site_menu
-    WHERE site_id = '$site_id'
-    AND display_menu = 0
-    AND delete_at IS NULL
-    ORDER BY menu_order");
-    $row = $result->fetch_assoc();
-    $count = $result->num_rows;
-    if (0 == $count) {
-        $menu_exit = 0;
-    } else {
-        echo "<script>
-               window.location.href = 'home.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
-              </script>";
-    }
-} else {
-    $menu_exit = 1;
-}
 
 $edit_show = 1;
 $arrMenu = array();

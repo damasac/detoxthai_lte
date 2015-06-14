@@ -57,7 +57,7 @@
             ลำดับ
           </th>
           <th>
-            ชื่อศูนย์/ลิ้งค์
+            ลิ้งค์
           </th>
           <th>
             ที่ตั้ง
@@ -97,13 +97,13 @@
         if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
             echo "<tr><td>".$count."</td>
-            <td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td>
-            <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-wrench'></a></td>
-            <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-calendar'></a></td>
-            <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-user-plus'></a></td>
+            <td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td><td>".$row['address']."</td>
+            <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหน้าเว็บ</a></td>
+            <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a></td>
+            <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>
             <td>
-              <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'><i class='fa fa-fw fa-pencil'></i></button>
-              <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'><i class='fa fa-fw fa-trash'></i></a>
+              <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
+              <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
             </td>
           </tr>";
 
@@ -337,7 +337,7 @@ $count++;
       ลำดับ
     </th>
     <th>
-      ชื่อศูนย์/ลิ้งค์
+      ลิ้งค์
     </th>
     <th>
       ที่ตั้ง
@@ -375,9 +375,9 @@ $count++;
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           echo "<tr><td>".$count_exit."</td>
-          <td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>".$row['site_name']."</a></td><td>".$row['address']."</td>
-          <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-wrench'></a></td>
-          <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-calendar'></a></td>
+          <td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td><td>".$row['address']."</td>
+          <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหน้าเว็บ</a></td>
+          <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a></td>
         </tr>";
 
       }

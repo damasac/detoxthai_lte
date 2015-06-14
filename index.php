@@ -1,3 +1,26 @@
+<?php include_once "_connection/db_base.php"; ?>
+<?php
+/** Fixed. id */
+$site_id = 1;
+isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
+
+if ('' == $menu) {
+  $result = $mysqli->query("SELECT menu_name
+    FROM site_menu
+    WHERE site_id = '$site_id'
+    AND display_menu = 0
+    ORDER BY menu_order");
+  $row = $result->fetch_assoc();
+  $count = $result->num_rows;
+  if (0 == $count) {
+    $menu_exit = 0;
+  } else {
+    header("Location: index.php?menu=".$row['menu_name']."&site_id=".$site_id);
+}
+} else {
+  $menu_exit = 1;
+}
+?>
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php
@@ -26,14 +49,6 @@ if (!isset($detoxthai)) {
 </style>
 <?php eb();?>
 
-<?php include_once "_connection/db_base.php"; ?>
-
-<?php
-
-/** Fixed. id */
-$site_id = 1;
-?>
-
 <?php sb('notifications');?>
   <?php include_once 'notifications.php'; ?>
 <?php eb();?>
@@ -42,28 +57,7 @@ $site_id = 1;
 
 <?php
 
-isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
 isset($_GET['sub_menu']) ? $sub_menu = $_GET['sub_menu'] :  $sub_menu = 0;
-
-
-if ('' == $menu) {
-  $result = $mysqli->query("SELECT menu_name
-    FROM site_menu
-    WHERE site_id = '$site_id'
-    AND display_menu = 0
-    ORDER BY menu_order");
-  $row = $result->fetch_assoc();
-  $count = $result->num_rows;
-  if (0 == $count) {
-    $menu_exit = 0;
-  } else {
-    echo "<script>
-    window.location.href = 'index.php?menu=".$row['menu_name']."&site_id=".$site_id."'".";
-  </script>";
-}
-} else {
-  $menu_exit = 1;
-}
 
 $edit_show = 1;
 $arrMenu = array();

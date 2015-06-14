@@ -20,11 +20,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    ค่ายล้างพิษตับ
-    <small>สร้างหรือจัดการค่ายล้างพิษตับ</small>
+    ค่ายล้างพิษ
+    <small>สร้างหรือจัดการค่ายล้างพิษ</small>
   </h1>
   <ol class="breadcrumb">
-    <li class="active"><i class="fa fa-tachometer"></i> ค่ายล้างพิษตับ</li>
+    <li class="active"><i class="fa fa-tachometer"></i> ค่ายล้างพิษ</li>
   </ol>
 </section>
 
@@ -33,7 +33,7 @@
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">ค่ายล้างพิษตับทั้งหมด</h3>
+      <h3 class="box-title">ค่ายล้างพิษทั้งหมด</h3>
     </div>
     <div class="box-body">
       <?php
@@ -53,7 +53,7 @@
             ลำดับ
           </th>
           <th>
-            ชื่อศูนย์/ลิ้งค์
+            ลิ้งค์
           </th>
           <th>
             ที่ตั้ง
@@ -90,7 +90,7 @@
             }
 
             echo "<tr>
-                  <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/wp-content/site/site.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+                  <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
                   <td>".$row['address']."</td>
                   <td>".$btn_follow."</td>
                   </tr>";
