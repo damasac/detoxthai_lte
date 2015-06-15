@@ -36,13 +36,16 @@ $table = "<table class='table table-bordered' id='show_content'>
     <th>
         รายละเอียด
     </th>
+    <th>
+    </th>
 </tr>";
 
 $count = 1;
 $script = "";
 $modal = "";
+$btn_edit = "";
         // prepare and query (direct)
-$result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE site_id = '".$site_url."' ORDER BY id");
+$result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment, site_id FROM site_schedule WHERE site_id = '".$site_url."' ORDER BY id");
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
 
@@ -52,7 +55,17 @@ if ($result->num_rows > 0) {
       AND user_id = '".$session."'");
     $row_check = $result_check->fetch_assoc();
 
-            //echo $row_check['join_status'];
+    $result_check_edit = $mysqli->query("SELECT count(*) AS edit_status
+                FROM site_schedule
+                WHERE user_id = '".$session."'
+                AND site_id = '".$row['site_id']."'");
+    $result_check_edit = $result_check_edit->fetch_assoc();
+
+    if (0 < $result_check_edit['edit_status']) {
+      $btn_edit = "<a type='button' href='site/site_schedule.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a>";
+    } else {
+      $btn_edit = "";
+    }
 
     if (0 < $row_check['join_status']) {
       if (0 == $row_check['payment_upload_status']) {
@@ -74,6 +87,7 @@ $table .= "<tr>
 <td>".$row['user_qty']." คน</td>
 <td>".number_format($row['price_per_person'])." บาท</td>
 <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal_gen".$count."'>รายละเอียด</button></td>
+<td>".$btn_edit."</td>
 </tr>";
 
 $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal_gen".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
