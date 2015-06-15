@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2015 at 10:18 AM
+-- Generation Time: Jun 15, 2015 at 12:25 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -70,6 +70,8 @@ CREATE TABLE IF NOT EXISTS `site_detail` (
   `site_postal_code` int(11) NOT NULL,
   `site_telephone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `site_mobile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `lat` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `lng` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `create_user` int(11) NOT NULL,
   `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `delete_at` timestamp NULL DEFAULT NULL
@@ -79,9 +81,9 @@ CREATE TABLE IF NOT EXISTS `site_detail` (
 -- Dumping data for table `site_detail`
 --
 
-INSERT INTO `site_detail` (`id`, `site_name`, `site_url`, `site_province`, `site_amphur`, `site_district`, `site_house_no`, `site_village_no`, `site_muban`, `site_postal_code`, `site_telephone`, `site_mobile`, `create_user`, `create_date`, `delete_at`) VALUES
-(1, 'ศูนย์หลัก', 'main', 0, 0, 0, '', 0, '', 0, '', '', 3, '2015-06-12 12:56:22', NULL),
-(2, 'ไอมิวสุขภาพดี', 'imu', 0, 0, 0, '', 0, '', 0, '', '', 1, '2015-06-14 09:55:22', NULL);
+INSERT INTO `site_detail` (`id`, `site_name`, `site_url`, `site_province`, `site_amphur`, `site_district`, `site_house_no`, `site_village_no`, `site_muban`, `site_postal_code`, `site_telephone`, `site_mobile`, `lat`, `lng`, `create_user`, `create_date`, `delete_at`) VALUES
+(1, 'ศูนย์หลัก', 'main', 0, 0, 0, '', 0, '', 0, '', '', '0', '0', 3, '2015-06-12 12:56:22', NULL),
+(2, 'ไอมิวสุขภาพดี', 'imu', 0, 0, 0, '', 0, '', 0, '', '', '0', '0', 1, '2015-06-14 09:55:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,14 +114,15 @@ CREATE TABLE IF NOT EXISTS `site_join` (
   `image_path` text COLLATE utf8_unicode_ci NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `delete_at` timestamp NULL DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `site_join`
 --
 
 INSERT INTO `site_join` (`id`, `schedule_id`, `user_id`, `payment_status`, `payment_upload_status`, `image_path`, `create_at`, `delete_at`) VALUES
-(31, 31, 1, 0, 0, '', '2015-06-15 07:57:10', NULL);
+(34, 31, 1, 1, 1, 'uploads/2015_06_15_ANljnGZiBfxzCUXvVHqErsJpKgIYtF.jpg', '2015-06-15 08:40:57', NULL),
+(33, 32, 1, 0, 1, 'uploads/2015_06_15_CrnPvUspHBbcZakYGJfENdjuStzQyo.jpg', '2015-06-15 08:36:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -198,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `site_schedule` (
 --
 
 INSERT INTO `site_schedule` (`id`, `schedule_name`, `schedule_date`, `schedule_end_date`, `user_qty`, `price_per_person`, `schedule_desc`, `schedule_payment`, `schedule_after_payment`, `site_id`, `user_id`, `create_at`, `delete_at`) VALUES
-(31, 'ทดสอบ', '2015-06-15', '2015-06-15', 20, 12000, '', '', '', 2, 1, '2015-06-15 07:54:31', NULL),
+(31, 'ทดสอบ', '2015-06-15', '2015-06-15', 19, 12000, '', '', '', 2, 1, '2015-06-15 07:54:31', NULL),
 (32, 'ทดสอบ 2 ', '2015-06-15', '2015-06-15', 20, 20000, '[color=#ffcc33][size=7]หกดหก[/size][/color]', '[color=#6699ff][size=7]หกด[/size][/color]', '[color=#cc3399][size=7]หกด[/size][/color]', 1, 3, '2015-06-15 08:07:27', NULL);
 
 -- --------------------------------------------------------
@@ -304,7 +307,7 @@ ALTER TABLE `site_follow`
 -- AUTO_INCREMENT for table `site_join`
 --
 ALTER TABLE `site_join`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `site_manage_user`
 --
