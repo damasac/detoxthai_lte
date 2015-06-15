@@ -32,7 +32,7 @@ $result = $mysqli->query("SELECT site_schedule.schedule_name, site_join.schedule
 
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
-    array_push($notificationArray, array("url" => "http://".$_SERVER['SERVER_NAME']."/".APP_WEBROOT."site/transfer_confirm.php?schedule_id=".$row['schedule_id'], "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "เข้าร่วมหลักสูตร <strong>".$row['schedule_name']."</strong> เรียบร้อย"));
+    array_push($notificationArray, array("url" => "#", "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "เข้าร่วมหลักสูตร <strong>".$row['schedule_name']."</strong> เรียบร้อย"));
   }
 }
 

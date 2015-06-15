@@ -116,11 +116,10 @@ $num2 = $query2->num_rows;
                     <h4 class='modal-title' id='myModalLabel'>ภาพ</h4>
                   </div>
                   <div class='modal-body'>
-                    <img src='uploads/".$row['image_path']."' class='img-rounded img-responsive'>
+                    <img src='".$row['image_path']."' class='img-rounded img-responsive'>
                   </div>
                   <div class='modal-footer'>
                     <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-                    <button type='button' class='btn btn-primary'>Save changes</button>
                   </div>
                 </div>
               </div>
