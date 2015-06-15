@@ -89,6 +89,9 @@ ect-chat direct-chat-primary">
 <link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<script src="../_plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../_plugins/datatables/dataTables.bootstrap.min.js"></script>
+<link href="../_plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <script>
     function goForm(id) {
         $.post("ball-sql.php?task=saveSession",
@@ -112,7 +115,6 @@ ect-chat direct-chat-primary">
           user_id : user_id
         },
         function(data,status){
-            console.log(data);
           if (data==1) {
           }else{
             location.reload();
@@ -196,9 +198,6 @@ ect-chat direct-chat-primary">
         }
 
 </script>
-<script src="../_plugins/dataTables/jquery.dataTables.min.js"></script>
-<script src="../_plugins/dataTables/dataTables.bootstrap.min.js"></script>
-<link href="../_plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <?php eb();?>
 
 <?php render($MasterPage);?>
