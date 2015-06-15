@@ -76,7 +76,7 @@ if (0 == $row['check_secu'] && $check_point) {
         </tr>
         <?php
         $count = 1;
-        $result = $mysqli->query("SELECT username, CONCAT(  fname, ' ', lname) AS name
+        $result = $mysqli->query("SELECT username, site_id, user_id
           FROM site_manage_user
           JOIN puser ON site_manage_user.user_id = puser.id
           WHERE site_id = $site_id");
@@ -89,9 +89,9 @@ if (0 == $row['check_secu'] && $check_point) {
             echo "<td>".$row['username']."</td>";
             //echo "<td>".$row['name']."</td>";
             echo "<td>
-            <button class='btn btn-danger btn-flat' id='btndel'>
-              <i class='fa fa-fw fa-trash'></i>
-            </button>
+            <a href='delete_site_manage_user.php?site_id=".$row['site_id']."&user_id=".$row['user_id']."' class='btn btn-danger btn-flat' id='btndel'>
+              ลบ
+            </a>
             </td>";
             echo "</tr>";
 
@@ -104,8 +104,9 @@ if (0 == $row['check_secu'] && $check_point) {
       <div class="col-sm-offset-4 col-sm-4 text-center">
         <div class="btn-group">
           <select class="form-control" id="user_id">
+            <option value="">เลือก</option>
             <?php
-            $result = $mysqli->query("SELECT id, username FROM puser");
+            $result = $mysqli->query("SELECT id, username FROM puser WHERE id != '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
 
             if ($result->num_rows > 0) {
               while($row = $result->fetch_assoc()) {
@@ -129,31 +130,35 @@ if (0 == $row['check_secu'] && $check_point) {
 <script>
   $(document).ready(function(){
     $("#save").click(function(){
-      $.post("create_site_manage_user.php",
-      {
-        site_id: <?php echo $site_id; ?>,
-        user_id: $('#user_id').val(),
-      },
-      function(data,status){
-        if (!data) {
-          location.reload();
-        }else{
-          alert(data);
-        }
-      });
+      if ( 0 != $('#user_id').val() || '' != $('#user_id').val()) {
+        $.post("create_site_manage_user.php",
+        {
+          site_id: <?php echo $site_id; ?>,
+          user_id: $('#user_id').val(),
+        },
+        function(data,status){
+          if (!data) {
+            location.reload();
+          }else{
+            alert(data);
+          }
+        });
+      } else {
+      alert('กรุราเลือกผุ้ใช้');
+      }
     });
 
-    $("#btndel").click(function(){
-      $.post("delete_site_manage_user.php",
-      {
-        site_id: <?php echo $site_id; ?>,
-        user_id: $('#user_id').val(),
-      },
-      function(data,status){
-        location.reload();
-      });
+  /*$("#btndel").click(function(){
+    $.post("delete_site_manage_user.php",
+    {
+      site_id: <?php echo $site_id; ?>,
+      user_id: $('#user_id').val(),
+    },
+    function(data,status){
+      location.reload();
     });
-  });
+  });*/
+});
 </script>
 <?php eb();?>
 
