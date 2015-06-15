@@ -1,4 +1,6 @@
 <?php
+$length = 30;
+$randomString = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
 
 $user_id = $_POST['user_id'];
 $schedule_id = $_POST['schedule_id'];
@@ -7,6 +9,9 @@ $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+$target_file = $target_dir.date("Y_m_d").'_'.$randomString.'.'.$imageFileType;
+
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
