@@ -44,7 +44,7 @@ $modal = "";
         // prepare and query (direct)
 $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE site_id = '".$site_url."' ORDER BY id");
 if ($result->num_rows > 0) {
-  foreach($result as $row) {
+  while($row = $result->fetch_assoc()) {
 
     $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
       FROM site_join

@@ -82,7 +82,7 @@
         $script = "";
         $script_address = "";
 
-        $result = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
+        $result_site = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
           site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
           FROM site_detail
           LEFT JOIN const_district ON site_district = DISTRICT_ID
@@ -93,9 +93,11 @@
           ORDER BY id");
         //$result->execute();
         $count = 1;
-                // display it
-        if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
+
+        // display it
+        if ($result_site->num_rows > 0) {
+          while($row = $result_site->fetch_assoc()) {
+            //print_r($row);
             echo "<tr><td>".$count."</td>
             <td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td><td>".$row['address']."</td>
             <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหน้าเว็บ</a></td>
