@@ -60,6 +60,9 @@
             ลิ้งค์
           </th>
           <th>
+            ชื่อศูนย์
+          </th>
+          <th>
             ที่ตั้ง
           </th>
           <th>
@@ -99,7 +102,9 @@
           while($row = $result_site->fetch_assoc()) {
             //print_r($row);
             echo "<tr><td>".$count."</td>
-            <td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td><td>".$row['address']."</td>
+            <td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+            <td>".$row['site_name']."</td>
+            <td>".$row['address']."</td>
             <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหน้าเว็บ</a></td>
             <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a></td>
             <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>

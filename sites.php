@@ -56,6 +56,9 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
             ลิ้งค์
           </th>
           <th>
+            ชื่อศูนย์
+          </th>
+          <th>
             ที่ตั้ง
           </th>
           <th></th>
@@ -91,6 +94,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
 
             echo "<tr>
             <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+            <td>".$row['site_name']."</td>
             <td>".$row['address']."</td>
             <td>".$btn_follow."</td>
           </tr>";
