@@ -7,14 +7,14 @@
 <?php eb();?>
 
 <?php sb('notifications');?>
-  <?php include_once 'notifications.php'; ?>
+<?php include_once 'notifications.php'; ?>
 <?php eb();?>
 
 <?php sb('content');?>
 <?php include_once "_connection/db_base.php"; ?>
 
 <?php
-  isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 ?>
 
 <!-- Content Header (Page header) -->
@@ -38,14 +38,14 @@
     <div class="box-body">
       <?php
         //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-        if ('' != $session) {
-      ?>
-      <p class="text-right">
-        <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
-        <a class="btn btn-primary btn-flat" href="site/site_manage.php">จัดการศูนย์</a>
-      </p>
-      <?php
-        }
+      if ('' != $session) {
+        ?>
+        <p class="text-right">
+          <button type="button" class="btn btn-primary btn-flat" onclick="showMap();">ตั้งศูนย์</button>
+          <a class="btn btn-primary btn-flat" href="site/site_manage.php">จัดการศูนย์</a>
+        </p>
+        <?php
+      }
       ?>
       <table class="table table-bordered">
         <tr class="active">
@@ -78,9 +78,9 @@
           while($row = $result->fetch_assoc()) {
 
             $result_follow = $mysqli->query("SELECT COUNT(*) AS check_follow
-                FROM site_follow
-                WHERE user_id = '".$session."'
-                AND site_id = '".$row['site_id']."'");
+              FROM site_follow
+              WHERE user_id = '".$session."'
+              AND site_id = '".$row['site_id']."'");
             $row_follow = $result_follow->fetch_assoc();
 
             if (0 == $row_follow['check_follow']) {
@@ -90,18 +90,18 @@
             }
 
             echo "<tr>
-                  <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
-                  <td>".$row['address']."</td>
-                  <td>".$btn_follow."</td>
-                  </tr>";
-            $count++;
-          }
+            <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+            <td>".$row['address']."</td>
+            <td>".$btn_follow."</td>
+          </tr>";
+          $count++;
         }
-        ?>
-      </table>
+      }
+      ?>
+    </table>
 
-    </div><!-- /.box-body -->
-  </div><!-- /.box -->
+  </div><!-- /.box-body -->
+</div><!-- /.box -->
 
 </section><!-- /.content -->
 
@@ -137,14 +137,14 @@
                 <option value="">เลือกจังหวัด</option>
                 <?php
                   // prepare and query (direct)
-                  $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
-                  $result = $mysqli->query($sql);
+                $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
+                $result = $mysqli->query($sql);
 
-                  if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                     echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
-                   }
+                if ($result->num_rows > 0) {
+                  while($row = $result->fetch_assoc()) {
+                   echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
                  }
+               }
                ?>
              </select>
            </div>
@@ -211,6 +211,13 @@
             <input type="text" class="form-control" id="mobile" placeholder="มือถือ">
           </div>
         </div>
+        <div class="form-group">
+          <label for="mobile" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="mobile" class="control-label">ตำแหน่ง : </label>
+            <div id="map" style="height:400px"></div>
+          </div>
+        </div>
       </form>
     </div>
     <div class="modal-footer">
@@ -225,21 +232,97 @@
 
 
 <?php sb('js_and_css_footer');?>
-  <script type="text/javascript">
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn9cN6qlVc">
+</script>
+<script>
+  var map;
+  var markers = [];
+
+  var lat;
+  var lng;
+
+  var locationName;
+
+  function showMap() {
+    var mapOptions = {
+      zoom: 5
+    };
+
+    map = new google.maps.Map(document.getElementById("map"),
+      mapOptions);
+
+    $('#myModal').on('shown.bs.modal', function () {
+      google.maps.event.trigger(map, 'resize');
+      map.setCenter(new google.maps.LatLng(13.736717, 100.523186));
+
+      var myLatlng = new google.maps.LatLng(13.736717, 100.523186);
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        draggable:true
+      });
+
+      lat = 13.736717;
+      lng = 100.523186;
+
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      markers.push(marker);
+
+    });
+    $('#myModal').modal("show");
+  }
+</script>
+<script type="text/javascript">
   $(document).ready(function(){
     $("#province").change(function() {
-            //alert("Codeerror");
-            $("#amphur").empty();
-            var option = new Option("เลือกอำเภอ/เขต", "");
-            $("#amphur").append($(option));
-            $.getJSON("api/getamphur.php?province_id=" + $("#province").val(), function(data){
-              $.each(data.amphur, function(i, amphur){
-                var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
-                $("#amphur").append($(option));
-              });
-            });
+      locationName = $("#province").find('option:selected').text();
+      $("#amphur").empty();
+      var option = new Option("เลือกอำเภอ/เขต", "");
+      $("#amphur").append($(option));
+      $.getJSON("api/getamphur.php?province_id=" + $("#province").val(), function(data){
+        $.each(data.amphur, function(i, amphur){
+          var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
+          $("#amphur").append($(option));
+        });
+      });
+
+      /** Get lat lng from address */
+      $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+        dataType: "text",
+        success: function(data) {
+          var json = $.parseJSON(data);
+
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+
+          var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable:true
           });
+
+          lat = json.results[0].geometry.location.lat;
+          lng = json.results[0].geometry.location.lng;
+
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          markers.push(marker);
+
+          map.setZoom(10)
+          map.setCenter(myLatlng);
+
+        }
+      });
+
+    });
     $("#amphur").change(function() {
+      locationName = $("#amphur").find('option:selected').text() + ' ' + $("#province").find('option:selected').text();
+
       $("#district").empty();
       var option = new Option("เลือกตำบล/แขวง", "");
       $("#district").append($(option));
@@ -249,22 +332,93 @@
           $("#district").append($(option));
         });
       });
+
+      /** Get lat lng from address */
+      $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+        dataType: "text",
+        success: function(data) {
+          var json = $.parseJSON(data);
+
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+
+          var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable:true,
+            title:"Drag me!"
+          });
+
+          lat = json.results[0].geometry.location.lat;
+          lng = json.results[0].geometry.location.lng;
+
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          markers.push(marker);
+
+          map.setZoom(10)
+          map.setCenter(myLatlng);
+
+        }
+      });
+
     });
+
+    $("#district").change(function() {
+      locationName = $("#district").find('option:selected').text() + $("#amphur").find('option:selected').text() + $("#province").find('option:selected').text();
+      //alert(locationName);
+      /** Get lat lng from address */
+      $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+        dataType: "text",
+        success: function(data) {
+          var json = $.parseJSON(data);
+
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+
+          var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable:true,
+            title:"Drag me!"
+          });
+
+          lat = json.results[0].geometry.location.lat;
+          lng = json.results[0].geometry.location.lng;
+
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          markers.push(marker);
+
+          map.setZoom(10)
+          map.setCenter(myLatlng);
+
+        }
+      });
+
+    });
+
     $("#btadd").click(function(){
       var site_url = $("#urlname");
 
       var check_site_exit = 0;
       $.post("site/check_exit_site.php",
-        {
-          site_url: $("#urlname").val(),
-        },
-        function(data,status){
+      {
+        site_url: $("#urlname").val(),
+      },
+      function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
               if(0 < data){
                 alert('URL นี้มีการใช้งานแล้ว');
                 check_site_exit = 1;
               }
-        });
+            });
 
 
       var site_name = $("#sitename");
@@ -302,15 +456,17 @@
           site_telephone: $("#tel").val(),
           site_mobile: $("#mobile").val(),
           site_user: <?php echo $session; ?>,
+          lat: lat,
+          lng: lng,
         },
         function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
               location.reload();
-        });
+            });
       }
     });
 
-  });
+});
 </script>
 <script src="../_plugins/input-mask/jquery.inputmask.js"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>

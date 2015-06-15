@@ -18,13 +18,15 @@
     $site_telephone = $_POST['site_telephone'];
     $site_mobile = $_POST['site_mobile'];
     $site_user = $_POST['site_user'];
+    $lat = $_POST['lat'];
+    $lng = $_POST['lng'];
 
     $result = $mysqli->query("INSERT INTO
                 site_detail (site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
-                            site_postal_code, site_telephone, site_mobile, create_user)
+                            site_postal_code, site_telephone, site_mobile, create_user, lat, lng)
                 VALUES ('$site_name', '$site_url', '$site_province', '$site_amphur', '$site_district',
                         '$site_house_no', '$site_village_no', '$site_muban', '$site_postal_code',
-                        '$site_telephone', '$site_mobile', '$site_user')");
+                        '$site_telephone', '$site_mobile', '$site_user', '$lat', '$lng')");
 
     $last_id_site = $mysqli->insert_id;
 

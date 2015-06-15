@@ -104,8 +104,10 @@
             <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a></td>
             <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>
             <td>
+              <div class='btn-group-vertical'>
               <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
               <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
+              </div>
             </td>
           </tr>";
 
