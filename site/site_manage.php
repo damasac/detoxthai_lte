@@ -20,7 +20,7 @@
     <small>จัดการหรือแก้ไขส่วนต่างๆ ของศูนย์</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษตับ</a></li>
+    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษ</a></li>
     <li class="active">จัดการศูนย์</li>
   </ol>
 </section>
@@ -38,7 +38,7 @@
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">ศูนย์ล้างพิษตับของท่าน <code>มีทั้งหมด <?php echo $row['sitecount']; ?> ศูนย์</code></h3>
+      <h3 class="box-title">ศูนย์ล้างพิษของท่าน <code>มีทั้งหมด <?php echo $row['sitecount']; ?> ศูนย์</code></h3>
     </div>
     <div class="box-body">
       <?php
@@ -215,7 +215,7 @@ $box .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dial
   <div class='modal-content'>
     <div class='modal-header'>
       <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      <h4 class='modal-title' id='myModalLabel'>เพิ่มศูนย์ล้างพิษตับ</h4>
+      <h4 class='modal-title' id='myModalLabel'>ตั้งศูนย์</h4>
     </div>
     <div class='modal-body'>
       <form class='form-horizontal'>
@@ -330,7 +330,7 @@ $count++;
   $manage_site_count = $result_count_manage->fetch_assoc();
 ?>
 <hr/>
-<h4>ศูนย์ที่ท่านดูแล <code>มีทั้งหมด <?php echo $manage_site_count['count_manage']; ?> ศูนย์</code></h4>
+<h4>ศูนย์ล้างพิษที่ท่านดูแล <code>มีทั้งหมด <?php echo $manage_site_count['count_manage']; ?> ศูนย์</code></h4>
 <table class="table table-bordered">
   <tr class="active">
     <th>
@@ -398,7 +398,7 @@ $count++;
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">เพิ่มค่ายล้างพิษตับ</h4>
+        <h4 class="modal-title" id="myModalLabel">ตั้งศูนย์</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" id="addform">
