@@ -14,5 +14,5 @@
 
     $result = $mysqli->query("INSERT INTO
                 site_schedule (schedule_name, schedule_date, schedule_desc, site_id, schedule_end_date, user_qty, price_per_person, schedule_payment, schedule_after_payment)
-                VALUES ('$schedulename', STR_TO_DATE('$scheduledate', '%m/%d/%Y'), '$scheduledesc', '$site_id', STR_TO_DATE('$scheduledateend', '%m/%d/%Y'), $user_qty, $price, '$payment', '$afterpayment')");
+                VALUES ('$schedulename', STR_TO_DATE('$scheduledate', '%d/%m/%Y'), '$scheduledesc', '$site_id', STR_TO_DATE('$scheduledateend', '%d/%m/%Y'), $user_qty, $price, '$payment', '$afterpayment')");
 ?>

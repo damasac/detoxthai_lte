@@ -25,8 +25,8 @@
 function getDateThai($strDate)
 {
   $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("j",strtotime($strDate));
-  $strDay= date("n",strtotime($strDate));
+  $strMonth= date("n",strtotime($strDate));
+  $strDay= date("j",strtotime($strDate));
   $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
   $strMonthThai=$strMonthCut[$strMonth];
   return "$strDay $strMonthThai $strYear";
@@ -284,8 +284,8 @@ if (0 == $row['check_secu'] && $check_point) {
 
 <script>
   $(document).ready(function(){
-    $("#scheduledate").datepicker();
-    $("#scheduledateend").datepicker();
+    $("#scheduledate").datepicker({ altFormat: "dd-mm-yyyy" });
+    $("#scheduledateend").datepicker({ altFormat: "dd-mm-yyyy" });
 
     $("#detail").sceditor({
       plugins: "bbcode",

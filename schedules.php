@@ -37,12 +37,12 @@ if('' == $all){
 <?php
 function getDateThai($strDate)
 {
-  $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("n",strtotime($strDate));
-  $strDay= date("j",strtotime($strDate));
-  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-  $strMonthThai=$strMonthCut[$strMonth];
-  return "$strDay $strMonthThai $strYear";
+    $strYear = date("Y", strtotime($strDate))+543;
+    $strMonth= date("n", strtotime($strDate));
+    $strDay= date("j", strtotime($strDate));
+    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+    $strMonthThai=$strMonthCut[$strMonth];
+    return "$strDay $strMonthThai $strYear";
 }
 
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
@@ -119,6 +119,8 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
             <th>
               รายละเอียด
             </th>
+            <th>
+            </th>
           </tr>
           <?php
           $count = 1;
@@ -157,6 +159,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
               <td>".$row['user_qty']." คน</td>
               <td>".number_format($row['price_per_person'])." บาท</td>
               <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
+              <td></td>
             </tr>";
 
             $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
