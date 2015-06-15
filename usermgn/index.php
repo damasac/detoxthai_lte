@@ -20,6 +20,7 @@ $MasterPage = 'page_main.php';?>
 <?php include "../_connection/db_base.php"; ?>
 <?php
 
+    isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
     $MenuSetting = "user";
     include_once("inc_menu.php");
     $site_id = explode(".",$_SERVER['SERVER_NAME']);
@@ -45,7 +46,7 @@ $MasterPage = 'page_main.php';?>
 ect-chat direct-chat-primary">
 <div class="box-header">
     <?php
-        $sql2 = "SELECT * FROM `site_detail` WHERE id='".$site_id."' AND create_user='".$_SESSION[SESSIONPREFIX."puser_id"]."' ";
+        $sql2 = "SELECT * FROM `site_detail` WHERE id='".$site_id."' AND create_user='".$session."' ";
         $query2 = $mysqli->query($sql2) or die(mysqli_error($query1));
         $num2 = $query2->num_rows;
     ?>
@@ -123,7 +124,7 @@ ect-chat direct-chat-primary">
     }
     function popup_custom() {
             var site_id = <?php echo $site_id;?>;
-            var user_id = <?php echo $_SESSION[SESSIONPREFIX."puser_id"];?>;
+            var user_id = <?php echo $session;?>;
             dialogPopWindow = BootstrapDialog.show({
                     title: "เพิิ่มสมาชิกเข้าสู่ศูนย์",
                     cssClass: 'popup-dialog',
