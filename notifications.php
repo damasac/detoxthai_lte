@@ -9,18 +9,33 @@ include_once "_connection/db_base.php";
 /** Array notification. */
 $notificationArray = array();
 
-$result = $mysqli->query("SELECT site_schedule.schedule_name
+/** Join notification. */
+$result = $mysqli->query("SELECT site_schedule.schedule_name, site_join.schedule_id
                           FROM site_join
                           JOIN site_schedule ON site_join.schedule_id = site_schedule.id
-                          WHERE user_id = '".$session."'");
+                          WHERE user_id = '".$session."'
+                          AND payment_upload_status = 0");
 
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
-    array_push($notificationArray, array("url" => "#", "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "คุณได้เข้าร่วมหลักสูตร ".$row['schedule_name']));
-    //echo $row['schedule_name'];
+    array_push($notificationArray, array("url" => "http://".$_SERVER['SERVER_NAME']."/".APP_WEBROOT."site/transfer_confirm.php?schedule_id=".$row['schedule_id'], "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "คุณได้เข้าร่วมหลักสูตร <strong>".$row['schedule_name']."</strong>"));
   }
 }
-//print_r($notificationArray);
+
+/** After Join notification. */
+$result = $mysqli->query("SELECT site_schedule.schedule_name, site_join.schedule_id
+                          FROM site_join
+                          JOIN site_schedule ON site_join.schedule_id = site_schedule.id
+                          WHERE user_id = '".$session."'
+                          AND payment_upload_status = 1
+                          AND payment_status = 1");
+
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    array_push($notificationArray, array("url" => "http://".$_SERVER['SERVER_NAME']."/".APP_WEBROOT."site/transfer_confirm.php?schedule_id=".$row['schedule_id'], "icon" => "<i class='fa fa-users text-aqua'></i>", "msg" => "เข้าร่วมหลักสูตร <strong>".$row['schedule_name']."</strong> เรียบร้อย"));
+  }
+}
+
 ?>
 
 <!-- Menu toggle button -->
