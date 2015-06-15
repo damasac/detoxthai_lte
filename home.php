@@ -55,7 +55,7 @@ if ('' == $menu) {
 <?php sb('content');?>
 
 <?php
-
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 isset($_GET['sub_menu']) ? $sub_menu = $_GET['sub_menu'] :  $sub_menu = 0;
 
 $edit_show = 1;
@@ -155,6 +155,22 @@ $arrMenu = array();
       </div>
     </div>
     <p><hr/></p>
+  <?php
+  $result_check_secu = $mysqli->query("SELECT COUNT(*) AS check_secu
+                                      FROM site_detail
+                                      WHERE
+                                      id = ".$site_id."
+                                      AND create_user = '$session'");
+  $check_secu = $result_check_secu->fetch_assoc();
+  //echo $check_secu['check_secu'];
+  if (0 < $check_secu['check_secu']) {
+  ?>
+  <div class="col-md-12 text-right">
+      <a href="site/index.php?menu=<?php echo $menu ?>&id=<?php echo $site_id; ?>" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
+  </div>
+  <?php
+  }
+  ?>
     <div class="row marketing" id="show_content">
           <?php
           if (1 != $sub_menu) {
