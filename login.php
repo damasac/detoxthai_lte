@@ -196,7 +196,7 @@ if ($user) {
           </div>
           <div class="row">
             <div class="col-xs-8">
-              <div class="checkbox icheck">
+              <div class="checkbox">
                 <label>
                   <input type="checkbox"> จดจำฉันไว้ในคราวต่อไป
                 </label>
