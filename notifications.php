@@ -13,7 +13,7 @@ $notificationArray = array();
 $result = $mysqli->query("SELECT site_schedule.schedule_name, site_join.schedule_id
                           FROM site_join
                           JOIN site_schedule ON site_join.schedule_id = site_schedule.id
-                          WHERE user_id = '".$session."'
+                          WHERE site_join.user_id = '".$session."'
                           AND payment_upload_status = 0");
 
 if ($result->num_rows > 0) {
@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
 $result = $mysqli->query("SELECT site_schedule.schedule_name, site_join.schedule_id
                           FROM site_join
                           JOIN site_schedule ON site_join.schedule_id = site_schedule.id
-                          WHERE user_id = '".$session."'
+                          WHERE site_join.user_id = '".$session."'
                           AND payment_upload_status = 1
                           AND payment_status = 1");
 
