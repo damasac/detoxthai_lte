@@ -1,10 +1,10 @@
 <?php
 
-include_once "db_connect.php";
+include_once "../_connection/db_form.php";
 
 $province_id = quote_smart($_GET['province_id']);
 
-$sql = "SELECT AMPHUR_ID, AMPHUR_NAME FROM amphur WHERE PROVINCE_ID = $province_id ORDER BY AMPHUR_NAME";
+$sql = "SELECT AMPHUR_ID, AMPHUR_NAME FROM tbl_amphur WHERE PROVINCE_ID = $province_id ORDER BY AMPHUR_NAME";
 
 $result = $conn->query($sql);
 

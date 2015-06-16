@@ -15,7 +15,7 @@
           padding-bottom: 5px;
     }
     .form-control.fix {
-          width: 270px !important;
+          width: 350px !important;
     }
     .p3tableheader {
       background-color: #ccc;

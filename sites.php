@@ -326,7 +326,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn
     });
     $("#amphur").change(function() {
       locationName = $("#amphur").find('option:selected').text() + ' ' + $("#province").find('option:selected').text();
-
       $("#district").empty();
       var option = new Option("เลือกตำบล/แขวง", "");
       $("#district").append($(option));

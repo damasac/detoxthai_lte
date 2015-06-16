@@ -85,6 +85,7 @@ $site_id_desc = $result_name_site->fetch_assoc();
 <!-- Main content -->
 <section class="content">
 
+<div class="row">
   <div class="box box-default">
     <div class="box-body">
       <?php
@@ -209,6 +210,32 @@ $site_id_desc = $result_name_site->fetch_assoc();
   </footer>
 </div><!-- /.box-body -->
 </div><!-- /.box -->
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="box box-default">
+      <div class="box-body">
+  
+        <iframe src="maps.php" scrolling="no" frameborder="no" width="100%" height="800"></iframe>
+        
+      </div>
+    </div>
+  </div>
+<div class="col-md-6">
+  <div class="box box-default">
+    <div class="box-body">
+<fieldset class="gllpLatlonPicker" id="custom_id">
+	<input type="text" class="gllpSearchField"><input type="button" class="gllpSearchButton" value="search"></p>
+<div class="gllpMap">Google Maps</div>
+<p>	<input type="hidden" class="gllpLatitude" value="52"/><input type="hidden" class="gllpLongitude" value="1"/><input type="hidden" class="gllpZoom" value="12"/><br />
+</fieldset>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script><script src="http://www.wimagguc.com/projects/jquery-latitude-longitude-picker-gmaps/js/jquery-gmaps-latlon-picker.js"></script>
+    </div>
+  </div>
+</div> <!-- col-md -->
+</div> <!-- Row -->
 
 </section><!-- /.content -->
 
