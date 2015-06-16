@@ -105,7 +105,8 @@ if($dataform['status']+0) { ?>
                                    
                                     <label for="name" style="font-weight: bold;"><h4>สถานที่ทำการ Detox</h4></label><br>
                                     <select id="location" class="form-control">
-                                        <option value='0'>เลือกสถานที่ทำการ Detox</option>
+                                        <option selected='selected' value=10000001>ที่บ้าน</option>
+                                        <option value=10000002 >อื่นๆ</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">    
@@ -316,21 +317,18 @@ if($dataform['status']+0) { ?>
                     $.each(result, function(i, field){
                         $("#location").append("<option value="+field.id+" >"+field.site_name+"</option>");
                     });
-                     $("#location").append("<option value=10000001>ที่บ้าน</option>");
+                    $("#location").append("<option value=10000001>ที่บ้าน</option>");
                     $("#location").append("<option value=10000002 >อื่นๆ</option>");
             });
         });
         var jsonAPI = "ajax-search-site.php?task=site&key=";
         var key = '';
-        $("#location").html("<option value='0'>- สถานที่ทำการ Detox -</option>");
         $.getJSON(jsonAPI+key,
             function(result){
                 $.each(result, function(i, field){
                     $("#location").append("<option value="+field.id+" >"+field.site_name+"</option>");
                 });
         });
-        $("#location").append("<option value=10000001>ที่บ้าน</option>");
-        $("#location").append("<option value=10000002 >อื่นๆ</option>");
     });
         //---
 </script>
