@@ -20,7 +20,7 @@
 
       </div>
       <div style="float: right;">
-      <button class="btn btn-success" onclick="findUser()"><i class="fa fa-search"></i></button>
+      <button class="btn bg-green btn-flat margin" onclick="findUser()"><i class="fa fa-search"></i></button>
       </div>
     </div><br><br>
 
@@ -46,14 +46,14 @@
 		  </div>
 		    <input type="hidden" id="puser_id" name="puser_id" value=""/>
 		    <br>
-		      <button class="btn btn-success " onclick="addUser()">เพิ่มสมาชิกเข้าสู่ศูนย์</button><code id="valAddUser" style="display:none;"></code>
+		      <button class="btn bg-light-blue btn-flat margin " onclick="addUser()">เพิ่มสมาชิกเข้าสู่ศูนย์</button><code id="valAddUser" style="display:none;"></code>
                   </div>
       </div>
       <div  id="showUser2" style="display:none;">
 	<div class="alert alert-default">
                     <!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
                     <h4>	<i class="icon fa fa-fw fa-remove"></i> ไม่พบสมาชิกนี้ </h4>
-		    <button class="btn btn-success " onclick="addNewUser()">เพิ่มสมาชิกใหม่</button>
+		    <button class="btn bg-light-blue btn-flat margin" onclick="addNewUser()">เพิ่มสมาชิกใหม่</button>
                   </div>
       </div>
 
@@ -109,7 +109,7 @@
 
             </div><!-- /.col -->
             <div class="col-xs-5">
-              <button type="submit" class="btn btn-primary btn-block btn-flat" onclick="saveUser();">สมัครสมาชิก</button>
+              <button type="submit" class="btn bg-light-blue btn-flat margin" onclick="saveUser();">สมัครสมาชิก</button>
             </div><!-- /.col -->
           </div>
 
