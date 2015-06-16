@@ -1,6 +1,7 @@
 <?php
 session_start();
 session_destroy();
+unset($_COOKIE['detoxthai']);
 ?>
 <!DOCTYPE html>
 <!--
@@ -29,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!--Page Load Progress Bar [ OPTIONAL ]-->
 	<link href="_plugins/pace/pace.css" rel="stylesheet">
 	<script src="_plugins/pace/pace.js"></script>
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,19 +59,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   |---------------------------------------------------------|
   -->
   <body class="skin-blue sidebar-mini">
-    
+
      <!-- Automatic element centering -->
     <div class="lockscreen-wrapper">
         <!-- Content Header (Page header) -->
         <meta http-equiv="refresh" content="1;URL=index.php">
-        
+
         <div class="lockscreen-logo">
         <b>Logout</b></a>
         </div>
         <div align="center"><img src="login/img/loading.gif" width="65" height="65" /><br>
 
         <!-- /.content -->
-      
+
     </div><!-- /.center -->
 
 
