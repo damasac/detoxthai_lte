@@ -20,7 +20,8 @@ $MasterPage = 'page_main.php';?>
 <?php include "../_connection/db_base.php"; ?>
 <?php
 
-    isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+    isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = 'NULL';
+
     $MenuSetting = "user";
     include_once("inc_menu.php");
     $site_id = explode(".",$_SERVER['SERVER_NAME']);
@@ -53,7 +54,7 @@ ect-chat direct-chat-primary">
     ?>
     <?php if($num2==1){?>
     <span style="float: right">
-        <button class="btn bg-aqua btn-flat margin" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
+        <button class="btn bg-aqua btn-flat margin" onclick="popup_custom();"><i class="fa fa-user-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
     </span><br><br><br>
     <?php }?>
     <table id="userTable" class="table table-hover">
@@ -61,8 +62,10 @@ ect-chat direct-chat-primary">
             <tr>
                 <th>ลำดับ</th>
                 <th>ชื่อ</th>
+                <?php if($num2==1){?>
                 <th>เบอร์โทรศัพท์</th>
                 <th>จัดการ</th>
+                <?php }?>
             </tr>
         </thead>
         <tbody>
@@ -70,15 +73,21 @@ ect-chat direct-chat-primary">
             <tr>
                 <td><?php echo $i;?></td>
                 <td><?php echo $data1["fname"]." ".$data1["lname"];?></td>
+                <?php if($num2==1){?>
+                
                 <td><?php echo $data1["tel"];?></td>
                 <td>
-                <?php if($num2==1){?>
                 <?php if($_SESSION[SESSIONPREFIX."user_form"]==$data1["id"]){?>
-                    <button class="btn bg-maroon btn-flat margin">Logout</button>
+                    <button class="btn bg-maroon btn-flat margin">
+                    <i class="fa fa-close"></i>
+                    Logout</button>
                 <?php }?>
-                    <button class="btn bg-navy-active  color-palette btn-flat margin" onclick="goForm(<?php echo $data1["id"]; ?>);">กรอกข้อมูล</button>
-
-                    <button class="btn bg-yellow btn-flat margin" onclick="leaveSite(<?php echo $data1["id"]; ?>);">ย้ายสมาชิกออกจากศูนย์</button>
+                    <button class="btn bg-navy-active  color-palette btn-flat margin" onclick="goForm(<?php echo $data1["id"]; ?>);">
+                    <i class="fa fa-edit "></i>
+                    กรอกข้อมูล</button>
+                    <button class="btn bg-yellow btn-flat margin" onclick="leaveSite(<?php echo $data1["id"]; ?>);">
+                    <i class="fa fa-sign-out"></i>
+                    ย้ายสมาชิกออกจากศูนย์</button>
                 </td>
                 <?php }?>
             </tr>

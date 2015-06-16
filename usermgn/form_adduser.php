@@ -6,7 +6,7 @@
 
 
 ?>
-  <section class="content">
+<section class="content">
     <div class="form-group">
       <label>ค้นหาสมาชิก </label>	    <code id="valTelFind" style="display:none;"></code>
       <div class="form-group has-feedback">
