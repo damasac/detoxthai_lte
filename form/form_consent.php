@@ -1,5 +1,4 @@
-﻿<hr>
-<div class="row">
+﻿<div class="row">
     <div class="col-md-12 col-xs-12">
 		<h2 class="text-center">แบบเก็บรวบรวมข้อมูลโครงการ Liver Flushing Registry</h2>
 		<h3 class="text-center">หนังสือยินยอมเข้าร่วมฐานข้อมูลทะเบียนสุขภาพผู้ล้างพิษตับในประเทศไทย</h3>

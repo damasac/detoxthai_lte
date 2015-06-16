@@ -50,13 +50,17 @@
 		  	<script>
 			$(document).ready(function(){
 				//alert("Codeerror");
-/*
+
+				$("#p0a1b3c5").select2();
+				$("#p0a1b3c6").select2();
+				$("#p0a1b3c7").select2();
+				
 				$("#p0a1b3c6").empty();
 			    	var option = new Option("เลือกอำเภอ/เขต", "");
     				$("#p0a1b3c6").append($(option));
-					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getamphur.php?province_id=" + $("#p0a1b3c5").val(), function(data){
+					$.getJSON("getamphur.php?province_id=" + $("#p0a1b3c5").val(), function(data){
 						$.each(data.amphur, function(i, amphur){
-						if(amphur.AMPHUR_ID == <?php // echo $dataform["p0a1b3c6"]+0; ?>){
+						if(amphur.AMPHUR_ID == <?php echo $dataform["p0a1b3c6"]+0; ?>){
 							var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
 							option.setAttribute("selected","selected");
 						}else{
@@ -71,7 +75,7 @@
 			    	$("#p0a1b3c6").empty();
 			    	var option = new Option("เลือกอำเภอ/เขต", "");
     				$("#p0a1b3c6").append($(option));
-					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getamphur.php?province_id=" + $("#p0a1b3c5").val(), function(data){
+					$.getJSON("getamphur.php?province_id=" + $("#p0a1b3c5").val(), function(data){
 						$.each(data.amphur, function(i, amphur){
 						var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
     					$("#p0a1b3c6").append($(option));
@@ -82,9 +86,9 @@
 				$("#p0a1b3c7").empty();
 			    	var option = new Option("เลือกตำบล/แขวง", "");
     				$("#p0a1b3c7").append($(option));
-					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getdistrict.php?amphur_id=<?php //echo $dataform["p0a1b3c6"]; ?>", function(data){
+					$.getJSON("getdistrict.php?amphur_id=<?php echo $dataform["p0a1b3c6"]+0; ?>", function(data){
 						$.each(data.district, function(i, district){
-						if(district.DISTRICT_ID == <?php //echo $dataform["p0a1b3c7"]+0; ?>){
+						if(district.DISTRICT_ID == <?php echo $dataform["p0a1b3c7"]+0; ?>){
 							var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
 							option.setAttribute("selected","selected");
 						}else{
@@ -98,7 +102,7 @@
 			    	$("#p0a1b3c7").empty();
 			    	var option = new Option("เลือกตำบล/แขวง", "");
     				$("#p0a1b3c7").append($(option));
-					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getdistrict.php?amphur_id=" + $("#p0a1b3c6").val(), function(data){
+					$.getJSON("getdistrict.php?amphur_id=" + $("#p0a1b3c6").val(), function(data){
 						$.each(data.district, function(i, district){
 						var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
     					$("#p0a1b3c7").append($(option));
@@ -106,19 +110,17 @@
 			  		});
 				});
 
-				//$("#p0a1b3c5").select2();
-				//$("#p0a1b3c6").select2();
-				//$("#p0a1b3c7").select2();
-*/
+
 			});
 
 		  	</script>
+			<br>
 		  	<div class="form-group fix">
 			    <label for="p0a1b3c5">จังหวัด</label>
-			    <select id="p0a1b3c5" onchange="AutoSave_private('p0a1b3c5',$('#form_id').val())" class="form-control">
+			    <select style="width: 200px;" id="p0a1b3c5" onchange="AutoSave_private('p0a1b3c5',$('#form_id').val())" class="form-control">
 			    <option value="">เลือกจังหวัด</option>
 			    <?php
-			    	$sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM province ORDER BY PROVINCE_NAME";
+			    	$sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM tbl_province ORDER BY PROVINCE_NAME";
 			    	$result = $conn->query($sql);
 
 					if ($result->num_rows > 0) {
@@ -137,20 +139,34 @@
 		  	</div>
 		  	<div class="form-group fix">
 			    <label for="p0a1b3c6">อำเภอ/เขต</label>
-			    <select id="p0a1b3c6" onchange="AutoSave_private('p0a1b3c6',$('#form_id').val())" class="form-control">
+			    <select style="width: 200px;" id="p0a1b3c6" onchange="AutoSave_private('p0a1b3c6',$('#form_id').val())" class="form-control">
 			    	<option value="">เลือกอำเภอ/เขต</option>
+				<?php
+				$sql = "SELECT AMPHUR_ID, AMPHUR_NAME FROM tbl_amphur WHERE AMPHUR_ID = '$dataform[p0a1b3c6]' ORDER BY AMPHUR_NAME";
+				$result = $conn->query($sql);
+				$row = $result->fetch_assoc();
+				echo "<option value=".$row['AMPHUR_ID']." selected>".$row['AMPHUR_NAME']."</option>";
+				?>
 				</select>
 			    <!-- <input type="text" class="form-control fix" id="p0a1b3c6" placeholder="อำเภอ/เขต"> -->
 		  	</div>
+
 		  	<div class="form-group fix">
 			    <label for="p0a1b3c7">ตำบล/แขวง</label>
-			    <select id="p0a1b3c7" onchange="AutoSave_private('p0a1b3c7',$('#form_id').val())" class="form-control">
+			    <select style="width: 200px;" id="p0a1b3c7" onchange="AutoSave_private('p0a1b3c7',$('#form_id').val())" class="form-control">
 			    	<option value="">เลือกตำบล/แขวง</option>
+				<?php
+				$sql = "SELECT DISTRICT_ID, DISTRICT_NAME FROM tbl_district WHERE DISTRICT_ID =  '$dataform[p0a1b3c7]' ORDER BY DISTRICT_NAME";
+				$result = $conn->query($sql);
+				$row = $result->fetch_assoc();
+				echo "<option value=".$row['DISTRICT_ID']." selected>".$row['DISTRICT_NAME']."</option>";
+				?>
 				</select>
 			    <!-- <input type="text" class="form-control fix" id="p0a1b3c7" placeholder="ตำบล/แขวง"> -->
 		  	</div>
+
 		  	<div class="form-group fix">
-			    <label for="p0a1b3c8">รหัสไปรษณีย์</label>
+			    <label for="p0a1b3c8">รหัสไปรษณีย์</label><br>
 			    <input type="text" class="form-control fix" id="p0a1b3c8" placeholder="รหัสไปรษณีย์" maxlength="5" onblur="AutoSave_private('p0a1b3c8',$('#form_id').val())" value="<?php echo $dataform["p0a1b3c8"]; ?>">
 		  	</div>
 		  	<br/>

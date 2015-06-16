@@ -52,19 +52,20 @@
 			</tr>
 			<script>
 			$(document).ready(function(){
-/*
+
 				$("#p1a4b2").empty();
-			    	var option = new Option("เลือกอำเภอ/เขต", "");
-    				$("#p1a4b2").append($(option));
-					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getamphur.php?province_id=" + $("#p1a4b1").val(), function(data){
+				<?php
+				$sql = "SELECT AMPHUR_ID, AMPHUR_NAME FROM tbl_amphur WHERE AMPHUR_ID = '$dataform[p1a4b2]' ORDER BY AMPHUR_NAME";
+				$result = $conn->query($sql);
+				$row = $result->fetch_assoc();
+				echo "var option = new Option('$row[AMPHUR_NAME]', '');";
+				echo '$("#p1a4b2").append($(option));';
+				?>
+
+					$.getJSON("getamphur.php?province_id=" + $("#p1a4b1").val(), function(data){
 						$.each(data.amphur, function(i, amphur){
-						if(amphur.AMPHUR_ID == <?php echo $dataform["p1a4b2"]+0; ?>){
 							var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
-							option.setAttribute("selected","selected");
-						}else{
-							var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
-						}
-    					$("#p1a4b2").append($(option));
+							$("#p1a4b2").append($(option));
 						});
 			  		});
 
@@ -72,18 +73,18 @@
 			    	$("#p1a4b2").empty();
 			    	var option = new Option("เลือกอำเภอ/เขต", "");
     				$("#p1a4b2").append($(option));
-					$.getJSON("http://www.detoxthai.org/wp-content/surveyform/getamphur.php?province_id=" + $("#p1a4b1").val(), function(data){
+					$.getJSON("getamphur.php?province_id=" + $("#p1a4b1").val(), function(data){
 						$.each(data.amphur, function(i, amphur){
 						var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
     					$("#p1a4b2").append($(option));
 						});
 			  		});
 				});
-*/
-				//$("#p1a4b1").select2();
-				//$("#p1a4b2").select2();
-				//$("#p1a5").select2();
-				//$("#p1a6").select2();
+
+				$("#p1a4b1").select2();
+				$("#p1a4b2").select2();
+				$("#p1a5").select2();
+				$("#p1a6").select2();
 
 			});
 		  	</script>
@@ -96,7 +97,7 @@
 		  				<select id="p1a4b1" onchange="AutoSave('p1a4b1',$('#form_id').val())" class="form-control">
 						    <option value="">เลือกจังหวัด&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 						    <?php
-						    	$sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM province ORDER BY PROVINCE_NAME";
+						    	$sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM tbl_province ORDER BY PROVINCE_NAME";
 						    	$result = $conn->query($sql);
 
 								if ($result->num_rows > 0) {
