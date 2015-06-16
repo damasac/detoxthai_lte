@@ -127,7 +127,7 @@ if (0 == $row['check_secu'] && $check_point) {
             <td>".$row['user_qty']." คน</td>
             <td>".number_format($row['price_per_person'])." บาท</td>
             <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
-            <td><a type='button' href='list_join.php?schedule_id=".$row['id']."&site_id=".$site_id."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-eye'></i></a></td>
+            <td><a type='button' href='list_join.php?schedule_id=".$row['id']."&site_id=".$site_id."' class='btn btn-primary btn-flat'>ดูสมาชิกที่เข้าร่วม</i></a></td>
             <td><a href='edit_schedule.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."&site_id=".$site_id."' class='btn btn-danger btn-flat'>ลบ</a></td>
           </tr>";
 
