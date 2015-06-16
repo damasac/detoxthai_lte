@@ -25,14 +25,16 @@
 	//Value Auto Update
 	if(isset($_POST["form_id"])) {
 		$form_id = $_POST["form_id"];
-		$field = $_POST["field"];
-		$value = $_POST["value"];
+		if(isset($_POST["field"]))
+			$field = $_POST["field"];
+		if($_POST["value"])
+			$value = $_POST["value"];
 	}
 	
 	if($task=="insertBlank"){
 		
 		
-		$sqlInsert1 =  "INSERT INTO `tbl_surveyuser`(`startdate`,`enddate`,`createdate`,`location`,`user_id`)
+		$sqlInsert1 =  "INSERT INTO `tbl_surveyuser`(`startdate`,`enddate`,`createdate`,`location`,`user_id`, `status`)
 		VALUES('".$startdate."','".$enddate."','".$createdate."','".$location."','".$user_id."')
 		";
 		
@@ -67,22 +69,13 @@
 		echo $sqlUpdate;
 		$sqlQuery = $conn->query($sqlUpdate) or die($conn->error());
 		
-		
 	}
 	
 	if($task=="deleteForm"){
-		$sql1 = "DELETE FROM `tbl_surveyform`
-				WHERE `ref_id_create`='".$form_id."'";
+		$sql1 = "UPDATE `tbl_surveyuser` SET status = '1' WHERE `id`='".$form_id."'";
 		$query1 = $conn->query($sql1);
-		$sql2 = "DELETE FROM `tbl_surveyuser`
-				WHERE `id`='".$form_id."'
-				AND `user_id`='".$user_id."'
-		";
-		//echo $sql1."<br>".$sql2;
-		$query2 = $conn->query($sql2);
 		
-		$sql3 = "SELECT * FROM `tbl_surveyuser` WHERE id='".$form_id."' ";
-		
+		$sql3 = "SELECT * FROM `tbl_surveyuser` WHERE id='".$form_id."' AND status='0';";
 		$query3 = $conn->query($sql3);
 		echo $query3->num_rows;
 	}

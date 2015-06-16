@@ -43,7 +43,7 @@
     $data = $query->fetch_assoc();
     
     $user_name = $data['fname'].'  '.$data['lname'];
-    $sql = "SELECT * FROM `tbl_surveyuser` WHERE user_id='".$user_id."' ORDER BY id ASC";
+    $sql = "SELECT * FROM `tbl_surveyuser` WHERE (user_id='".$user_id."' AND status='0') ORDER BY id ASC";
     //echo $sql;
     $query = $conn->query($sql);
 ?>
@@ -149,6 +149,7 @@ if($dataform['status']+0) { ?>
                       <td><?php echo System_showDate($data["createdate"]);?></td>
                       <td><button class="btn btn-primary" onclick='window.location.href="input.php?form_id=<?php echo $data["id"]; ?>"'> ตรวจสอบ </button>
                       <button class="btn btn-danger" onclick='deleteForm(<?php echo $data["id"];?>);'> ลบ </button></td>
+                      
                     </tr> 
                     <?php $i++; }?>
                   </tbody>
@@ -278,8 +279,8 @@ if($dataform['status']+0) { ?>
                   },
                   success: function(returndata){
                     $("#numForm").html(returndata);
-                    $("#showDelete").hide();
-                    $("#trForm_"+form_id).fadeOut();
+                    //$("#showDelete").hide();
+                    //$("#trForm_"+form_id).fadeOut();
                 }
             }); 
         });
