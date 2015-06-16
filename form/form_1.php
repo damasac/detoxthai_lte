@@ -116,7 +116,7 @@
 		  			<div class="form-group">
 					    <label for="p1a4b2">อําเภอ</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a4b2" placeholder="อําเภอ"> -->
-		  				<select id="p1a4b2" onchange="AutoSave('p1a4b2',$('#form_id').val())" class="form-control">
+		  				<select style="width: 150px;" id="p1a4b2" onchange="AutoSave('p1a4b2',$('#form_id').val())" class="form-control">
 						    <option value="">เลือกอําเภอ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 						</select>
 		  			</div>

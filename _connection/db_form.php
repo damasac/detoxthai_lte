@@ -34,7 +34,7 @@
 	if($task=="insertBlank"){
 		
 		
-		$sqlInsert1 =  "INSERT INTO `tbl_surveyuser`(`startdate`,`enddate`,`createdate`,`location`,`user_id`, `status`)
+		$sqlInsert1 =  "INSERT INTO `tbl_surveyuser`(`startdate`,`enddate`,`createdate`,`location`,`user_id`)
 		VALUES('".$startdate."','".$enddate."','".$createdate."','".$location."','".$user_id."')
 		";
 		
