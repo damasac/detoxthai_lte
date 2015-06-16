@@ -7,7 +7,7 @@
 <?php eb();?>
 
 <?php sb('notifications');?>
-  <?php include_once '../notifications.php'; ?>
+<?php include_once '../notifications.php'; ?>
 <?php eb();?>
 
 <?php sb('content');?>
@@ -43,13 +43,13 @@
     <div class="box-body">
       <?php
         //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-        if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
-      ?>
-      <p class="text-right">
-        <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#myModal">ตั้งศูนย์</button>
-      </p>
-      <?php
-        }
+      if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+        ?>
+        <p class="text-right">
+          <button type="button" class="btn btn-primary btn-flat" onclick="showMap();">ตั้งศูนย์</button>
+        </p>
+        <?php
+      }
       ?>
       <table class="table table-bordered">
         <tr class="active">
@@ -110,8 +110,8 @@
             <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>
             <td>
               <div class='btn-group-vertical'>
-              <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
-              <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
+                <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
+                <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
               </div>
             </td>
           </tr>";
@@ -332,11 +332,11 @@ $count++;
 </table>
 <?php echo $box; ?>
 <?php
-  $result_count_manage = $mysqli->query("SELECT COUNT(*) AS count_manage
-    FROM site_manage_user
-    WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
-    AND site_manage_user.delete_at IS NULL");
-  $manage_site_count = $result_count_manage->fetch_assoc();
+$result_count_manage = $mysqli->query("SELECT COUNT(*) AS count_manage
+  FROM site_manage_user
+  WHERE site_manage_user.user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+  AND site_manage_user.delete_at IS NULL");
+$manage_site_count = $result_count_manage->fetch_assoc();
 ?>
 <hr/>
 <h4>ศูนย์ล้างพิษที่ท่านดูแล <code>มีทั้งหมด <?php echo $manage_site_count['count_manage']; ?> ศูนย์</code></h4>
@@ -392,7 +392,7 @@ $count++;
       }
     }
     $count_exit++;
-}
+  }
 }
 ?>
 </table>
@@ -434,14 +434,14 @@ $count++;
                 <option value="">เลือกจังหวัด</option>
                 <?php
                   // prepare and query (direct)
-                  $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
-                  $result = $mysqli->query($sql);
+                $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
+                $result = $mysqli->query($sql);
 
-                  if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                     echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
-                   }
+                if ($result->num_rows > 0) {
+                  while($row = $result->fetch_assoc()) {
+                   echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
                  }
+               }
                ?>
              </select>
            </div>
@@ -508,6 +508,13 @@ $count++;
             <input type="text" class="form-control" id="mobile" placeholder="มือถือ">
           </div>
         </div>
+        <div class="form-group">
+          <label for="mobile" class="col-sm-2 control-label"></label>
+          <div class="col-sm-10">
+            <label for="mobile" class="control-label">ตำแหน่ง : </label>
+            <div id="map" style="height:400px"></div>
+          </div>
+        </div>
       </form>
     </div>
     <div class="modal-footer">
@@ -522,94 +529,245 @@ $count++;
 
 
 <?php sb('js_and_css_footer');?>
+
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn9cN6qlVc">
+</script>
+<script>
+  var map;
+  var markers = [];
+
+  var lat;
+  var lng;
+
+  var locationName;
+
+  function showMap() {
+    var mapOptions = {
+      zoom: 5
+    };
+
+    map = new google.maps.Map(document.getElementById("map"),
+      mapOptions);
+
+    $('#myModal').on('shown.bs.modal', function () {
+      google.maps.event.trigger(map, 'resize');
+      map.setCenter(new google.maps.LatLng(13.736717, 100.523186));
+
+      var myLatlng = new google.maps.LatLng(13.736717, 100.523186);
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        draggable:true
+      });
+
+      lat = 13.736717;
+      lng = 100.523186;
+
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      markers.push(marker);
+
+    });
+    $('#myModal').modal("show");
+  }
+</script>
+
 <?php echo  $script_address; ?>
 <?php echo $script ?>
 <script type="text/javascript">
   $(document).ready(function(){
     $("#province").change(function() {
-            //alert("Codeerror");
-            $("#amphur").empty();
-            var option = new Option("เลือกอำเภอ/เขต", "");
-            $("#amphur").append($(option));
-            $.getJSON("../api/getamphur.php?province_id=" + $("#province").val(), function(data){
-              $.each(data.amphur, function(i, amphur){
-                var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
-                $("#amphur").append($(option));
-              });
-            });
-          });
-    $("#amphur").change(function() {
-      $("#district").empty();
-      var option = new Option("เลือกตำบล/แขวง", "");
-      $("#district").append($(option));
-      $.getJSON("../api/getdistrict.php?amphur_id=" + $("#amphur").val(), function(data){
-        $.each(data.district, function(i, district){
-          var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
-          $("#district").append($(option));
+      locationName = $("#province").find('option:selected').text();
+      $("#amphur").empty();
+      var option = new Option("เลือกอำเภอ/เขต", "");
+      $("#amphur").append($(option));
+      $.getJSON("../api/getamphur.php?province_id=" + $("#province").val(), function(data){
+        $.each(data.amphur, function(i, amphur){
+          var option = new Option(amphur.AMPHUR_NAME, amphur.AMPHUR_ID);
+          $("#amphur").append($(option));
         });
       });
-    });
-    $("#btadd").click(function(){
-      var site_url = $("#urlname");
 
-      var check_site_exit = 0;
-      $.post("../site/check_exit_site.php",
-        {
-          site_url: $("#urlname").val(),
-        },
-        function(data,status){
+      /** Get lat lng from address */
+      $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+        dataType: "text",
+        success: function(data) {
+          var json = $.parseJSON(data);
+
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+
+          var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable:true
+          });
+
+          lat = json.results[0].geometry.location.lat;
+          lng = json.results[0].geometry.location.lng;
+
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          markers.push(marker);
+
+          map.setZoom(10)
+          map.setCenter(myLatlng);
+
+        }
+      });
+
+    });
+
+$("#amphur").change(function() {
+  locationName = $("#amphur").find('option:selected').text() + ' ' + $("#province").find('option:selected').text();
+  $("#district").empty();
+  var option = new Option("เลือกตำบล/แขวง", "");
+  $("#district").append($(option));
+  $.getJSON("../api/getdistrict.php?amphur_id=" + $("#amphur").val(), function(data){
+    $.each(data.district, function(i, district){
+      var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
+      $("#district").append($(option));
+    });
+  });
+
+  /** Get lat lng from address */
+  $.ajax({
+    url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+    dataType: "text",
+    success: function(data) {
+      var json = $.parseJSON(data);
+
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+
+      var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        draggable:true,
+        title:"Drag me!"
+      });
+
+      lat = json.results[0].geometry.location.lat;
+      lng = json.results[0].geometry.location.lng;
+
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      markers.push(marker);
+
+      map.setZoom(10)
+      map.setCenter(myLatlng);
+
+    }
+  });
+
+});
+
+$("#district").change(function() {
+  locationName = $("#district").find('option:selected').text() + $("#amphur").find('option:selected').text() + $("#province").find('option:selected').text();
+      //alert(locationName);
+      /** Get lat lng from address */
+      $.ajax({
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+        dataType: "text",
+        success: function(data) {
+          var json = $.parseJSON(data);
+
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+          }
+
+          var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+          var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable:true,
+            title:"Drag me!"
+          });
+
+          lat = json.results[0].geometry.location.lat;
+          lng = json.results[0].geometry.location.lng;
+
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          markers.push(marker);
+
+          map.setZoom(10)
+          map.setCenter(myLatlng);
+
+        }
+      });
+
+    });
+
+$("#btadd").click(function(){
+  var site_url = $("#urlname");
+
+  var check_site_exit = 0;
+  $.post("../site/check_exit_site.php",
+  {
+    site_url: $("#urlname").val(),
+  },
+  function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
               if(0 < data){
                 alert('URL นี้มีการใช้งานแล้ว');
                 check_site_exit = 1;
               }
-        });
+            });
 
 
-      var site_name = $("#sitename");
+  var site_name = $("#sitename");
 
-      var check_site_url = 0;
-      var check_site_name = 0;
+  var check_site_url = 0;
+  var check_site_name = 0;
 
-      if(!site_url.val()) {
-        site_url.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check_site_url = 1;
-      } else {
-        site_url.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
+  if(!site_url.val()) {
+    site_url.closest('.form-group').removeClass('has-success').addClass('has-error');
+    check_site_url = 1;
+  } else {
+    site_url.closest('.form-group').removeClass('has-error').addClass('has-success');
+  }
 
-      if(!site_name.val()) {
-        site_name.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check_site_name = 1;
-      } else {
-        site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
+  if(!site_name.val()) {
+    site_name.closest('.form-group').removeClass('has-success').addClass('has-error');
+    check_site_name = 1;
+  } else {
+    site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
+  }
 
-      if( 0 == check_site_url && 0 == check_site_name && 0 == check_site_exit){
+  if( 0 == check_site_url && 0 == check_site_name && 0 == check_site_exit){
 
-        $.post("../site/add_site.php",
-        {
-          site_url: $("#urlname").val(),
-          site_name: $("#sitename").val(),
-          site_province: $("#province").val(),
-          site_amphur: $("#amphur").val(),
-          site_district: $("#district").val(),
-          site_house_no: $("#houseno").val(),
-          site_village_no: $("#villageno").val(),
-          site_muban: $("#muban").val(),
-          site_postal_code: $("#postalcode").val(),
-          site_telephone: $("#tel").val(),
-          site_mobile: $("#mobile").val(),
-          site_user: <?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>,
-        },
-        function(data,status){
+    $.post("../site/add_site.php",
+    {
+      site_url: $("#urlname").val(),
+      site_name: $("#sitename").val(),
+      site_province: $("#province").val(),
+      site_amphur: $("#amphur").val(),
+      site_district: $("#district").val(),
+      site_house_no: $("#houseno").val(),
+      site_village_no: $("#villageno").val(),
+      site_muban: $("#muban").val(),
+      site_postal_code: $("#postalcode").val(),
+      site_telephone: $("#tel").val(),
+      site_mobile: $("#mobile").val(),
+      site_user: <?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>,
+      lat: lat,
+      lng: lng,
+    },
+    function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
               location.reload();
-        });
-      }
-    });
+            });
+  }
+});
 
-  });
+});
 </script>
 <script src="../_plugins/input-mask/jquery.inputmask.js"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>
