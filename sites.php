@@ -471,9 +471,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn
 
 });
 </script>
-<script src="../_plugins/input-mask/jquery.inputmask.js"></script>
-<script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="_plugins/input-mask/jquery.inputmask.js"></script>
+<script src="_plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script>
   $("[data-mask]").inputmask();
   $("#urlname").inputmask("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
