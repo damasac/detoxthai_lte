@@ -177,10 +177,24 @@ $MasterPage = 'page_main.php';?>
                         var timeline_post = $("#timeline_post").val();
                         if (timeline_post=="") {
                                     //code
-                                    alert("กรุณาระบุ");
+                                    $("#timeline_post").attr("style","border-color:red;")
+
                                     return ;
                         }else{
-                                    
+                                    $.ajax({
+		    url: "usermgn/ajax-sql-query.php?task=addUserNormal",
+		    type: "post",
+		    data: {
+                      text:timeline_post
+                      },
+		    success: function(data){
+            
+		    },
+		    error:function(){
+			alert("failure");
+		    }
+		});
+
                         }
             }            
 </script>

@@ -42,6 +42,7 @@ $MasterPage = 'page_main.php';?>
     $query1 = $mysqli->query($sql1);
   }
 ?>
+
 <div class="box box-primary dir
 ect-chat direct-chat-primary">
 <div class="box-header">
@@ -52,7 +53,7 @@ ect-chat direct-chat-primary">
     ?>
     <?php if($num2==1){?>
     <span style="float: right">
-        <button class="btn btn-info btn-flat" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
+        <button class="btn bg-aqua btn-flat margin" onclick="popup_custom();"><i class="fa fa-plus"></i> เพิ่มสมาชิกเข้าสู่ศูนย์</button>
     </span><br><br><br>
     <?php }?>
     <table id="userTable" class="table table-hover">
@@ -72,8 +73,12 @@ ect-chat direct-chat-primary">
                 <td><?php echo $data1["tel"];?></td>
                 <td>
                 <?php if($num2==1){?>
-                    <button class="btn btn-success" onclick="goForm(<?php echo $data1["id"]; ?>);">กรอกข้อมูล</button>
-                    <button class="btn btn-warning" onclick="leaveSite(<?php echo $data1["id"]; ?>);">ย้ายสมาชิกออกจากศูนย์</button>
+                <?php if($_SESSION[SESSIONPREFIX."user_form"]==$data1["id"]){?>
+                    <button class="btn bg-maroon btn-flat margin">Logout</button>
+                <?php }?>
+                    <button class="btn bg-navy-active  color-palette btn-flat margin" onclick="goForm(<?php echo $data1["id"]; ?>);">กรอกข้อมูล</button>
+
+                    <button class="btn bg-yellow btn-flat margin" onclick="leaveSite(<?php echo $data1["id"]; ?>);">ย้ายสมาชิกออกจากศูนย์</button>
                 </td>
                 <?php }?>
             </tr>
