@@ -3,7 +3,7 @@
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<script src=""></script>
+<link rel="stylesheet" href="_plugins/dropzone/dropzone.css"/>
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -116,113 +116,125 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">ตั้งศูนย์</h4>
       </div>
-      <div class="modal-body">
-        <form class="form-horizontal" id="addform">
-          <div class="form-group">
-            <label for="urlname" class="col-sm-2 control-label">URL : </label>
-            <div class="col-sm-5">
-              <input type="text" class="form-control" id="urlname" placeholder="ชื่อคำนำหน้า URL" required>
-            </div>
-            <div class="col-sm-5">
-              <h4 id="url">.detoxthai.org</h4>
-            </div>
+      <div class="modal-body form-horizontal">
+        <!-- <form class="form-horizontal" id="addform"> -->
+        <div class="form-group">
+          <label for="urlname" class="col-sm-2 control-label">URL : </label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="urlname" placeholder="ชื่อคำนำหน้า URL" required>
           </div>
-          <div class="form-group">
-            <label for="sitename" class="col-sm-2 control-label">ชื่อค่ายล้างพิษ : </label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="sitename" placeholder="ชื่อค่าย">
-            </div>
+          <div class="col-sm-5">
+            <h4 id="url">.detoxthai.org</h4>
           </div>
-          <div class="form-group">
-            <label for="" class="col-sm-2 control-label">ที่ตั้ง : </label>
-            <div class="col-sm-10">
-              <label for="province" class="control-label">จังหวัด : </label>
-              <select id="province" o class="form-control">
-                <option value="">เลือกจังหวัด</option>
-                <?php
+        </div>
+        <div class="form-group">
+          <label for="sitename" class="col-sm-2 control-label">ชื่อค่ายล้างพิษ : </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="sitename" placeholder="ชื่อค่าย">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="col-sm-2 control-label">ที่ตั้ง : </label>
+          <div class="col-sm-10">
+            <label for="province" class="control-label">จังหวัด : </label>
+            <select id="province" o class="form-control">
+              <option value="">เลือกจังหวัด</option>
+              <?php
                   // prepare and query (direct)
-                $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
-                $result = $mysqli->query($sql);
+              $sql = "SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME";
+              $result = $mysqli->query($sql);
 
-                if ($result->num_rows > 0) {
-                  while($row = $result->fetch_assoc()) {
-                   echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
-                 }
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                 echo "<option value=".$row['PROVINCE_ID'].">".$row['PROVINCE_NAME']."</option>";
                }
-               ?>
-             </select>
-           </div>
+             }
+             ?>
+           </select>
          </div>
-         <div class="form-group">
-          <label for="amphur" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="amphur" class="control-label">อำเภอ : </label>
-            <select id="amphur" o class="form-control">
-              <option value="">เลือกอำเภอ/เขต</option>
+       </div>
+       <div class="form-group">
+        <label for="amphur" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="amphur" class="control-label">อำเภอ : </label>
+          <select id="amphur" o class="form-control">
+            <option value="">เลือกอำเภอ/เขต</option>
 
-            </select>
-          </div>
+          </select>
         </div>
-        <div class="form-group">
-          <label for="district" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="district" class="control-label">ตำบล : </label>
-            <select id="district" o class="form-control">
-              <option value="">เลือกตำบล/แขวง</option>
+      </div>
+      <div class="form-group">
+        <label for="district" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="district" class="control-label">ตำบล : </label>
+          <select id="district" o class="form-control">
+            <option value="">เลือกตำบล/แขวง</option>
 
-            </select>
-          </div>
+          </select>
         </div>
-        <div class="form-group">
-          <label for="houseno" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="houseno" class="control-label">บ้านเลขที่ : </label>
-            <input type="text" class="form-control" id="houseno" placeholder="บ้านเลขที่">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="houseno" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="houseno" class="control-label">บ้านเลขที่ : </label>
+          <input type="text" class="form-control" id="houseno" placeholder="บ้านเลขที่">
         </div>
-        <div class="form-group">
-          <label for="villageno" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="villageno" class="control-label">หมู่ที่ : </label>
-            <input type="text" class="form-control" id="villageno" placeholder="หมู่ที่">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="villageno" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="villageno" class="control-label">หมู่ที่ : </label>
+          <input type="text" class="form-control" id="villageno" placeholder="หมู่ที่">
         </div>
-        <div class="form-group">
-          <label for="muban" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="muban" class="control-label">หมู่บ้าน : </label>
-            <input type="text" class="form-control" id="muban" placeholder="หมู่บ้าน">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="muban" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="muban" class="control-label">หมู่บ้าน : </label>
+          <input type="text" class="form-control" id="muban" placeholder="หมู่บ้าน">
         </div>
-        <div class="form-group">
-          <label for="postalcode" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="postalcode" class="control-label">รหัสไปรษณีย์ : </label>
-            <input type="text" class="form-control" id="postalcode" placeholder="รหัสไปรษณีย์">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="postalcode" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="postalcode" class="control-label">รหัสไปรษณีย์ : </label>
+          <input type="text" class="form-control" id="postalcode" placeholder="รหัสไปรษณีย์">
         </div>
-        <div class="form-group">
-          <label for="tel" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="tel" class="control-label">เบอร์โทร : </label>
-            <input type="text" class="form-control" id="tel" placeholder="โทร">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="tel" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="tel" class="control-label">เบอร์โทร : </label>
+          <input type="text" class="form-control" id="tel" placeholder="โทร">
         </div>
-        <div class="form-group">
-          <label for="mobile" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="mobile" class="control-label">มือถือ : </label>
-            <input type="text" class="form-control" id="mobile" placeholder="มือถือ">
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="mobile" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="mobile" class="control-label">มือถือ : </label>
+          <input type="text" class="form-control" id="mobile" placeholder="มือถือ">
         </div>
-        <div class="form-group">
-          <label for="mobile" class="col-sm-2 control-label"></label>
-          <div class="col-sm-10">
-            <label for="mobile" class="control-label">ตำแหน่ง : </label>
-            <div id="map" style="height:400px"></div>
-          </div>
+      </div>
+      <div class="form-group">
+        <label for="mobile" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="mobile" class="control-label">ตำแหน่ง : </label>
+          <div id="map" style="height:400px"></div>
         </div>
-      </form>
+      </div>
+      <div class="form-group">
+        <label for="mobile" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="mobile" class="control-label">แนบภาพถ่ายบัตรประจำตัวประชาชน : </label>
+          <form action="api/upload.php" class="dropzone">
+            <div class="dz-message">
+            ลากไฟล์หรือคลิกที่นี่<br>
+              <span class="note">(อัพโหลดข้อมูลที่เป็นไฟล์ภาพเท่านั้น)</span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- </form> -->
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
@@ -236,9 +248,8 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
 
 
 <?php sb('js_and_css_footer');?>
-<script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn9cN6qlVc">
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script src="_plugins/dropzone/dropzone.js"></script>
 <script>
   var map;
   var markers = [];
@@ -273,6 +284,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn
 
       google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
       markers.push(marker);
+
+      $(".uploadform").dropzone({ url: "api/upload.php" });
 
     });
     $('#myModal').modal("show");
@@ -324,54 +337,53 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn
       });
 
     });
-    $("#amphur").change(function() {
-      locationName = $("#amphur").find('option:selected').text() + ' ' + $("#province").find('option:selected').text();
-      $("#district").empty();
-      var option = new Option("เลือกตำบล/แขวง", "");
+$("#amphur").change(function() {
+  locationName = $("#amphur").find('option:selected').text() + ' ' + $("#province").find('option:selected').text();
+  $("#district").empty();
+  var option = new Option("เลือกตำบล/แขวง", "");
+  $("#district").append($(option));
+  $.getJSON("api/getdistrict.php?amphur_id=" + $("#amphur").val(), function(data){
+    $.each(data.district, function(i, district){
+      var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
       $("#district").append($(option));
-      $.getJSON("api/getdistrict.php?amphur_id=" + $("#amphur").val(), function(data){
-        $.each(data.district, function(i, district){
-          var option = new Option(district.DISTRICT_NAME, district.DISTRICT_ID);
-          $("#district").append($(option));
-        });
-      });
-
-      /** Get lat lng from address */
-      $.ajax({
-        url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
-        dataType: "text",
-        success: function(data) {
-          var json = $.parseJSON(data);
-
-          for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-          }
-
-          var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
-
-          var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            draggable:true,
-            title:"Drag me!"
-          });
-
-          lat = json.results[0].geometry.location.lat;
-          lng = json.results[0].geometry.location.lng;
-
-          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
-          markers.push(marker);
-
-          map.setZoom(10)
-          map.setCenter(myLatlng);
-
-        }
-      });
-
     });
+  });
 
-    $("#district").change(function() {
-      locationName = $("#district").find('option:selected').text() + $("#amphur").find('option:selected').text() + $("#province").find('option:selected').text();
+  /** Get lat lng from address */
+  $.ajax({
+    url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + locationName,
+    dataType: "text",
+    success: function(data) {
+      var json = $.parseJSON(data);
+
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+      }
+
+      var myLatlng = new google.maps.LatLng(json.results[0].geometry.location.lat, json.results[0].geometry.location.lng);
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        draggable:true
+      });
+
+      lat = json.results[0].geometry.location.lat;
+      lng = json.results[0].geometry.location.lng;
+
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      markers.push(marker);
+
+      map.setZoom(10)
+      map.setCenter(myLatlng);
+
+    }
+  });
+
+});
+
+$("#district").change(function() {
+  locationName = $("#district").find('option:selected').text() + $("#amphur").find('option:selected').text() + $("#province").find('option:selected').text();
       //alert(locationName);
       /** Get lat lng from address */
       $.ajax({
@@ -407,15 +419,15 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn
 
     });
 
-    $("#btadd").click(function(){
-      var site_url = $("#urlname");
+$("#btadd").click(function(){
+  var site_url = $("#urlname");
 
-      var check_site_exit = 0;
-      $.post("site/check_exit_site.php",
-      {
-        site_url: $("#urlname").val(),
-      },
-      function(data,status){
+  var check_site_exit = 0;
+  $.post("site/check_exit_site.php",
+  {
+    site_url: $("#urlname").val(),
+  },
+  function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
               if(0 < data){
                 alert('URL นี้มีการใช้งานแล้ว');
@@ -424,50 +436,50 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn
             });
 
 
-      var site_name = $("#sitename");
+  var site_name = $("#sitename");
 
-      var check_site_url = 0;
-      var check_site_name = 0;
+  var check_site_url = 0;
+  var check_site_name = 0;
 
-      if(!site_url.val()) {
-        site_url.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check_site_url = 1;
-      } else {
-        site_url.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
+  if(!site_url.val()) {
+    site_url.closest('.form-group').removeClass('has-success').addClass('has-error');
+    check_site_url = 1;
+  } else {
+    site_url.closest('.form-group').removeClass('has-error').addClass('has-success');
+  }
 
-      if(!site_name.val()) {
-        site_name.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check_site_name = 1;
-      } else {
-        site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
+  if(!site_name.val()) {
+    site_name.closest('.form-group').removeClass('has-success').addClass('has-error');
+    check_site_name = 1;
+  } else {
+    site_name.closest('.form-group').removeClass('has-error').addClass('has-success');
+  }
 
-      if( 0 == check_site_url && 0 == check_site_name && 0 == check_site_exit){
+  if( 0 == check_site_url && 0 == check_site_name && 0 == check_site_exit){
 
-        $.post("site/add_site.php",
-        {
-          site_url: $("#urlname").val(),
-          site_name: $("#sitename").val(),
-          site_province: $("#province").val(),
-          site_amphur: $("#amphur").val(),
-          site_district: $("#district").val(),
-          site_house_no: $("#houseno").val(),
-          site_village_no: $("#villageno").val(),
-          site_muban: $("#muban").val(),
-          site_postal_code: $("#postalcode").val(),
-          site_telephone: $("#tel").val(),
-          site_mobile: $("#mobile").val(),
-          site_user: <?php echo $session; ?>,
-          lat: lat,
-          lng: lng,
-        },
-        function(data,status){
+    $.post("site/add_site.php",
+    {
+      site_url: $("#urlname").val(),
+      site_name: $("#sitename").val(),
+      site_province: $("#province").val(),
+      site_amphur: $("#amphur").val(),
+      site_district: $("#district").val(),
+      site_house_no: $("#houseno").val(),
+      site_village_no: $("#villageno").val(),
+      site_muban: $("#muban").val(),
+      site_postal_code: $("#postalcode").val(),
+      site_telephone: $("#tel").val(),
+      site_mobile: $("#mobile").val(),
+      site_user: <?php echo $session; ?>,
+      lat: lat,
+      lng: lng,
+    },
+    function(data,status){
               //alert("Data: " + data + "\nStatus: " + status);
               location.reload();
             });
-      }
-    });
+  }
+});
 
 });
 </script>

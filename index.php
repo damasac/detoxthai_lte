@@ -28,14 +28,6 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
 
 isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
-/** Set cookie. */
-if (!isset($detoxthai)) {
-  $domain='detoxthai.dev';
-  setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
-
-  /** Test. */
-      //setcookie("detoxthai", $_SESSION[SESSIONPREFIX.'puser_id'], time() + (86400 * 30), "/");
-}
 ?>
 
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
@@ -217,9 +209,9 @@ $site_id_desc = $result_name_site->fetch_assoc();
 
     <div class="box box-default">
       <div class="box-body">
-  
+
         <iframe src="maps.php" scrolling="no" frameborder="no" width="100%" height="800"></iframe>
-        
+
       </div>
     </div>
   </div>

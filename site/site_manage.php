@@ -530,9 +530,7 @@ $manage_site_count = $result_count_manage->fetch_assoc();
 
 <?php sb('js_and_css_footer');?>
 
-<script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIslO7DDfO0nfHTih5z-4qgPn9cN6qlVc">
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <script>
   var map;
   var markers = [];
