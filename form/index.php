@@ -90,44 +90,36 @@ if($dataform['status']+0) { ?>
                 
                 <hr>
                 
-                <div class="">
-                    <div class="">
                         
-                        <div class="form-horizontal alert alert-success">
+                <div class="form-inline alert alert-success">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                            <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-lg-8 form-inline">
                             <div class="form-group">
-                                <label for="name" style="font-weight: bold;" class="col-sm-2 control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
-                                <div class="col-sm-10">
-                                    <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
-                                </div>
-                                <label for="name" style="font-weight: bold;" class="col-sm-1 control-label"><h4>ถึง</h4></label>
-                                <div class="col-sm-2">
-                                    <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
-                                </div>
+                            <label for="name" style="font-weight: bold;" class="control-label"><h4>สถานที่ &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h4></label>
                             </div>
-                            
                             <div class="form-group">
-                               
-                            </div>
-                   
-    
-                            <div class="form-group">
-                                <label for="name" style="font-weight: bold;" class="col-sm-2 control-label"><h4>สถานที่</h4></label>
-                                <div class="col-sm-10">
-                                <select style="width: 150px;" id="location" class="form-control">
-                                    <option selected='selected' value=10000001>ที่บ้าน</option>
-                                    <option value=10000002 >อื่นๆ</option>
-                                </select>
-                                </div>
-                             </div>
-                            
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button class=" btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
-                                    <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
-                                </div>
+                             <select style="width: 150px;" id="location" class="form-control">
+                                <option selected='selected' value=10000001>ที่บ้าน</option>
+                                <option value=10000002 >อื่นๆ</option>
+                            </select>
                             </div>
                         </div>
-
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-12" style="padding-left: 140px;">
+                            <button class=" btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
+                            <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
+                        </div>
                     </div>
                 </div>
 
