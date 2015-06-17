@@ -13,9 +13,9 @@
     $scheduledateend = $_POST['scheduledateend'];
     $price = $_POST['price'];
     $user_qty = $_POST['user_qty'];
-    $scheduledesc = $_POST['scheduledesc'];
-    $payment = $_POST['payment'];
-    $afterpayment = $_POST['afterpayment'];
+    $scheduledesc = htmlspecialchars($_POST['scheduledesc']);
+    $payment = htmlspecialchars($_POST['payment']);
+    $afterpayment = htmlspecialchars($_POST['afterpayment']);
     $site_id = $_POST['site_id'];
 
     $result = $mysqli->query("INSERT INTO

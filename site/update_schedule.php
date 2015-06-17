@@ -7,9 +7,9 @@
     $scheduledateend = $_POST['scheduledateend'];
     $price = $_POST['price'];
     $user_qty = $_POST['user_qty'];
-    $scheduledesc = $_POST['scheduledesc'];
-    $payment = $_POST['payment'];
-    $afterpayment = $_POST['afterpayment'];
+    $scheduledesc = htmlspecialchars($_POST['scheduledesc']);
+    $payment = htmlspecialchars($_POST['payment']);
+    $afterpayment = htmlspecialchars($_POST['afterpayment']);
     $id = $_POST['id'];
 
     $result = $mysqli->query("UPDATE site_schedule

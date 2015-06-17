@@ -4,12 +4,15 @@
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="../_plugins/datepicker/datepicker3.css">
-<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="../ckfinder/ckfinder.js"></script>
-<script type="text/javascript">
-  var editor = CKEDITOR;
-  CKFinder.setupCKEditor(editor, '../ckfinder/');
-</script>
+<style type="text/css">
+  .sceditor-container {
+    height: 700px;
+  }
+  iframe {
+    height: 82% !important;
+    width: 97% !important;
+  }
+</style>
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -141,12 +144,12 @@ if (0 == $row['check_secu'] && $check_point) {
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
                 <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
                 <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
-                <p><strong>รายละเอียด :<hr/></strong></p>
-                ".htmlspecialchars_decode($row['schedule_desc'])."
-                <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong></p>
-                ".htmlspecialchars_decode($row['schedule_payment'])."
-                <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong></p>
-                ".htmlspecialchars_decode($row['schedule_after_payment'])."
+                <p><strong>รายละเอียด :<hr/></strong><p>
+                <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
+                <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
+                <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
+                <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
+                <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
               </div>
               <div class='modal-footer'>
                 <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
@@ -154,6 +157,30 @@ if (0 == $row['check_secu'] && $check_point) {
             </div>
           </div>
         </div>";
+        $script .= "$('#detail".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
+        $script .= "$('#payment".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
+        $script .= "$('#afterpayment".$count."').sceditor({
+                plugins: 'bbcode',
+                width: '98%',
+                toolbar: 'justify',
+                readOnly: 'true',
+                resizeEnabled: false,
+                style: 'edit/minified/jquery.sceditor.default.min.css'
+              });";
 
         $count++;
       }
@@ -212,24 +239,21 @@ if (0 == $row['check_secu'] && $check_point) {
             <div class="form-group">
               <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลักสูตร</label>
               <div class="col-sm-10">
-                <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample="1" data-sample-short="">
-                </textarea>
+                <textarea class="form-control" id="detail" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
               </div>
             </div>
 
             <div class="form-group">
               <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดการโอนเงิน</label>
               <div class="col-sm-10">
-                <textarea cols="80" id="editor2" name="editor1" rows="10" data-sample="2" data-sample-short="">
-                </textarea>
+                <textarea class="form-control" id="payment" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
               </div>
             </div>
 
             <div class="form-group">
               <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลังการโอนเงินเรียบร้อยแล้ว</label>
               <div class="col-sm-10">
-                <textarea cols="80" id="editor3" name="editor1" rows="10" data-sample="3" data-sample-short="">
-                </textarea>
+                <textarea class="form-control" id="afterpayment" rows="50" id="scheduledesc" placeholder="รายละเอียดหลักสูตร"></textarea>
               </div>
             </div>
           </form>
@@ -254,32 +278,35 @@ if (0 == $row['check_secu'] && $check_point) {
 
 
 <?php sb('js_and_css_footer');?>
+<link rel="stylesheet" type="text/css" href="../_plugins/edit/minified/themes/default.min.css">
+<script src="../_plugins/edit/minified/jquery.sceditor.bbcode.min.js"></script>
 <script type="text/javascript" src="../_plugins/datepicker/bootstrap-datepicker.js"></script>
-<script>
-    CKEDITOR.replace( 'editor1', {
-      width: '100%',
-      height: 500
-    } );
 
-    CKEDITOR.replace( 'editor2', {
-      width: '100%',
-      height: 500
-    } );
-
-    CKEDITOR.replace( 'editor3', {
-      width: '100%',
-      height: 500
-    } );
-</script>
 <script>
   $(document).ready(function(){
-
-    jQuery.fn.CKEditorValFor = function( element_id ){
-      return CKEDITOR.instances[element_id].getData();
-    }
-
     $("#scheduledate").datepicker({ altFormat: "dd-mm-yyyy" });
     $("#scheduledateend").datepicker({ altFormat: "dd-mm-yyyy" });
+
+    $("#detail").sceditor({
+      plugins: "bbcode",
+      width: '98%',
+      resizeEnabled: false,
+      style: "edit/minified/jquery.sceditor.default.min.css"
+    });
+
+    $("#payment").sceditor({
+      plugins: "bbcode",
+      width: '98%',
+      resizeEnabled: false,
+      style: "edit/minified/jquery.sceditor.default.min.css"
+    });
+
+    $("#afterpayment").sceditor({
+      plugins: "bbcode",
+      width: '98%',
+      resizeEnabled: false,
+      style: "edit/minified/jquery.sceditor.default.min.css"
+    });
 
     $("#btadd").click(function(){
 
@@ -328,11 +355,14 @@ if (0 == $row['check_secu'] && $check_point) {
 
       if(0 == check){
 
-        var bbCode_detail = $().CKEditorValFor('editor1');
+        var bbCode_detail = $('#detail').sceditor('instance').val();
+        //var html_detail = $('#detail').sceditor('instance').fromBBCode(bbCode_detail);
 
-        var bbCode_payment = $().CKEditorValFor('editor2');
+        var bbCode_payment = $('#payment').sceditor('instance').val();
+        //var html_payment = $('#payment').sceditor('instance').fromBBCode(bbCode_payment);
 
-        var bbCode_afterpayment = $().CKEditorValFor('editor3');
+        var bbCode_afterpayment = $('#afterpayment').sceditor('instance').val();
+        //var html_afterpayment = $('#afterpayment').sceditor('instance').fromBBCode(bbCode_afterpayment);
 
         $.post("add_schedule.php",
         {
@@ -352,6 +382,8 @@ if (0 == $row['check_secu'] && $check_point) {
                     });
       }
     });
+
+    <?php echo $script; ?>
 });
 </script>
 <?php eb();?>
