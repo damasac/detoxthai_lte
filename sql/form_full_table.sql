@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 16, 2015 at 10:25 AM
+-- Generation Time: Jun 17, 2015 at 07:50 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -11115,7 +11115,7 @@ CREATE TABLE IF NOT EXISTS `tbl_surveyform` (
 --
 
 INSERT INTO `tbl_surveyform` (`ref_id_create`, `p0a1b1c1`, `p0a1b1c2`, `p0a1b2`, `p0a1b3`, `p0a1b3c1`, `p0a1b3c2`, `p0a1b3c3`, `p0a1b3c4`, `p0a1b3c5`, `p0a1b3c6`, `p0a1b3c7`, `p0a1b3c8`, `p0a1b4`, `p0a1b5`, `p0a1b6`, `p0a2b1c1`, `p0a2b1c2`, `p0a2b2`, `p0a2b3`, `p0a2b4`, `p1a1b1`, `p1a1b2`, `p1a2b1`, `p1a2b2`, `p1a3b1`, `p1a4b1`, `p1a4b2`, `p1a5`, `p1a6`, `p1a7b1`, `p1a7b2`, `p1a7b3`, `p1a8b1`, `p1a8b2`, `p1a9`, `p1a10`, `p1a10b1c1`, `p1a10b2c1`, `p1a10b3c1`, `p1a10b1c2`, `p1a10b2c2`, `p1a10b3c2`, `p1a10b1c3`, `p1a10b2c3`, `p1a10b3c3`, `p1a10b1c4`, `p1a10b2c4`, `p1a10b3c4`, `p1a10b1c5`, `p1a10b2c5`, `p1a10b3c5`, `p1a10b1c6`, `p1a10b2c6`, `p1a10b3c6`, `p1a11b1`, `p1a11b1c1`, `p1a11b1c4`, `p1a12b1`, `p1a12b2`, `p1a12b3`, `p1a12b4`, `p2a1`, `p2a13b1c1`, `p2a13b1c2`, `p2a13b1c3`, `p2a13b1c4`, `p2a13b1c5`, `p2a13b1c6`, `p2a13b1c7`, `p2a13b1c8`, `p2a13b1c9`, `p2a13b1c10`, `p2a13b1c11`, `p2a13b1c12`, `p2a13b1c13`, `p2a13b1c14`, `p2a13b1c15`, `p2a13b1c16`, `p2a13b1c17`, `p2a13b1c18`, `p2a13b1c19`, `p2a13b2c1`, `p2a13b3c1`, `p2a13b4c1`, `p2a13b5c1`, `p2a13b6c1`, `p2a13b2c2`, `p2a13b3c2`, `p2a13b4c2`, `p2a13b5c2`, `p2a13b6c2`, `p2a13b2c3`, `p2a13b3c3`, `p2a13b4c3`, `p2a13b5c3`, `p2a13b6c3`, `p2a13b2c4`, `p2a13b3c4`, `p2a13b4c4`, `p2a13b5c4`, `p2a13b6c4`, `p2a13b2c5`, `p2a13b3c5`, `p2a13b4c5`, `p2a13b5c5`, `p2a13b6c5`, `p2a13b2c6`, `p2a13b3c6`, `p2a13b4c6`, `p2a13b5c6`, `p2a13b6c6`, `p2a13b2c7`, `p2a13b3c7`, `p2a13b4c7`, `p2a13b5c7`, `p2a13b6c7`, `p2a13b2c8`, `p2a13b3c8`, `p2a13b4c8`, `p2a13b5c8`, `p2a13b6c8`, `p2a13b2c9`, `p2a13b3c9`, `p2a13b4c9`, `p2a13b5c9`, `p2a13b6c9`, `p2a13b2c10`, `p2a13b3c10`, `p2a13b4c10`, `p2a13b5c10`, `p2a13b6c10`, `p2a13b2c11`, `p2a13b3c11`, `p2a13b4c11`, `p2a13b5c11`, `p2a13b6c11`, `p2a13b2c12`, `p2a13b3c12`, `p2a13b4c12`, `p2a13b5c12`, `p2a13b6c12`, `p2a13b2c13`, `p2a13b3c13`, `p2a13b4c13`, `p2a13b5c13`, `p2a13b6c13`, `p2a13b2c14`, `p2a13b3c14`, `p2a13b4c14`, `p2a13b5c14`, `p2a13b6c14`, `p2a13b2c15`, `p2a13b3c15`, `p2a13b4c15`, `p2a13b5c15`, `p2a13b6c15`, `p2a13b2c16`, `p2a13b3c16`, `p2a13b4c16`, `p2a13b5c16`, `p2a13b6c16`, `p2a13b2c17`, `p2a13b3c17`, `p2a13b4c17`, `p2a13b5c17`, `p2a13b6c17`, `p2a13b2c18`, `p2a13b3c18`, `p2a13b4c18`, `p2a13b5c18`, `p2a13b6c18`, `p2a13b2c19`, `p2a13b3c19`, `p2a13b4c19`, `p2a13b5c19`, `p2a13b6c19`, `p3a1`, `p3a2`, `p3a3`, `p3a4`, `p3a5`, `p3a5c1`, `p3a6`, `p3a7`, `p3a8`, `p3a9`, `p3a10`, `p3a11`, `p3a11c1`, `p3a12`, `p3a12c1`, `p3a13`, `p3a13c1`, `p3a14`, `p3a15`, `p3a16`, `p3a16c1`, `p3a17`, `p3a17c1`, `p3a18`, `p4a1`, `p4a2`, `p4a3`, `p4a4`, `p4a5`, `p4a6`, `p4a7`, `p4a8`, `p5a21g1c1`, `p5a21g1c2`, `p5a21g1c3`, `p5a21g1c4`, `p5a21g1c5`, `p5a21g2c1`, `p5a21g2c2`, `p5a21g2c3`, `p5a21g2c4`, `p5a21g2c5`, `p5a21g3c1`, `p5a21g3c2`, `p5a21g3c3`, `p5a21g3c4`, `p5a21g3c5`, `p5a21g4c1`, `p5a21g4c2`, `p5a21g4c3`, `p5a21g4c4`, `p5a21g4c5`, `p5a21g5c1`, `p5a21g5c2`, `p5a21g5c3`, `p5a21g5c4`, `p5a21g5c5`, `p5a21g6c1`, `p5a21g6c2`, `p5a21g6c3`, `p5a21g6c4`, `p5a21g6c5`, `p5a21g7c1`, `p5a21g7c2`, `p5a21g7c3`, `p5a21g7c4`, `p5a21g7c5`, `p5a21g8c1`, `p5a21g8c2`, `p5a21g8c3`, `p5a21g8c4`, `p5a21g8c5`, `p5a21g9c1`, `p5a21g9c2`, `p5a21g9c3`, `p5a21g9c4`, `p5a21g9c5`, `p5a22q1`, `p5a22q2`, `p5a23q1`, `p5a23q2`, `p5a24q1`, `p5a25q1`, `p6a26`, `p6a26q1`, `p6a27`, `p6a27q1`, `p6a28`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '46', '3', '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '56', '792', '5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -11153,7 +11153,7 @@ CREATE TABLE IF NOT EXISTS `tbl_surveyprivate` (
 --
 
 INSERT INTO `tbl_surveyprivate` (`ref_id_user`, `status`, `p0a1b1c1`, `p0a1b1c2`, `p0a1b2`, `p0a1b3`, `p0a1b3c1`, `p0a1b3c2`, `p0a1b3c3`, `p0a1b3c4`, `p0a1b3c5`, `p0a1b3c6`, `p0a1b3c7`, `p0a1b3c8`, `p0a1b4`, `p0a1b5`, `p0a1b6`, `p0a2b1c1`, `p0a2b1c2`, `p0a2b2`, `p0a2b3`, `p0a2b4`) VALUES
-(1, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '28', '401', '3574', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -11167,15 +11167,16 @@ CREATE TABLE IF NOT EXISTS `tbl_surveyuser` (
   `enddate` datetime DEFAULT NULL,
   `createdate` datetime DEFAULT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tbl_surveyuser`
 --
 
-INSERT INTO `tbl_surveyuser` (`id`, `startdate`, `enddate`, `createdate`, `location`, `user_id`) VALUES
-(1, '2015-06-16 00:00:00', '2015-06-16 00:00:00', '2015-06-16 08:47:36', '10000001', 1);
+INSERT INTO `tbl_surveyuser` (`id`, `startdate`, `enddate`, `createdate`, `location`, `user_id`, `status`) VALUES
+(1, '2015-06-17 00:00:00', '2015-06-18 00:00:00', '2015-06-16 13:39:30', '10000001', 1, NULL);
 
 --
 -- Indexes for dumped tables
