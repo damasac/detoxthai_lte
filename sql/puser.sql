@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2015-06-17 11:58:25
+Date: 2015-06-17 12:01:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,13 +43,3 @@ CREATE TABLE `puser` (
 -- Records of puser
 -- ----------------------------
 INSERT INTO `puser` VALUES ('1', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'admin@admin.com', null, 'fadmin', 'ladmin', '0812345678', '1', '13777', '7', '400101', '4001', '40', null, '2015-05-22 15:17:01');
-INSERT INTO `puser` VALUES ('2', '0874379405', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'ภานุพงศ์', 'ศรีศุภเดชะ', '0874379405', '1', null, null, '', '', '', null, '2015-06-10 08:27:28');
-INSERT INTO `puser` VALUES ('3', '0898412748', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'รัก', 'สุขภาพ', '0898412748', '1', null, null, '', '', '', null, '2015-06-11 11:34:00');
-INSERT INTO `puser` VALUES ('4', '0819750571', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'ฟิน', 'นาเร่', '0819750571', '1', null, null, '', '', '', null, '2015-06-11 11:48:09');
-INSERT INTO `puser` VALUES ('5', '8888888888', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'sooso', 'ososos', '8888888888', '1', null, null, '', '', '', null, '2015-06-12 10:57:20');
-INSERT INTO `puser` VALUES ('6', '0999999999', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'ทดสอบ', 'ทดสอบ', '0999999999', '1', null, null, '', '', '', null, '2015-06-12 12:50:53');
-INSERT INTO `puser` VALUES ('7', '0801841938', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'พี่', 'นุ', '0801841938', '1', null, null, '', '', '', null, '2015-06-12 12:54:01');
-INSERT INTO `puser` VALUES ('8', '0813332234', '10470c3b4b1fed12c3baac014be15fac67c6e815', null, null, 'เทา', 'เมส', '0813332234', '1', null, null, '', '', '', null, '2015-06-12 12:55:42');
-INSERT INTO `puser` VALUES ('9', '1231231231', '876b2886307af779103980802fdba2b42b8e4ac2', null, null, 'aaa', 'aaa', '1231231231', '1', null, null, '', '', '', null, '2015-06-13 10:23:14');
-INSERT INTO `puser` VALUES ('10', '1111111111', '5141ab1cced63b13ceb9d4431428462acce92c59', null, null, 'ฟหกฟหก', 'ฟหกฟหก', '1111111111', '1', null, null, '', '', '', null, '2015-06-13 10:24:06');
-INSERT INTO `puser` VALUES ('11', '1232223232', '7b31f53f978339308fba99cdafa6a6b97263414f', null, null, 'ๅ/-/ๅ-', '-ๅ/-ๅ/-', '1232223232', '1', null, null, '', '', '', null, '2015-06-13 10:25:40');
