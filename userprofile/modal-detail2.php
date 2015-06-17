@@ -10,40 +10,50 @@
 
 <div class="container">
     
-    <div class="row">
-        <div class="col-lg-6">
-            <label>ชื่อ</label><code id="valFname" style="display:none;"></code>
-            <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $data["fname"];?>">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <label>นามสกุล</label><code id="valLname" style="display:none;"></code>
-            <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $data["lname"];?>">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <label>นามแฝง</label>
-            <input type="text" class="form-control" id="nickname" name="nickname" value="<?php echo $data["nickname"];?>">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <label>เบอรโทรศัพท์</label><code id="valTel" style="display:none;"></code>
-            <input type="text" class="form-control" id="tel" name="tel"
-                   value="<?php echo $data["tel"];?>"
-                   data-inputmask="'mask': ['9999999999']" data-mask>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <label>รหัสผ่าน</label><code id="valPassword" style="display:none;"></code>
-            <input type="password" class="form-control" id="password" name="password"
-            value="<?php echo $data["password"]?>"
-            >
-        </div>
-    </div>
+   
+    <p style="font-size:16px;">
+        ชื่อ ::
+        <code id="valFname" style="display:none;"></code>
+    <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $data["fname"];?>" style="width:550px;">
+
+    </p>
+    <p style="font-size:16px;">
+        นามสกุล ::
+        <code id="valLname" style="display:none;"></code>
+            <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $data["lname"];?>" style="width:550px;">
+    </p>
+
+    <p>
+        รหัสผ่าน ::
+        <code id="valPassword" style="display:none;"></code>
+
+    <input type="password" class="form-control" id="password" name="password" value="<?php echo $data["password"];?>" style="width:550px;">
+    </p>
+    <p>
+        ยืนยันรหัสผ่าน ::
+        <code id="valPassword2" style="display:none;"></code>
+    <input type="password" class="form-control" id="password2" name="password2" value="<?php echo $data["password"];?>" style="width:550px;">
+    </p>
+    <p style="font-size:16px;">
+        เบอร์โทรศัพท์ :: 
+        <code id="valTel" style="display:none;"></code>
+        <input type="text" class="form-control" id="tel" name="tel"
+               
+               value="<?php echo $data["tel"];?>" style="width:550px;"
+               data-inputmask="'mask': ['9999999999']" data-mask
+               >
+    </p>
+        <p style="font-size:16px;">
+        อีเมล์ ::
+        <code id="valEmail" style="display:none;"></code>
+        <input type="text" class="form-control" id="email" name="email" value="<?php echo $data["email"];?>" style="width:550px;">
+    </p>
+    <p>
+        นามแฝง ::
+        <code style="color:green;">เป็นชื่อที่ใช้แทนชื่อจริงในกรณีที่ไม่อยากเปิดเผยตัวตน</code>
+        <?php if($data["nickname"]==""){ $nickname=$data["fname"]." ".$data["lname"]; } else{ $nickname=$data["nickname"];}  ?>
+            <input type="text" class="form-control" id="nickname" name="nickname" value="<?php echo $nickname;?>" style="width:550px;">
+    </p>
     <br>
     <button class="btn btn-primary btn-flat" onclick="editPuser('<?php echo $data["id"];?>');">
         <i class="fa fa-save"></i>   บันทึก
@@ -70,6 +80,8 @@
     var lname = $("#lname").val();
     var nickname = $("#nickname").val();
     var password = $("#password").val();
+    var password2 = $("#password2").val();
+    var email = $("#email").val();
     if (fname=="") {
       $("#valFname").show();
       $("#valFname").html("กรุณาระบุชื่อ");
@@ -106,6 +118,12 @@
     }else{
       $("#valPassword").hide();
     }
+    if (password2!=password) {
+        //code
+        $("#valPassword2").show();
+        $("#valPassword2").html("ระบุรหัสผ่านไม่ตรงกัน");
+        return ;
+    }
        $.ajax({
 		    url: "sql.php?task=edit",
 		    type: "post",
@@ -115,6 +133,7 @@
                       fname:fname,
                       lname:lname,
                       nickname:nickname,
+                      email:email,
                       id:id
                       },
 		    success: function(data){
@@ -123,6 +142,11 @@
                         //code
                         $("#valTel").show();
                         $("#valTel").html("เบอร์โทรศัพท์มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
+                      }
+                      else if ($.trim(data)=="2") {
+                        //code
+                        $("#valEmail").show();
+                        $("#valEmail").html("อีเมล์นี้มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
                       }
                       else{
                         //code
@@ -136,31 +160,4 @@
 		});
   }
   
-  </script>
-<script>
-/*jslint unparam: true */
-/*global window, $ */
-$(function () {
-    'use strict';
-    // Change this to the location of your server-side upload handler:
-    var url = window.location.hostname === 'blueimp.github.io' ?
-                '//jquery-file-upload.appspot.com/' : 'server/php/';
-    $('#imgupload').fileupload({
-        url: url,
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo('#files');
-            });
-        },
-        progressall: function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css(
-                'width',
-                progress + '%'
-            );
-        }
-    }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');
-});
 </script>

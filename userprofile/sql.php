@@ -63,12 +63,14 @@
         `tel`='".$_POST["tel"]."',
         `password`='".$_POST["password"]."',
         `nickname`='".$_POST["nickname"]."',
-        `email`='".$_POST["email"]."'
+        `email`='".$_POST["email"]."',
+        `isFristLogin`='1'
         WHERE
             `id`='".$_POST["id"]."'
         ";
-        echo $sql;
         $query= $mysqli->query($sql);
-        
+        if($query){
+            $_SESSION["dtt_puser_first_login"] = 1;
+        }
     }
 ?>
