@@ -1,6 +1,6 @@
 <?php
 	// Create connection
-	$conn = new mysqli("localhost", "root", "root", "detoxthai_lte");
+	$conn = new mysqli("localhost", "root", "", "detoxthai_lte");
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
