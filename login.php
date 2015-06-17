@@ -187,7 +187,9 @@ if ($user) {
   
   $returnurl=$_POST['returnurl'];
   if ($returnurl=="") $returnurl=$_GET['returnurl'];
-  if ($returnurl=="") $returnurl=$_SERVER['HTTP_REFERER'];
+  
+  //if ($returnurl=="") if (strpos($_SERVER['HTTP_REFERER'],"pleaselogin")===false) $returnurl=$_SERVER['HTTP_REFERER'];
+   
 ?>
 	</p>
         <form action="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>chk-login.php" method="post">
@@ -208,7 +210,7 @@ if ($user) {
               </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
-	      <input type="hidden" name="returnurl" value="<?php echo $_SERVER['HTTP_REFERER'];?>">
+	      <input type="hidden" name="returnurl" value="<?php echo $returnurl;?>">
               <button type="submit" class="btn btn-primary btn-block btn-flat">เข้าใช้งาน</button>
             </div><!-- /.col -->
           </div>
