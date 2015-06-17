@@ -115,9 +115,9 @@
 
 
 <!-- jQuery 2.1.4 -->
-<script src="http://localhost/detoxthai_lte/_plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.2 JS -->
-<script src="http://localhost/detoxthai_lte/_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
 <script>
     $(function() {
