@@ -19,17 +19,29 @@
 	$sql1 = "SELECT * FROM `puser` WHERE username='".$_POST["tel"]."' ";
 	$query1 = $mysqli->query($sql1);
 	$num1 = $query1->num_rows;
+	$sql2 = "SELECT * FROM `puser` WHERE email='".$_POST["email"]."' ";
+	$query2 = $mysqli->query($sql2);
+	$num2 = $query2->num_rows;
+
+	if($num2==1){
+	    echo "2";
+	    exit;
+	}
 	if($num1==1){
 	    echo "1";
 	    exit;
 	}else{
-	    $sql = "INSERT INTO `puser`(`username`,`password`,`fname`,`lname`,`tel`,`status`,`createdate`)
-	    VALUES('".$_POST["tel"]."','".$password."','".$_POST["fname"]."','".$_POST["lname"]."','".$_POST["tel"]."','1','".$date."')";
+	    $sql = "INSERT INTO `puser`(`username`,`password`,`email`,`fname`,`lname`,`tel`,`status`,`createdate`)
+	    VALUES('".$_POST["tel"]."','".$password."','".$_POST["email"]."','".$_POST["fname"]."','".$_POST["lname"]."','".$_POST["tel"]."','1','".$date."')";
+
 	    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
 	    $user_id = $mysqli->insert_id;
-	    $sql2 = "INSERT INTO `site_follow`(site_id,user_id)
-	    VALUES('".$_POST["site_id"]."','".$user_id."')";
-	    $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
+	    if($_POST["site_id"]!=""){
+		echo "OK!";
+		$sql3 = "INSERT INTO `site_follow`(site_id,user_id)
+		VALUES('".$_POST["site_id"]."','".$user_id."')";
+		$query3 = $mysqli->query($sql3) or die(mysqli_error($mysqli));
+	    }
 	}
 
     }

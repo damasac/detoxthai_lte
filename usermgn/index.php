@@ -1,4 +1,5 @@
-<?php require_once '../_theme/util.inc.php'; //chk_login();
+<?php
+require_once '../_theme/util.inc.php'; //chk_login();
 $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> สมาชิก<?php eb();?>

@@ -39,9 +39,16 @@
         $sql1 = "SELECT * FROM `puser` WHERE username='".$_POST["tel"]."' AND id!='".$_POST["id"]."' ";
 	$query1 = $mysqli->query($sql1);
 	$num1 = $query1->num_rows;
+        $sql2 = "SELECT * FROM `puser` WHERE email='".$_POST["tel"]."' AND id!='".$_POST["id"]."' ";
+	$query2 = $mysqli->query($sql2);
+	$num2 = $query1->num_rows;
 	if($num1==1){
 	    echo "1";
 	    exit;
+        }
+        if($num2==1){
+            echo "2";
+            exit;
         }
         if($numSelect==1){
             $password = $_POST["password"];
@@ -53,13 +60,14 @@
         SET
         `fname`='".$_POST["fname"]."',
         `lname`='".$_POST["lname"]."',
-        `username`='".$_POST["tel"]."',
         `tel`='".$_POST["tel"]."',
         `password`='".$_POST["password"]."',
-        `nickname`='".$_POST["nickname"]."'
+        `nickname`='".$_POST["nickname"]."',
+        `email`='".$_POST["email"]."'
         WHERE
             `id`='".$_POST["id"]."'
         ";
+        echo $sql;
         $query= $mysqli->query($sql);
         
     }

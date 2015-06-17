@@ -7,36 +7,71 @@
 
 
     $sql = "SELECT * FROM `puser` WHERE id='".$_SESSION["dtt_puser_id"]."' ";
+
     $query = $mysqli->query($sql);
     $data = $query->fetch_assoc();
-    
+
 ?>
 <div class="container">
-    <div class="callout callout-danger" style="width:550px;">
+    <div class="callout callout-warning" style="width:550px;">
         <h4><i class="fa fa-warning"></i> Warning !</h4>
         <p>คุณได้เข้าสู่ระบบเป็นครั้งแรกกรุณาตรวจสอบข้อมูลผู้ใช้งาน</p>
     </div>
     <p style="font-size:16px;">
-        ชื่อ :: <?php echo $data["fname"];?>
+        ชื่อ ::
+        <code id="valFname" style="display:none;"></code>
+    <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $data["fname"];?>" style="width:550px;">
+
     </p>
     <p style="font-size:16px;">
-        นามสกุล :: <?php echo $data["lname"];?>
+        นามสกุล ::
+        <code id="valLname" style="display:none;"></code>
+            <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $data["lname"];?>" style="width:550px;">
+    </p>
+
+    <p>
+        รหัสผ่าน ::
+        <code id="valPassword" style="display:none;"></code>
+
+    <input type="text" class="form-control" id="password" name="password" value="<?php echo $data["password"];?>" style="width:550px;">
+    </p>
+    <p>
+        ยืนยันรหัสผ่าน ::
+        <code id="valPassword2" style="display:none;"></code>
+    <input type="text" class="form-control" id="password2" name="password2" value="<?php echo $data["password"];?>" style="width:550px;">
+    </p>
+    <p style="font-size:16px;">
+        เบอร์โทรศัพท์ :: 
+        <code id="valTel" style="display:none;"></code>
+        <input type="text" class="form-control" id="tel" name="tel"
+               
+               value="<?php echo $data["tel"];?>" style="width:550px;"
+               data-inputmask="'mask': ['9999999999']" data-mask
+               >
+    </p>
+        <p style="font-size:16px;">
+        อีเมล์ ::
+        <code id="valEmail" style="display:none;"></code>
+        <input type="text" class="form-control" id="email" name="email" value="<?php echo $data["email"];?>" style="width:550px;">
     </p>
     <p>
         นามแฝง ::
-        <code>เป็นชื่อที่ใช้แทนชื่อจริงในกรณีที่ไม่อยากเปิดเผยตัวตน</code>
-        <input type="text" class="form-control" id="nickname" name="nickname" style="width:550px;">
+        <code style="color:green;">เป็นชื่อที่ใช้แทนชื่อจริงในกรณีที่ไม่อยากเปิดเผยตัวตน</code>
+        <?php if($data["nickname"]==""){ $nickname=$data["fname"]." ".$data["lname"]; } else{ $nickname=$data["nickname"];}  ?>
+            <input type="text" class="form-control" id="nickname" name="nickname" value="<?php echo $nickname;?>" style="width:550px;">
     </p>
-    <p style="font-size:16px;">
-        เบอร์โทรศัพท์ :: <?php echo $data["tel"];?>
-    </p>
-    <button class="btn btn-success btn-flat" onclick="skip('<?php echo $data["id"];?>');">
-        <i class="fa fa-check"></i> ข้อมูลถูกต้อง
-    </button>
     <button class="btn btn-warning btn-flat" onclick="editPuser('<?php echo $data["id"];?>');">
         <i class="fa fa-edit"></i>  แก้ไขข้อมูล
     </button>
 </div>
+<link rel="stylesheet" href="../_plugins/js-select2/select2.css">
+<script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script>
+  $("[data-mask]").inputmask();
+</script>
 <script>
     function skip(id){
         $.post("sql.php?task=skip",
@@ -47,15 +82,93 @@
             location.href="../index.php?menu=หน้าหลัก&site_id=1";
         });
     }
-    function editPuser(id){
-        var nickname = $("#nickname").val();
-        $.post("sql.php?task=editUser",
-        {
-          user_id : id,
-          nickname:nickname
-        },
-        function(data,status){
-            location.href="profile.php";
-        });
+
+     function editPuser(id) {
+
+    //code
+    var tel = $("#tel").val();
+    var fname = $("#fname").val();
+    var lname = $("#lname").val();
+    var nickname = $("#nickname").val();
+    var password = $("#password").val();
+    var password2 = $("#password2").val();
+    var email = $("#email").val();
+    
+    if (fname=="") {
+      $("#valFname").show();
+      $("#valFname").html("กรุณาระบุชื่อ");
+      return ;
+    }else{
+      $("#valFname").hide();
     }
+    if (lname=="") {
+      $("#valLname").show();
+      $("#valLname").html("กรุณาระบุนามสกุล");
+      return ;
+    }else{
+      $("#valLname").hide();
+    }
+    if (tel=="") {
+      $("#valTel").show();
+      $("#valTel").html("กรุณาระบุเบอร์โทรศัพท์");
+      return ;
+    }else{
+      $("#valTel").hide();
+    }
+    if (password=="") {
+      $("#valPassword").show();
+      $("#valPassword").html("กรุณาระบุรหัสผ่าน");
+      return ;
+    }
+    else{
+      $("#valPassword").hide();
+    }
+    if (password<6) {
+      $("#valPassword").show();
+      $("#valPassword").html("กรุณาระบุรหัสผ่าน 6 ตัวขึ้นไป");
+      return ;
+    }else{
+      $("#valPassword").hide();
+    }
+    if (password2!=password) {
+        //code
+        $("#valPassword2").show();
+        $("#valPassword2").html("ระบุรหัสผ่านไม่ตรงกัน");
+        return ;
+    }
+       $.ajax({
+		    url: "sql.php?task=edit",
+		    type: "post",
+		    data: {
+                      password:password,
+                      tel:tel,
+                      fname:fname,
+                      lname:lname,
+                      nickname:nickname,
+                      email:email,
+                      id:id
+                      },
+		    success: function(data){
+
+                      if ($.trim(data)==1) {
+                        //code
+                        $("#valTel").show();
+                        $("#valTel").html("เบอร์โทรศัพท์มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
+                      }
+                      if ($.trim(data)==2) {
+                        //code
+                        $("#valEmail").show();
+                        $("#valEmail").html("อีเมล์นี้มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
+                      }
+                      else{
+                        //code
+			location.href='../index.php';
+                      }
+
+		    },
+		    error:function(){
+			alert("failure");
+		    }
+		});
+  }
 </script>

@@ -1,13 +1,15 @@
 <?php
     session_start();    
-  require_once '../_theme/util.inc.php';
-  $MasterPage = 'page_main.php';
-  include "../_connection/db_base.php";
+    require_once '../_theme/util.inc.php';
+    $MasterPage = 'page_main.php';
+    include "../_connection/db_base.php";
     $sql = "SELECT * FROM `puser` WHERE id='".$_SESSION["dtt_puser_id"]."' ";
     $query = $mysqli->query($sql);
     $data = $query->fetch_assoc();
 ?>
+
 <div class="container">
+    
     <div class="row">
         <div class="col-lg-6">
             <label>ชื่อ</label><code id="valFname" style="display:none;"></code>
@@ -53,6 +55,9 @@
 <script src="../_plugins/input-mask/jquery.inputmask.js"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="blueimpupload/js/vendor/jquery.ui.widget.js"></script>
+<script src="blueimpupload/js/jquery.iframe-transport.js"></script>
+<script src="blueimpupload/js/jquery.fileupload.js"></script>
 <script>
   $("[data-mask]").inputmask();
 </script>
@@ -132,3 +137,30 @@
   }
   
   </script>
+<script>
+/*jslint unparam: true */
+/*global window, $ */
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = window.location.hostname === 'blueimp.github.io' ?
+                '//jquery-file-upload.appspot.com/' : 'server/php/';
+    $('#imgupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo('#files');
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>

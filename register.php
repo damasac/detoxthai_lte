@@ -44,6 +44,13 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 	    <input type="email" class="form-control" placeholder="นามสกุล" id="lname" name="lname"/><code id="valLname" style="display:none;"></code>
             <span class="glyphicon glyphicon-user form-control-feedback" ></span>
           </div>
+	  <div class="form-group has-feedback">
+            <label>อีเมล์</label>
+	    <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="email" name="email"
+	    />
+	    <code id="valEmail" style="display:none;"></code>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          </div>
           <div class="form-group has-feedback">
             <label>เบอร์โทรศัพท์</label>
 	    <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="tel" name="tel"
@@ -92,6 +99,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
     var lname = $("#lname").val();
     var password = $("#password").val();
     var password2 = $("#password2").val();
+    var email = $("#email").val();
         
     if (fname=="") {
       $("#valFname").show();
@@ -138,9 +146,9 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
       $("#valPassword2").hide();
     }
 
-    goAjaxSave(username,password,tel,fname,lname);
+    goAjaxSave(username,password,tel,fname,lname,email);
   }
-  function goAjaxSave(username,password,tel,fname,lname){
+  function goAjaxSave(username,password,tel,fname,lname,email){
       $.ajax({
 		    url: "usermgn/ajax-sql-query.php?task=addUserNormal",
 		    type: "post",
@@ -149,7 +157,8 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       password:password,
                       tel:tel,
                       fname:fname,
-                      lname:lname
+                      lname:lname,
+		      email:email
                       },
 		    success: function(data){
 
@@ -158,9 +167,14 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                         $("#valTel").show();
                         $("#valTel").html("เบอร์โทรศัพท์มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
                       }
+		      if ($.trim(data)=="2") {
+			//code
+			$("#valEmail").show();
+			$("#valEmail").html("อีเมล์นี้มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
+		      }
                       else{
                         //code
-                        location.href="login.php";
+                        //location.href="login.php";
                       }
 
 		    },
