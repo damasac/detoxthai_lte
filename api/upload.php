@@ -1,6 +1,10 @@
 <?php
-$ds          = DIRECTORY_SEPARATOR;
+require_once '../_theme/util.inc.php';
+chk_login();
 
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+
+$ds = DIRECTORY_SEPARATOR;
 $storeFolder = 'uploads';
 
 if (!empty($_FILES)) {
@@ -36,10 +40,9 @@ if (!empty($_FILES)) {
 if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-        //include_once "../_connection/db_base.php";
+        include_once "../_connection/db_base.php";
 
-        //$mysqli->query("UPDATE site_join SET payment_upload_status = 1, image_path = '".$target_file."' WHERE user_id = '$user_id' AND schedule_id = '$schedule_id'");
-        //header("Location: ../schedules.php");
+        $mysqli->query("INSERT INTO site_user_id_card(user_id, card_image) VALUES ('".$session."', '".$target_file."');");
 
     } else {
         echo "Sorry, there was an error uploading your file.";

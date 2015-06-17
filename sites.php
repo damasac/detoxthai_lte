@@ -15,6 +15,18 @@
 
 <?php
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
+
+$result_data = $mysqli->query("SELECT COUNT(*) check_data
+        FROM tbl_surveyprivate
+        WHERE ref_id_user = '".$session."'");
+$row_data = $result_data->fetch_assoc();
+
+$check_data = 1;
+
+if (0 == $row_data['check_data']) {
+    $check_data = 0;
+}
+
 ?>
 
 <!-- Content Header (Page header) -->
@@ -38,13 +50,19 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
     <div class="box-body">
       <?php
         //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-      if ('' != $session) {
+      if ('' != $session && $check_data) {
         ?>
         <p class="text-right">
           <button type="button" class="btn btn-primary btn-flat" onclick="showMap();">ตั้งศูนย์</button>
           <a class="btn btn-primary btn-flat" href="site/site_manage.php">จัดการศูนย์</a>
         </p>
         <?php
+      } else {
+        echo "<div class='alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+                    <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
+                    ท่านสามารถบันทึกข้อมูลได้ที่เมนู <a href='form/'>บันทึกข้อมูล</a> <i class='icon fa fa-pencil'></i>
+                  </div>";
       }
       ?>
       <table class="table table-bordered">
@@ -228,7 +246,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
           <label for="mobile" class="control-label">แนบภาพถ่ายบัตรประจำตัวประชาชน : </label>
           <form action="api/upload.php" class="dropzone">
             <div class="dz-message">
-            ลากไฟล์หรือคลิกที่นี่<br>
+            ลากไฟล์เพื่ออัพโหลดหรือคลิกที่นี่<br>
               <span class="note">(อัพโหลดข้อมูลที่เป็นไฟล์ภาพเท่านั้น)</span>
             </div>
           </form>
@@ -259,6 +277,8 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
 
   var locationName;
 
+  var myDropzone;
+
   function showMap() {
     var mapOptions = {
       zoom: 5
@@ -285,7 +305,8 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
       google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
       markers.push(marker);
 
-      $(".uploadform").dropzone({ url: "api/upload.php" });
+      //var myAwesomeDropzone = $(".uploadform").dropzone({ url: "api/upload.php" });
+      myDropzone = new Dropzone(".uploadform", { url: "api/upload.php"});
 
     });
     $('#myModal').modal("show");
@@ -475,9 +496,12 @@ $("#btadd").click(function(){
       lng: lng,
     },
     function(data,status){
-              //alert("Data: " + data + "\nStatus: " + status);
-              location.reload();
-            });
+      if ('กรุณาแนบภาพถ่ายบัตรประจำตัวประชาชน' == data) {
+        alert(data);
+      } else {
+        location.reload();
+      }
+    });
   }
 });
 

@@ -3,7 +3,7 @@
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<script src=""></script>
+<link rel="stylesheet" href="../_plugins/dropzone/dropzone.css"/>
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -409,8 +409,8 @@ $manage_site_count = $result_count_manage->fetch_assoc();
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">ตั้งศูนย์</h4>
       </div>
-      <div class="modal-body">
-        <form class="form-horizontal" id="addform">
+      <div class="modal-body form-horizontal">
+        <!-- <form class="form-horizontal" id="addform"> -->
           <div class="form-group">
             <label for="urlname" class="col-sm-2 control-label">URL : </label>
             <div class="col-sm-5">
@@ -515,7 +515,19 @@ $manage_site_count = $result_count_manage->fetch_assoc();
             <div id="map" style="height:400px"></div>
           </div>
         </div>
-      </form>
+        <div class="form-group">
+        <label for="mobile" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+          <label for="mobile" class="control-label">แนบภาพถ่ายบัตรประจำตัวประชาชน : </label>
+          <form action="../api/upload.php" class="dropzone">
+            <div class="dz-message">
+            ลากไฟล์เพื่ออัพโหลดหรือคลิกที่นี่<br>
+              <span class="note">(อัพโหลดข้อมูลที่เป็นไฟล์ภาพเท่านั้น)</span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- </form> -->
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">ยกเลิก</button>
@@ -531,6 +543,7 @@ $manage_site_count = $result_count_manage->fetch_assoc();
 <?php sb('js_and_css_footer');?>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script src="../_plugins/dropzone/dropzone.js"></script>
 <script>
   var map;
   var markers = [];
@@ -539,6 +552,8 @@ $manage_site_count = $result_count_manage->fetch_assoc();
   var lng;
 
   var locationName;
+
+  var myDropzone;
 
   function showMap() {
     var mapOptions = {
@@ -565,6 +580,8 @@ $manage_site_count = $result_count_manage->fetch_assoc();
 
       google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
       markers.push(marker);
+
+      myDropzone = new Dropzone(".uploadform", { url: "../api/upload.php"});
 
     });
     $('#myModal').modal("show");
@@ -759,9 +776,12 @@ $("#btadd").click(function(){
       lng: lng,
     },
     function(data,status){
-              //alert("Data: " + data + "\nStatus: " + status);
-              location.reload();
-            });
+      if ('กรุณาแนบภาพถ่ายบัตรประจำตัวประชาชน' == data) {
+        alert(data);
+      } else {
+        location.reload();
+      }
+    });
   }
 });
 

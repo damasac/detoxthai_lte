@@ -1,9 +1,18 @@
 <?php
+    require_once '../_theme/util.inc.php';
+    chk_login();
+
     include_once "../_connection/db_base.php";
 
-    /*if(!isset($_COOKIE['detoxthai'])){
-      header('Location: http://www.detoxthai.org/');
-    }*/
+    $result_id_card = $mysqli->query("SELECT COUNT(*) check_id_card
+        FROM site_user_id_card
+        WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'");
+    $row_id_card = $result_id_card->fetch_assoc();
+
+    if (0 == $row_id_card['check_id_card']) {
+        echo "กรุณาแนบภาพถ่ายบัตรประจำตัวประชาชน";
+        exit;
+    }
 
     $site_url = $_POST['site_url'];
     $site_url = str_replace("_", "", $site_url);
@@ -17,7 +26,7 @@
     $site_postal_code = $_POST['site_postal_code'];
     $site_telephone = $_POST['site_telephone'];
     $site_mobile = $_POST['site_mobile'];
-    $site_user = $_POST['site_user'];
+    $site_user = $_SESSION[SESSIONPREFIX.'puser_id'];
     $lat = $_POST['lat'];
     $lng = $_POST['lng'];
 
