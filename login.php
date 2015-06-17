@@ -184,6 +184,10 @@ if ($user) {
       $session_value = $_SESSION[$session_name];
     }
   }
+  
+  $returnurl=$_POST['returnurl'];
+  if ($returnurl=="") $returnurl=$_GET['returnurl'];
+  if ($returnurl=="") $returnurl=$_SERVER['HTTP_REFERER'];
 ?>
 	</p>
         <form action="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>chk-login.php" method="post">
@@ -210,14 +214,14 @@ if ($user) {
           </div>
         </form>
 
-        <div class="social-auth-links text-center">
+        <!-- div class="social-auth-links text-center">
           <p>- หรือ -</p>
           <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> เข้าใช้งานโดยใช้ เฟซบุ๊ค</a>
           <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> เข้าใช้งานโดยใช้  Google+</a>
-        </div><!-- /.social-auth-links -->
+        </div --><!-- /.social-auth-links -->
 
         <a href="#">ลืมรหัสผ่าน</a><br>
-        <a href="register.html" class="text-center">สมัครสมาชิกใหม่</a>
+        <a href="register.php" class="text-center">สมัครสมาชิกใหม่</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

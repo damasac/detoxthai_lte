@@ -10,9 +10,11 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 <?php
 $user_login = (($_POST['username']));
 $pwd_login = sha1(md5($_POST['password']));
-$returnurl=$_POST['returnurl'];
 
-if ($returnurl=="") $returnurl='http://'.$_SERVER['SERVER_NAME'].'/'.APP_WEBROOT;
+$returnurl=$_POST['returnurl'];
+if ($returnurl=="") $returnurl=$_GET['returnurl'];
+if ($returnurl=="") $returnurl='http://'.$_SERVER['SERVER_NAME'].'/'.APP_WEBROOT
+
 
 $_SESSION[SESSIONPREFIX.'input_username']=$user_login;
 
