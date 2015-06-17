@@ -192,7 +192,7 @@ $arrMenu = array();
                                       ORDER BY site_submenu.id");
                     $row = $result->fetch_assoc();
           }
-            echo "<textarea name='textarea' rows='0' style='display: none;'></textarea>";
+            echo htmlspecialchars_decode($row['content_html']);
           ?>
       </div>
       <p><hr/></p>
@@ -209,26 +209,6 @@ $arrMenu = array();
 
 
 <?php sb('js_and_css_footer');?>
-<link rel="stylesheet" type="text/css" href="_plugins/edit/minified/themes/default.min.css">
-<script src="_plugins/edit/minified/jquery.sceditor.bbcode.min.js"></script>
-
-<script>
-$(document).ready(function() {
-  <?php
-    echo "$('textarea').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-            });
-            var html = $('textarea').sceditor('instance').fromBBCode('".trim(preg_replace('/[\n\r]/', '\n', $row['content_html']))."');
-            //alert(html);
-            $('#show_content').html(html);
-            $('.sceditor-container').hide();";
-  ?>
-});
-</script>
-
 <?php eb();?>
 
 <?php render($MasterPage);?>
