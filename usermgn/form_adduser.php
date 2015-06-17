@@ -91,7 +91,7 @@
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
       </div>
-  </section><!-- /.content -->'
+  </section><!-- /.content -->
 
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
@@ -216,7 +216,7 @@
     }else{
       $("#valPassword").hide();
     }
-   
+
     goAjaxSave(username,password,tel,fname,lname,site_id);
   }
   function goAjaxSave(username,password,tel,fname,lname,site_id){
