@@ -15,9 +15,9 @@
     <link rel="icon" type="image/png" href="http://almsaeedstudio.com/logo.png">
 
     <!-- Bootstrap 3.3.4 -->
-    <link href="http://localhost/detoxthai_lte/_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
-    <link href="http://localhost/detoxthai_lte/_plugins/icon-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>_plugins/icon-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
 
     <style>
