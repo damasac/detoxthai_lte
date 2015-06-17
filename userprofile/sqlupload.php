@@ -3,7 +3,7 @@ $length = 30;
 $randomString = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
 
 $user_id = $_POST['user_id'];
-$schedule_id = $_POST['schedule_id'];
+//$schedule_id = $_POST['schedule_id'];
 
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -47,8 +47,12 @@ if ($uploadOk == 0) {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         include_once "../_connection/db_base.php";
-
-        $mysqli->query("");
+        $sql = "UPDATE
+            `puser`
+            SET `image`='".$target_file."'
+            WHERE `id`='".$_POST["user_id"]."'
+        ";
+        $mysqli->query($sql);
         header("Location: ../index.php");
 
     } else {

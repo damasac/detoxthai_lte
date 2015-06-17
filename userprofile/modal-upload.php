@@ -9,7 +9,7 @@
 ?>
 
 <div class="container">
- <form action="upload.php" method="post" enctype="multipart/form-data">
+ <form action="sqlupload.php" method="post" enctype="multipart/form-data">
   <div class="form-group">
     <input type="hidden" name="user_id" value="<?php echo $_SESSION[SESSIONPREFIX.'puser_id']; ?>">
     <label for="exampleInputFile">ไฟล์ภาพเท่านั้น</label>

@@ -80,11 +80,11 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
             </div><!-- /.col -->
           </div>
 
-        <!-- div class="social-auth-links text-center">
+        <div class="social-auth-links text-center">
           <p>- OR -</p>
           <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
           <a href="#" class="btn btn-block btn-social btn-google-plus btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
-        </div -->
+        </div>
         <a href="login.html" class="text-center">I already have a membership</a>
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -167,14 +167,14 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                         $("#valTel").show();
                         $("#valTel").html("เบอร์โทรศัพท์มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
                       }
-		      if ($.trim(data)=="2") {
+		     else if ($.trim(data)=="2") {
 			//code
 			$("#valEmail").show();
 			$("#valEmail").html("อีเมล์นี้มีอยู่ในระบบแล้วกรุณาตรวจสอบ");
 		      }
                       else{
                         //code
-                        //location.href="login.php";
+                        location.href="login.php";
                       }
 
 		    },
