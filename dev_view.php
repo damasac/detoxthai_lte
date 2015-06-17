@@ -1,3 +1,4 @@
+<?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 <!DOCTYPE html>
 <html>
 <head>
