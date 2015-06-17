@@ -31,10 +31,10 @@
           <div class="error-page">
             <h2 class="headline text-yellow"> Login</h2>
             <div class="error-content">
-              <h3><i class="fa fa-warning text-yellow"></i> ��ҹ��ͧ�ӡ�� Login ��͹.</h3>
+              <h3><i class="fa fa-warning text-yellow"></i> ท่านต้องทำการ Login ก่อน.</h3>
               <p>
-                ˹�ҷ���ҹ��ͧ�����Ҷ֧ ���繵�ͧ�ա�� Login ��͹.
-                �ӡ�� Login �������к� <a href='login.php?returnurl=<?php urlencode($returnurl);?>'>��ԡ�����</a>.
+                หน้าที่ท่านต้องการเข้าถึง จำเป็นต้องมีการ Login ก่อน.
+                ทำการ Login เข้าสู่ระบบ <a href='login.php?returnurl=<?php urlencode($returnurl);?>'>คลิกที่นี่</a>.
               </p>
             </div><!-- /.error-content -->
           </div><!-- /.error-page -->
