@@ -1,4 +1,5 @@
 <?php
+session_start();
 $length = 30;
 $randomString = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
 
@@ -46,6 +47,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        $_SESSION["dtt_puser_image"] = $target_file;
         include_once "../_connection/db_base.php";
         $sql = "UPDATE
             `puser`

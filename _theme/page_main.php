@@ -36,7 +36,6 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php include_once "../_connection/db_base.php";?>
     <style>
         @media (max-width:430px) {
             #divusername {
@@ -121,15 +120,19 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                   <!-- User Account Menu -->
                   <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
-		    <?php $sqlProfile = $mysqli->query(
-						       "SELECT * FROM `puser` WHERE id='".$_SESSION[SESSIONPREFIX."puser_id"]."' "
-						       );
-				$dataProfile = $sqlProfile->fetch_assoc();
-		    ?>
+
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <!-- The user image in the navbar-->
-                      <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>userprofile/<?php echo $dataProfile["image"];?>" class="user-image" alt="User Image"/>
+		      <?php 
+			if($_SESSION[SESSIONPREFIX."puser_image"]==""){
+			     $image = "img/avatar-male_4.jpg";
+			}else{
+			      $image = "userprofile/".$_SESSION[SESSIONPREFIX."puser_image"];
+			}
+		      ?>
+                      <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?><?php echo $image;?>" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
+		      
                       <span id="divusername">
 
                     <?php if(isset($_SESSION[SESSIONPREFIX."puser_fname"])) echo $_SESSION[SESSIONPREFIX."puser_fname"]; else echo "Guest"; ?>
@@ -138,7 +141,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                     <ul class="dropdown-menu">
                       <!-- The user image in the menu -->
                       <li class="user-header">
-                        <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>userprofile/<?php echo $dataProfile["image"];?>" class="img-circle" alt="User Image" />
+                        <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?><?php echo $image;?>" class="img-circle" alt="User Image" />
                         <p>
                           <?php echo $_SESSION[SESSIONPREFIX."puser_fname"]." ".$_SESSION[SESSIONPREFIX."puser_lname"]; ?>
                           <small>

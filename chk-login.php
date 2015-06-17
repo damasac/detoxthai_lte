@@ -48,6 +48,7 @@ if (isset($user_login) and isset($pwd_login)) {
         $_SESSION[SESSIONPREFIX.'puser_status'] = $dbarr['status'];
         $_SESSION[SESSIONPREFIX.'puser_create_date'] = $dbarr['createdate'];
         $_SESSION[SESSIONPREFIX.'puser_first_login'] = $dbarr['isFristLogin'];
+        $_SESSION[SESSIONPREFIX.'puser_image'] = $dbarr['image'];
         //-----------------------
         //echo "success";
     }
