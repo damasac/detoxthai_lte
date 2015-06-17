@@ -3,7 +3,9 @@ require_once '../_theme/util.inc.php'; //chk_login();
 $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> สมาชิก<?php eb();?>
-
+<?php sb('notifications');?>
+<?php include_once '../notifications.php'; ?>
+<?php eb();?>
 <?php sb('js_and_css_head'); ?>
 <style>
     body { font-size: 140%; }

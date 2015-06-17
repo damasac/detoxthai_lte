@@ -5,7 +5,9 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 }
 ?>
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
-
+<?php sb('notifications');?>
+<?php include_once 'notifications.php'; ?>
+<?php eb();?>
 <?php sb('js_and_css_head'); ?>
 <script src=""></script>
 <?php eb();?>

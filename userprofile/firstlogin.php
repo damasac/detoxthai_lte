@@ -6,7 +6,9 @@
 
 <?php sb('js_and_css_head'); ?>
 <?php eb();?>
-
+<?php sb('notifications');?>
+<?php include_once '../notifications.php'; ?>
+<?php eb();?>
 <?php sb('content');?>
 <?php
 
