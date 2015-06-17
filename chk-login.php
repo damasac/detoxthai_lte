@@ -117,7 +117,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <?php
     if ($_SESSION[SESSIONPREFIX.'puser_id'] != "") {
 ?>
+
+    <?php if($_SESSION[SESSIONPREFIX."puser_first_login"]==""){?>
+        <meta http-equiv="refresh" content="1;URL=userprofile/firstlogin.php">            
+    <?php }else{?>
         <meta http-equiv="refresh" content="1;URL=<?php echo $returnurl;?>">
+    <?php }?>
 <?php
     } else {
 ?>

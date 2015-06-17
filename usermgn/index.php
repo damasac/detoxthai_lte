@@ -21,7 +21,7 @@ $MasterPage = 'page_main.php';?>
 <?php
 
     isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = 'NULL';
-
+    isset($_SESSION[SESSIONPREFIX.'user_form']) ? $user_form = $_SESSION[SESSIONPREFIX.'user_form'] :  $user_form = 'NULL';
     $MenuSetting = "user";
     include_once("inc_menu.php");
     $site_id = explode(".",$_SERVER['SERVER_NAME']);
@@ -39,13 +39,12 @@ $MasterPage = 'page_main.php';?>
     $sql1 = "SELECT * FROM `puser`";
     $query1 = $mysqli->query($sql1);
   }else{
-    $sql1 = "SELECT puser.id,puser.fname,puser.lname,puser.tel FROM `puser` INNER JOIN site_follow ON puser.id = site_follow.user_id WHERE site_follow.site_id='".$site_id."' AND delete_at is NULL ";
+    $sql1 = "SELECT puser.id,puser.fname,puser.lname,puser.tel,puser.nickname FROM `puser` INNER JOIN site_follow ON puser.id = site_follow.user_id WHERE site_follow.site_id='".$site_id."' AND delete_at is NULL ";
     $query1 = $mysqli->query($sql1);
   }
 ?>
 
-<div class="box box-primary dir
-ect-chat direct-chat-primary">
+<div class="box box-primary direct-chat direct-chat-primary">
 <div class="box-header">
     <?php
         $sql2 = "SELECT * FROM `site_detail` WHERE id='".$site_id."' AND create_user='".$session."' ";
@@ -72,13 +71,17 @@ ect-chat direct-chat-primary">
             <?php $i=1;while($data1 = $query1->fetch_assoc()){?>
             <tr>
                 <td><?php echo $i;?></td>
+                <?php if($data1['nickname']==""){?>
                 <td><?php echo $data1["fname"]." ".$data1["lname"];?></td>
+                <?php }else{?>
+                <td><?php echo $data1["nickname"];?></td>
+                <?php }?>
                 <?php if($num2==1){?>
                 
                 <td><?php echo $data1["tel"];?></td>
                 <td>
-                <?php if($_SESSION[SESSIONPREFIX."user_form"]==$data1["id"]){?>
-                    <button class="btn bg-maroon btn-flat margin">
+                <?php if($user_form==$data1["id"]){?>
+                    <button class="btn bg-maroon btn-flat margin"  onclick="backUser(<?php echo $session;?>)">
                     <i class="fa fa-close"></i>
                     Logout</button>
                 <?php }?>
@@ -108,17 +111,26 @@ ect-chat direct-chat-primary">
 <script src="../_plugins/datatables/dataTables.bootstrap.min.js"></script>
 <link href="../_plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css"></script>
 <script>
+    function backUser(id){
+        $.post("ball-sql.php?task=changeSession",
+        {
+          user_id : id
+        },
+        function(data,status){
+
+            location.reload();
+            
+        });
+    }
     function goForm(id) {
         $.post("ball-sql.php?task=saveSession",
         {
           user_id : id
         },
         function(data,status){
-          //if (data==1) {
-          //}else{
+
             location.href="../form/index.php";
-            //location.reload();
-          //}
+
         });
     }
     function leaveSite(id){

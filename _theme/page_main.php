@@ -157,7 +157,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       <!-- Menu Footer-->
                       <li class="user-footer">
                         <div class="pull-left">
-                          <a href="#" class="btn btn-default btn-flat">Profile</a>
+                          <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>userprofile/profile.php" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
                           <a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>logout.php" class="btn btn-default btn-flat">Sign out</a>

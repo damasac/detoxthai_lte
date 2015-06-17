@@ -76,7 +76,7 @@ $MasterPage = 'page_main.php';?>
             <div class="box box-primary">
                 <br>
                 <div class="container">
-                    <div class="row">
+<!--                    <div class="row">
                         <div class="col-md-2">
                             <label>คุณกำลังคิดอะไรอยู่</label><br>
                             <code id="valPost" style="display:none;"></code>
@@ -87,12 +87,11 @@ $MasterPage = 'page_main.php';?>
                                     data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-image"></i></button>
 
     <tbody class="files"></tbody>
-                                    <!--<button class="btn btn-primary btn-flat margin"><i class="fa fa-video-camera"></i></button>-->
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-primary btn-flat" onclick="postStatus();">โพสต์</button>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
                 <br>
