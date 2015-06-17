@@ -34,6 +34,17 @@
     FROM site_detail WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']
     ." AND delete_at IS NULL");
   $row = $result->fetch_assoc();
+
+  $result_data = $mysqli->query("SELECT COUNT(*) check_data
+        FROM tbl_surveyprivate
+        WHERE ref_id_user = '".$session."'");
+  $row_data = $result_data->fetch_assoc();
+
+  $check_data = 1;
+
+  if (0 == $row_data['check_data']) {
+      $check_data = 0;
+  }
   ?>
 
   <div class="box box-default">
@@ -43,12 +54,18 @@
     <div class="box-body">
       <?php
         //isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-      if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
+      if (isset($_SESSION[SESSIONPREFIX.'puser_id']) && $check_data) {
         ?>
         <p class="text-right">
           <button type="button" class="btn btn-primary btn-flat" onclick="showMap();">ตั้งศูนย์</button>
         </p>
         <?php
+      } else {
+        echo "<div class='alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+                    <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
+                    ท่านสามารถบันทึกข้อมูลได้ที่เมนู <a href='form/'>บันทึกข้อมูล</a> <i class='icon fa fa-pencil'></i>
+                  </div>";
       }
       ?>
       <table class="table table-bordered">
