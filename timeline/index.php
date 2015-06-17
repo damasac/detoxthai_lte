@@ -4,6 +4,10 @@ $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
+<?php sb('notifications');?>
+  <?php include_once '../notifications.php'; ?>
+<?php eb();?>
+
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
@@ -82,7 +86,7 @@ $MasterPage = 'page_main.php';?>
                             <code id="valPost" style="display:none;"></code>
                         </div>
                         <div class="col-md-8">
-                                    <input type="text" class="form-control" id="timeline_post" name="timeline_post"><br>     
+                                    <input type="text" class="form-control" id="timeline_post" name="timeline_post"><br>
                                     <button class="btn btn-primary btn-flat margin"
                                     data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-image"></i></button>
 
@@ -164,8 +168,8 @@ $MasterPage = 'page_main.php';?>
                 </li>
                  <?php }?>
                 <?php  }?>
-                
-     
+
+
                 <li>
                   <i class="fa fa-clock-o bg-gray"></i>
                 </li>
@@ -200,8 +204,8 @@ $MasterPage = 'page_main.php';?>
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel upload</span>
                 </button>
-                
-                
+
+
                 <!-- The global file processing state -->
                 <span class="fileupload-process"></span>
             </div>
@@ -239,14 +243,11 @@ $MasterPage = 'page_main.php';?>
 </div>
 
 <?php eb();?>
-<?php
-
-?>
 
 <?php sb('js_and_css_footer');?>
 <script>
             $("#timeline_post").click(function(){
-                        
+
                         });
             function postStatus(){
                         var timeline_post = $("#timeline_post").val();
@@ -264,7 +265,7 @@ $MasterPage = 'page_main.php';?>
                       text:timeline_post
                       },
 		    success: function(data){
-            
+
 		    },
 		    error:function(){
 			alert("failure");
@@ -272,7 +273,7 @@ $MasterPage = 'page_main.php';?>
 		});
 
                         }
-            }            
+            }
 </script>
 
 
@@ -340,7 +341,7 @@ $MasterPage = 'page_main.php';?>
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    
+
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
@@ -384,7 +385,7 @@ $MasterPage = 'page_main.php';?>
             {% if (file.deleteUrl) { %}
                 <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
-                    
+
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
@@ -434,6 +435,5 @@ $MasterPage = 'page_main.php';?>
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
-\ No newline at end of file
