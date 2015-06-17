@@ -28,7 +28,7 @@ try {
 //check login
 function chk_login(){
 	if(empty($_SESSION['dtt_puser_id']) && empty($_SESSION['dtt_puser_username'])){
-		echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'login.php">';
+		echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'pleaselogin.php">';
 		unset($arr_file);
 		exit('Redirect to login page!');
 	} else {
