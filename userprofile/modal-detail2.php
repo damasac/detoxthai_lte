@@ -1,6 +1,8 @@
 <?php
     session_start();    
-    include_once "../_connection/db_base.php";
+  require_once '../_theme/util.inc.php';
+  $MasterPage = 'page_main.php';
+  include "../_connection/db_base.php";
     $sql = "SELECT * FROM `puser` WHERE id='".$_SESSION["dtt_puser_id"]."' ";
     $query = $mysqli->query($sql);
     $data = $query->fetch_assoc();

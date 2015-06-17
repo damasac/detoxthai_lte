@@ -1,10 +1,7 @@
 <?php
   require_once '../_theme/util.inc.php';
-  chk_login();
   $MasterPage = 'page_main.php';
   include "../_connection/db_base.php";
-
-
 ?>
 <section class="content">
     <div class="form-group">
