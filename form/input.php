@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="css/datepicker.css">
 
 <style>
+    body{
+        font-size: 20px;
+    }
     .form-group.paddingleft {
           padding-bottom: 5px;
           padding-left: 50px;
@@ -77,7 +80,7 @@
 
     <div class="box box-primary">
             <div class="box-header with-border">
-            <h3 class="box-title">Input Form</h3>
+            <h3 class="box-title"></h3>
             <div class="pull-right">
                 <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
@@ -134,10 +137,10 @@
                 if($form_id == $resx['min'])
                     include_once "form_2.php";
                 else{ ?>
-                <table class="table table-hover" style="border: 1.5px solid #AA66CC;">
+                <table class="table table-hover" style="border: 1.5px solid green;">
 			<tr>
-				<td class="p3tableheader" style="background-color: #AA66CC;color: #FFFFFF;">
-					<strong>ตอนที่ 2 ผลการล้างพิษตับในครั้งที่ผ่านมา (กรอกครั้งเดียวคือครั้งแรก)</strong>
+				<td class="p3tableheader"  style="background-color:green;color:white;border:1.5px solid green;">
+					<strong>ตอนที่ 2 ผลการล้างพิษตับในครั้งที่ผ่านมา (ท่านได้กรอกไปแล้วในครั้งแรก)</strong>
 				</td>
 			</tr>
                 </table>

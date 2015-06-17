@@ -1,16 +1,16 @@
 <div class="row">
     <div class="col-md-12 col-xs-12">
          <div class="table-responsive">
-            <table class="table" style="border:1.5px solid #3C3CF5;">
+            <table class="table" style="border:1.5px solid green;">
               <thead>
-                <tr style="background-color:#3C3CF5;color:white;border:1.5px solid #3C3CF5;">
+                <tr style="background-color:green;color:white;border:1.5px solid green;">
                   <th>ตอนที่ 3 ข้อมูลเกี่ยวกับพฤติกรรมสุขภาพของตัวท่าน</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    14.โปรดทำเครื่องหมายกากบาท <code>(X)</code> ลงช่อง <code>สี่เหลี่ยม</code> ที่ตรงกับพฤติกรรมสุขภาพของท่าน <code>ในรอบหนึ่งเดือนที่ผ่านมา</code>
+                    14.โปรดคลิกที่วงกลม  <input style="margin-top: -7px;" type="radio" value="" checked='checked'> ที่ตรงกับคำตอบของท่านเกี่ยวกับ พฤติกรรมสุขภาพของท่าน ในรอบหนึ่งเดือนที่ผ่านมา
                   </td>
                 </tr>
                 <tr>

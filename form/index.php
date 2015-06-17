@@ -55,7 +55,7 @@
 if($dataform['status']+0) { ?>
     <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Input Form</h3>
+            <h3 class="box-title"></h3>
             <div class="pull-right">
                 <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
@@ -85,39 +85,54 @@ if($dataform['status']+0) { ?>
             <div class="row">
                 <div class="col-lg-12">
                 <h3>
-                    คุณ&nbsp<code><?php echo $user_name?></code>&nbsp; ได้บันทึกข้อมูลเป็นจำนวน <code id="numForm"><?php echo $query->num_rows; ?></code> ครั้ง
+                    บันทึกผลการล้างพิษตับของ &nbsp<code><?php echo $user_name?></code>
                 </h3>
                 
                 <hr>
                 
-                <div class="text-center">
-                        <div class="row alert alert-success">
+                <div class="">
+                    <div class="">
+                        
+                        <div class="form-horizontal alert alert-success">
+                            <div class="form-group">
+                                <label for="name" style="font-weight: bold;" class="col-sm-2 control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
+                                <div class="col-sm-10">
+                                    <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                                </div>
+                                <label for="name" style="font-weight: bold;" class="col-sm-1 control-label"><h4>ถึง</h4></label>
+                                <div class="col-sm-2">
+                                    <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                                </div>
+                            </div>
                             
-                                <div class="form-group col-md-3">
-                                    <label for="name" style="font-weight: bold;"><h4>เลือกวันที่ต้องการบันทึกข้อมูล</h4></label><br>
-                                    <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                            <div class="form-group">
+                               
+                            </div>
+                   
+    
+                            <div class="form-group">
+                                <label for="name" style="font-weight: bold;" class="col-sm-2 control-label"><h4>สถานที่</h4></label>
+                                <div class="col-sm-10">
+                                <select style="width: 150px;" id="location" class="form-control">
+                                    <option selected='selected' value=10000001>ที่บ้าน</option>
+                                    <option value=10000002 >อื่นๆ</option>
+                                </select>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="name" style="font-weight: bold;"><h4>ถึง</h4></label><br>
-                                  <input type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
-                                </div>
-                                <div class="form-group col-md-3">
-                                   
-                                    <label for="name" style="font-weight: bold;"><h4>สถานที่ทำการ Detox</h4></label><br>
-                                    <select id="location" class="form-control">
-                                        <option selected='selected' value=10000001>ที่บ้าน</option>
-                                        <option value=10000002 >อื่นๆ</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">    
-                                    <button class="margin btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
+                             </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class=" btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
                                     <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
                                 </div>
-
-                            
+                            </div>
                         </div>
+
+                    </div>
                 </div>
 
+                <hr>
+               <h3>จำนวนการล้างพิษตับทั้งหมด <code id="numForm"><?php echo $query->num_rows; ?></code> ครั้ง</h3>
                 <hr>
                 
                 <div class="table-responsive">
@@ -164,7 +179,7 @@ if($dataform['status']+0) { ?>
 <?php } else { ?>
  <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Input Form</h3>
+            <h3 class="box-title"></h3>
           </div>
 
           <div class="box-body">

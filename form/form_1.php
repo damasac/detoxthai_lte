@@ -1,7 +1,7 @@
 ﻿<div class="table-responsive">
-		<table class="table table-hover" style="border: 1.5px solid #FF4444;">
+		<table class="table table-hover" style="border: 1.5px solid green;">
 			<tr>
-				<td class="p3tableheader" style="background-color: #FF4444;color: #FFFFFF;">
+				<td class="p3tableheader" style="background-color:green;color:white;border:1.5px solid green;">
 					<strong>ตอนที่ 1 ข้อมูลเกี่ยวกับตัวท่าน</strong>
 				</td>
 			</tr>
@@ -377,7 +377,6 @@
 		  				<thead>
 		  				<tr class="p3tableheader">
 		  					<th>รูปร่างของท่านในปัจจุบัน</th>
-		  					<th>ผลการวัด</th>
 		  				</tr>
 		  				</thead>
 		  				<tr>
@@ -389,6 +388,8 @@
 					  			</div>
 					  			</form>
 		  					</td>
+							</tr>
+		  				<tr>
 		  					<td>
 		  						<form class="form-inline">
 								<div class="form-group">
@@ -407,6 +408,8 @@
 					  			</div>
 					  			</form>
 		  					</td>
+							</tr>
+		  				<tr>
 		  					<td>
 		  						<form class="form-inline">
 								<div class="form-group">

@@ -1,9 +1,24 @@
+<style>
+    .slider-handle{
+        width: 40px !important; 
+        height: 40px !important;
+    }
+    .slider.slider-horizontal .slider-handle {
+        margin-top: -15px;
+    }
+    .tooltip-inner{
+    
+    }
+    .tooltip-arrow{
+        
+    }
+</style>
 <div class="row">
   <div class="col-md-12 col-xs-12">
         <div class="table-responsive">
-            <table class="table table-hover" style="border: 1.5px solid #FF4000;">
+            <table class="table table-hover" style="border: 1.5px solid green;">
               <thead>
-                <tr style="background-color: #FF4000;">
+                <tr style="background-color:green;color:white;border:1.5px solid green;">
                   <th  style="color: #FFF;"><b>ตอนที่ 4 การประเมินภาวะสุขภาพของท่าน <code>ในรอบหนึ่งเดือนที่ผ่านมา</code></b></th>
                 </tr>
               </thead>

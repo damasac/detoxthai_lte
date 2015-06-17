@@ -1,9 +1,9 @@
 
      <div class="col-md-12 col-xs-12">
              <!--<div class="table-responsive">-->
-                <table class="table" style="border:1.5px solid red;">
+                <table class="table" style="border:1.5px solid green;">
                     <thead>
-                        <tr style="background-color:red;color:white;border:1.5px solid red;">
+                        <tr style="background-color:green;color:white;border:1.5px solid green;">
                             <th>
                             ตอนที่ 6 การประเมินภาพรวมเกี่ยวกับการล้างพิษตับในครั้งนี้
                             </th>

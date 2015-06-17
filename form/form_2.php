@@ -1,7 +1,7 @@
 ﻿<div class="table-responsive fix">
-		<table class="table table-hover" style="border: 1.5px solid #AA66CC;">
+		<table class="table table-hover" style="border: 1.5px solid green;">
 			<tr>
-				<td class="p3tableheader" style="background-color: #AA66CC;color: #FFFFFF;">
+				<td class="p3tableheader" style="background-color:green;color:white;border:1.5px solid green;">
 					<strong>ตอนที่ 2 ผลการล้างพิษตับในครั้งที่ผ่านมา (กรอกครั้งเดียว)</strong>
 				</td>
 			</tr>
@@ -37,27 +37,27 @@
 							<th rowspan="2"  style="vertical-align: middle;text-align: center;width:120px;" >
 								ดื่มน้ำมันมะกอก
 							</th>
-							<th colspan="3" class="text-center">
+							<th colspan="3" class="text-center" style="background-color: #E8FFF2;">
 								โปรดระบุผลการตรวจถังอุจจาระ
 							</th>
-							<th colspan="2" class="text-center">
+							<th colspan="2" class="text-center" style="background-color: #A1FFC9;">
 								อาการทางร่างกาย
 							</th>
 						</tr>
 						<tr>
-							<th class="text-center">
+							<th class="text-center" style="background-color: #E8FFF2;">
 								สิ่งที่พบในถัง
 							</th>
-							<th class="text-center">
+							<th class="text-center" style="background-color: #E8FFF2;">
 								การวินิจฉัย <br>(โรคที่พบหรือที่คาดว่าจะเกิด )
 							</th>
-							<th class="text-center">
+							<th class="text-center" style="background-color: #E8FFF2;">
 								คําแนะนําการปฏิบัติตัว
 							</th>
-							<th class="text-center">
+							<th class="text-center" style="background-color: #A1FFC9;">
 								ก่อนถ่าย
 							</th>
-							<th class="text-center">
+							<th class="text-center" style="background-color: #A1FFC9;">
 								หลังถ่าย
 							</th>
 						</tr>
@@ -111,19 +111,19 @@
 					  			</div>
 					  			</form>
 							</td>
-							<td>
+							<td style='background-color: #E8FFF2;'>
 								<textarea class='form-control' rows='3' id='p2a13b2c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b2c{$i}',$('#form_id').val())>".$dataform["p2a13b2c{$i}"]."</textarea>
 							</td>
-							<td>
+							<td style='background-color: #E8FFF2;'>
 								<textarea class='form-control' rows='3' id='p2a13b3c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b3c{$i}',$('#form_id').val())>".$dataform["p2a13b3c{$i}"]."</textarea>
 							</td>
-							<td>
+							<td style='background-color: #E8FFF2;'>
 								<textarea class='form-control' rows='3' id='p2a13b4c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b4c{$i}',$('#form_id').val())>".$dataform["p2a13b4c{$i}"]."</textarea>
 							</td>
-							<td>
+							<td style='background-color: #A1FFC9;'>
 								<textarea class='form-control' rows='3' id='p2a13b5c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b5c{$i}',$('#form_id').val())>".$dataform["p2a13b5c{$i}"]."</textarea>
 							</td>
-							<td>
+							<td style='background-color: #A1FFC9;'>
 								<textarea class='form-control' rows='3' id='p2a13b6c".$i."' onclick=add_tr('section2_".($i+1)."'); onblur=AutoSave('p2a13b6c{$i}',$('#form_id').val())>".$dataform["p2a13b6c{$i}"]."</textarea>
 							</td>
 						</tr>";

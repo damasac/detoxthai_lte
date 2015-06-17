@@ -22,15 +22,15 @@
                                     <thead>
                                         <tr>
                                             <th rowspan="2"  style="vertical-align: middle;text-align: center;width:120px;" >ดื่มน้ำมะกอก</th>
-                                            <th colspan="3" class="text-center">โปรดระบุผลการตรวจถังอุจจาระ</th>
-                                            <th colspan="2" class="text-center">อาการทางร่างกาย</th>
+                                            <th colspan="3" class="text-center" style='background-color: #E8FFF2;'>โปรดระบุผลการตรวจถังอุจจาระ</th>
+                                            <th colspan="2" class="text-center" style='background-color: #A1FFC9;'>อาการทางร่างกาย</th>
                                         </tr>
                                         <tr>
-                                            <th class="text-center">สิ่งที่พบในถัง</th>
-                                            <th class="text-center">การวินิจฉัย <br>(โรคที่พบ หรือที่คาดว่าจะเกิด)</th>
-                                            <th class="text-center">คำแนะนำ การปฏิบัติตัว</th>
-                                            <th class="text-center">ก่อนถ่าย</th>
-                                            <th class="text-center">หลังถ่าย</th>
+                                            <th class="text-center" style='background-color: #E8FFF2;'>สิ่งที่พบในถัง</th>
+                                            <th class="text-center" style='background-color: #E8FFF2;'>การวินิจฉัย <br>(โรคที่พบ หรือที่คาดว่าจะเกิด)</th>
+                                            <th class="text-center" style='background-color: #E8FFF2;'>คำแนะนำ การปฏิบัติตัว</th>
+                                            <th class="text-center" style='background-color: #A1FFC9;'>ก่อนถ่าย</th>
+                                            <th class="text-center" style='background-color: #A1FFC9;'>หลังถ่าย</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,23 +43,23 @@
                                     ?>
                                         <tr id='section5_<?php echo $i; ?>' class='<?php echo $classcss; ?>'>
                                             <td class="text-center">แก้วที่ <?php echo $i;?></td>
-                                            <td  class="text-center">
+                                            <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c1" cols="10"
                                                 onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                 onblur="AutoSave('<?php echo "p5a21g".$i."c1";?>',$('#form_id').val())"><?php echo $dataform["p5a21g".$i."c1"];?></textarea></td>
-                                            <td  class="text-center">
+                                            <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c2" cols="10"
                                                 onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c2";?>',$('#form_id').val())"><?php echo $dataform["p5a21g".$i."c2"];?></textarea></td>
-                                            <td  class="text-center">
+                                            <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c3" cols="10"
                                                 onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                onblur="AutoSave('<?php echo "p5a21g".$i."c3";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c3"];?></textarea></td>
-                                            <td  class="text-center">
+                                            <td  class="text-center" style='background-color: #A1FFC9;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c4" cols="10"
                                                 onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c4";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c4"];?></textarea></td>
-                                            <td  class="text-center">
+                                            <td  class="text-center" style='background-color: #A1FFC9;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c5" cols="10"
                                                 onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c5";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c5"];?> </textarea></td>
