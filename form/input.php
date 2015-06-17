@@ -130,7 +130,8 @@
             <?php
                 $sqlx =  "SELECT MIN(b.id) as min FROM `tbl_surveyform` AS a INNER JOIN  tbl_surveyuser AS b ON a.ref_id_create=b.id WHERE b.user_id = '".$_SESSION['dtt_user_form']."';";
                 $queryx = $conn->query($sqlx);
-                if($form_id == $queryx->num_rows)
+                $resx = $queryx->fetch_assoc();
+                if($form_id == $resx['min'])
                     include_once "form_2.php";
                 else{ ?>
                 <table class="table table-hover" style="border: 1.5px solid #AA66CC;">
