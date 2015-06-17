@@ -1,7 +1,9 @@
 <?php
 session_start();
 session_destroy();
-unset($_COOKIE['detoxthai']);
+
+$domain='detoxthai.org';
+setcookie("detoxthai", '', time() - (86400 * 30), '/', $domain, false);
 ?>
 <!DOCTYPE html>
 <!--

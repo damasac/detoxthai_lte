@@ -9,12 +9,27 @@ define("APP_WEBROOT", "detoxthai_lte/");
 //Session Prefix
 define('SESSIONPREFIX' , "dtt_");
 
-isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
+/*set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
+    // error was suppressed with the @-operator
+    if (0 === error_reporting()) {
+        return false;
+    }
 
-include_once "../_connection/db_base.php";
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+
+try {
+    include_once '_connection/db_base.php';
+} catch (ErrorException $e) {
+    include_once '../_connection/db_base.php';
+}*/
+
+include_once '../_connection/db_base.php';
 
 if (empty($_SESSION['dtt_puser_id']) && empty($_SESSION['dtt_puser_username'])) {
     $sql = "SELECT * FROM puser";
+
+    isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
 
     $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
     while($dbarr = $res->fetch_assoc()) {
