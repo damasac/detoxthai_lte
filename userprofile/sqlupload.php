@@ -30,7 +30,7 @@ if (file_exists($target_file)) {
 }
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 500000) {
-    //echo "Sorry, your file is too large.";
+    echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
 // Allow certain file formats
@@ -52,9 +52,9 @@ if ($uploadOk == 0) {
             SET `image`='".$target_file."'
             WHERE `id`='".$_POST["user_id"]."'
         ";
+        echo $sql;
         $mysqli->query($sql);
-        header("Location: ../index.php");
-
+        //header("Location: ../index.php");
     } else {
         echo "Sorry, there was an error uploading your file.";
     }

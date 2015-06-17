@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localSql
-Source Server Version : 50617
-Source Host           : localhost:3306
+Source Server         : Damasac
+Source Server Version : 50537
+Source Host           : 61.19.254.15:3306
 Source Database       : detoxthai_lte
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50537
 File Encoding         : 65001
 
-Date: 2015-06-17 12:01:30
+Date: 2015-06-17 22:45:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,6 +27,7 @@ CREATE TABLE `puser` (
   `nickname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `fname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hcode` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -42,4 +43,4 @@ CREATE TABLE `puser` (
 -- ----------------------------
 -- Records of puser
 -- ----------------------------
-INSERT INTO `puser` VALUES ('1', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'admin@admin.com', null, 'fadmin', 'ladmin', '0812345678', '1', '13777', '7', '400101', '4001', '40', null, '2015-05-22 15:17:01');
+INSERT INTO `puser` VALUES ('1', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'admin@admin.com', '', 'fadmin', 'ladmin', 'uploads/2015_06_17_jGdqEtBXAHwfJaghulUSTCpkYOyneP.jpg', '0812345678', '1', '13777', '7', '400101', '4001', '40', '1', '2015-05-22 15:17:01');
