@@ -82,9 +82,12 @@ $site_id_desc = $result_name_site->fetch_assoc();
     <div class="box-body">
       <?php
             //Developer mode
-      echo "Print SESSION [Developer mode]<br><pre>";
-      print_r($_SESSION);
-      echo "</pre>";
+      $debugmode=false;
+      if ($debugmode) {
+        echo "Print SESSION [Developer mode]<br><pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+      }
             //end mode
       ?>
       <div class="row">
