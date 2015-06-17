@@ -37,7 +37,7 @@ function initialize() {
  * other.
  */
 <?php
-  $sql="select * from site_detail";
+  $sql="select * from site_detail where lat<>''";
   $result=$mysqli->query($sql);
   
   while($row = $result->fetch_assoc()) {
