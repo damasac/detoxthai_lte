@@ -107,7 +107,7 @@
 					    		<form class='form-inline'>
 								<div class='form-group'>
 								    แก้วที่
-								    <input type='text' class='form-control fix2' onclick=add_tr('section2_".($i+1)."'); id='p2a13b1c".$i."' onblur=AutoSave('p2a13b1c{$i}',$('#form_id').val()) value=".$dataform["p2a13b1c{$i}"].">
+								    <input type='number' style='width:70px;' class='form-control' onclick=add_tr('section2_".($i+1)."'); id='p2a13b1c".$i."' onblur=AutoSave('p2a13b1c{$i}',$('#form_id').val()) value=".$dataform["p2a13b1c{$i}"].">
 					  			</div>
 					  			</form>
 							</td>

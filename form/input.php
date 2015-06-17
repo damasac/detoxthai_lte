@@ -113,9 +113,6 @@
                    $dbarr = $res->fetch_assoc();
                 }
                 ?>
-
-                
-                
                 
                 </div>
             </div>            
@@ -129,7 +126,24 @@
             ?>
             <div id="formsurvey">
             <!-------------------------- form 1-2-->
-            <?php include_once "form_1.php";include_once "form_2.php"; ?>
+            <?php include_once "form_1.php"; ?>
+            <?php
+                $sqlx =  "SELECT MIN(b.id) as min FROM `tbl_surveyform` AS a INNER JOIN  tbl_surveyuser AS b ON a.ref_id_create=b.id WHERE b.user_id = '".$_SESSION['dtt_user_form']."';";
+                $queryx = $conn->query($sqlx);
+                $resx = $queryx->fetch_assoc();
+                if($form_id == $resx['min'])
+                    include_once "form_2.php";
+                else{ ?>
+                <table class="table table-hover" style="border: 1.5px solid #AA66CC;">
+			<tr>
+				<td class="p3tableheader" style="background-color: #AA66CC;color: #FFFFFF;">
+					<strong>ตอนที่ 2 ผลการล้างพิษตับในครั้งที่ผ่านมา (กรอกครั้งเดียวคือครั้งแรก)</strong>
+				</td>
+			</tr>
+                </table>
+                <?php    
+                }
+            ?>
             
             <!-------------------------- form 3-4-->
             <?php include_once "form_3.php"; ?>
@@ -178,12 +192,12 @@
   });
 $("#p2a1").click(function(){
   if ($("#p2a1").is(":checked")) {
-      $("#p2a1").val("0");
+      $("#p2a1").val("1");
       $("#labelHide2").fadeOut();
       $("#tableHide2").fadeOut();
        AutoSave("p2a1",$("#form_id").val());
     }else{
-      $("#p2a1").val("1");
+      $("#p2a1").val("0");
       $("#tableHide2").fadeIn();
       $("#tableHide2").fadeIn();
       AutoSave("p2a1",$("#form_id").val());
