@@ -59,7 +59,7 @@ $MasterPage = 'page_main.php';?>
     <table id="userTable" class="table table-hover">
         <thead>
             <tr>
-                <th>ลำดับ</th>
+                <!--<th>ลำดับ</th>-->
                 <th>ชื่อ</th>
                 <?php if($num2==1){?>
                 <th>เบอร์โทรศัพท์</th>
@@ -70,7 +70,7 @@ $MasterPage = 'page_main.php';?>
         <tbody>
             <?php $i=1;while($data1 = $query1->fetch_assoc()){?>
             <tr>
-                <td><?php echo $i;?></td>
+                <!--<td><?php echo $i;?></td>-->
                 <?php if($data1['nickname']==""){?>
                 <td><?php echo $data1["fname"]." ".$data1["lname"];?></td>
                 <?php }else{?>

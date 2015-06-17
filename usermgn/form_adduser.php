@@ -51,21 +51,25 @@
 
 	</p>
           <div class="form-group has-feedback">
+	    <label>ชื่อ</label>
             <input type="text" class="form-control" placeholder="ชื่อ" id="fname" name="fname"/><code id="valFname" style="display:none;"></code>
             <span class="glyphicon glyphicon-user form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
+	    <label>นามสกุล</label>
             <input type="email" class="form-control" placeholder="นามสกุล" id="lname" name="lname"/><code id="valLname" style="display:none;"></code>
             <span class="glyphicon glyphicon-user form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="tel" name="tel"
+            <label>เบอร์โทรศัพท์</label>
+	    <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" id="tel" name="tel"
 	    data-inputmask="'mask': ['9999999999']" data-mask
 	    data-toggle="tooltip" data-placement="top" title="ใช้แทน Username ในการเข้าสู่ระบบ"/>
 	    <code id="valTel" style="display:none;"></code>
             <span class="glyphicon glyphicon-phone-alt form-control-feedback" ></span>
           </div>
           <div class="form-group has-feedback">
+	    <label>รหัสผ่าน</label>
             <input type="text" class="form-control" placeholder="รหัสผ่าน" id="password" name="password"
 	    data-toggle="tooltip" data-placement="top" title="ระบุรหัสผ่านตั้งแต่ 6 ตัวขึ้นไป"
 	    /><code id="valPassword" style="display:none;"></code>
