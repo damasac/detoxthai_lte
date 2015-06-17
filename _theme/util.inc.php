@@ -1,7 +1,5 @@
 <?php
-if(empty($_SESSION)){
-   session_start();
-}
+
 //encoding to utf-8
 header("Content-type:text/html; charset=UTF-8");
 //for path directory
@@ -24,29 +22,6 @@ try {
     include_once '../_connection/db_base.php';
 }*/
 
-include_once '../_connection/db_base.php';
-
-if (empty($_SESSION['dtt_puser_id']) && empty($_SESSION['dtt_puser_username'])) {
-    $sql = "SELECT * FROM puser";
-
-    isset($_COOKIE['detoxthai']) ? $detoxthai = $_COOKIE['detoxthai'] :  $detoxthai = '';
-
-    $res = $mysqli->query($sql)or die('[' . $mysqli->error . ']');
-    while($dbarr = $res->fetch_assoc()) {
-    	if($detoxthai == md5($dbarr['id'].'codeerrorDev444')){
-    		$_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
-	        $_SESSION[SESSIONPREFIX.'puser_username'] = $dbarr['username'];
-	        $_SESSION[SESSIONPREFIX.'puser_fname'] = $dbarr['fname'];
-	        $_SESSION[SESSIONPREFIX.'puser_lname'] = $dbarr['lname'];
-	        $_SESSION[SESSIONPREFIX.'puser_tel'] = $dbarr['tel'];
-	        $_SESSION[SESSIONPREFIX.'puser_status'] = $dbarr['status'];
-	        $_SESSION[SESSIONPREFIX.'puser_create_date'] = $dbarr['createdate'];
-
-    		//echo '<meta http-equiv="refresh" content="1;URL='.'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT.'index.php">';
-
-    	}
-    }
-}
 
 //check login
 function chk_login(){
