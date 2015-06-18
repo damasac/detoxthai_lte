@@ -17,7 +17,7 @@
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a2b1">2. ท่านเกิด</label>
-					    <input type="text" class="form-control fix" id="p1a2b1" data-date-format='dd/m/yyyy' data-date-viewmode='years' placeholder="วัน/เดือน/ปี" onblur="AutoSave('p1a2b1',$('#form_id').val())" value="<?php echo $dataform["p1a2b1"]; ?>">
+					    <input type="text" class="form-control fix" id="p1a2b1" data-date-format='dd/m/yyyy'  placeholder="วัน/เดือน/ปี" onblur="AutoSave('p1a2b1',$('#form_id').val())" value="<?php echo $dataform["p1a2b1"]; ?>">
 		  			</div>
 		  			<div class="form-group">
 					    <label for="p1a2b2">อายุ</label>
