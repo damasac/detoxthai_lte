@@ -95,11 +95,11 @@ if($dataform['status']+0) { ?>
                     <div class="row">
                         <div class="col-lg-6">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDatex">
-							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDatex">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDatex">
-							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDatex">
                         </div>
                     </div>
                     <hr />
