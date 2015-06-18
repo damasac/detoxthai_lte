@@ -162,7 +162,7 @@
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
 				this.format
 			);
-			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear()+543, this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -399,7 +399,7 @@
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 			if (parts.length === format.parts.length) {
-				var year = (date.getFullYear())+543, day = date.getDate(), month = date.getMonth();
+				var year = (date.getFullYear()), day = date.getDate(), month = date.getMonth();
 				for (var i=0, cnt = format.parts.length; i < cnt; i++) {
 					val = parseInt(parts[i], 10)||1;
 					switch(format.parts[i]) {
