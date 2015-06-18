@@ -226,10 +226,10 @@ if($dataform['status']+0) { ?>
           AutoSave("p2a1",$("#form_id").val());
         }
       });
-    $("#startDate").datepicker({
+    $("#startDatex").datepicker({
       format: 'dd/mm/yyyy',
       });
-    $("#endDate").datepicker({
+    $("#endDatex").datepicker({
       format: 'dd/mm/yyyy',
       });
     $("#AddForm").click(function(){
