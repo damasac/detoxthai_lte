@@ -208,7 +208,7 @@
 					html.push('<tr>');
 				}
 				clsName = this.onRender(prevMonth);
-				prevY = prevMonth.getFullYear();
+				prevY = prevMonth.getFullYear()+543;
 				prevM = prevMonth.getMonth();
 				if ((prevM < month &&  prevY === year) ||  prevY < year) {
 					clsName += ' old';
@@ -303,7 +303,7 @@
 							} else if (target.is('.new')) {
 								month += 1;
 							}
-							var year = this.viewDate.getFullYear();
+							var year = this.viewDate.getFullYear()+543;
 							this.date = new Date(year, month, day,0,0,0,0);
 							this.viewDate = new Date(year, month, Math.min(28, day),0,0,0,0);
 							this.fill();
@@ -399,7 +399,7 @@
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 			if (parts.length === format.parts.length) {
-				var year = (date.getFullYear()), day = date.getDate(), month = date.getMonth();
+				var year = (date.getFullYear())+543, day = date.getDate(), month = date.getMonth();
 				for (var i=0, cnt = format.parts.length; i < cnt; i++) {
 					val = parseInt(parts[i], 10)||1;
 					switch(format.parts[i]) {
@@ -432,7 +432,7 @@
 				d: date.getDate(),
 				m: date.getMonth() + 1,
 				yy: date.getFullYear().toString().substring(2),
-				yyyy: date.getFullYear()+543
+				yyyy: date.getFullYear()
 			};
 			val.dd = (val.d < 10 ? '0' : '') + val.d;
 			val.mm = (val.m < 10 ? '0' : '') + val.m;
