@@ -221,6 +221,23 @@ $('#p4a7').slider().on('slideStop', function(ev){
 });
 
 //
+datepicker_hide('p1a2b1');
+datepicker_hide('p1a7b1');
+
+datepicker_hide('p1a10b2c1');
+datepicker_hide('p1a10b2c2');
+datepicker_hide('p1a10b2c3');
+datepicker_hide('p1a10b2c4');
+datepicker_hide('p1a10b2c5');
+datepicker_hide('p1a10b2c6');
+function datepicker_hide(datePick){
+  $(function(){
+	  $('#'+datePick).on('changeDate', function(ev){
+		$(this).datepicker('hide');
+		
+	});
+});
+}
 </script>
 
 
