@@ -208,7 +208,7 @@
 					html.push('<tr>');
 				}
 				clsName = this.onRender(prevMonth);
-				prevY = prevMonth.getFullYear()+543;
+				prevY = prevMonth.getFullYear();
 				prevM = prevMonth.getMonth();
 				if ((prevM < month &&  prevY === year) ||  prevY < year) {
 					clsName += ' old';
@@ -432,7 +432,7 @@
 				d: date.getDate(),
 				m: date.getMonth() + 1,
 				yy: date.getFullYear().toString().substring(2),
-				yyyy: date.getFullYear()
+				yyyy: date.getFullYear()+543
 			};
 			val.dd = (val.d < 10 ? '0' : '') + val.d;
 			val.mm = (val.m < 10 ? '0' : '') + val.m;
