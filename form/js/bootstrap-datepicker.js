@@ -193,7 +193,7 @@
 			this.picker.find('.datepicker-days th:eq(1)')
 						.text(DPGlobal.dates.months[month]+' '+year);
 			var prevMonth = new Date(year, month-1, 28,0,0,0,0),
-				day = DPGlobal.getDaysInMonth(prevMonth.getFullYear()+543, prevMonth.getMonth());
+				day = DPGlobal.getDaysInMonth(prevMonth.getFullYear(), prevMonth.getMonth());
 			prevMonth.setDate(day);
 			prevMonth.setDate(day - (prevMonth.getDay() - this.weekStart + 7)%7);
 			var nextMonth = new Date(prevMonth);
@@ -208,7 +208,7 @@
 					html.push('<tr>');
 				}
 				clsName = this.onRender(prevMonth);
-				prevY = prevMonth.getFullYear();
+				prevY = prevMonth.getFullYear()+543;
 				prevM = prevMonth.getMonth();
 				if ((prevM < month &&  prevY === year) ||  prevY < year) {
 					clsName += ' old';
