@@ -95,9 +95,11 @@ if($dataform['status']+0) { ?>
                     <div class="row">
                         <div class="col-lg-6">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDatex">
+							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDatex">
+							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
                         </div>
                     </div>
                     <hr />
@@ -302,12 +304,18 @@ if($dataform['status']+0) { ?>
                        //AutoSave(field,form_id);
       }
       //hide
-      $('#startDate').on('changeDate', function(ev){
-        $(this).datepicker('hide');
-    });
-       $('#endDate').on('changeDate', function(ev){
-        $(this).datepicker('hide');
-    });
+	  function datepicker_hide(datePick){
+		  $(function(){
+			  $('#'+datePick+'x').on('changeDate', function(ev){
+				$(this).datepicker('hide');
+				
+			});
+			$('#'+datePick).click(function(){
+			  $('#'+datePick).val($('#'+datePick+'x').val());
+			})
+		});
+	  }
+   
   </script>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
