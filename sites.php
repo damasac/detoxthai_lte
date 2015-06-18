@@ -57,7 +57,7 @@ if (0 == $row_data['check_data']) {
           <a class="btn btn-primary btn-flat" href="site/site_manage.php">จัดการศูนย์</a>
         </p>
         <?php
-      } else {
+      } else if('' != $session && !$check_data) {
         echo "<div class='alert alert-danger alert-dismissable'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
                     <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
