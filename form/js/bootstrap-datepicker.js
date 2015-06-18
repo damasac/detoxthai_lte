@@ -145,7 +145,7 @@
 				this.date = new Date(newDate);
 			}
 			this.set();
-			this.viewDate = new Date(this.(date.getFullYear()+543), this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -162,7 +162,7 @@
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
 				this.format
 			);
-			this.viewDate = new Date(this.(date.getFullYear()+543), this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -225,7 +225,7 @@
 				prevMonth.setDate(prevMonth.getDate()+1);
 			}
 			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
-			var currentYear = this.(date.getFullYear()+543);
+			var currentYear = this.date.getFullYear();
 			
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
@@ -303,7 +303,7 @@
 							} else if (target.is('.new')) {
 								month += 1;
 							}
-							var year = this.view(date.getFullYear()+543);
+							var year = this.viewDate.getFullYear();
 							this.date = new Date(year, month, day,0,0,0,0);
 							this.viewDate = new Date(year, month, Math.min(28, day),0,0,0,0);
 							this.fill();
@@ -399,7 +399,7 @@
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 			if (parts.length === format.parts.length) {
-				var year = (date.getFullYear()+543), day = date.getDate(), month = date.getMonth();
+				var year = date.getFullYear(), day = date.getDate(), month = date.getMonth();
 				for (var i=0, cnt = format.parts.length; i < cnt; i++) {
 					val = parseInt(parts[i], 10)||1;
 					switch(format.parts[i]) {
@@ -432,7 +432,7 @@
 				d: date.getDate(),
 				m: date.getMonth() + 1,
 				yy: (date.getFullYear()+543).toString().substring(2),
-				yyyy: ((date.getFullYear()+543)+543)
+				yyyy: (date.getFullYear()+543)
 			};
 			val.dd = (val.d < 10 ? '0' : '') + val.d;
 			val.mm = (val.m < 10 ? '0' : '') + val.m;
