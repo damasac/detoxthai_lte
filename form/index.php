@@ -94,9 +94,11 @@ if($dataform['status']+0) { ?>
                     <div class="row">
                         <div class="col-lg-6">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDatex">
+							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDatex">
+							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
                         </div>
                     </div>
                     <hr />
@@ -238,7 +240,12 @@ if($dataform['status']+0) { ?>
         var user_id = $("#user_id").val();
         
         //console.log(startDate+endDate);
-        if (startDate=="" || endDate=="" || location=="") {
+		if(startDate == '____-__-__' || endDate == '____-__-__'){
+			$('#showError').show('fast').delay(2000).fadeOut(300);
+            $("#showError").html("กรุณากรอกข้อมูลให้ครบถ้วน");
+          return ;
+		}
+        else if (startDate=="" || endDate=="" || location=="") {
             $('#showError').show('fast').delay(2000).fadeOut(300);
             $("#showError").html("กรุณากรอกข้อมูลให้ครบถ้วน");
           return ;
@@ -253,8 +260,6 @@ if($dataform['status']+0) { ?>
             $("#showError").html("โปรดเลือกสถานที่");
           return ;
         }else{
-		var startDate =$("#startDate").val();
-        var endDate = $("#endDate").val();
           $.ajax({
                   type: "POST",
                   url: "../_connection/db_form.php?task=insertBlank",
@@ -313,7 +318,7 @@ function txt_datetimepicker(args) {
             todayButton: true,
             datepicker: true,
             timepicker: false,
-            format: 'Y-m-d',
+            format: 'd/m/Y',
             mask:true,
             lang:'th',
             onChangeMonth:datetimepicker_ThaiYear,
