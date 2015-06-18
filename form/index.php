@@ -226,10 +226,10 @@ if($dataform['status']+0) { ?>
           AutoSave("p2a1",$("#form_id").val());
         }
       });
-    $("#startDatex").datepicker({
+    $("#startDate").datepicker({
       format: 'dd/mm/yyyy',
       });
-    $("#endDatex").datepicker({
+    $("#endDate").datepicker({
       format: 'dd/mm/yyyy',
       });
     $("#AddForm").click(function(){
@@ -304,15 +304,19 @@ if($dataform['status']+0) { ?>
                        //AutoSave(field,form_id);
       }
       //hide
+	  datepicker_hide('startDate');
+	  datepicker_hide('EndDate');
 	  function datepicker_hide(datePick){
 		  $(function(){
 			  $('#'+datePick+'x').on('changeDate', function(ev){
 				$(this).datepicker('hide');
 				
 			});
+			/*
 			$('#'+datePick).click(function(){
 			  $('#'+datePick).val($('#'+datePick+'x').val());
 			})
+			*/
 		});
 	  }
    
