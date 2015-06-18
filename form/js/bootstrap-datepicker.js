@@ -399,7 +399,7 @@
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 			if (parts.length === format.parts.length) {
-				var year = (date.getFullYear()+543), day = date.getDate(), month = date.getMonth();
+				var year = (date.getFullYear()), day = date.getDate(), month = date.getMonth();
 				for (var i=0, cnt = format.parts.length; i < cnt; i++) {
 					val = parseInt(parts[i], 10)||1;
 					switch(format.parts[i]) {
