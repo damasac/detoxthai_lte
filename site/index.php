@@ -211,7 +211,7 @@ $id_desc = $result_name_site->fetch_assoc();
   </div>
   <p></p>
   <div class="col-md-12 text-center">
-    <button id="save" class="btn btn-primary btn-flat"><strong>แก้ไข</strong></button>
+    <button id="save" class="btn btn-primary btn-flat"><strong>บันทึก</strong></button>
   </div>
 </div>
 </div><!-- /.box-body -->

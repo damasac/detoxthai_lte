@@ -112,7 +112,7 @@ $row = $result->fetch_assoc();
         </div>
       </form>
       <p class="text-center">
-        <button type="button" id="btnedit" class="btn btn-primary btn-flat">แก้ไข</button>
+        <button type="button" id="btnedit" class="btn btn-primary btn-flat">บันทึก</button>
       </p>
     </div><!-- /.box-body -->
   </div><!-- /.box -->

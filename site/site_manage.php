@@ -336,7 +336,7 @@ $box .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dial
     </div>
     <div class='modal-footer'>
       <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>ยกเลิก</button>
-      <button type='button' class='btn btn-primary btn-flat' id='btadd".$count."'>แก้ไข</button>
+      <button type='button' class='btn btn-primary btn-flat' id='btadd".$count."'>บันทึก</button>
     </div>
   </div>
 </div>
