@@ -308,7 +308,7 @@ if($dataform['status']+0) { ?>
 	  datepicker_hide('EndDate');
 	  function datepicker_hide(datePick){
 		  $(function(){
-			  $('#'+datePick+'x').on('changeDate', function(ev){
+			  $('#'+datePick).on('changeDate', function(ev){
 				$(this).datepicker('hide');
 				
 			});
