@@ -145,7 +145,7 @@
 				this.date = new Date(newDate);
 			}
 			this.set();
-			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear()+543, this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -162,7 +162,7 @@
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
 				this.format
 			);
-			this.viewDate = new Date(this.date.getFullYear()+543, this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -187,7 +187,7 @@
 		
 		fill: function() {
 			var d = new Date(this.viewDate),
-				year = d.getFullYear()+543,
+				year = d.getFullYear(),
 				month = d.getMonth(),
 				currentDate = this.date.valueOf();
 			this.picker.find('.datepicker-days th:eq(1)')
@@ -208,7 +208,7 @@
 					html.push('<tr>');
 				}
 				clsName = this.onRender(prevMonth);
-				prevY = prevMonth.getFullYear()+543;
+				prevY = prevMonth.getFullYear();
 				prevM = prevMonth.getMonth();
 				if ((prevM < month &&  prevY === year) ||  prevY < year) {
 					clsName += ' old';
@@ -225,7 +225,7 @@
 				prevMonth.setDate(prevMonth.getDate()+1);
 			}
 			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
-			var currentYear = this.date.getFullYear()+543;
+			var currentYear = this.date.getFullYear();
 			
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
