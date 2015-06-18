@@ -4,7 +4,6 @@
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">
-<link rel="stylesheet" href="css/datepicker.css">
   
 <?php eb();?>
 
@@ -191,7 +190,9 @@ if($dataform['status']+0) { ?>
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+<script type='text/javascript' src="datepicker/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" href="datepicker/jquery.datetimepicker.css">
 
 <script>
     $(function(){
@@ -302,13 +303,29 @@ if($dataform['status']+0) { ?>
                        //AutoSave(field,form_id);
       }
       //hide
-	  
-      $('#startDate').on('changeDate', function(ev){
-        $(this).datepicker('hide');
+
+txt_datetimepicker('startDate');
+txt_datetimepicker('endDate');
+
+function txt_datetimepicker(args) {
+    $(document).ready(function () {
+    
+        $('#'+args).datetimepicker({
+            scrollInput:false,
+            todayButton: true,
+            datepicker: true,
+            timepicker: false,
+            format: 'Y-m-d',
+            mask:true,
+            lang:'th',
+            onChangeMonth:datetimepicker_ThaiYear,
+            onShow:datetimepicker_ThaiYear,
+            yearOffset:543,
+            closeOnDateSelect:true
+        });
+    
     });
-       $('#endDate').on('changeDate', function(ev){
-        $(this).datepicker('hide');
-    });
+}
 	
   </script>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
