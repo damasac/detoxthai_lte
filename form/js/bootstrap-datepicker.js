@@ -225,7 +225,7 @@
 				prevMonth.setDate(prevMonth.getDate()+1);
 			}
 			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
-			var currentYear = this.date.getFullYear();
+			var currentYear = this.date.getFullYear()+543;
 			
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
