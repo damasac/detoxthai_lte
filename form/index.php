@@ -226,11 +226,9 @@ if($dataform['status']+0) { ?>
       });
     $("#startDate").datepicker({
       format: 'dd/mm/yyyy',
-	  isBuddhist: true,
       });
     $("#endDate").datepicker({
       format: 'dd/mm/yyyy',
-	  isBuddhist: true,
       });
     $("#AddForm").click(function(){
         var startDate =$("#startDate").val();
