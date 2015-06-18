@@ -61,7 +61,7 @@
         `fname`='".$_POST["fname"]."',
         `lname`='".$_POST["lname"]."',
         `tel`='".$_POST["tel"]."',
-        `password`='".$_POST["password"]."',
+        `password`='".$password."',
         `nickname`='".$_POST["nickname"]."',
         `email`='".$_POST["email"]."',
         `isFristLogin`='1'
