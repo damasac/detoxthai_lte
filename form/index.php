@@ -253,6 +253,8 @@ if($dataform['status']+0) { ?>
             $("#showError").html("โปรดเลือกสถานที่");
           return ;
         }else{
+		var startDate =$("#startDate").val();
+        var endDate = $("#endDate").val();
           $.ajax({
                   type: "POST",
                   url: "../_connection/db_form.php?task=insertBlank",
