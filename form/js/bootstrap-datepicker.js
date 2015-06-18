@@ -162,7 +162,7 @@
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
 				this.format
 			);
-			this.viewDate = new Date(this.date.getFullYear()+543, this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear()-543, this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
