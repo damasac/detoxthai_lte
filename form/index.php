@@ -240,7 +240,7 @@ if($dataform['status']+0) { ?>
         var user_id = $("#user_id").val();
         
         //console.log(startDate+endDate);
-		if(startDate == '____-__-__' || endDate == '____-__-__'){
+		if(startDate == '__/__/____' || endDate == '__/__/____'){
 			$('#showError').show('fast').delay(2000).fadeOut(300);
             $("#showError").html("กรุณากรอกข้อมูลให้ครบถ้วน");
           return ;
