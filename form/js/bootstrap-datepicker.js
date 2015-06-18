@@ -145,7 +145,7 @@
 				this.date = new Date(newDate);
 			}
 			this.set();
-			this.viewDate = new Date(this.date.getFullYear()+543, this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -187,7 +187,7 @@
 		
 		fill: function() {
 			var d = new Date(this.viewDate),
-				year = d.getFullYear(),
+				year = d.getFullYear()+543,
 				month = d.getMonth(),
 				currentDate = this.date.valueOf();
 			this.picker.find('.datepicker-days th:eq(1)')
