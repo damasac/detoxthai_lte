@@ -162,7 +162,7 @@
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
 				this.format
 			);
-			this.viewDate = new Date(this.date.getFullYear()-543, this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -193,7 +193,7 @@
 			this.picker.find('.datepicker-days th:eq(1)')
 						.text(DPGlobal.dates.months[month]+' '+year);
 			var prevMonth = new Date(year, month-1, 28,0,0,0,0),
-				day = DPGlobal.getDaysInMonth(prevMonth.getFullYear(), prevMonth.getMonth());
+				day = DPGlobal.getDaysInMonth(prevMonth.getFullYear()+543, prevMonth.getMonth());
 			prevMonth.setDate(day);
 			prevMonth.setDate(day - (prevMonth.getDay() - this.weekStart + 7)%7);
 			var nextMonth = new Date(prevMonth);
