@@ -162,8 +162,7 @@
 				typeof newDate === 'string' ? newDate : (this.isInput ? this.element.prop('value') : this.element.data('date')),
 				this.format
 			);
-			newDate=newDate-543;
-			this.viewDate = new Date(newDate.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
+			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
 		},
 		
@@ -304,7 +303,7 @@
 							} else if (target.is('.new')) {
 								month += 1;
 							}
-							var year = this.viewDate.getFullYear();
+							var year = this.viewDate.getFullYear()+543;
 							this.date = new Date(year, month, day,0,0,0,0);
 							this.viewDate = new Date(year, month, Math.min(28, day),0,0,0,0);
 							this.fill();
