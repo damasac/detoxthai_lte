@@ -84,7 +84,7 @@
           </div>
         </div>
         <p class="text-center">
-        <button type="button" class="btn btn-primary btn-flat" id="btadd">แก้ไข</button>
+        <button type="button" class="btn btn-primary btn-flat" id="btadd">บันทึก</button>
         </p>
       </form>
     </div><!-- /.box-body -->
