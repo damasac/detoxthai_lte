@@ -303,7 +303,7 @@
 							} else if (target.is('.new')) {
 								month += 1;
 							}
-							var year = this.viewDate.getFullYear()+543;
+							var year = this.viewDate.getFullYear();
 							this.date = new Date(year, month, day,0,0,0,0);
 							this.viewDate = new Date(year, month, Math.min(28, day),0,0,0,0);
 							this.fill();
