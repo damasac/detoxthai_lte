@@ -191,8 +191,9 @@ if($dataform['status']+0) { ?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
 
-<script type='text/javascript' src="datepicker/jquery.datetimepicker.js"></script>
 <link rel="stylesheet" href="datepicker/jquery.datetimepicker.css">
+<script type='text/javascript' src="datepicker/jquery.datetimepicker.js"></script>
+
 
 <script>
     $(function(){
@@ -225,12 +226,7 @@ if($dataform['status']+0) { ?>
           AutoSave("p2a1",$("#form_id").val());
         }
       });
-    $("#startDate").datepicker({
-      format: 'dd/mm/yyyy',
-      });
-    $("#endDate").datepicker({
-      format: 'dd/mm/yyyy',
-      });
+    
     $("#AddForm").click(function(){
         var startDate =$("#startDate").val();
         var endDate = $("#endDate").val();
