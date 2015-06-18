@@ -18,7 +18,7 @@ function System_ShowDateLongTh($myDate) {
 			case "11" : $myMonth = "พฤศจิกายน";   break;
 			case "12" : $myMonth = "ธันวาคม";  break;
 		}
-		$myYear = sprintf("%d",$myDateArray[0])+543;
+		$myYear = sprintf("%d",$myDateArray[0]);
         return($myDay . " " . $myMonth . " " . $myYear);
 }
 ###############################
