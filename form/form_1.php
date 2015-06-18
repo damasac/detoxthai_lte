@@ -8,7 +8,7 @@
 			<tr>
 				<td>
 					<form class="form-inline">
-					<h3>บันทึกการล้างพิษตับ ระหว่าง <code><?php echo System_ShowDate($data['startdate']);?></code> ถึง <code><?php echo System_ShowDate($data['enddate']);?></code> ณ สถานที่ <code><?php echo $dbarr['site_name'];?></code></h3>
+					<h3>บันทึกการล้างพิษตับ ระหว่าง <code><?php echo System_ShowDateLongTh($data['startdate']);?></code> ถึง <code><?php echo System_ShowDateLongTh($data['enddate']);?></code> ณ สถานที่ <code><?php echo $dbarr['site_name'];?></code></h3>
 		  			</form>
 				</td>
 			</tr>

@@ -62,7 +62,7 @@ function System_ShowDate($myDate) {
 			case "11" : $myMonth = "พ.ย.";   break;
 			case "12" : $myMonth = "ธ.ค.";  break;
 		}
-		$myYear = substr(sprintf("%d",$myDateArray[0])+543,2,2);
+		$myYear = substr(sprintf("%d",$myDateArray[0]),2,2);
         return($myDay . " " . $myMonth . " " . $myYear);
 }
 ?>
