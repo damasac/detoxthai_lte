@@ -4,6 +4,7 @@
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">
+<link rel="stylesheet" href="css/datepicker.css">
 
 <style>
     body{
@@ -170,8 +171,7 @@
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
-<link rel="stylesheet" href="datepicker/jquery.datetimepicker.css">
-<script type='text/javascript' src="datepicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
@@ -221,50 +221,6 @@ $('#p4a7').slider().on('slideStop', function(ev){
 });
 
 //
-
-txt_datetimepicker('p1a2b1');
-
-function txt_datetimepicker(args) {
-    $(document).ready(function () {
-    
-        $('#'+args).datetimepicker({
-            scrollInput:false,
-            todayButton: true,
-            datepicker: true,
-            timepicker: false,
-            format: 'd/m/Y',
-            mask:true,
-            lang:'th',
-            onChangeMonth:datetimepicker_ThaiYear,
-            onShow:datetimepicker_ThaiYear,
-            yearOffset:543,
-            closeOnDateSelect:true
-        });
-    
-    });
-}
-
-txt_monthpicker('endDate');
-
-function txt_monthpicker(args) {
-    $(document).ready(function () {
-    
-        $('#'+args).datetimepicker({
-            scrollInput:false,
-            todayButton: true,
-            datepicker: true,
-            timepicker: false,
-            format: 'm/Y',
-            mask:true,
-            lang:'th',
-            onChangeMonth:datetimepicker_ThaiYear,
-            onShow:datetimepicker_ThaiYear,
-            yearOffset:543,
-            closeOnDateSelect:true
-        });
-    
-    });
-}
 </script>
 
 

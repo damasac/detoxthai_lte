@@ -4,6 +4,7 @@
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">
+<link rel="stylesheet" href="css/datepicker.css">
   
 <?php eb();?>
 
@@ -95,10 +96,8 @@ if($dataform['status']+0) { ?>
                         <div class="col-lg-6">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
                             <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
-							
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
                             <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
-							
                         </div>
                     </div>
                     <hr />
@@ -192,10 +191,7 @@ if($dataform['status']+0) { ?>
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
-
-<link rel="stylesheet" href="datepicker/jquery.datetimepicker.css">
-<script type='text/javascript' src="datepicker/jquery.datetimepicker.js"></script>
-
+<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 
 <script>
     $(function(){
@@ -228,7 +224,12 @@ if($dataform['status']+0) { ?>
           AutoSave("p2a1",$("#form_id").val());
         }
       });
-    
+    $("#startDate").datepicker({
+      format: 'dd/mm/yyyy',
+      });
+    $("#endDate").datepicker({
+      format: 'dd/mm/yyyy',
+      });
     $("#AddForm").click(function(){
         var startDate =$("#startDate").val();
         var endDate = $("#endDate").val();
@@ -240,12 +241,7 @@ if($dataform['status']+0) { ?>
         var user_id = $("#user_id").val();
         
         //console.log(startDate+endDate);
-		if(startDate == '__/__/____' || endDate == '__/__/____'){
-			$('#showError').show('fast').delay(2000).fadeOut(300);
-            $("#showError").html("กรุณากรอกข้อมูลให้ครบถ้วน");
-          return ;
-		}
-        else if (startDate=="" || endDate=="" || location=="") {
+        if (startDate=="" || endDate=="" || location=="") {
             $('#showError').show('fast').delay(2000).fadeOut(300);
             $("#showError").html("กรุณากรอกข้อมูลให้ครบถ้วน");
           return ;
@@ -306,30 +302,12 @@ if($dataform['status']+0) { ?>
                        //AutoSave(field,form_id);
       }
       //hide
-
-txt_datetimepicker('startDate');
-txt_datetimepicker('endDate');
-
-function txt_datetimepicker(args) {
-    $(document).ready(function () {
-    
-        $('#'+args).datetimepicker({
-            scrollInput:false,
-            todayButton: true,
-            datepicker: true,
-            timepicker: false,
-            format: 'd/m/Y',
-            mask:true,
-            lang:'th',
-            onChangeMonth:datetimepicker_ThaiYear,
-            onShow:datetimepicker_ThaiYear,
-            yearOffset:543,
-            closeOnDateSelect:true
-        });
-    
+      $('#startDate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
     });
-}
-	
+       $('#endDate').on('changeDate', function(ev){
+        $(this).datepicker('hide');
+    });
   </script>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
