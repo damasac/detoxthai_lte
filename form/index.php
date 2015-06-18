@@ -304,12 +304,14 @@ if($dataform['status']+0) { ?>
                        //AutoSave(field,form_id);
       }
       //hide
+	  /*
       $('#startDate').on('changeDate', function(ev){
         $(this).datepicker('hide');
     });
        $('#endDate').on('changeDate', function(ev){
         $(this).datepicker('hide');
     });
+	*/
   </script>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
