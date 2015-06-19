@@ -128,13 +128,17 @@ $MasterPage = 'page_main.php';?>
 
                 <li>
                 <?php
-                    $sqlTimeline = "SELECT a.id,a.createtime,a.user_id,a.text,b.image FROM `timeline_post` AS a LEFT JOIN `timeline_image` AS b ON  a.id = b.post_id WHERE a.createtime LIKE '%".$key."%' ORDER BY a.createtime DESC";
-  
+                    $sqlTimeline = "SELECT * FROM `timeline_post`AS a  WHERE a.createtime LIKE '%".$key."%' ORDER BY a.createtime DESC";
+                    
                     $queryTimeline = $mysqli->query($sqlTimeline);
                     while($dataTimeline = $queryTimeline->fetch_assoc()){
+                        $sqlImg = "SELECT * FROM `timeline_image` WHERE post_id='".$dataTimeline["id"]."' ";
+                        $queryImg = $mysqli->query($sqlImg);
+                        $numImg = $queryImg->num_rows;
+  
                 ?>
                  <li> 
-            <?php if($dataTimeline["image"]==""){?>
+            <?php if($numImg==1){?>
                         <i class="fa fa-comment bg-green"></i>
             <?php }else{?>
                         <i class="fa fa-image bg-blue"></i>
@@ -143,7 +147,7 @@ $MasterPage = 'page_main.php';?>
                                 <span class="time"><i class="fa fa-clock-o"></i><?php echo TimeThai($dataTimeline["createtime"]);?></span>
                                 <h3 class="timeline-header"><a href="#"><?php echo lookUpUser($dataTimeline["user_id"],$mysqli)?></a>
                                 <?php
-                                    if($dataTimeline["image"]==""){
+                                    if($numImg==1){
                                                 echo "ได้โพสข้อความ";
                                     }else{
                                                 echo "ได้อัพโหลดรุปภาพ";
@@ -155,8 +159,7 @@ $MasterPage = 'page_main.php';?>
                                     <p>"<?php echo $dataTimeline["text"];?>"</p>
                                     <?php }?>
                                     <?php
-                                                 if($dataTimeline["image"]!=""){
-                                 
+                                                 if($numImg!=""){
                                                 
                                                             $sqlImg = "SELECT * FROM `timeline_image` WHERE post_id='".$dataTimeline["id"]."' ";
                                                             $queryImg = $mysqli->query($sqlImg);
