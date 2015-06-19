@@ -1,5 +1,6 @@
 <?php
-$p1 = $p2 = [];
+$p1 = [];
+$p2 = [];
 $images = $_FILES['images'];
 $filenames = $images['name'];
 if (empty($filenames)) {
