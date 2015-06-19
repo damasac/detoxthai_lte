@@ -101,10 +101,8 @@ $MasterPage = 'page_main.php';?>
 
 
                         </div>
-                          <div class="col-md-1">
-                        <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-image'></i> อัพโหลด</button>
-                        </div>
                         <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-camera'> </i></button> 
                         <button type="submit" class="btn btn-success" id="button_post"><i class="fa fa-pencil"></i> โพสต์</button>
                         </div>
                     </div>
