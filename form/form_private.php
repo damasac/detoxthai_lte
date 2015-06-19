@@ -164,6 +164,19 @@
         }
         
     });
+	//
+	$( "#btnChkdata" ).click(function() {
+        //var chk = confirm("ยืนว่า ข้อมูลทั้งหมดถูกต้อง.");
+        if (1) {
+           var user_id =$('#form_id').val();
+            $.post( "ajax.php",
+                { user_id: user_id, task:'setFormPrivateEdit' },
+                function( data ) {
+                    parent.location='form_private.php';
+                });
+        }
+        
+    });
 </script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>

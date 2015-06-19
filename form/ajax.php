@@ -11,4 +11,9 @@ if($_POST['task']=='setFormPrivate'){
     $query = $mysqli->query($sql);
     echo $sql;
 }
+if($_POST['task']=='setFormPrivateEdit'){
+    $sql = "UPDATE tbl_surveyprivate SET status='0' WHERE ref_id_user = '".$_POST['user_id']."';";
+    $query = $mysqli->query($sql);
+    echo $sql;
+}
 ?>
