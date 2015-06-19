@@ -120,7 +120,7 @@
             <div class="pull-right">
             <?php if(($dataform['status']+0)) { ?>
             <a class="btn btn-danger btn-lg btn-flat"><li class="fa fa-lock"></li> ข้อมูลถูกจัดเก็บเป็นความลับแล้ว</a>
-            <a class="btn btn-info btn-lg btn-flat"><li class="fa fa-pencil-square-o"></li> เสนอแก้ไขข้อมูล</a>
+            <a class="btn btn-info btn-lg btn-flat" id="btnFormEdit"><li class="fa fa-pencil-square-o"></li> เสนอแก้ไขข้อมูล</a>
             <?php } else { ?>
             <a id="btnChkdata" class="btn btn-success btn-lg btn-flat"><li class="fa fa-check"></li> ข้อมูลทั้งหมดถูกต้อง</a>
             <?php } ?>
@@ -165,7 +165,7 @@
         
     });
 	//
-	$( "#btnChkdata" ).click(function() {
+	$( "#btnFormEdit" ).click(function() {
         //var chk = confirm("ยืนว่า ข้อมูลทั้งหมดถูกต้อง.");
         if (1) {
            var user_id =$('#form_id').val();
