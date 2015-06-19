@@ -1,42 +1,23 @@
 <?php
-// ...
-// SERVER CODE that processes ajax upload and returns a JSON response. Your server action 
-// must return a json object containing initialPreview, initialPreviewConfig, & append.
-// An example for PHP Server code is mentioned below.
-// ...
-$p1 = $p2 = [];
-$images = $_FILES['images'];
-$filenames = $images['name'];
-if (empty($filenames)) {
-    echo '{}';
-    return;
-}
-for ($i = 0; $i < count($filenames); $i++) {
-    $j = $i + 1;
-    $key = '<code to parse your image key>';
-    $url = '<your server action to delete the file>';
-    $ext = explode('.', basename($filenames[$i]));
+    include_once "../_connection/db_base.php";
+    $task = $_GET["task"];
+    if($task=="post_timeline"){
+        $sql1 = "INSERT INTO `timeline_post`(user_id,text) VALUES ('".$_POST["user_id"]."','".$_POST["post"]."') ";
+        //echo $sql1;
+        $query = $mysqli->query($sql1);
+        $post_id = $mysqli->insert_id;
+        if(isset($_POST["img"])!=""){
+            foreach($_POST["img"] as $img){
 
-    $target = "img" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
-    if(move_uploaded_file($images['tmp_name'][$i], $target)) {
-        $newimage = explode('/',$target);
-        //print_r($newimage);
-        $success = true;
-        $paths[] = $target;
-    } else {
-        $success = false;
-        break;
+                $newimg = substr($img,4);
+
+                $sql2 = "INSERT INTO `timeline_image`(post_id,image)
+                VALUES('".$post_id."','".$newimg."')
+                ";
+
+                $query2 = $mysqli->query($sql2);
+                
+            }
+        }
     }
-    
-    $p1[$i] = "<img src='".$target."' data-id='$i' class='file-preview-image'>";
-    $p2[$i] = ['caption' => '', 'width' => '120px', 'url' => 'delete.php', 'key' => $target];
-}
-echo json_encode([
-    'initialPreview' => $p1, 
-    'initialPreviewConfig' => $p2,   
-    'append' => true // whether to append these configurations to initialPreview.
-                     // if set to false it will overwrite initial preview
-                     // if set to true it will append to initial preview
-                     // if this propery not set or passed, it will default to true
- ]);
 ?>

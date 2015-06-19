@@ -1,4 +1,5 @@
-<?php require_once '../_theme/util.inc.php';
+<?php
+require_once '../_theme/util.inc.php';
 
 $MasterPage = 'page_main.php';?>
 
@@ -30,6 +31,15 @@ $MasterPage = 'page_main.php';?>
             $sqlDateJoin = "SELECT  DATE_FORMAT(a.create_at, '%Y-%m-%d') AS date1,DATE_FORMAT(a.delete_at, '%Y-%m-%d') AS date2 FROM site_join AS a ORDER BY a.create_at DESC";
             $queryDateJoin = $mysqli->query($sqlDateJoin);
             $dateQuery1 = array();
+            $sqlTimeline = "SELECT  DATE_FORMAT(createtime, '%Y-%m-%d') AS date FROM `timeline_post` AS a ORDER BY createtime DESC";
+            $queryTimeline = $mysqli->query($sqlTimeline);
+            while($dataTimeline = $queryTimeline->fetch_assoc()){
+                //print_r($dataDateUser);
+                foreach($dataTimeline as $key=>$value){
+                    //echo $key."=".$value."<br>";
+                    array_push($dateQuery1,$value);
+                }
+            }
             while($dataDateJoin = $queryDateJoin->fetch_assoc()){
                 //print_r($dataDateUser);
                 foreach($dataDateJoin as $key=>$value){
@@ -54,6 +64,7 @@ $MasterPage = 'page_main.php';?>
 
             $dateQuery = array_filter(array_unique($dateQuery1));
             rsort($dateQuery);
+            //print_r($dateQuery);
 ?>
 
 <!-- Content Header (Page header) -->
@@ -69,11 +80,10 @@ $MasterPage = 'page_main.php';?>
   </section>
 <?php
 ?>
-
   <!-- Main content -->
         <section class="content">
             <div class="box box-primary">
-
+            <?php if($_SESSION!=""){?>
                 <br>
                 <div class="container">
                     <div class="row">
@@ -81,32 +91,28 @@ $MasterPage = 'page_main.php';?>
                             <label>คุณกำลังคิดอะไรอยู่</label><br>
                             <code id="valPost" style="display:none;"></code>
                         </div>
-<!--<form id="post" action="sql.php" enctype="multipart/form-data">-->
-                        <div class="col-md-8">
-            <input type="text" class="form-control" id="timeline_post" name="timeline_post"><br>
+                        <div class="col-md-7">
+                        
+                        <input type="text" class="form-control" id="timeline_post" name="timeline_post"><br>
+                        <div id="form-upload" style="display:none;">            
+                        <input id="file" class="file" type="file" name="images[]"  accept="image/*"  multiple="multiple">
+                        </div>
+                        <br>
 
-                <input id="file" class="file" type="file" name="images[]"  accept="image/*"  multiple="multiple">
-                <br>
-                <button type="submit" class="btn btn-primary" id="button_post">โพสต์</button>
-<!--</form>-->
-<script>
-            var $input = $("#file");
-                $('#file').fileinput({
-                        showUpload:false,
-                        showRemove:false,
-                        uploadAsync: false,
-                        uploadUrl: "sql.php", // your upload server url
-                        }).on("filebatchselected", function(event, files) {
-    // trigger upload method immediately after files are selected
-    $input.fileinput("upload");
-});
-</script>
+
+                        </div>
+                          <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-image'></i> อัพโหลด</button>
+                        </div>
+                        <div class="col-md-2">
+                        <button type="submit" class="btn btn-success" id="button_post"><i class="fa fa-pencil"></i> โพสต์</button>
                         </div>
                     </div>
                 </div>
 
                 <br>
              </div>
+            <?php }?>
         <div class="box box-primary">
           <div class="row" style="margin: 10px;">
             <div class="col-md-12">
@@ -121,7 +127,54 @@ $MasterPage = 'page_main.php';?>
                     ?>
                   </span>
                 </li>
+
+                <li>
+                <?php
+                    $sqlTimeline = "SELECT a.id,a.createtime,a.user_id,a.text,b.image FROM `timeline_post` AS a LEFT JOIN `timeline_image` AS b ON  a.id = b.post_id WHERE a.createtime LIKE '%".$key."%' ORDER BY a.createtime DESC";
+  
+                    $queryTimeline = $mysqli->query($sqlTimeline);
+                    while($dataTimeline = $queryTimeline->fetch_assoc()){
+                ?>
+                 <li> 
+            <?php if($dataTimeline["image"]==""){?>
+                        <i class="fa fa-comment bg-green"></i>
+            <?php }else{?>
+                        <i class="fa fa-image bg-blue"></i>
+            <?php }?>
+                        <div class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i><?php echo TimeThai($dataTimeline["createtime"]);?></span>
+                                <h3 class="timeline-header"><a href="#"><?php echo lookUpUser($dataTimeline["user_id"],$mysqli)?></a>
+                                <?php
+                                    if($dataTimeline["image"]==""){
+                                                echo "ได้โพสข้อความ";
+                                    }else{
+                                                echo "ได้อัพโหลดรุปภาพ";
+                                    }
+                                ?>
+                                </h3>
+                                <div class="timeline-body">
+                                    <?php if($dataTimeline["text"]!=""){?>
+                                    <p>"<?php echo $dataTimeline["text"];?>"</p>
+                                    <?php }?>
+                                    <?php
+                                                 if($dataTimeline["image"]!=""){
+                                 
+                                                
+                                                            $sqlImg = "SELECT * FROM `timeline_image` WHERE post_id='".$dataTimeline["id"]."' ";
+                                                            $queryImg = $mysqli->query($sqlImg);
+                                                            while($dataImg = $queryImg->fetch_assoc()){
+                                                                       ?>
+                                                                         <img src="img/<?php echo $dataImg["image"]?>"  class='margin' width='150' height='100'/>
+                                                                       <?php
+                                                            }
+                                                }
+                                    ?>
+                                </div>
+
+                        </div>
+                </li>
                <li>
+            <?php }?>
                 <?php
                     $sqlCreate = "SELECT  * FROM  puser WHERE createdate LIKE '%".$key."%'";
                     $queryCreate = $mysqli->query($sqlCreate);
@@ -197,40 +250,65 @@ $MasterPage = 'page_main.php';?>
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
+
 <script>
+
+var $input = $("#file");
+$('#file').fileinput({
+showUpload:false,
+showRemove:true,
+uploadAsync: false,
+uploadUrl: "upload.php", // your upload server url
+}).on("filebatchselected", function(event, files) {
+// trigger upload method immediately after files are selected
+$input.fileinput("upload");
+});
+
+            $("#btn-form-upload").click(function(){
+                        $("#form-upload").toggle({
+
+                                    });
+                        });
             
             $("#button_post").click(function(){
                         
-                        var image = $(".file-preview-image").attr("src");
-                        });
-            function postStatus(){
-                        var timeline_post = $("#timeline_post").val();
-                        if (timeline_post=="") {
+                        var imgLength = $(".file-preview-image").length;
+                        var imgQuery = [];
+                        var post = $("#timeline_post").val();
+                        if (post=="") {
                                     //code
-                                    $("#valPost").show();
-                                    $("#valPost").html("กรุณากรอกข้อความ");
-                                    $("#timeline_post").attr("style","border-color:red;")
+                                    alert("กรุณาระบุโพสต์");
                                     return ;
-                        }else{
-                                    $.ajax({
-		    url: "usermgn/ajax-sql-query.php?task=addUserNormal",
-		    type: "post",
-		    data: {
-                      text:timeline_post
-                      },
-		    success: function(data){
-
-		    },
-		    error:function(){
-			alert("failure");
-		    }
-		});
+                        }else if (imgLength==0) {
+                                    //code
+                                    alert("กรุณาระบุโพสต์");
+                                    return ;
+                        }
+                        var user_id = <?php echo  $_SESSION["dtt_puser_id"];?>;
+                        for (i=0;i<imgLength;i++) {
+                                    //code      
+                                    var img = $(".file-preview-image[data-id='"+i+"']").attr("src");
+                                    imgQuery.push(img);
 
                         }
-            }
+                        $.ajax({
+                                    url: "sql.php?task=post_timeline",
+                                    type: "post",
+                                    data: {
+                                      user_id:user_id,
+                                      post:post,
+                                      img:imgQuery
+                                      },
+                                    success: function(data){
+                                                location.reload();
+                                    },
+                                    error:function(){
+                                        alert("failure");
+                                    }
+                                });
+                        });
+          
 </script>
-
-
 <![endif]-->
 <?php eb();?>
 

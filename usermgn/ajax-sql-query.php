@@ -37,7 +37,6 @@
 	    $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
 	    $user_id = $mysqli->insert_id;
 	    if($_POST["site_id"]!=""){
-		echo "OK!";
 		$sql3 = "INSERT INTO `site_follow`(site_id,user_id)
 		VALUES('".$_POST["site_id"]."','".$user_id."')";
 		$query3 = $mysqli->query($sql3) or die(mysqli_error($mysqli));
