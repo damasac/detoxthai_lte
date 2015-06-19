@@ -984,6 +984,7 @@
                 };
 
             self.$preview.find('.kv-file-remove').each(function () {
+            
                 var $el = $(this), vUrl = $el.data('url') || self.deleteUrl, vKey = $el.data('key');
                 if (isEmpty(vUrl) || vKey === undefined) {
                     return;
@@ -997,9 +998,10 @@
                     extraData = extraData();
                 }
                 params = {id: $el.attr('id'), key: vKey, extra: extraData};
+
                 settings = $.extend({
                     url: vUrl,
-                    type: 'DELETE',
+                    type: 'POST',
                     dataType: 'json',
                     data: $.extend({key: vKey}, extraData),
                     beforeSend: function (jqXHR) {

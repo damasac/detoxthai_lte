@@ -10,7 +10,7 @@ $MasterPage = 'page_main.php';?>
 
 <?php sb('js_and_css_head'); ?>
         <link href="../_plugins/js-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-        <script src="../_plugins/js-fileinput/js/fileinput.min.js" type="text/javascript"></script>
+        <script src="../_plugins/js-fileinput/js/fileinput.js" type="text/javascript"></script>
 <?php eb();?>
 
 <?php sb('content');?>
@@ -81,45 +81,25 @@ $MasterPage = 'page_main.php';?>
                             <label>คุณกำลังคิดอะไรอยู่</label><br>
                             <code id="valPost" style="display:none;"></code>
                         </div>
-<form id="post" action="sql.php" enctype="multipart/form-data">
+<!--<form id="post" action="sql.php" enctype="multipart/form-data">-->
                         <div class="col-md-8">
             <input type="text" class="form-control" id="timeline_post" name="timeline_post"><br>
 
-                <input id="file" class="images" type="file" name="images[]"  accept="image/*"  multiple="multiple">
+                <input id="file" class="file" type="file" name="images[]"  accept="image/*"  multiple="multiple">
                 <br>
-                <button type="submit" class="btn btn-primary">โพสต์</button>
-</form>
+                <button type="submit" class="btn btn-primary" id="button_post">โพสต์</button>
+<!--</form>-->
 <script>
             var $input = $("#file");
                 $('#file').fileinput({
                         showUpload:false,
+                        showRemove:false,
                         uploadAsync: false,
                         uploadUrl: "sql.php", // your upload server url
-                        
-                        uploadExtraData: function() {
-                            return {
-                                //userid: $("#userid").val(),
-                                //username: $("#username").val()
-                            };
-                        },
-                         initialPreview: [
-                                    "<img src='http://placeimg.com/200/150/nature/1'>",
-                                    "<img src='http://placeimg.com/200/150/nature/2'>",
-                                    "<img src='http://placeimg.com/200/150/nature/3'>",
-                        ],
-                        initialPreviewConfig: [
-                            {caption: "Food-1.jpg", width: "120px", url: "/site/file-delete", key: 1},
-                         
-                        ]
-            }).on("filebatchselected", function(event, files) {
+                        }).on("filebatchselected", function(event, files) {
     // trigger upload method immediately after files are selected
     $input.fileinput("upload");
 });
-                
-$("#file").on("filepresfdfdelete", function(jqXHR) {
-            alert("delete");
-});
-
 </script>
                         </div>
                     </div>
@@ -218,8 +198,10 @@ $("#file").on("filepresfdfdelete", function(jqXHR) {
 
 <?php sb('js_and_css_footer');?>
 <script>
-            $("#timeline_post").click(function(){
-
+            
+            $("#button_post").click(function(){
+                        
+                        var image = $(".file-preview-image").attr("src");
                         });
             function postStatus(){
                         var timeline_post = $("#timeline_post").val();

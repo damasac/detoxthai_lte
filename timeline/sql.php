@@ -1,62 +1,42 @@
 <?php
-    // upload.php
-// 'images' refers to your file input name attribute
-if (empty($_FILES['images'])) {
-    echo json_encode(['error'=>'No files found for upload.']); 
-    // or you can throw an exception 
-    return; // terminate
-}
-
-// get the files posted
+// ...
+// SERVER CODE that processes ajax upload and returns a JSON response. Your server action 
+// must return a json object containing initialPreview, initialPreviewConfig, & append.
+// An example for PHP Server code is mentioned below.
+// ...
+$p1 = $p2 = [];
 $images = $_FILES['images'];
-
-
-// a flag to see if everything is ok
-$success = null;
-
-// file paths to store
-$paths= [];
-
-// get file names
 $filenames = $images['name'];
-
-// loop and process files
-for($i=0; $i < count($filenames); $i++){
+if (empty($filenames)) {
+    echo '{}';
+    return;
+}
+for ($i = 0; $i < count($filenames); $i++) {
+    $j = $i + 1;
+    $key = '<code to parse your image key>';
+    $url = '<your server action to delete the file>';
     $ext = explode('.', basename($filenames[$i]));
+
     $target = "img" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
     if(move_uploaded_file($images['tmp_name'][$i], $target)) {
+        $newimage = explode('/',$target);
+        //print_r($newimage);
         $success = true;
         $paths[] = $target;
     } else {
         $success = false;
         break;
     }
+    
+    $p1[$i] = "<img src='".$target."' data-id='$i' class='file-preview-image'>";
+    $p2[$i] = ['caption' => '', 'width' => '120px', 'url' => 'delete.php', 'key' => $target];
 }
-
-// check and process based on successful status 
-if ($success === true) {
-    // call the function to save all data to database
-    // code for the following function `save_data` is not 
-    // mentioned in this example
-    //save_data($userid, $username, $paths);
-
-    // store a successful response (default at least an empty array). You
-    // could return any additional response info you need to the plugin for
-    // advanced implementations.
-    $output = [];
-    // for example you can get the list of files uploaded this way
-     $output = ['uploaded' => $paths];
-} elseif ($success === false) {
-    $output = ['error'=>'Error while uploading images. Contact the system administrator'];
-    // delete any uploaded files
-    foreach ($paths as $file) {
-        unlink($file);
-    }
-} else {
-    $output = ['error'=>'No files were processed.'];
-}
-
-// return a json encoded response for plugin to process successfully
-echo json_encode($output);
-
+echo json_encode([
+    'initialPreview' => $p1, 
+    'initialPreviewConfig' => $p2,   
+    'append' => true // whether to append these configurations to initialPreview.
+                     // if set to false it will overwrite initial preview
+                     // if set to true it will append to initial preview
+                     // if this propery not set or passed, it will default to true
+ ]);
 ?>
