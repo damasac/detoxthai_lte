@@ -29,7 +29,18 @@
     .form-control.fix2 {
           width: 40px !important;
     }
+    @media (min-width:765px) {
+         input[type=radio] {
+            margin-left : -22px !important;
+            position: static !important;
+            border: 0px;
+            width: 35px;
+            height: 35px;
+           }
+    }
     input[type=radio] {
+    margin-left : 0px !important;
+    position: static !important;
     border: 0px;
     width: 35px;
     height: 35px;

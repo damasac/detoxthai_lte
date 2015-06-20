@@ -1,4 +1,4 @@
-﻿<div class="table-responsive">
+﻿
 		<table class="table table-hover" style="border: 1.5px solid green;">
 			<tr>
 				<td class="p3tableheader" style="background-color:green;color:white;border:1.5px solid green;">
@@ -27,10 +27,8 @@
 					    <label>ปี</label>
 		  			</div>
 		  			</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
+	
+	
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a3b1">3. เพศ</label>
@@ -48,8 +46,7 @@
 					  	</label>
 					</div>
 		  			</form>
-				</td>
-			</tr>
+		
 			<script>
 			$(document).ready(function(){
 
@@ -88,8 +85,7 @@
 
 			});
 		  	</script>
-			<tr>
-				<td>
+			
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a4b1">4. ภูมิลำเนาเดิมหรือบ้านเกิดของท่านอยู่ที่ใด จังหวัด</label>
@@ -116,15 +112,12 @@
 		  			<div class="form-group">
 					    <label for="p1a4b2">อําเภอ</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a4b2" placeholder="อําเภอ"> -->
-		  				<select style="width: 150px;" id="p1a4b2" onchange="AutoSave('p1a4b2',$('#form_id').val())" class="form-control">
+		  				<select style="width: auto;" id="p1a4b2" onchange="AutoSave('p1a4b2',$('#form_id').val())" class="form-control">
 						    <option value="">เลือกอําเภอ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 						</select>
 		  			</div>
 		  			</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
+			
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a5">5. วุฒิการศึกษาสูงสุดที่ท่านได้รับในปัจจุบัน</label>
@@ -149,10 +142,7 @@
 						</select>
 		  			</div>
 		  			</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
+			
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a6">6. อาชีพหลักของท่านในปัจจุบัน</label>
@@ -177,10 +167,7 @@
 						</select>
 		  			</div>
 		  			</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
+		
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a7b1">7. ท่านเริ่มล้างพิษตับครั้งแรกเมื่อเดือน/ปี</label>
@@ -198,10 +185,7 @@
 					    <input type="text" class="form-control" id="p1a7b2" placeholder="สถานที่" onblur="AutoSave('p1a7b2',$('#form_id').val())" value="<?php echo $dataform["p1a7b2"]; ?>">
 		  			</div>
 		  			</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
+		
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a8b1">8. การล้างพิษตับครั้งนี้นับเป็นครั้งที่</label>
@@ -212,21 +196,13 @@
 					    <input type="text" class="form-control" id="p1a8b2" placeholder="แก้วที่" onblur="AutoSave('p1a8b2',$('#form_id').val())" value="<?php echo $dataform["p1a8b2"]; ?>">
 		  			</div>
 		  			</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
 					
 					<div class="form-group">
 					    <label for="p1a9">9. โปรดระบุเหตุผลหลัก ที่ท่านมารับการล้างพิษตับครั้งนี้</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a9" placeholder="เหตุผล"> -->
 					    <textarea class='form-control' rows='3' id="p1a9" onblur="AutoSave('p1a9',$('#form_id').val())" ><?php echo $dataform["p1a9"]; ?></textarea>
 		  			</div>
-		  		
-				</td>
-			</tr>
-			<tr>
-				<td>
+		
 					<form class="form-inline">
 					<div class="form-group" id="labelHide1">
 					    <label>10. โปรดระบุอาการหลักๆ หรือโรคที่ได้รับการวินิจฉัยจากแพทย์</label>
@@ -324,10 +300,7 @@
 		  			?>
 
 		  			</table>
-				</td>
-			</tr>
-			<tr>
-		  		<td>
+			
 		  			<div class="form-group">
 					    <label>11. ในวันแรกของการล้างพิษตับครั้งนี้ ท่านอยู่ในสถานะเช่นใด</label>
 		  			</div>
@@ -366,10 +339,7 @@
 					    	<input type="text" class="form-control fix" id="p1a11b1c4" onblur="AutoSave('p1a11b1c4',$('#form_id').val())" value="<?php echo $dataform["p1a11b1c4"]; ?>">
 		  				</div>
 					</form>
-		  		</td>
-		  	</tr>
-		  	<tr>
-		  		<td>
+		  		
 		  			<div class="form-group">
 					    <label>12. โปรดบันทึกข้อมูลเกี่ยวกับรูปร่างของท่านในปัจจุบัน</label>
 		  			</div>
@@ -420,10 +390,9 @@
 		  					</td>
 		  				</tr>
 		  			</table>
-		  		</td>
-		  	</tr>
-		</table>
-		</div>
+		</td>
+		</tr>
+</table>  	
 
 <script>
 	function getAge(dateString) 
