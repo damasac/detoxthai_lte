@@ -26,14 +26,23 @@ if('' == $all){
 <?php eb();?>
 
 <?php
-function getDateThai($strDate)
-{
-  $strYear = date("Y", strtotime($strDate))+543;
-  $strMonth= date("n", strtotime($strDate));
-  $strDay= date("j", strtotime($strDate));
-  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-  $strMonthThai=$strMonthCut[$strMonth];
-  return "$strDay $strMonthThai $strYear";
+function System_ShowDate($myDate) {
+  $myDateArray=explode("-",$myDate);
+  switch($myDateArray[1]) {
+    case "01" : $myMonth = "มกราคม";  break;
+    case "02" : $myMonth = "กุมภาพันธ์";  break;
+    case "03" : $myMonth = "มีนาคม"; break;
+    case "04" : $myMonth = "เมษายน"; break;
+    case "05" : $myMonth = "พฤษภาคม";   break;
+    case "06" : $myMonth = "มิถุนายน";  break;
+    case "07" : $myMonth = "กรกฎาคม";   break;
+    case "08" : $myMonth = "สิงหาคม";  break;
+    case "09" : $myMonth = "กันยายน";  break;
+    case "10" : $myMonth = "ตุลาคม";  break;
+    case "11" : $myMonth = "พฤศจิกายน";   break;
+    case "12" : $myMonth = "ธันวาคม";  break;
+  }
+  return $myDateArray['0']." ".$myMonth." ".$myDateArray['2'];
 }
 
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
@@ -157,7 +166,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
 
               echo "<tr>
               <td>".$count."</td>
-              <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
+              <td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
               <td>".$row['schedule_name']."</td>
               <td>".$row['user_qty']." คน</td>
               <td>".number_format($row['price_per_person'])." บาท</td>
@@ -178,7 +187,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
                   <p class='text-right'>
                     ".$btn_join."
                   </p>
-                  <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
+                  <p><strong>วันที่ :</strong> ".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</p>
                   <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
                   <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
                   <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>

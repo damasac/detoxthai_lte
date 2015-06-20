@@ -55,13 +55,13 @@ $row = $result->fetch_assoc();
         <div class="form-group">
           <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
           <div class="col-sm-10">
-            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_date']); echo date_format($date, 'm/d/Y'); ?>">
+            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_date']); echo date_format($date, 'd/m/Y'); ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
           <div class="col-sm-10">
-            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_end_date']); echo date_format($date, 'm/d/Y'); ?>">
+            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_end_date']); echo date_format($date, 'd/m/Y'); ?>">
           </div>
         </div>
 
@@ -147,8 +147,8 @@ $row = $result->fetch_assoc();
       return CKEDITOR.instances[element_id].getData();
     }
 
-    $("#scheduledate").datepicker();
-    $("#scheduledateend").datepicker();
+    $("#scheduledate").datepicker({ format: 'dd/mm/yyyy', });
+    $("#scheduledateend").datepicker({ format: 'dd/mm/yyyy', });
 
     $("#btnedit").click(function(){
 

@@ -4,6 +4,9 @@
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="../_plugins/datepicker/datepicker3.css">
+<style>
+  .datepicker{z-index:1151 !important;}
+</style>
 <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="../ckfinder/ckfinder.js"></script>
 <script type="text/javascript">
@@ -13,20 +16,29 @@
 <?php eb();?>
 
 <?php sb('notifications');?>
-  <?php include_once '../notifications.php'; ?>
+<?php include_once '../notifications.php'; ?>
 <?php eb();?>
 
 <?php include_once "../_connection/db_base.php"; ?>
 
 <?php
-function getDateThai($strDate)
-{
-  $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("n",strtotime($strDate));
-  $strDay= date("j",strtotime($strDate));
-  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-  $strMonthThai=$strMonthCut[$strMonth];
-  return "$strDay $strMonthThai $strYear";
+function System_ShowDate($myDate) {
+  $myDateArray=explode("-",$myDate);
+  switch($myDateArray[1]) {
+    case "01" : $myMonth = "มกราคม";  break;
+    case "02" : $myMonth = "กุมภาพันธ์";  break;
+    case "03" : $myMonth = "มีนาคม"; break;
+    case "04" : $myMonth = "เมษายน"; break;
+    case "05" : $myMonth = "พฤษภาคม";   break;
+    case "06" : $myMonth = "มิถุนายน";  break;
+    case "07" : $myMonth = "กรกฎาคม";   break;
+    case "08" : $myMonth = "สิงหาคม";  break;
+    case "09" : $myMonth = "กันยายน";  break;
+    case "10" : $myMonth = "ตุลาคม";  break;
+    case "11" : $myMonth = "พฤศจิกายน";   break;
+    case "12" : $myMonth = "ธันวาคม";  break;
+  }
+  return $myDateArray['0']." ".$myMonth." ".$myDateArray['2'];
 }
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
@@ -35,9 +47,9 @@ isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 $check_point = 0;
 
 $result = $mysqli->query("SELECT COUNT(*) check_secu
-    FROM site_manage_user
-    WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
-    AND site_id = '$site_id'");
+  FROM site_manage_user
+  WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+  AND site_id = '$site_id'");
 $row = $result->fetch_assoc();
 
 if (0 == $row['check_secu']) {
@@ -45,9 +57,9 @@ if (0 == $row['check_secu']) {
 }
 
 $result = $mysqli->query("SELECT COUNT(*) check_secu
-    FROM site_detail
-    WHERE create_user = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
-    AND id = '$site_id'");
+  FROM site_detail
+  WHERE create_user = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
+  AND id = '$site_id'");
 $row = $result->fetch_assoc();
 
 if (0 == $row['check_secu'] && $check_point) {
@@ -81,7 +93,7 @@ if (0 == $row['check_secu'] && $check_point) {
     </div>
     <div class="box-body">
       <p class="text-left col-xs-2" style="margin-left: -15px;">
-        <button class="btn btn-block btn-primary btn-flat" data-toggle="modal" data-target="#myModal">เพิ่มหลักสูตรล้างพิษ</button>
+        <button class="btn btn-block btn-primary btn-flat" onclick="show_model ();">เพิ่มหลักสูตรล้างพิษ</button>
       </p>
       <table class="table table-bordered">
         <tr class="active">
@@ -119,7 +131,7 @@ if (0 == $row['check_secu'] && $check_point) {
           while($row = $result->fetch_assoc()) {
             echo "<tr>
             <td>".$count."</td>
-            <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
+            <td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
             <td>".$row['schedule_name']."</td>
             <td>".$row['user_qty']." คน</td>
             <td>".number_format($row['price_per_person'])." บาท</td>
@@ -137,7 +149,7 @@ if (0 == $row['check_secu'] && $check_point) {
               </div>
               <div class='modal-body'>
 
-                <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
+                <p><strong>วันที่ :</strong> ".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</p>
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
                 <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
                 <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
@@ -180,13 +192,13 @@ if (0 == $row['check_secu'] && $check_point) {
             <div class="form-group">
               <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
               <div class="col-sm-10">
-                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
+                <input type="text" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="">
               </div>
             </div>
             <div class="form-group">
               <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
               <div class="col-sm-10">
-                <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php echo date("d/m/Y"); ?>">
+                <input type="text" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="">
               </div>
             </div>
 
@@ -254,32 +266,40 @@ if (0 == $row['check_secu'] && $check_point) {
 
 
 <?php sb('js_and_css_footer');?>
-<script type="text/javascript" src="../_plugins/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 <script>
-    CKEDITOR.replace( 'editor1', {
-      width: '100%',
-      height: 500
-    } );
+  CKEDITOR.replace( 'editor1', {
+    width: '100%',
+    height: 500
+  } );
 
-    CKEDITOR.replace( 'editor2', {
-      width: '100%',
-      height: 500
-    } );
+  CKEDITOR.replace( 'editor2', {
+    width: '100%',
+    height: 500
+  } );
 
-    CKEDITOR.replace( 'editor3', {
-      width: '100%',
-      height: 500
-    } );
+  CKEDITOR.replace( 'editor3', {
+    width: '100%',
+    height: 500
+  } );
 </script>
 <script>
+  function show_model () {
+    $('#myModal').on('shown.bs.modal', function () {
+      $("#scheduledate").datepicker({ format: 'dd/mm/yyyy', });
+      $("#scheduledateend").datepicker({ format: 'dd/mm/yyyy', });
+    });
+
+    $('#myModal').modal("show");
+  }
   $(document).ready(function(){
 
     jQuery.fn.CKEditorValFor = function( element_id ){
       return CKEDITOR.instances[element_id].getData();
     }
 
-    $("#scheduledate").datepicker({ altFormat: "dd-mm-yyyy" });
-    $("#scheduledateend").datepicker({ altFormat: "dd-mm-yyyy" });
+    $("#scheduledate").datepicker({ format: 'dd/mm/yyyy', });
+    $("#scheduledateend").datepicker({ format: 'dd/mm/yyyy', });
 
     $("#btadd").click(function(){
 
