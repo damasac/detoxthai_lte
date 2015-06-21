@@ -3,7 +3,7 @@
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link rel="stylesheet" href="../_plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="css/datepicker.css">
 <style>
   .datepicker{z-index:1151 !important;}
 </style>
@@ -13,6 +13,7 @@
   var editor = CKEDITOR;
   CKFinder.setupCKEditor(editor, '../ckfinder/');
 </script>
+
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -40,6 +41,7 @@ function System_ShowDate($myDate) {
   }
   return $myDateArray['0']." ".$myMonth." ".$myDateArray['2'];
 }
+
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 
@@ -192,13 +194,13 @@ if (0 == $row['check_secu'] && $check_point) {
             <div class="form-group">
               <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="">
+                <input type="text" class="form-control" id="scheduledate" data-provide="datepicker" data-date-language="th-th" placeholder="วัน/เดือน/ปี" value="">
               </div>
             </div>
             <div class="form-group">
               <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="">
+                <input type="text" class="form-control" id="scheduledateend" data-provide="datepicker" data-date-language="th-th" placeholder="วัน/เดือน/ปี" value="">
               </div>
             </div>
 
@@ -266,7 +268,9 @@ if (0 == $row['check_secu'] && $check_point) {
 
 
 <?php sb('js_and_css_footer');?>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker-thai.js"></script>
+<script src="js/locales/bootstrap-datepicker.th.js"></script>
 <script>
   CKEDITOR.replace( 'editor1', {
     width: '100%',
@@ -286,8 +290,9 @@ if (0 == $row['check_secu'] && $check_point) {
 <script>
   function show_model () {
     $('#myModal').on('shown.bs.modal', function () {
-      $("#scheduledate").datepicker({ format: 'dd/mm/yyyy', });
-      $("#scheduledateend").datepicker({ format: 'dd/mm/yyyy', });
+      $('.datepicker').datepicker();
+      //$("#scheduledate").datepicker({ dateFormat: 'dd/mm/yyyy', });
+      //$("#scheduledateend").datepicker({ dateFormat: 'dd/mm/yyyy', });
     });
 
     $('#myModal').modal("show");
@@ -298,8 +303,9 @@ if (0 == $row['check_secu'] && $check_point) {
       return CKEDITOR.instances[element_id].getData();
     }
 
-    $("#scheduledate").datepicker({ format: 'dd/mm/yyyy', });
-    $("#scheduledateend").datepicker({ format: 'dd/mm/yyyy', });
+    $('.datepicker').datepicker();
+    //$("#scheduledate").datepicker({ dateFormat: 'dd/mm/yyyy', });
+    //$("#scheduledateend").datepicker({ dateFormat: 'dd/mm/yyyy', });
 
     $("#btadd").click(function(){
 

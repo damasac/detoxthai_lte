@@ -3,7 +3,7 @@
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link rel="stylesheet" href="../_plugins/datepicker/datepicker3.css">
+<link rel="stylesheet" href="css/datepicker.css">
 <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="../ckfinder/ckfinder.js"></script>
 <script type="text/javascript">
@@ -55,13 +55,13 @@ $row = $result->fetch_assoc();
         <div class="form-group">
           <label for="scheduledate" class="col-sm-2 control-label">วันที่เริ่ม</label>
           <div class="col-sm-10">
-            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_date']); echo date_format($date, 'd/m/Y'); ?>">
+            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledate" data-provide="datepicker" data-date-language="th-th" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_date']); echo date_format($date, 'd/m/Y'); ?>">
           </div>
         </div>
         <div class="form-group">
           <label for="scheduledateend" class="col-sm-2 control-label">วันที่สิ้นสุด</label>
           <div class="col-sm-10">
-            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_end_date']); echo date_format($date, 'd/m/Y'); ?>">
+            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" id="scheduledateend" data-provide="datepicker" data-date-language="th-th" placeholder="วัน/เดือน/ปี" value="<?php $date = date_create($row['schedule_end_date']); echo date_format($date, 'd/m/Y'); ?>">
           </div>
         </div>
 
@@ -123,7 +123,9 @@ $row = $result->fetch_assoc();
 
 
 <?php sb('js_and_css_footer');?>
-<script type="text/javascript" src="../_plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker.js"></script>
+<script src="js/bootstrap-datepicker-thai.js"></script>
+<script src="js/locales/bootstrap-datepicker.th.js"></script>
 <script>
     CKEDITOR.replace( 'editor1', {
       width: '100%',
@@ -147,8 +149,9 @@ $row = $result->fetch_assoc();
       return CKEDITOR.instances[element_id].getData();
     }
 
-    $("#scheduledate").datepicker({ format: 'dd/mm/yyyy', });
-    $("#scheduledateend").datepicker({ format: 'dd/mm/yyyy', });
+    //$("#scheduledate").datepicker({ dateFormat: 'dd/mm/yyyy', });
+    //$("#scheduledateend").datepicker({ dateFormat: 'dd/mm/yyyy', });
+    $('.datepicker').datepicker();
 
     $("#btnedit").click(function(){
 
