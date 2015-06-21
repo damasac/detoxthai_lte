@@ -7,11 +7,11 @@
         margin-top: -15px;
     }
     .tooltip-inner{
-    
+		margin-left: 15px;
     }
-    .tooltip-arrow{
-        
-    }
+	.tooltip.top .tooltip-arrow {
+		margin-left: 3px;
+	}
 </style>
 <div class="row">
   <div class="col-md-12 col-xs-12">
