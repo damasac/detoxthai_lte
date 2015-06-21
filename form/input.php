@@ -182,7 +182,10 @@
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+<script src="datepicker/bootstrap-datepicker.js"></script>
+<script src="datepicker/bootstrap-datepicker-thai.js"></script>
+<script src="datepicker/bootstrap-datepicker.th.js"></script>
 
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>

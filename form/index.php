@@ -95,11 +95,9 @@ if($dataform['status']+0) { ?>
                     <div class="row">
                         <div class="col-lg-6">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
-							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDatex">
+                            <input style="width: 100px;" type="text" data-provide="datepicker" data-date-language="th-th" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
-							<input style="width: 100px;" type="hidden" class="form-control" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDatex">
+                            <input style="width: 100px;" type="text" class="form-control" data-date-language="th-th" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
                         </div>
                     </div>
                     <hr />
@@ -193,7 +191,10 @@ if($dataform['status']+0) { ?>
 <?php sb('js_and_css_footer');?>
 <script type="text/javascript" src="script/fnc_javascript.js"></script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+<script src="datepicker/bootstrap-datepicker.js"></script>
+<script src="datepicker/bootstrap-datepicker-thai.js"></script>
+<script src="datepicker/bootstrap-datepicker.th.js"></script>
 
 <script>
     $(function(){
@@ -305,18 +306,13 @@ if($dataform['status']+0) { ?>
       }
       //hide
 	  datepicker_hide('startDate');
-	  datepicker_hide('EndDate');
+	  datepicker_hide('endDate');
 	  function datepicker_hide(datePick){
 		  $(function(){
 			  $('#'+datePick).on('changeDate', function(ev){
 				$(this).datepicker('hide');
 				
 			});
-			/*
-			$('#'+datePick).click(function(){
-			  $('#'+datePick).val($('#'+datePick+'x').val());
-			})
-			*/
 		});
 	  }
    

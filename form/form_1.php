@@ -17,7 +17,7 @@
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a2b1">2. ท่านเกิด</label>
-					    <input type="text" class="form-control fix" id="p1a2b1" data-date-format='dd/m/yyyy'  placeholder="วัน/เดือน/ปี" onblur="AutoSave('p1a2b1',$('#form_id').val())" value="<?php echo $dataform["p1a2b1"]; ?>">
+					    <input type="text" class="form-control fix" id="p1a2b1" data-date-format='dd/mm/yyyy' data-provide="datepicker" data-date-language="th-th"  placeholder="วัน/เดือน/ปี" onblur="AutoSave('p1a2b1',$('#form_id').val())" value="<?php echo $dataform["p1a2b1"]; ?>">
 		  			</div>
 		  			<div class="form-group">
 					    <label for="p1a2b2">อายุ</label>
@@ -171,7 +171,7 @@
 					<form class="form-inline">
 					<div class="form-group">
 					    <label for="p1a7b1">7. ท่านเริ่มล้างพิษตับครั้งแรกเมื่อเดือน/ปี</label>
-					    <input type="text" class="form-control" id="p1a7b1" data-date-format="m/yyyy" data-date-minviewmode="months" data-date-viewmode="years" placeholder="เดือน/ปี" onblur="AutoSave('p1a7b1',$('#form_id').val())" value="<?php echo $dataform["p1a7b1"]; ?>">
+					    <input type="text" class="form-control" id="p1a7b1" data-provide="datepicker" data-date-language="th-th" data-date-format="mm/yyyy" data-date-minviewmode="months" data-date-viewmode="years" placeholder="เดือน/ปี" onblur="AutoSave('p1a7b1',$('#form_id').val())" value="<?php echo $dataform["p1a7b1"]; ?>">
 		  			</div>
 		  			<!-- <div class="form-group">
 					    <label for="p1a7b2">ปี พ.ศ.</label>
@@ -277,7 +277,7 @@
 		  						<textarea class='form-control' rows='3' id='p1a10b1c".$i."' onblur=AutoSave('p1a10b1c{$i}',$('#form_id').val())>".$dataform["p1a10b1c{$i}"]."</textarea>
 		  					</td>
 		  					<td>
-		  					<input type='text' class='form-control' data-date-format='m/yyyy' data-date-minviewmode='months' data-date-viewmode='years' id='p1a10b2c".$i."' value='".$dataform["p1a10b2c{$i}"]."' placeholder='เดือน/ปี' onblur=AutoSave('p1a10b1c{$i}',$('#form_id').val())>
+		  					<input type='text' class='form-control' data-date-format='mm/yyyy' data-provide='datepicker' data-date-language='th-th' data-date-minviewmode='months' data-date-viewmode='years' id='p1a10b2c".$i."' value='".$dataform["p1a10b2c{$i}"]."' placeholder='เดือน/ปี' onblur=AutoSave('p1a10b1c{$i}',$('#form_id').val())>
 		  					</td>
 		  					<td>
 		  						<form class='form-inline'>
@@ -399,7 +399,7 @@
 	{
 	    var today = new Date();
 	    var birthDate = new Date(dateString);
-	    var age = (today.getFullYear()+543) - birthDate.getFullYear();
+	    var age = (today.getFullYear()+0) - birthDate.getFullYear();
 	    var m = today.getMonth() - birthDate.getMonth();
 	    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
 	    {
