@@ -169,7 +169,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
               <td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
               <td>".$row['schedule_name']."</td>
               <td>".$row['user_qty']." คน</td>
-              <td>".number_format($row['price_per_person'])." บาท</td>
+              <td>".$row['price_per_person']."</td>
               <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
               <td>".$btn_edit."</td>
             </tr>";
@@ -190,7 +190,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
                   <p><strong>วันที่ :</strong> ".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</p>
                   <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
                   <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
-                  <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
+                  <p><strong>ราคา/คน :</strong> ".$row['price_per_person']."</p>
                   <p><strong>รายละเอียด :<hr/></strong></p>
                     ".htmlspecialchars_decode($row['schedule_desc'])."
                     <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong></p>

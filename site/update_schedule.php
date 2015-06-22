@@ -14,11 +14,11 @@
 
     $result = $mysqli->query("UPDATE site_schedule
                 SET schedule_name = '$schedulename',
-                    schedule_date = STR_TO_DATE('$scheduledate', '%m/%d/%Y'),
+                    schedule_date = STR_TO_DATE('$scheduledate', '%d/%m/%Y'),
                     schedule_desc = '$scheduledesc',
-                    schedule_end_date = STR_TO_DATE('$scheduledateend', '%m/%d/%Y'),
+                    schedule_end_date = STR_TO_DATE('$scheduledateend', '%d/%m/%Y'),
                     user_qty = $user_qty,
-                    price_per_person = $price,
+                    price_per_person = '$price',
                     schedule_payment = '$payment',
                     schedule_after_payment = '$afterpayment'
                 WHERE id = '$id'");

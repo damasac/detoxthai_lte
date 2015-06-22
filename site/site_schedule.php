@@ -136,7 +136,7 @@ if (0 == $row['check_secu'] && $check_point) {
             <td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
             <td>".$row['schedule_name']."</td>
             <td>".$row['user_qty']." คน</td>
-            <td>".number_format($row['price_per_person'])." บาท</td>
+            <td>".$row['price_per_person']."</td>
             <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
             <td><a type='button' href='list_join.php?schedule_id=".$row['id']."&site_id=".$site_id."' class='btn btn-primary btn-flat'>ดูสมาชิกที่เข้าร่วม</i></a></td>
             <td><a href='edit_schedule.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."&site_id=".$site_id."' class='btn btn-danger btn-flat'>ลบ</a></td>
@@ -154,7 +154,7 @@ if (0 == $row['check_secu'] && $check_point) {
                 <p><strong>วันที่ :</strong> ".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</p>
                 <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
                 <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
-                <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
+                <p><strong>ราคา/คน :</strong> ".$row['price_per_person']."</p>
                 <p><strong>รายละเอียด :<hr/></strong></p>
                 ".htmlspecialchars_decode($row['schedule_desc'])."
                 <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong></p>
@@ -217,7 +217,7 @@ if (0 == $row['check_secu'] && $check_point) {
               <div class="col-sm-10">
                 <div class="input-group">
                   <div class="input-group-addon">฿</div>
-                  <input type="number" class="form-control" id="price" placeholder="ราคา">
+                  <input type="text" class="form-control" id="price" placeholder="ราคา">
                   <div class="input-group-addon">.00</div>
                 </div>
               </div>

@@ -78,7 +78,7 @@ $row = $result->fetch_assoc();
           <div class="col-sm-10">
             <div class="input-group">
               <div class="input-group-addon">฿</div>
-              <input type="number" class="form-control" id="price" placeholder="ราคา" value="<?php echo $row['price_per_person']; ?>">
+              <input type="text" class="form-control" id="price" placeholder="ราคา" value="<?php echo $row['price_per_person']; ?>">
               <div class="input-group-addon">.00</div>
             </div>
           </div>
