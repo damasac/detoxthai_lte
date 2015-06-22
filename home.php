@@ -114,15 +114,15 @@ $site_id_desc = $result_name_site->fetch_assoc();
                     }
                     while($submenu = $getSubMenu->fetch_assoc()) {
                     //foreach($getSubMenu as $submenu) {
-                      $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='index.php?menu=".trim($submenu['menu_name'])."&site_id=".$site_id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
+                      $html_sub_menu .= "<li role='presentation'><a role='menuitem' tabindex='-1' href='home.php?menu=".trim($submenu['menu_name'])."&site_id=".$site_id."&sub_menu=1'>".$submenu['menu_name']."</a></li>";
                       array_push($arrMenu, $submenu['menu_name']);
                     }
                   }
                   if ($menu_sub_show == 0) {
                     if (strcmp($menu, $row['menu_name']) === 0) {
-                      echo "<li role='presentation' class='active'><a href='index.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
+                      echo "<li role='presentation' class='active'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
                     } else {
-                      echo "<li role='presentation'><a href='index.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
+                      echo "<li role='presentation'><a href='home.php?menu=".trim($row['menu_name'])."&site_id=".$site_id."'>".trim($row['menu_name'])."</a></li>";
                     }
                   } else {
                         //print_r($arrMenu);
@@ -169,7 +169,7 @@ $site_id_desc = $result_name_site->fetch_assoc();
   if (0 < $check_secu['check_secu']) {
   ?>
   <div class="col-md-12 text-right">
-      <a href="site/index.php?menu=<?php echo $menu ?>&id=1" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
+      <a href="site/home.php?menu=<?php echo $menu ?>&id=1" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
   </div>
   <?php
   }
