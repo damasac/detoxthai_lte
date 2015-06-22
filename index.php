@@ -29,7 +29,7 @@ if ('' == $menu) {
     if (0 == $count) {
         $menu_exit = 0;
     } else {
-        header("Location: home.php?menu=".$row['menu_name']."&site_id=".$site_id);
+        header("Location: index.php?menu=".$row['menu_name']."&site_id=".$site_id);
     }
 } else {
     $menu_exit = 1;
