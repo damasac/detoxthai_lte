@@ -143,6 +143,7 @@
                             <label for="name" style="font-weight: bold;">โปรดกำหนดค่าคะแนนที่ตรงกับสภาวะสุขภาพของท่านมากที่สุด จากคะแนน 1 - 100</label><br><br><br>
                             
                             <div class="text-center">
+							<div class="pull-left"><b>แย่ที่สุด</b></div><div class="pull-right"><b>ดีที่สุด</b></div><br><br>
                               <input style="background: green;" class="from-control"
                                      id="p4a7" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
                                      data-slider-value="<?php if($dataform["p4a7"]!=""){echo $dataform["p4a7"];}else{echo "0";}?>"/></div>
