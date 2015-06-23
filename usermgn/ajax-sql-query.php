@@ -15,13 +15,13 @@
     $hcode = $_GET["hcode"];
     $date = date("Y-m-d H:i:s");
     if($task=="addUserNormal"){
-	$password = sha1(md5($_POST["password"]));
-	$sql1 = "SELECT * FROM `puser` WHERE username='".$_POST["tel"]."' ";
-	$query1 = $mysqli->query($sql1);
-	$num1 = $query1->num_rows;
-	$sql2 = "SELECT * FROM `puser` WHERE email='".$_POST["email"]."' ";
-	$query2 = $mysqli->query($sql2);
-	$num2 = $query2->num_rows;
+    	$password = sha1(md5($_POST["password"]));
+    	$sql1 = "SELECT * FROM `puser` WHERE username='".$_POST["tel"]."' ";
+    	$query1 = $mysqli->query($sql1);
+    	$num1 = $query1->num_rows;
+    	$sql2 = "SELECT * FROM `puser` WHERE email='".$_POST["email"]."' ";
+    	$query2 = $mysqli->query($sql2);
+    	$num2 = $query2->num_rows;
 
 	if($num2==1){
 	    echo "2";

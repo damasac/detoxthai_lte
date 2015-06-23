@@ -91,14 +91,13 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span><span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>dev_view.php">Dev View</a></li>
-                    <!-- li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html">Example</a></li -->
-                    <!-- li class="divider"></li -->
-                    <!-- li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation">Document</a></li -->
+                     <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html">Example</a></li 
+                     <!--< li class="divider"></li>-->
+                     <!--li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation">Document</a></li--> 
                     <!-- li class="divider"></li -->
                     <!-- li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sql.php">SQL</a></li -->
                   </ul>
                 </li>
-
               </ul>
 
             </div><!-- /.navbar-collapse -->
@@ -134,7 +133,6 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
 
                       <span id="divusername">
-
                         <?php
                           if($_SESSION[SESSIONPREFIX."puser_nickname"]!=""){
                             $name = $_SESSION[SESSIONPREFIX."puser_nickname"];
@@ -142,7 +140,6 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                             $name = $_SESSION[SESSIONPREFIX."puser_fname"]." ".$_SESSION[SESSIONPREFIX."puser_lname"];
                           }
                         ?>
-
                     <?php if(isset($_SESSION[SESSIONPREFIX."puser_fname"])) echo $name; else echo "Guest"; ?>
                     </span>
                     </a>
