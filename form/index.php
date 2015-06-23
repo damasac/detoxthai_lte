@@ -57,7 +57,8 @@ if($dataform['status']+0) { ?>
           <div class="box-header with-border">
             <h3 class="box-title"></h3>
             <div class="pull-right">
-                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
+                <a href="album.php" class="btn btn-success btn-lg"><li class="fa fa-picture-o"></li> อัลบั้มภาพ</a>
+                <a href="." class="btn btn-primary btn-lg"><li class="fa fa-list"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
             </div>
           </div>
@@ -88,41 +89,26 @@ if($dataform['status']+0) { ?>
                     บันทึกผลการล้างพิษตับของ &nbsp<code><?php echo $user_name?></code>
                 </h3>
                 
-                <hr>
-                
                         
-                <div class="form-inline alert alert-success">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label for="name" style="font-weight: bold;" class="control-label"><h4>ล้างพิษตับระหว่าง</h4></label>
-                            <input style="width: 100px;" type="text" data-provide="datepicker" data-date-language="th-th" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
-                            <label for="name" style="font-weight: bold;" class="control-label"><h4>ถึง</h4></label>
-                            <input style="width: 100px;" type="text" class="form-control" data-date-language="th-th" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
-                        </div>
-                    </div>
+<!--                <div class="form-inline alert alert-success">
+                    
                     <hr />
                     <div class="row">
                         <div class="col-lg-8 form-inline">
                             <div class="form-group">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>สถานที่ &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h4></label>
                             </div>
-                            <div class="form-group">
-                             <select style="width: 150px;" id="location" class="form-control">
-                                <option selected='selected' value=10000001>ที่บ้าน</option>
-                                <option value=10000002 >อื่นๆ</option>
-                            </select>
-                            </div>
+                            
                         </div>
                     </div>
                     <hr>
                     <div class="form-group">
                         <div class="col-sm-12" style="padding-left: 140px;">
-                            <button class=" btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
-                            <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
+                            
                         </div>
                     </div>
                 </div>
-
+-->
                 <hr>
                <h3>จำนวนการล้างพิษตับทั้งหมด <code id="numForm"><?php echo $query->num_rows; ?></code> ครั้ง</h3>
                 <hr>
@@ -159,6 +145,34 @@ if($dataform['status']+0) { ?>
                       
                     </tr> 
                     <?php $i++; }?>
+                    <tr style="background-color: #D4FFDE;">
+                      <td><?php echo $i;?></td>
+                      <td>
+                        <div class="form-group">
+                        <select style="width: 150px;" id="location" class="form-control">
+                           <option selected='selected' value=10000001>ที่บ้าน</option>
+                           <option value=10000002 >อื่นๆ</option>
+                       </select>
+                       </div>
+                      </td>
+                      <td>
+
+                          <form class="form-inline">
+                              <div class="form-group">
+                                <label for="startDate">วันเริ่ม</label>
+                                <input style="width: 100px;" type="text" data-provide="datepicker" data-date-language="th-th" class="form-control" style="cursor: pointer;" placeholder="วันที่เริ่ม" id="startDate">
+                              </div>
+                              <div class="form-group">
+                                <label for="endDate">วันสิ้นสุด</label>
+                                <input style="width: 100px;" type="text" class="form-control" data-date-language="th-th" style="cursor: pointer;" placeholder="วันที่สิ้นสุด" id="endDate">
+                              </div>
+                          </form>
+                      </td>
+                      <td><?php echo System_showDate(date('Y-m-d'));?></td>
+                      <td>
+                        <button class=" btn btn-warning btn-flat btn-lg" id="AddForm"><li class="fa fa-plus"></li> เริ่มบันทึกข้อมูล</button>
+                        <input type="hidden" id="user_id" value="<?php echo $user_id; ?>"></td>
+                    </tr>
                   </tbody>
                 </table>
                 </div>
@@ -229,9 +243,11 @@ if($dataform['status']+0) { ?>
       });
     $("#startDate").datepicker({
       format: 'dd/mm/yyyy',
+      viewMode: 'years',
       });
     $("#endDate").datepicker({
       format: 'dd/mm/yyyy',
+      viewMode: 'years',
       });
     $("#AddForm").click(function(){
         var startDate =$("#startDate").val();

@@ -15,7 +15,7 @@
                         <td>
                             <script>
                                 $(document).ready(function(){
-                                    $('#section5_1').show();
+                                    $('.section5_1').show();
                                 });
                             </script>
                                 <table class="table table-striped table-bordered table-hover" style="width:100%;">
@@ -41,7 +41,7 @@
                                         $classcss = "divhide";
                                     }
                                     ?>
-                                        <tr id='section5_<?php echo $i; ?>' class='<?php echo $classcss; ?>'>
+                                        <tr class='<?php echo $classcss; ?> section5_<?php echo $i; ?>'>
                                             <td class="text-center">แก้วที่ <?php echo $i;?></td>
                                             <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c1" cols="10"
@@ -63,6 +63,47 @@
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c5" cols="10"
                                                 onclick="add_tr('section5_<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c5";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c5"];?> </textarea></td>
+                                        </tr>
+                                        <script>
+                    
+                                            $(document).ready(function(){
+                                                    $('#section5_<?php echo $i; ?>').JSAjaxFileUploader({
+                                                        uploadUrl:'upload.php',
+                                                        inputText:'แนบรูปภาพ หรือ วิดีโอ',
+                                                        fileName:'photo',
+                                                        allowExt:'gif|jpg|jpeg|png|bmp|mp4',
+                                                        //autoSubmit:false,
+                                                        formData:{ref_form:'<?php echo $_GET['form_id']; ?>', ref_field:'p5a21g<?php echo $i; ?>', ref_user:'<?php echo $_SESSION['dtt_user_form']; ?>'},
+                                                        maxFileSize:5400900,
+                                                        zoomPreview:true,
+                                                        zoomWidth:260,
+                                                        zoomHeight:260,
+                                                        success: function(returndata){
+                                                            $("#section5_file<?php echo $i; ?>").prepend(returndata);
+                                                        }
+                                                    });
+                                            });
+                                            
+                                        </script>
+                                        <tr class='<?php echo $classcss; echo " section5_",$i; ?>'>
+                                            <td colspan="6"><div id="section5_<?php echo $i; ?>"></div></td>
+                                        </tr>
+                                        <tr class='<?php echo $classcss; echo " section5_",$i; ?>'>
+                                            <td colspan="6"  id="section5_file<?php echo $i; ?>">
+                                            <?php
+                                            $sql = "SELECT `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p5a21g".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+                                            //echo $sql;
+                                            $result = $conn->query($sql);
+                                            while($dbarr = $result->fetch_assoc()){
+                                                if($dbarr['file_type'] =='mp4'){
+                                                echo '<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [ลบ]';
+                                                }
+                                                else {
+                                                echo '<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'"><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [ลบ]';
+                                                }
+                                            }
+                                            ?>
+                                            </td>
                                         </tr>
                                     <?php }?>
                                     </tbody>

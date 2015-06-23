@@ -14,14 +14,68 @@
 			</tr>
 			<tr>
 				<td>
+<?php if($form_id == $resx['min']){ ?>
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a2b1">2. ท่านเกิด</label>
-					    <input type="text" class="form-control fix" id="p1a2b1" data-date-format='dd/mm/yyyy' data-provide="datepicker" data-date-language="th-th"  placeholder="วัน/เดือน/ปี" onblur="AutoSave('p1a2b1',$('#form_id').val())" value="<?php echo $dataform["p1a2b1"]; ?>">
+					    <label for="p1a2b1"><?php $num_index=1; echo $num_index; ?>. ท่านเกิด</label>
+						<?php
+						$pieces = explode("/", $dataform["p1a2b1"]);
+						?>
+						<input type="hidden" class="form-control" id="p1a2b1" placeholder="วัน" value="<?php echo $dataform["p1a2b1"]; ?>">
+						
+						<input type="number" class="form-control" id="p1a2b1_day" placeholder="วัน" value="<?php echo $pieces["0"]; ?>">
+						<select class="form-control" name="month" id="p1a2b1_month" class="month" tabindex="4">
+							<option value="">เดือน</option>
+							
+							<option <?php if($pieces["1"] =='01') echo ' selected'; ?> value="01">มกราคม</option>
+							<option <?php if($pieces["1"] =='02') echo ' selected'; ?> value="02">กุมภาพันธ์</option>
+							<option <?php if($pieces["1"] =='03') echo ' selected'; ?> value="03">มีนาคม</option>
+							<option <?php if($pieces["1"] =='04') echo ' selected'; ?> value="04">เมษายน</option>
+							<option <?php if($pieces["1"] =='05') echo ' selected'; ?> value="05">พฤษภาคม</option>
+							<option <?php if($pieces["1"] =='06') echo ' selected'; ?> value="06">มิถุนายน</option>
+							<option <?php if($pieces["1"] =='07') echo ' selected'; ?> value="07">กรกฎาคม</option>
+							<option <?php if($pieces["1"] =='08') echo ' selected'; ?> value="08">สิงหาคม</option>
+							<option <?php if($pieces["1"] =='09') echo ' selected'; ?> value="09">กันยายน</option>
+							<option <?php if($pieces["1"] =='10') echo ' selected'; ?> value="10">ตุลาคม</option>
+							<option <?php if($pieces["1"] =='11') echo ' selected'; ?> value="11">พฤศจิกายน</option>
+							<option <?php if($pieces["1"] =='12') echo ' selected'; ?> value="12">ธันวาคม</option>
+						</select>
+					    <input type="number" class="form-control" id="p1a2b1_year" placeholder="ปี" value="<?php echo $pieces["2"]; ?>">
+						
+						<script>
+							$("#p1a2b1_day").blur(function(){
+								var p1a2b1_day = $('#p1a2b1_day').val();
+								var p1a2b1_month = $('#p1a2b1_month').val();
+								var p1a2b1_year = $('#p1a2b1_year').val();
+								var p1a2b1 = p1a2b1_day+'/'+p1a2b1_month+'/'+p1a2b1_year;
+								$('#p1a2b1').val(p1a2b1);
+								AutoSave('p1a2b1',$('#form_id').val())
+							});
+							$("#p1a2b1_month").change(function(){
+								var p1a2b1_day = $('#p1a2b1_day').val();
+								var p1a2b1_month = $('#p1a2b1_month').val();
+								var p1a2b1_year = $('#p1a2b1_year').val();
+								var p1a2b1 = p1a2b1_day+'/'+p1a2b1_month+'/'+p1a2b1_year;
+								$('#p1a2b1').val(p1a2b1);
+								AutoSave('p1a2b1',$('#form_id').val())
+							});
+							$("#p1a2b1_year").blur(function(){
+								var p1a2b1_day = $('#p1a2b1_day').val();
+								var p1a2b1_month = $('#p1a2b1_month').val();
+								var p1a2b1_year = $('#p1a2b1_year').val();
+								var p1a2b1 = p1a2b1_day+'/'+p1a2b1_month+'/'+p1a2b1_year;
+								$('#p1a2b1').val(p1a2b1);
+								AutoSave('p1a2b1',$('#form_id').val())
+								var p1a2b1 = p1a2b1_year+'-'+p1a2b1_month+'-'+p1a2b1_day;
+								$("#p1a2b2").val(getAge(p1a2b1));
+								AutoSave('p1a2b2',$('#form_id').val())
+							});
+						</script>
+						
 		  			</div>
 		  			<div class="form-group">
 					    <label for="p1a2b2">อายุ</label>
-					    <input type="text" class="form-control fix" id="p1a2b2" placeholder="อายุ" onblur="AutoSave('p1a2b2',$('#form_id').val())" onchange="AutoSave('p1a2b2',$('#form_id').val())" value="<?php echo $dataform["p1a2b2"]; ?>">
+					    <input type="number" class="form-control fix" id="p1a2b2" placeholder="อายุ" onblur="AutoSave('p1a2b2',$('#form_id').val())" onchange="AutoSave('p1a2b2',$('#form_id').val())" value="<?php echo $dataform["p1a2b2"]; ?>">
 		  			</div>
 		  			<div class="form-group">
 					    <label>ปี</label>
@@ -31,7 +85,7 @@
 	
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a3b1">3. เพศ</label>
+					    <label for="p1a3b1"><?php $num_index++; echo $num_index; ?>. เพศ</label>
 		  			</div>
 					<div class="radio">
 					  	<label>
@@ -88,7 +142,7 @@
 			
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a4b1">4. ภูมิลำเนาเดิมหรือบ้านเกิดของท่านอยู่ที่ใด จังหวัด</label>
+					    <label for="p1a4b1"><?php $num_index++; echo $num_index; ?>. ภูมิลำเนาเดิมหรือบ้านเกิดของท่านอยู่ที่ใด จังหวัด</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a4b1" placeholder="จังหวัด"> -->
 		  				<select id="p1a4b1" onchange="AutoSave('p1a4b1',$('#form_id').val())" class="form-control">
 						    <option value="">เลือกจังหวัด&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
@@ -112,7 +166,7 @@
 		  			<div class="form-group">
 					    <label for="p1a4b2">อําเภอ</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a4b2" placeholder="อําเภอ"> -->
-		  				<select style="width: auto;" id="p1a4b2" onchange="AutoSave('p1a4b2',$('#form_id').val())" class="form-control">
+		  				<select style="width: 220px;" id="p1a4b2" onchange="AutoSave('p1a4b2',$('#form_id').val())" class="form-control">
 						    <option value="">เลือกอําเภอ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
 						</select>
 		  			</div>
@@ -120,7 +174,7 @@
 			
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a5">5. วุฒิการศึกษาสูงสุดที่ท่านได้รับในปัจจุบัน</label>
+					    <label for="p1a5"><?php $num_index++; echo $num_index; ?>. วุฒิการศึกษาสูงสุดที่ท่านได้รับในปัจจุบัน</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a5" placeholder="วุฒิการศึกษา"> -->
 		  				<select id="p1a5" onchange="AutoSave('p1a5',$('#form_id').val())" class="form-control">
 						    <option value="">วุฒิการศึกษา&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
@@ -145,7 +199,7 @@
 			
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a6">6. อาชีพหลักของท่านในปัจจุบัน</label>
+					    <label for="p1a6"><?php $num_index++; echo $num_index; ?>. อาชีพหลักของท่านในปัจจุบัน</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a6" placeholder="อาชีพ"> -->
 		  				<select id="p1a6" onchange="AutoSave('p1a6',$('#form_id').val())" class="form-control">
 						    <option value="">อาชีพ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
@@ -170,9 +224,10 @@
 		
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a7b1">7. ท่านเริ่มล้างพิษตับครั้งแรกเมื่อเดือน/ปี</label>
+					    <label for="p1a7b1"><?php $num_index++; echo $num_index; ?>. ท่านเริ่มล้างพิษตับครั้งแรกเมื่อเดือน/ปี</label>
 					    <input type="text" class="form-control" id="p1a7b1" data-provide="datepicker" data-date-language="th-th" data-date-format="mm/yyyy" data-date-minviewmode="months" data-date-viewmode="years" placeholder="เดือน/ปี" onblur="AutoSave('p1a7b1',$('#form_id').val())" value="<?php echo $dataform["p1a7b1"]; ?>">
 		  			</div>
+	
 		  			<!-- <div class="form-group">
 					    <label for="p1a7b2">ปี พ.ศ.</label>
 					    <input type="text" class="form-control" id="p1a7b2" placeholder="พ.ศ.">
@@ -185,10 +240,11 @@
 					    <input type="text" class="form-control" id="p1a7b2" placeholder="สถานที่" onblur="AutoSave('p1a7b2',$('#form_id').val())" value="<?php echo $dataform["p1a7b2"]; ?>">
 		  			</div>
 		  			</form>
-		
+	<?php } else $num_index=0; ?>
+	
 					<form class="form-inline">
 					<div class="form-group">
-					    <label for="p1a8b1">8. การล้างพิษตับครั้งนี้นับเป็นครั้งที่</label>
+					    <label for="p1a8b1"><?php $num_index++; echo $num_index; ?>. การล้างพิษตับครั้งนี้นับเป็นครั้งที่</label>
 					    <input type="text" class="form-control" id="p1a8b1" placeholder="ครั้งที่" onblur="AutoSave('p1a8b1',$('#form_id').val())" value="<?php echo $dataform["p1a8b1"]; ?>">
 		  			</div>
 		  			<div class="form-group">
@@ -198,14 +254,14 @@
 		  			</form>
 					
 					<div class="form-group">
-					    <label for="p1a9">9. โปรดระบุเหตุผลหลัก ที่ท่านมารับการล้างพิษตับครั้งนี้</label>
+					    <label for="p1a9"><?php $num_index++; echo $num_index; ?>. โปรดระบุเหตุผลหลัก ที่ท่านมารับการล้างพิษตับครั้งนี้</label>
 					    <!-- <input type="text" class="form-control fix" id="p1a9" placeholder="เหตุผล"> -->
 					    <textarea class='form-control' rows='3' id="p1a9" onblur="AutoSave('p1a9',$('#form_id').val())" ><?php echo $dataform["p1a9"]; ?></textarea>
 		  			</div>
 		
 					<form class="form-inline">
 					<div class="form-group" id="labelHide1">
-					    <label>10. โปรดระบุอาการหลักๆ หรือโรคที่ได้รับการวินิจฉัยจากแพทย์</label>
+					    <label><?php $num_index++; echo $num_index; ?>. โปรดระบุอาการหลักๆ หรือโรคที่ได้รับการวินิจฉัยจากแพทย์</label>
 		  			</div>
 		  			<label class="checkbox-inline">
 					  	<input type="checkbox" id="p1a10" value="<?php echo $dataform["p1a10"]; ?>" <?php if($dataform["p1a10"]==1){echo "checked";} ?>> &nbsp;&nbsp;ไม่มีอาการป่วยใดๆ
@@ -302,7 +358,7 @@
 		  			</table>
 			
 		  			<div class="form-group">
-					    <label>11. ในวันแรกของการล้างพิษตับครั้งนี้ ท่านอยู่ในสถานะเช่นใด</label>
+					    <label><?php $num_index++; echo $num_index; ?>. ในวันแรกของการล้างพิษตับครั้งนี้ ท่านอยู่ในสถานะเช่นใด</label>
 		  			</div>
 		  			<form class="form-inline">
 						<div class="radio p3paddingleft">
@@ -341,7 +397,7 @@
 					</form>
 		  		
 		  			<div class="form-group">
-					    <label>12. โปรดบันทึกข้อมูลเกี่ยวกับรูปร่างของท่านในปัจจุบัน</label>
+					    <label><?php $num_index++; echo $num_index; ?>. โปรดบันทึกข้อมูลเกี่ยวกับรูปร่างของท่านในปัจจุบัน</label>
 		  			</div>
 		  			<table class="table table-bordered table-hover">
 		  				<thead>
@@ -399,7 +455,7 @@
 	{
 	    var today = new Date();
 	    var birthDate = new Date(dateString);
-	    var age = (today.getFullYear()+0) - birthDate.getFullYear();
+	    var age = (today.getFullYear()+543) - birthDate.getFullYear();
 	    var m = today.getMonth() - birthDate.getMonth();
 	    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
 	    {
@@ -409,14 +465,14 @@
 	}
 
 	$(document).ready(function(){
-		  $("#p1a2b1").datepicker().on('changeDate', function(ev) {
-  				$("#p1a2b2").val(getAge(ev.date));
-			});
+//		  $("#p1a2b1").datepicker().on('changeDate', function(ev) {
+//  				$("#p1a2b2").val(getAge(ev.date));
+//			});
 
-		  $("#p1a2b1").datepicker().on('hide', function(ev) {
-		  		AutoSave('p1a2b1',$('#form_id').val());
-		  		AutoSave('p1a2b2',$('#form_id').val());
-			});
+		//  $("#p1a2b1").datepicker().on('hide', function(ev) {
+		//  		AutoSave('p1a2b1',$('#form_id').val());
+		//  		AutoSave('p1a2b2',$('#form_id').val());
+		//	});
 
 		  $("#p1a7b1").datepicker().on('hide', function(ev) {
   				AutoSave('p1a7b1',$('#form_id').val());

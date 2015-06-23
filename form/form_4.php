@@ -150,13 +150,51 @@
                   </td>
                 </tr>
 
-                
+                <script>
+
+					$(document).ready(function(){
+							$('#section4_20').JSAjaxFileUploader({
+								uploadUrl:'upload.php',
+								inputText:'แนบรูปภาพ หรือ วิดีโอ',
+								fileName:'photo',
+								allowExt:'gif|jpg|jpeg|png|bmp|mp4',
+								//autoSubmit:false,
+								formData:{ref_form:'<?php echo $_GET['form_id']; ?>', ref_field:'p4a8', ref_user:'<?php echo $_SESSION['dtt_user_form']; ?>'},
+								maxFileSize:5400900,
+								zoomPreview:true,
+								zoomWidth:260,
+								zoomHeight:260,
+								success: function(returndata){
+									$("#section4_file_20").prepend(returndata);
+								}
+							});
+					});
+					
+				</script>
                 <tr>
                   <td>
                         <div class="from-group">
                             <label for="name" style="font-weight: bold;">20. โปรดเขียนบรรยายผลการตรวจสุขภาพของท่านครั้งล่าสุด (ตรวจอะไร ด้วยวิธีใด โดยใคร ที่ไหน และผลเป็นอย่างไร)</label>
                             <div><textarea id="p4a8" name="p4a8" class="form-control" rows="5" placeholder="พิมพ์รายละเอียด" onblur="AutoSave('p4a8',$('#form_id').val())" ><?php echo $dataform["p4a8"]?></textarea></div>
-                           
+							<div id="section4_20"></div>
+							<hr>
+							<div id="section4_file_20">
+						<?php
+							$sql = "SELECT `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p4a8' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+							//echo $sql;
+							$result = $conn->query($sql);
+							while($dbarr = $result->fetch_assoc()){
+								
+								if($dbarr['file_type'] =='mp4'){
+								echo '<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [ลบ]';
+								}
+								else {
+								echo '<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'"><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [ลบ]';
+								}
+								
+							}
+						?>
+							</div>
                         </div>
                   </td>
                 </tr>

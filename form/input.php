@@ -140,11 +140,13 @@
             ?>
             <div id="formsurvey">
             <!-------------------------- form 1-2-->
-            <?php include_once "form_1.php"; ?>
             <?php
                 $sqlx =  "SELECT MIN(b.id) as min FROM `tbl_surveyform` AS a INNER JOIN  tbl_surveyuser AS b ON a.ref_id_create=b.id WHERE b.user_id = '".$_SESSION['dtt_user_form']."';";
                 $queryx = $conn->query($sqlx);
                 $resx = $queryx->fetch_assoc();
+                
+                include_once "form_1.php";
+                
                 if($form_id == $resx['min'])
                     include_once "form_2.php";
                 else{ ?>
@@ -254,6 +256,8 @@ function datepicker_hide(datePick){
 }
 </script>
 
+<script type="text/javascript" src="ajax-upload/JQuery.JSAjaxFileUploader.js"></script>
+<link href="ajax-upload/JQuery.JSAjaxFileUploader.css" rel="stylesheet" type="text/css" />
 
 
 <?php eb();?>
