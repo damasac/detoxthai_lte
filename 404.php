@@ -1,4 +1,4 @@
-<?php require_once '_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';?>
+<?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
 
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 

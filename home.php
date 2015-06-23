@@ -169,7 +169,7 @@ $site_id_desc = $result_name_site->fetch_assoc();
   if (0 < $check_secu['check_secu']) {
   ?>
   <div class="col-md-12 text-right">
-      <a href="site/home.php?menu=<?php echo $menu ?>&id=1" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
+      <a href="site/index.php?menu=<?php echo $menu ?>&id=1" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
   </div>
   <?php
   }
