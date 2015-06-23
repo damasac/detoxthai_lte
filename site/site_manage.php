@@ -61,7 +61,7 @@
         </p>
         <?php
       } else if(isset($_SESSION[SESSIONPREFIX.'puser_id']) && !$check_data) {
-        echo "<div class='alert alert-danger alert-dismissable'>
+        echo "<div class='alert alert-danger alert-dismissable js-key'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
                     <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
                     ท่านสามารถบันทึกข้อมูลได้ที่เมนู <a href='../form'>บันทึกข้อมูล</a> <i class='icon fa fa-pencil'></i>
@@ -609,6 +609,11 @@ $manage_site_count = $result_count_manage->fetch_assoc();
 <?php echo $script ?>
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $('.js-key').click(function(){
+      window.location.assign("../form/")
+    });
+
     $("#province").change(function() {
       locationName = $("#province").find('option:selected').text();
       $("#amphur").empty();

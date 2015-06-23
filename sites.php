@@ -58,7 +58,7 @@ if (0 == $row_data['check_data']) {
         </p>
         <?php
       } else if('' != $session && !$check_data) {
-        echo "<div class='alert alert-danger alert-dismissable'>
+        echo "<div class='alert alert-danger alert-dismissable js-key'>
                     <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
                     <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
                     ท่านสามารถบันทึกข้อมูลได้ที่เมนู <a href='form/'>บันทึกข้อมูล</a> <i class='icon fa fa-pencil'></i>
@@ -314,6 +314,11 @@ if (0 == $row_data['check_data']) {
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $('.js-key').click(function(){
+      window.location.assign("form/")
+    });
+
     $("#province").change(function() {
       locationName = $("#province").find('option:selected').text();
       $("#amphur").empty();
