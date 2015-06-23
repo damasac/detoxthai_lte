@@ -171,7 +171,11 @@
             <?php include_once "form_6.php"; ?>
             </div>
 
-
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="index.php" class="btn btn-success btn-lg btn-flat"><li class="fa fa-check"></li> บันทึกข้อมูล</a>
+                </div>
+            </div>
 
           </div><!-- /.box-body -->
     </div><!-- /.box -->
