@@ -249,7 +249,7 @@ if (0 == $row['check_secu'] && $check_point) {
             </div>
 
             <div class="form-group">
-              <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดหลังการโอนเงินเรียบร้อยแล้ว</label>
+              <label for="scheduledesc" class="col-sm-2 control-label">รายละเอียดสำหรับแจ้งผู้สมัครที่โอนเงินแล้ว</label>
               <div class="col-sm-10">
                 <textarea cols="80" id="editor3" name="editor1" rows="10" data-sample="3" data-sample-short="">
                 </textarea>
