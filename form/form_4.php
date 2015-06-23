@@ -155,7 +155,7 @@
 					$(document).ready(function(){
 							$('#section4_20').JSAjaxFileUploader({
 								uploadUrl:'upload.php',
-								inputText:'แนบรูปภาพ หรือ วิดีโอ',
+								inputText:'<li class="fa fa-picture-o"></li> แนบรูปภาพหรือวิดีโอ ผลการตรวจ',
 								fileName:'photo',
 								allowExt:'gif|jpg|jpeg|png|bmp|mp4',
 								//autoSubmit:false,

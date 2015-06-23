@@ -93,7 +93,8 @@
             <div class="box-header with-border">
             <h3 class="box-title"></h3>
             <div class="pull-right">
-                <a href="." class="btn btn-primary btn-lg active"><li class="fa fa-home"></li> รายการข้อมูลการล้างพิษตับ</a>
+                <a href="album.php" class="btn btn-success btn-lg"><li class="fa fa-picture-o"></li> อัลบั้มภาพ</a>
+                <a href="." class="btn btn-primary btn-lg"><li class="fa fa-list"></li> รายการข้อมูลการล้างพิษตับ</a>
                 <a href="form_private.php" class="btn btn-danger btn-lg"><li class="fa fa-lock"></li> ข้อมูลส่วนบุคคล</a>
             </div>
           </div>
