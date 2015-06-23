@@ -1,15 +1,26 @@
 <?php
-require_once '../_theme/util.inc.php'; //chk_login();
+//require_once '../_theme/util.inc.php'; //chk_login();
+header('Content-Type: text/html; charset=utf-8');
 include_once "../_connection/db_base.php";
+define('SESSIONPREFIX' , "dtt_");
 
-function getDateThai($strDate)
-{
-    $strYear = date("Y",strtotime($strDate))+543;
-    $strMonth= date("n",strtotime($strDate));
-    $strDay= date("j",strtotime($strDate));
-    $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-    $strMonthThai=$strMonthCut[$strMonth];
-    return "$strDay $strMonthThai $strYear";
+function System_ShowDate($myDate) {
+  $myDateArray=explode("-",$myDate);
+  switch($myDateArray[1]) {
+    case "01" : $myMonth = "ม.ค.";  break;
+    case "02" : $myMonth = "ก.พ.";  break;
+    case "03" : $myMonth = "มี.ค."; break;
+    case "04" : $myMonth = "เม.ย."; break;
+    case "05" : $myMonth = "พ.ค.";   break;
+    case "06" : $myMonth = "มิ.ย.";  break;
+    case "07" : $myMonth = "ก.ค.";   break;
+    case "08" : $myMonth = "ส.ค.";  break;
+    case "09" : $myMonth = "ก.ย.";  break;
+    case "10" : $myMonth = "ต.ค.";  break;
+    case "11" : $myMonth = "พ.ย.";   break;
+    case "12" : $myMonth = "ธ.ค.";  break;
+  }
+  return $myDateArray['0']." ".$myMonth." ".$myDateArray['2'];
 }
 
 $site_url = $_POST['site_url'];
@@ -26,6 +37,9 @@ $table = "<table class='table table-bordered' id='show_content'>
     </th>
     <th>
         ชื่อหลักสูตร
+    </th>
+    <th>
+        ชื่อศูนย์
     </th>
     <th>
         จำนวนที่รับ
@@ -45,7 +59,13 @@ $script = "";
 $modal = "";
 $btn_edit = "";
         // prepare and query (direct)
-$result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment, site_id FROM site_schedule WHERE site_id = '".$site_url."' ORDER BY id");
+$result = $mysqli->query("SELECT site_schedule.id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment, site_id, site_name, site_url
+                          FROM site_schedule
+                          INNER JOIN site_detail ON site_schedule.site_id = site_detail.id
+                          WHERE site_schedule.delete_at IS NULL
+                          AND site_id = '".$site_url."'
+                          AND DATE(schedule_end_date) >= DATE_ADD(DATE(NOW()), INTERVAL 543 YEAR)
+                          ORDER BY site_schedule.id");
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
 
@@ -82,10 +102,11 @@ if ($result->num_rows > 0) {
 
 $table .= "<tr>
 <td>".$count."</td>
-<td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
+<td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
 <td>".$row['schedule_name']."</td>
+<td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/'>".$row['site_name']."<a></td>
 <td>".$row['user_qty']." คน</td>
-<td>".number_format($row['price_per_person'])." บาท</td>
+<td>".$row['price_per_person']."</td>
 <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal_gen".$count."'>รายละเอียด</button></td>
 <td>".$btn_edit."</td>
 </tr>";
@@ -103,16 +124,16 @@ $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal_gen".$count."
     <p class='text-right'>
       ".$btn_join."
   </p>
-  <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
+  <p><strong>วันที่ :</strong> ".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</p>
   <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
   <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
-  <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
+  <p><strong>ราคา/คน :</strong> ".$row['price_per_person']."</p>
   <p><strong>รายละเอียด :<hr/></strong><p>
-      <textarea class='form-control' id='detail_gen".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
+      ".htmlspecialchars_decode($row['schedule_desc'])."
       <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
-        <textarea class='form-control' id='payment_gen".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
+        ".htmlspecialchars_decode($row['schedule_payment'])."
         <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
-          <textarea class='form-control' id='afterpayment_gen".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
+        ".htmlspecialchars_decode($row['schedule_after_payment'])."
       </div>
       <div class='modal-footer'>
           <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>

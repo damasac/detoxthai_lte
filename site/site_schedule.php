@@ -26,18 +26,18 @@
 function System_ShowDate($myDate) {
   $myDateArray=explode("-",$myDate);
   switch($myDateArray[1]) {
-    case "01" : $myMonth = "มกราคม";  break;
-    case "02" : $myMonth = "กุมภาพันธ์";  break;
-    case "03" : $myMonth = "มีนาคม"; break;
-    case "04" : $myMonth = "เมษายน"; break;
-    case "05" : $myMonth = "พฤษภาคม";   break;
-    case "06" : $myMonth = "มิถุนายน";  break;
-    case "07" : $myMonth = "กรกฎาคม";   break;
-    case "08" : $myMonth = "สิงหาคม";  break;
-    case "09" : $myMonth = "กันยายน";  break;
-    case "10" : $myMonth = "ตุลาคม";  break;
-    case "11" : $myMonth = "พฤศจิกายน";   break;
-    case "12" : $myMonth = "ธันวาคม";  break;
+    case "01" : $myMonth = "ม.ค.";  break;
+    case "02" : $myMonth = "ก.พ.";  break;
+    case "03" : $myMonth = "มี.ค."; break;
+    case "04" : $myMonth = "เม.ย."; break;
+    case "05" : $myMonth = "พ.ค.";   break;
+    case "06" : $myMonth = "มิ.ย.";  break;
+    case "07" : $myMonth = "ก.ค.";   break;
+    case "08" : $myMonth = "ส.ค.";  break;
+    case "09" : $myMonth = "ก.ย.";  break;
+    case "10" : $myMonth = "ต.ค.";  break;
+    case "11" : $myMonth = "พ.ย.";   break;
+    case "12" : $myMonth = "ธ.ค.";  break;
   }
   return $myDateArray['0']." ".$myMonth." ".$myDateArray['2'];
 }
@@ -109,6 +109,9 @@ if (0 == $row['check_secu'] && $check_point) {
             ชื่อหลักสูตร
           </th>
           <th>
+            ชื่อศูนย์
+          </th>
+          <th>
             จำนวนที่รับ
           </th>
           <th>
@@ -128,13 +131,19 @@ if (0 == $row['check_secu'] && $check_point) {
         $script = "";
         $modal = "";
         // prepare and query (direct)
-        $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE site_id = '$site_id' ORDER BY id");
+        $result = $mysqli->query("SELECT site_schedule.id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment, site_id, site_name, site_url
+                                    FROM site_schedule
+                                    INNER JOIN site_detail ON site_schedule.site_id = site_detail.id
+                                    WHERE site_schedule.delete_at IS NULL
+                                    AND site_id = '".$site_id."'
+                                    ORDER BY site_schedule.id");
         if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
             echo "<tr>
             <td>".$count."</td>
             <td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
             <td>".$row['schedule_name']."</td>
+            <td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/'>".$row['site_name']."<a></td>
             <td>".$row['user_qty']." คน</td>
             <td>".$row['price_per_person']."</td>
             <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>

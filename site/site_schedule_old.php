@@ -1,77 +1,65 @@
-<?php require_once '../_theme/util.inc.php'; chk_login(); $MasterPage = 'page_main.php';?>
+<?php
+isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
 
-<?php sb('title');?> Liver flushing registry <?php eb();?>
+$site_name = explode(".",$_SERVER['SERVER_NAME']);
+$sub_domain =  $site_name[sizeof($site_name) - 3];
+
+//$all = $_GET['site'];
+isset($_GET['site']) ? $all = $_GET['site'] :  $all = '';
+
+if('' == $all){
+  if ("www" === $sub_domain) {
+    header('Location: site_schedule_old.php?site=all');
+  }
+}
+?>
+<?php require_once '../_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
+
+<?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="../_plugins/datepicker/datepicker3.css">
-<style type="text/css">
-  .sceditor-container {
-    height: 700px;
-  }
-  iframe {
-    height: 82% !important;
-    width: 97% !important;
-  }
-</style>
 <?php eb();?>
 
 <?php sb('notifications');?>
-  <?php include_once '../notifications.php'; ?>
+<?php include_once '../notifications.php'; ?>
 <?php eb();?>
 
-<?php include_once "../_connection/db_base.php"; ?>
-
 <?php
-function getDateThai($strDate)
-{
-  $strYear = date("Y",strtotime($strDate))+543;
-  $strMonth= date("n",strtotime($strDate));
-  $strDay= date("j",strtotime($strDate));
-  $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
-  $strMonthThai=$strMonthCut[$strMonth];
-  return "$strDay $strMonthThai $strYear";
+function System_ShowDate($myDate) {
+  $myDateArray=explode("-",$myDate);
+  switch($myDateArray[1]) {
+    case "01" : $myMonth = "ม.ค.";  break;
+    case "02" : $myMonth = "ก.พ.";  break;
+    case "03" : $myMonth = "มี.ค."; break;
+    case "04" : $myMonth = "เม.ย."; break;
+    case "05" : $myMonth = "พ.ค.";   break;
+    case "06" : $myMonth = "มิ.ย.";  break;
+    case "07" : $myMonth = "ก.ค.";   break;
+    case "08" : $myMonth = "ส.ค.";  break;
+    case "09" : $myMonth = "ก.ย.";  break;
+    case "10" : $myMonth = "ต.ค.";  break;
+    case "11" : $myMonth = "พ.ย.";   break;
+    case "12" : $myMonth = "ธ.ค.";  break;
+  }
+  return $myDateArray['0']." ".$myMonth." ".$myDateArray['2'];
 }
 
-isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
-
-/** Check security. */
-$check_point = 0;
-
-$result = $mysqli->query("SELECT COUNT(*) check_secu
-    FROM site_manage_user
-    WHERE user_id = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
-    AND site_id = '$site_id'");
-$row = $result->fetch_assoc();
-
-if (0 == $row['check_secu']) {
-  $check_point = 1;
-}
-
-$result = $mysqli->query("SELECT COUNT(*) check_secu
-    FROM site_detail
-    WHERE create_user = '".$_SESSION[SESSIONPREFIX.'puser_id']."'
-    AND id = '$site_id'");
-$row = $result->fetch_assoc();
-
-if (0 == $row['check_secu'] && $check_point) {
-  echo 'การเข้าถึงข้อมูลถูกปฏิเสธ';
-  exit;
-}
+isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
 ?>
 
 <?php sb('content');?>
+<?php include_once "../_connection/db_base.php"; ?>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    จัดการหลักสูตรล้างพิษ
-    <small>เพิ่ม แก้ไข ลบ หลักสูตรล้างพิษ</small>
+    หลักสูตรสุขภาพองค์รวม
+    <small>เพิ่ม แก้ไข ลบ หลักสูตร</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="../sites.php"><i class="fa fa-tachometer"></i> ค่ายล้างพิษ</a></li>
-    <li><a href="site_manage.php">จัดการศูนย์</a></li>
-    <li class="active">จัดการหลักสูตรล้างพิษ</li>
+    <li class="active"><i class="fa fa-calendar"></i> หลักสูตรสุขภาพองค์รวม</li>
   </ol>
 </section>
 
@@ -80,113 +68,155 @@ if (0 == $row['check_secu'] && $check_point) {
 
   <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">หลักสูตรล้างพิษทั้งหมด</h3>
+      <h3 class="box-title">หลักสูตรทั้งหมด</h3>
     </div>
     <div class="box-body">
-      <p class="text-left col-xs-2" style="margin-left: -15px;">
-        <button class="btn btn-block btn-primary btn-flat" data-toggle="modal" data-target="#myModal">เพิ่มหลักสูตรล้างพิษ</button>
-      </p>
-      <table class="table table-bordered">
-        <tr class="active">
-          <th>
-            ลำดับ
-          </th>
-          <th>
-            วันที่
-          </th>
-          <th>
-            ชื่อหลักสูตร
-          </th>
-          <th>
-            จำนวนที่รับ
-          </th>
-          <th>
-            ราคา/คน
-          </th>
-          <th>
-            รายละเอียด
-          </th>
-          <th>
-            ดูสมาชิกที่เข้าร่วม
-          </th>
-          <th>
-          </th>
-        </tr>
-        <?php
-        $count = 1;
-        $script = "";
-        $modal = "";
+      <div class="form-group">
+        <label for="sch" class="col-sm-1 control-label">หลักสูตร</label>
+        <div class="col-sm-8">
+          <select class="form-control" id="sch">
+            <option value="0">หลักสูตรทั้งหมด</option>
+            <?php
+            if("all" != $all){
+              $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' AND delete_at IS NULL ORDER BY id");
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  echo "<option value=".$row['id']." selected>".$row['site_name']."</option>";
+                }
+              }
+            }else{
+              $result = $mysqli->query("SELECT id, site_url, site_name FROM site_detail WHERE delete_at IS NULL ORDER BY id");
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  echo "<option value=".$row['id'].">".$row['site_name']."</option>";
+                }
+              }
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+      <p></p>
+      <br/><br/>
+      <div id="show_table">
+        <table class="table table-bordered" id="show_content">
+          <tr class="active">
+            <th>
+              ลำดับ
+            </th>
+            <th>
+              วันที่
+            </th>
+            <th>
+              ชื่อหลักสูตร
+            </th>
+            <th>
+              ชื่อศูนย์
+            </th>
+            <th>
+              จำนวนที่รับ
+            </th>
+            <th>
+              ราคา/คน
+            </th>
+            <th>
+              รายละเอียด
+            </th>
+            <th>
+            </th>
+          </tr>
+          <?php
+          $count = 1;
+          $script = "";
+          $modal = "";
+
+          $btn_edit = "";
         // prepare and query (direct)
-        $result = $mysqli->query("SELECT id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment FROM site_schedule WHERE site_id = '$site_id' ORDER BY id");
-        if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
-            echo "<tr>
-            <td>".$count."</td>
-            <td>".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</td>
-            <td>".$row['schedule_name']."</td>
-            <td>".$row['user_qty']." คน</td>
-            <td>".number_format($row['price_per_person'])." บาท</td>
-            <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
-            <td><a type='button' href='list_join.php?schedule_id=".$row['id']."&site_id=".$site_id."' class='btn btn-primary btn-flat'>ดูสมาชิกที่เข้าร่วม</i></a></td>
-            <td><a href='edit_schedule.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>แก้ไข</a> <a href='delete_schedule.php?id=".$row['id']."&site_id=".$site_id."' class='btn btn-danger btn-flat'>ลบ</a></td>
-          </tr>";
+          $result = $mysqli->query("SELECT site_schedule.id, schedule_name, user_qty, DATE_FORMAT(schedule_date,'%d-%m-%Y') AS schedule_date, DATE_FORMAT(schedule_end_date,'%d-%m-%Y') AS schedule_end_date, price_per_person, schedule_desc, schedule_payment, schedule_after_payment, site_id, site_name, site_url
+            FROM site_schedule
+            INNER JOIN site_detail ON site_schedule.site_id = site_detail.id
+            WHERE site_schedule.delete_at IS NULL ORDER BY site_schedule.id");
+          if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
 
-          $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
-          <div class='modal-dialog modal-lg'>
-            <div class='modal-content'>
-              <div class='modal-header'>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                <h4 class='modal-title' id='myModalLabel'>รายละเอียด</h4>
-              </div>
-              <div class='modal-body'>
+              $result_check = $mysqli->query("SELECT count(*) AS join_status, payment_upload_status
+                FROM site_join
+                WHERE schedule_id = '".$row['id']."'
+                AND user_id = '".$session."'");
+              $row_check = $result_check->fetch_assoc();
 
-                <p><strong>วันที่ :</strong> ".getDateThai($row['schedule_date'])." - ".getDateThai($row['schedule_end_date'])."</p>
-                <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
-                <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
-                <p><strong>ราคา/คน :</strong> ".number_format($row['price_per_person'])." บาท</p>
-                <p><strong>รายละเอียด :<hr/></strong><p>
-                <textarea class='form-control' id='detail".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_desc'])."</textarea>
-                <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong><p>
-                <textarea class='form-control' id='payment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_payment'])."</textarea>
-                <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong><p>
-                <textarea class='form-control' id='afterpayment".$count."' rows='50' id='scheduledesc' placeholder='รายละเอียดหลักสูตร'>".html_entity_decode($row['schedule_after_payment'])."</textarea>
-              </div>
-              <div class='modal-footer'>
-                <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+              $result_check_edit = $mysqli->query("SELECT count(*) AS edit_status
+                FROM site_schedule
+                WHERE user_id = '".$session."'
+                AND site_id = '".$row['site_id']."'");
+              $result_check_edit = $result_check_edit->fetch_assoc();
+
+              if (0 < $result_check_edit['edit_status']) {
+                $btn_edit = "<a type='button' href='site/site_schedule.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a>";
+              } else {
+                $btn_edit = "";
+              }
+
+              if (0 < $row_check['join_status']) {
+                if (0 == $row_check['payment_upload_status']) {
+                //echo $row_check['payment_upload_status'];
+                  $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                  <a type='button' class='btn btn-primary btn-flat' href='site/transfer_confirm.php?schedule_id=".$row['id']."'>ยืนยันการจ่ายเงิน</a>";
+                } else {
+                  $btn_join = "<a type='button' class='btn btn-default btn-flat'>เข้าร่วมหลักสูตรแล้ว</a>
+                  <a type='button' class='btn btn-success btn-flat'>การจ่ายเงินเรียบร้อยแล้ว</a>";
+                }
+              } else {
+                $btn_join = "<a type='button' href='schedule/join.php?schedule_id=".$row['id']."' class='btn btn-primary btn-flat'>เข้าร่วมหลักสูตร</a>";
+              }
+
+              echo "<tr>
+              <td>".$count."</td>
+              <td>".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</td>
+              <td>".$row['schedule_name']."</td>
+              <td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/'>".$row['site_name']."<a></td>
+              <td>".$row['user_qty']." คน</td>
+              <td>".$row['price_per_person']."</td>
+              <td><button type='button' class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>รายละเอียด</button></td>
+              <td>".$btn_edit."</td>
+            </tr>";
+
+            $modal .= "<div class='modal fade bs-example-modal-lg' id='myModal".$count."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+            <div class='modal-dialog modal-lg'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  <h4 class='modal-title' id='myModalLabel'>
+                    รายละเอียด
+                  </h4>
+                </div>
+                <div class='modal-body'>
+                  <p class='text-right'>
+                  </p>
+                  <p><strong>วันที่ :</strong> ".System_ShowDate($row['schedule_date'])." - ".System_ShowDate($row['schedule_end_date'])."</p>
+                  <p><strong>ชื่อหลักสูตร :</strong> ".$row['schedule_name']."</p>
+                  <p><strong>จำนวนที่รับ :</strong> ".$row['user_qty']." คน</p>
+                  <p><strong>ราคา/คน :</strong> ".$row['price_per_person']."</p>
+                  <p><strong>รายละเอียด :<hr/></strong></p>
+                  ".htmlspecialchars_decode($row['schedule_desc'])."
+                  <p><strong>รายละเอียดการจ่ายเงิน :<hr/></strong></p>
+                  ".htmlspecialchars_decode($row['schedule_payment'])."
+                  <p><strong>รายละเอียดหลังการจ่ายเงิน :<hr/></strong></p>
+                  ".htmlspecialchars_decode($row['schedule_after_payment'])."
+                </div>
+                <div class='modal-footer'>
+                  <button type='button' class='btn btn-default btn-flat' data-dismiss='modal'>Close</button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>";
-        $script .= "$('#detail".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
-        $script .= "$('#payment".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
-        $script .= "$('#afterpayment".$count."').sceditor({
-                plugins: 'bbcode',
-                width: '98%',
-                toolbar: 'justify',
-                readOnly: 'true',
-                resizeEnabled: false,
-                style: 'edit/minified/jquery.sceditor.default.min.css'
-              });";
+          </div>";
 
-        $count++;
+          $count++;
+        }
       }
-    }
-    ?>
-  </table>
+      ?>
+    </table>
+  </div>
 
   <!-- Modal -->
   <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -269,6 +299,7 @@ if (0 == $row['check_secu'] && $check_point) {
   <?php
   echo $modal;
   ?>
+  <div id="show_modal"></div>
 </div><!-- /.box-body -->
 </div><!-- /.box -->
 
@@ -284,107 +315,27 @@ if (0 == $row['check_secu'] && $check_point) {
 
 <script>
   $(document).ready(function(){
-    $("#scheduledate").datepicker({ altFormat: "dd-mm-yyyy" });
-    $("#scheduledateend").datepicker({ altFormat: "dd-mm-yyyy" });
 
-    $("#detail").sceditor({
-      plugins: "bbcode",
-      width: '98%',
-      resizeEnabled: false,
-      style: "edit/minified/jquery.sceditor.default.min.css"
-    });
+    $("#sch").change(function(){
+      var sch = $("#sch").val();
+      if (0 == sch) {
+        window.location.assign("site_schedule_old.php?site=all")
+      }else{
+       $.post("schedule/schedule_api.php",
+       {
+        site_url: sch,
+      },
+      function(data,status){
+        var res = data.split(":codeerror:");
+        console.log(res);
+        $('#show_table').html(res[0]);
+        var res_script = res[1].split(":codeerror_script:");
+        $('#show_modal').html(res[1]);
+      });
+     }
+   });
 
-    $("#payment").sceditor({
-      plugins: "bbcode",
-      width: '98%',
-      resizeEnabled: false,
-      style: "edit/minified/jquery.sceditor.default.min.css"
-    });
-
-    $("#afterpayment").sceditor({
-      plugins: "bbcode",
-      width: '98%',
-      resizeEnabled: false,
-      style: "edit/minified/jquery.sceditor.default.min.css"
-    });
-
-    $("#btadd").click(function(){
-
-      var schedulename = $("#schedulename");
-      var scheduledate = $("#scheduledate");
-      var scheduledateend = $("#scheduledateend");
-      var user_qty = $("#user_qty");
-      var price = $("#price");
-
-      var check = 0;
-
-      if(!schedulename.val()) {
-        schedulename.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check = 1;
-      } else {
-        schedulename.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
-
-      if(!scheduledate.val()) {
-        scheduledate.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check = 1;
-      } else {
-        scheduledate.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
-
-      if(!scheduledateend.val()) {
-        scheduledateend.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check = 1;
-      } else {
-        scheduledateend.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
-
-      if(!user_qty.val()) {
-        user_qty.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check = 1;
-      } else {
-        user_qty.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
-
-      if(!price.val()) {
-        price.closest('.form-group').removeClass('has-success').addClass('has-error');
-        check = 1;
-      } else {
-        price.closest('.form-group').removeClass('has-error').addClass('has-success');
-      }
-
-      if(0 == check){
-
-        var bbCode_detail = $('#detail').sceditor('instance').val();
-        //var html_detail = $('#detail').sceditor('instance').fromBBCode(bbCode_detail);
-
-        var bbCode_payment = $('#payment').sceditor('instance').val();
-        //var html_payment = $('#payment').sceditor('instance').fromBBCode(bbCode_payment);
-
-        var bbCode_afterpayment = $('#afterpayment').sceditor('instance').val();
-        //var html_afterpayment = $('#afterpayment').sceditor('instance').fromBBCode(bbCode_afterpayment);
-
-        $.post("add_schedule.php",
-        {
-          schedulename: $("#schedulename").val(),
-          scheduledate: $("#scheduledate").val(),
-          scheduledateend : $("#scheduledateend").val(),
-          user_qty : $("#user_qty").val(),
-          price : $("#price").val(),
-          scheduledesc: bbCode_detail,
-          payment : bbCode_payment,
-          afterpayment : bbCode_afterpayment,
-          site_id: '<?php echo $site_id; ?>',
-        },
-        function(data,status){
-                      //alert("Data: " + data + "\nStatus: " + status);
-                      location.reload();
-                    });
-      }
-    });
-
-    <?php echo $script; ?>
-});
+  });
 </script>
 <?php eb();?>
 
