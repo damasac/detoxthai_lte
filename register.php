@@ -29,7 +29,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 
     <div class="login-box">
       <div class="login-logo">
-        <a href="index.php"><b>Detox</b>Thailand</a>
+        <a href="index.php"><b>Detox</b>Thai</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
 		  <h3>สมัครสมาชิก</h3>

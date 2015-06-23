@@ -155,7 +155,7 @@ if ($user) {
 
     <div class="login-box">
       <div class="login-logo">
-        <a href="../index2.html"><b>Detox</b>Thailand</a>
+        <a href="../index2.html"><b>Detox</b>Thai</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">
