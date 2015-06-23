@@ -123,7 +123,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <!-- The user image in the navbar-->
-		      <?php 
+		      <?php
 			if($_SESSION[SESSIONPREFIX."puser_image"]==""){
 			     $image = "img/avatar-male_4.jpg";
 			}else{
@@ -132,10 +132,18 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
 		      ?>
                       <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?><?php echo $image;?>" class="user-image" alt="User Image"/>
                       <!-- hidden-xs hides the username on small devices so only the image appears. -->
-		      
+
                       <span id="divusername">
 
-                    <?php if(isset($_SESSION[SESSIONPREFIX."puser_fname"])) echo $_SESSION[SESSIONPREFIX."puser_fname"]; else echo "Guest"; ?>
+                        <?php
+                          if($_SESSION[SESSIONPREFIX."puser_nickname"]!=""){
+                            $name = $_SESSION[SESSIONPREFIX."puser_nickname"];
+                          }else{
+                            $name = $_SESSION[SESSIONPREFIX."puser_fname"]." ".$_SESSION[SESSIONPREFIX."puser_lname"];
+                          }
+                        ?>
+
+                    <?php if(isset($_SESSION[SESSIONPREFIX."puser_fname"])) echo $name; else echo "Guest"; ?>
                     </span>
                     </a>
                     <ul class="dropdown-menu">
@@ -143,7 +151,7 @@ if (isset($_SESSION[SESSIONPREFIX.'puser_id'])) {
                       <li class="user-header">
                         <img src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?><?php echo $image;?>" class="img-circle" alt="User Image" />
                         <p>
-                          <?php echo $_SESSION[SESSIONPREFIX."puser_fname"]." ".$_SESSION[SESSIONPREFIX."puser_lname"]; ?>
+                          <?php echo $name; ?>
                           <small>
 
 			  <?php echo $_SESSION[SESSIONPREFIX."puser_create_date"];?>

@@ -39,7 +39,6 @@ if (isset($user_login) and isset($pwd_login)) {
         //exit();
     } else if (($user_login==$dbarr['username'] OR $user_login==$dbarr['email']) AND $pwd_login==$dbarr['password']) {
         //-----------------------
-
         $_SESSION[SESSIONPREFIX.'puser_id'] = $dbarr['id'];
         $_SESSION[SESSIONPREFIX.'puser_username'] = $dbarr['username'];
         $_SESSION[SESSIONPREFIX.'puser_fname'] = $dbarr['fname'];
@@ -49,6 +48,7 @@ if (isset($user_login) and isset($pwd_login)) {
         $_SESSION[SESSIONPREFIX.'puser_create_date'] = $dbarr['createdate'];
         $_SESSION[SESSIONPREFIX.'puser_first_login'] = $dbarr['isFristLogin'];
         $_SESSION[SESSIONPREFIX.'puser_image'] = $dbarr['image'];
+        $_SESSION[SESSIONPREFIX.'puser_nickname'] = $dbarr['nickname'];
         //-----------------------
         //echo "success";
     }
@@ -121,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 ?>
 
     <?php if($_SESSION[SESSIONPREFIX."puser_first_login"]==""){?>
-        <meta http-equiv="refresh" content="1;URL=userprofile/firstlogin.php">            
+        <meta http-equiv="refresh" content="1;URL=userprofile/firstlogin.php">
     <?php }else{?>
         <meta http-equiv="refresh" content="1;URL=<?php echo $returnurl;?>">
     <?php }?>

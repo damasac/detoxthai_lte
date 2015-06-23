@@ -92,9 +92,9 @@ $MasterPage = 'page_main.php';?>
                             <code id="valPost" style="display:none;"></code>
                         </div>
                         <div class="col-md-7">
-                        
+
                         <input type="text" class="form-control" id="timeline_post" name="timeline_post"><br>
-                        <div id="form-upload" style="display:none;">            
+                        <div id="form-upload" style="display:none;">
                         <input id="file" class="file" type="file" name="images[]"  accept="image/*"  multiple="multiple">
                         </div>
                         <br>
@@ -102,7 +102,7 @@ $MasterPage = 'page_main.php';?>
 
                         </div>
                         <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-camera'> </i></button> 
+                        <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-camera'> </i></button>
                         <button type="submit" class="btn btn-success" id="button_post"><i class="fa fa-pencil"></i> โพสต์</button>
                         </div>
                     </div>
@@ -129,15 +129,15 @@ $MasterPage = 'page_main.php';?>
                 <li>
                 <?php
                     $sqlTimeline = "SELECT * FROM `timeline_post`AS a  WHERE a.createtime LIKE '%".$key."%' ORDER BY a.createtime DESC";
-                    
+
                     $queryTimeline = $mysqli->query($sqlTimeline);
                     while($dataTimeline = $queryTimeline->fetch_assoc()){
                         $sqlImg = "SELECT * FROM `timeline_image` WHERE post_id='".$dataTimeline["id"]."' ";
                         $queryImg = $mysqli->query($sqlImg);
                         $numImg = $queryImg->num_rows;
-  
+
                 ?>
-                 <li> 
+                 <li>
             <?php if($numImg==1){?>
                         <i class="fa fa-comment bg-green"></i>
             <?php }else{?>
@@ -160,7 +160,7 @@ $MasterPage = 'page_main.php';?>
                                     <?php }?>
                                     <?php
                                                  if($numImg!=""){
-                                                
+
                                                             $sqlImg = "SELECT * FROM `timeline_image` WHERE post_id='".$dataTimeline["id"]."' ";
                                                             $queryImg = $mysqli->query($sqlImg);
                                                             while($dataImg = $queryImg->fetch_assoc()){
@@ -270,9 +270,9 @@ $input.fileinput("upload");
 
                                     });
                         });
-            
+
             $("#button_post").click(function(){
-                        
+
                         var imgLength = $(".file-preview-image").length;
                         var imgQuery = [];
                         var post = $("#timeline_post").val();
@@ -287,7 +287,7 @@ $input.fileinput("upload");
                         }
                         var user_id = <?php echo  $_SESSION["dtt_puser_id"];?>;
                         for (i=0;i<imgLength;i++) {
-                                    //code      
+                                    //code
                                     var img = $(".file-preview-image[data-id='"+i+"']").attr("src");
                                     imgQuery.push(img);
 
@@ -308,7 +308,7 @@ $input.fileinput("upload");
                                     }
                                 });
                         });
-          
+
 </script>
 <![endif]-->
 <?php eb();?>
