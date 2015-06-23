@@ -90,10 +90,14 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
             <option value="0">หลักสูตรทั้งหมด</option>
             <?php
             if("all" != $all){
-              $result = $mysqli->query("SELECT id, site_name FROM site_detail WHERE site_url = '$sub_domain' AND delete_at IS NULL ORDER BY id");
+              $result = $mysqli->query("SELECT id, site_name, site_url FROM site_detail WHERE delete_at IS NULL ORDER BY id");
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                  echo "<option value=".$row['id']." selected>".$row['site_name']."</option>";
+                  if ($sub_domain == $row['site_url']) {
+                    echo "<option value=".$row['id']." selected>".$row['site_name']."</option>";
+                  } else {
+                    echo "<option value=".$row['id'].">".$row['site_name']."</option>";
+                  }
                 }
               }
             }else{

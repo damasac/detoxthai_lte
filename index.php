@@ -1,5 +1,9 @@
+<?php
+if (!defined('SESSIONPREFIX')) define('SESSIONPREFIX', 'dtt_');
+?>
 <?php include_once "_connection/db_base.php"; ?>
 <?php
+
 isset($_GET['menu']) ? $menu = $_GET['menu'] :  $menu = '';
 
 /** Get sub domain. */
@@ -36,7 +40,10 @@ if ('' == $menu) {
 }
 ?>
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
-
+<?php
+$domain='detoxthai.org';
+setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
+?>
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
