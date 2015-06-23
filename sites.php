@@ -111,7 +111,7 @@ if (0 == $row_data['check_data']) {
             }
 
             echo "<tr>
-            <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/home.php' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+            <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
             <td>".$row['site_name']."</td>
             <td>".$row['address']."</td>
             <td>".$btn_follow."</td>
