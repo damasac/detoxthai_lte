@@ -81,7 +81,7 @@
     imagedestroy($new_img);
 	
     // บันทึกชื่อไฟล์รูป
-	include_once "../_connection/db_form.php";
+	include_once "../_connection/db_base.php";
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
 	//
 	$ref_formx = $_POST['ref_form'];
@@ -89,10 +89,11 @@
 	$ref_userx = $_POST['ref_user'];
 	//
     $sql="INSERT INTO `tbl_surveyfile` (`ref_form`, `ref_field`, `ref_user`, `file_name`, `file_name_org`, `file_type`) VALUES ('$ref_formx', '$ref_fieldx', '$ref_userx', '$filename', '$filename_org', '$ext');";
-	//echo $sql; exit;
-	$result = $conn->query($sql);
-	//$result->insert_id;
-	echo '<a target="_blank" href="file_upload/images_large/'.$filename.'"><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a target="_blank" href="file_upload/images_large/'.$filename.'">ดูขนาดใหญ่</a>] [ลบ]';
+	//echo $sql;
+	$result = $mysqli->query($sql);
+	$last_id = $mysqli->insert_id;
+	//echo $last_idx; exit;
+	echo '<div id="divfile'.$last_id.'"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery>ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
     } else {
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
     //
@@ -103,11 +104,12 @@
     $ext = strtolower(end(explode('.', $photo_name)));
 	$filename=$timestamp.".".$ext;
 	if (move_uploaded_file($_FILES['photo']['tmp_name'], "file_upload/video/$filename")) {
-		include_once "../_connection/db_form.php";
+		include_once "../_connection/db_base.php";
 		$sql="INSERT INTO `tbl_surveyfile` (`ref_form`, `ref_field`, `ref_user`, `file_name`, `file_name_org`, `file_type`) VALUES ('$ref_formx', '$ref_fieldx', '$ref_userx', '$filename', '$filename_org', '$ext');";
 		//echo $sql; exit;
-		$result = $conn->query($sql);
-		echo '<a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>] [ลบ]';
+		$result = $mysqli->query($sql);
+		$last_id = $mysqli->insert_id;
+		echo '<div id="divfile'.$last_id.'"><a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
 	} else {
 		echo "Possible file upload attack!\n";
 	}

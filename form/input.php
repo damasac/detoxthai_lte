@@ -64,7 +64,9 @@
       color:white;
     }
 </style>
-  
+
+<link rel="stylesheet" href="gallery-js/css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="gallery-js/css/bootstrap-image-gallery.min.css">
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -183,6 +185,40 @@
 
   </section><!-- /.content -->'
   
+  <div id="blueimp-gallery" class="blueimp-gallery">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body next"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left prev">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Previous
+                    </button>
+                    <button type="button" class="btn btn-primary next">
+                        Next
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
 <?php eb();?>
 
 
@@ -196,6 +232,9 @@
 
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
+
+<script src="gallery-js/js/jquery.blueimp-gallery.min.js"></script>
+<script src="gallery-js/js/bootstrap-image-gallery.min.js"></script>
 
 <script type='text/javascript'>
     // With JQuery
@@ -258,6 +297,13 @@ function datepicker_hide(datePick){
 		
 	});
 });
+}
+
+function del_file(file_id, div) {
+    $.get( "remove_file.php", { file_id: file_id } )
+    .done(function( data ) {
+      $('#'+div).fadeOut();
+    });
 }
 </script>
 

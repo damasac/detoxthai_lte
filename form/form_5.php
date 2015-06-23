@@ -98,12 +98,14 @@
                                             //echo $sql;
                                             $result = $conn->query($sql);
                                             while($dbarr = $result->fetch_assoc()){
-                                                if($dbarr['file_type'] =='mp4'){
-                                                echo '<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [ลบ]';
+                                                
+                                              if($dbarr['file_type'] =='mp4'){
+                                                echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
                                                 }
                                                 else {
-                                                echo '<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'"><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [ลบ]';
+                                                echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
                                                 }
+                                                
                                             }
                                             ?>
                                             </td>
