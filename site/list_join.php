@@ -13,6 +13,10 @@
 
 <?php include_once "../_connection/db_base.php"; ?>
 
+<?php sb('notifications');?>
+<?php include_once '../notifications.php'; ?>
+<?php eb();?>
+
 <?php
 
 isset($_GET['site_id']) ? $site_id = $_GET['site_id'] :  $site_id = '';
