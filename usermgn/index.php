@@ -83,7 +83,11 @@ $MasterPage = 'page_main.php';?>
 
                 <td><?php echo $data1["tel"];?></td>
                 <td>
-
+                <?php if($user_form==$data1["id"]){?>
+                    <button class="btn bg-maroon btn-flat margin"  onclick="backUser(<?php echo $session;?>)">
+                    <i class="fa fa-close"></i>
+                    Logout</button>
+                <?php }?>
                     <button class="btn bg-navy-active  color-palette btn-flat margin" onclick="goForm(<?php echo $data1["id"]; ?>);">
                     <i class="fa fa-edit "></i>
                     กรอกข้อมูล</button>
