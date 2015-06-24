@@ -49,7 +49,7 @@
         $_SESSION["dtt_user_form"] = $_POST["user_id"];
     }
     if($task=="changeSession"){
-        $_SESSION["dtt_user_form"] = $_POST["dtt_puser_id"];
+        $_SESSION["dtt_user_form"] = $_SESSION["dtt_puser_id"];
     }
     if($task=="outSite"){
 
