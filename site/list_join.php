@@ -143,6 +143,7 @@ $num2 = $query2->num_rows;
           echo "<td>".$txt_payment_upload_status."</i></td>";
           echo "<td>".$txt_status."</td>";
           echo "<td>
+          <a class='btn btn-primary btn-flat' onclick='goForm(".$session.");' >กรอกข้อมูล</a>
           <a class='btn btn-primary btn-flat' href='check_payment.php?schedule_id=".$row['schedule_id']."&user_id=".$row['user_id']."'>โอนแล้ว</a>
           <a class='btn btn-danger btn-flat' href='delete_join.php?schedule_id=".$row['schedule_id']."&user_id=".$row['user_id']."'>ยกเลิกการเข้าร่วม</a>
         </td>";
@@ -188,6 +189,18 @@ $num2 = $query2->num_rows;
                     }
          });
     }
+    function goForm(id) {
+        alert(id);
+        $.post("../usermgn/ball-sql.php?task=saveSession",
+        {
+          user_id : id
+        },
+        function(data,status){
+
+            location.href="../form/index.php";
+
+        });
+    }
   $(document).ready(function(){
     $("#btnpayment").click(function(){
       $.post("check_payment.php",
@@ -205,4 +218,3 @@ $num2 = $query2->num_rows;
 <?php eb();?>
 
 <?php render($MasterPage);?>
-
