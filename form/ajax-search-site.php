@@ -10,9 +10,9 @@ include_once "../_connection/db_base.php";
 if($_GET['task']=="site"){
     $key = $_GET['key'];
     if($key){
-        $sql = "SELECT id, `site_name` FROM site_detail WHERE site_name LIKE '%".$key."%' LIMIT 10";
+        $sql = "SELECT id, `site_name` FROM site_detail WHERE delete_at IS NULL AND site_name LIKE '%".$key."%' LIMIT 10";
     }else{
-        $sql = "SELECT id, `site_name` FROM site_detail LIMIT 10";
+        $sql = "SELECT id, `site_name` FROM site_detail WHERE delete_at IS NULL LIMIT 10";
     }
     $query = $mysqli->query($sql);
     $array = array();

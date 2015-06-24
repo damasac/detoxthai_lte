@@ -67,24 +67,6 @@ if($dataform['status']+0) { ?>
             
             <div class="row">
                 <div class="col-lg-12">
-                <div class="alert alert-danger" id="showDelete"style="display:none;">
-                  ยืนยันการลบแบบบันทึก ?
-                  <div class="pull-right">
-                  <button class="btn btn-success" id="doDelete">ใช่</button>&nbsp;&nbsp;&nbsp;
-                  <button class="btn btn-warning" id="cancerDelete">ยกเลิก</button>
-                  </div>
-                  </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-12">
-                <div class="alert alert-danger" id="showError" style="display:none;"></div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-12">
                 <h3>
                     บันทึกผลการล้างพิษตับของ &nbsp<code><?php echo $user_name?></code>
                 </h3>
@@ -149,7 +131,7 @@ if($dataform['status']+0) { ?>
                       <td><?php echo $i;?></td>
                       <td>
                         <div class="form-group">
-                        <select style="width: 150px;" id="location" class="form-control">
+                        <select style="width: 170px;" id="location" class="form-control">
                            <option selected='selected' value=10000001>ที่บ้าน</option>
                            <option value=10000002 >อื่นๆ</option>
                        </select>
@@ -179,6 +161,24 @@ if($dataform['status']+0) { ?>
                 
                 </div>
             </div>            
+            
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="alert alert-danger" id="showDelete"style="display:none;">
+                  ยืนยันการลบแบบบันทึก ?
+                  <div class="pull-right">
+                  <button class="btn btn-success" id="doDelete">ใช่</button>&nbsp;&nbsp;&nbsp;
+                  <button class="btn btn-warning" id="cancerDelete">ยกเลิก</button>
+                  </div>
+                  </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="alert alert-danger" id="showError" style="display:none;"></div>
+                </div>
+            </div>
             
           </div><!-- /.box-body -->
     </div><!-- /.box -->
@@ -305,8 +305,8 @@ if($dataform['status']+0) { ?>
                   },
                   success: function(returndata){
                     $("#numForm").html(returndata);
-                    //$("#showDelete").hide();
-                    //$("#trForm_"+form_id).fadeOut();
+                    $("#showDelete").hide();
+                    $("#trForm_"+form_id).fadeOut();
                 }
             }); 
         });
@@ -343,7 +343,7 @@ if($dataform['status']+0) { ?>
         $(".select2-input").keyup(function(event){
             var jsonAPI = "ajax-search-site.php?task=site&key=";
             var key = $(this).val();
-            $("#location").html("<option value='0'>- สถานที่ทำการ Detox -</option>");
+            $("#location").html("<option value='0'>- สถานที่ทำการล้างพิษตับ -</option>");
             $.getJSON(jsonAPI+key,
                 function(result){
                     $.each(result, function(i, field){
