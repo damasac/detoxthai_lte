@@ -547,12 +547,82 @@ $manage_site_count = $result_count_manage->fetch_assoc();
         <label for="mobile" class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
           <label for="mobile" class="control-label">แนบภาพถ่ายบัตรประจำตัวประชาชน : </label>
-          <form action="../api/upload.php" class="dropzone">
+
+          <!-- ========================================== -->
+
+          <div id="actions" class="row">
+
+            <div class="col-lg-7">
+              <!-- The fileinput-button span is used to style the file input field as button -->
+              <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+              </span>
+              <button type="submit" class="btn btn-primary start">
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>Start upload</span>
+              </button>
+              <button type="reset" class="btn btn-warning cancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span>Cancel upload</span>
+              </button>
+            </div>
+
+            <div class="col-lg-5">
+              <!-- The global file processing state -->
+              <span class="fileupload-process" style="display: none;">
+                <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                </div>
+              </span>
+            </div>
+
+          </div>
+          <!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+          <div class="table table-striped" class="files" id="previews">
+
+            <div id="template" class="file-row">
+              <!-- This is used as the file preview template -->
+              <div>
+                <p></p>
+                <span class="preview"><img data-dz-thumbnail /></span>
+              </div>
+              <div>
+                <p class="name" data-dz-name></p>
+                <strong class="error text-danger" data-dz-errormessage></strong>
+              </div>
+              <div>
+                <p class="size" data-dz-size></p>
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-primary start">
+                  <i class="glyphicon glyphicon-upload"></i>
+                  <span>Start</span>
+                </button>
+                <button data-dz-remove class="btn btn-warning cancel">
+                  <i class="glyphicon glyphicon-ban-circle"></i>
+                  <span>Cancel</span>
+                </button>
+                <button data-dz-remove class="btn btn-danger delete">
+                  <i class="glyphicon glyphicon-trash"></i>
+                  <span>Delete</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ========================================== -->
+
+          <!-- <form action="../api/upload.php" class="dropzone">
             <div class="dz-message">
             ลากไฟล์เพื่ออัพโหลดหรือคลิกที่นี่<br>
               <span class="note">(อัพโหลดข้อมูลที่เป็นไฟล์ภาพเท่านั้น)</span>
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
       <!-- </form> -->
@@ -609,7 +679,59 @@ $manage_site_count = $result_count_manage->fetch_assoc();
       google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
       markers.push(marker);
 
-      myDropzone = new Dropzone(".uploadform", { url: "../api/upload.php"});
+      /** ============================= */
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+          url: "../api/upload.php", // Set the url
+          thumbnailWidth: 80,
+          thumbnailHeight: 80,
+          parallelUploads: 20,
+          previewTemplate: previewTemplate,
+          autoQueue: false, // Make sure the files aren't queued until manually added
+          previewsContainer: "#previews", // Define the container to display the previews
+          clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        });
+
+        myDropzone.on("addedfile", function(file) {
+          // Hookup the start button
+          file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
+        });
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+          document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+        });
+
+        myDropzone.on("sending", function(file) {
+          // Show the total progress bar when upload starts
+          document.querySelector("#total-progress").style.opacity = "1";
+          // And disable the start button
+          file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+        });
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+          document.querySelector("#total-progress").style.opacity = "0";
+        });
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function() {
+          myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        };
+        document.querySelector("#actions .cancel").onclick = function() {
+          myDropzone.removeAllFiles(true);
+        };
+
+      /** ============================= */
+
+      //myDropzone = new Dropzone(".uploadform", { url: "../api/upload.php"});
 
     });
     $('#myModal').modal("show");

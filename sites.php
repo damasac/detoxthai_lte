@@ -17,14 +17,14 @@
 isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.'puser_id'] :  $session = '';
 
 $result_data = $mysqli->query("SELECT COUNT(*) check_data
-        FROM tbl_surveyprivate
-        WHERE ref_id_user = '".$session."'");
+  FROM tbl_surveyprivate
+  WHERE ref_id_user = '".$session."'");
 $row_data = $result_data->fetch_assoc();
 
 $check_data = 1;
 
 if (0 == $row_data['check_data']) {
-    $check_data = 0;
+  $check_data = 0;
 }
 
 ?>
@@ -59,70 +59,70 @@ if (0 == $row_data['check_data']) {
         <?php
       } else if('' != $session && !$check_data) {
         echo "<div class='alert alert-danger alert-dismissable js-key'>
-                    <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
-                    <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
-                    ท่านสามารถบันทึกข้อมูลได้ที่เมนู <a href='form/'>บันทึกข้อมูล</a> <i class='icon fa fa-pencil'></i>
-                  </div>";
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+        <h4><i class='icon fa fa-ban'></i> สมาชิกที่บันทึกข้อมูล (คลิกยินยอมเข้าร่วมโครงการ) แล้วเท่านั้น ที่สามารถ สร้างศูนย์สุขภาพได้!</h4>
+        ท่านสามารถบันทึกข้อมูลได้ที่เมนู <a href='form/'>บันทึกข้อมูล</a> <i class='icon fa fa-pencil'></i>
+      </div>";
+    }
+    ?>
+    <table class="table table-bordered">
+      <tr class="active">
+        <th>
+          ลำดับ
+        </th>
+        <th>
+          ลิ้งค์
+        </th>
+        <th>
+          ชื่อศูนย์
+        </th>
+        <th>
+          ที่ตั้ง
+        </th>
+        <th></th>
+      </tr>
+      <?php
+      $sql = "SELECT site_detail.id AS site_id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
+      site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
+      FROM site_detail
+      LEFT JOIN const_district ON site_district = DISTRICT_ID
+      LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
+      LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
+      WHERE site_detail.delete_at IS NULL
+      ORDER BY id";
+
+      $result = $mysqli->query($sql);
+
+      $count = 1;
+
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+
+          $result_follow = $mysqli->query("SELECT COUNT(*) AS check_follow
+            FROM site_follow
+            WHERE user_id = '".$session."'
+            AND site_id = '".$row['site_id']."'");
+          $row_follow = $result_follow->fetch_assoc();
+
+          if (0 == $row_follow['check_follow']) {
+            $btn_follow = "<a type='button' href='site/site_follow.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-heart'></i> ติดตาม</a>";
+          } else {
+            $btn_follow = "<a type='button' href='site/site_unfollow.php?site_id=".$row['site_id']."' class='btn btn-default btn-flat'><i class='fa fa-fw fa-heart'></i> ยกเลิกการติดตาม</a>";
+          }
+
+          echo "<tr>
+          <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+          <td>".$row['site_name']."</td>
+          <td>".$row['address']."</td>
+          <td>".$btn_follow."</td>
+        </tr>";
+        $count++;
       }
-      ?>
-      <table class="table table-bordered">
-        <tr class="active">
-          <th>
-            ลำดับ
-          </th>
-          <th>
-            ลิ้งค์
-          </th>
-          <th>
-            ชื่อศูนย์
-          </th>
-          <th>
-            ที่ตั้ง
-          </th>
-          <th></th>
-        </tr>
-        <?php
-        $sql = "SELECT site_detail.id AS site_id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
-        site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
-        FROM site_detail
-        LEFT JOIN const_district ON site_district = DISTRICT_ID
-        LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
-        LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
-        WHERE site_detail.delete_at IS NULL
-        ORDER BY id";
+    }
+    ?>
+  </table>
 
-        $result = $mysqli->query($sql);
-
-        $count = 1;
-
-        if ($result->num_rows > 0) {
-          while($row = $result->fetch_assoc()) {
-
-            $result_follow = $mysqli->query("SELECT COUNT(*) AS check_follow
-              FROM site_follow
-              WHERE user_id = '".$session."'
-              AND site_id = '".$row['site_id']."'");
-            $row_follow = $result_follow->fetch_assoc();
-
-            if (0 == $row_follow['check_follow']) {
-              $btn_follow = "<a type='button' href='site/site_follow.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-heart'></i> ติดตาม</a>";
-            } else {
-              $btn_follow = "<a type='button' href='site/site_unfollow.php?site_id=".$row['site_id']."' class='btn btn-default btn-flat'><i class='fa fa-fw fa-heart'></i> ยกเลิกการติดตาม</a>";
-            }
-
-            echo "<tr>
-            <td>".$count."</td><td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
-            <td>".$row['site_name']."</td>
-            <td>".$row['address']."</td>
-            <td>".$btn_follow."</td>
-          </tr>";
-          $count++;
-        }
-      }
-      ?>
-    </table>
-
-  </div><!-- /.box-body -->
+</div><!-- /.box-body -->
 </div><!-- /.box -->
 
 </section><!-- /.content -->
@@ -244,12 +244,83 @@ if (0 == $row_data['check_data']) {
         <label for="mobile" class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
           <label for="mobile" class="control-label">แนบภาพถ่ายบัตรประจำตัวประชาชน : </label>
-          <form action="api/upload.php" class="dropzone">
+
+          <!-- ========================================== -->
+
+          <div id="actions" class="row">
+
+            <div class="col-lg-7">
+              <!-- The fileinput-button span is used to style the file input field as button -->
+              <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add files...</span>
+              </span>
+              <button type="submit" class="btn btn-primary start">
+                <i class="glyphicon glyphicon-upload"></i>
+                <span>Start upload</span>
+              </button>
+              <button type="reset" class="btn btn-warning cancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+                <span>Cancel upload</span>
+              </button>
+            </div>
+
+            <div class="col-lg-5">
+              <!-- The global file processing state -->
+              <span class="fileupload-process" style="display: none;">
+                <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                </div>
+              </span>
+            </div>
+
+          </div>
+          <!-- HTML heavily inspired by http://blueimp.github.io/jQuery-File-Upload/ -->
+          <div class="table table-striped" class="files" id="previews">
+
+            <div id="template" class="file-row">
+              <!-- This is used as the file preview template -->
+              <div>
+                <p></p>
+                <span class="preview"><img data-dz-thumbnail /></span>
+              </div>
+              <div>
+                <p class="name" data-dz-name></p>
+                <strong class="error text-danger" data-dz-errormessage></strong>
+              </div>
+              <div>
+                <p class="size" data-dz-size></p>
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-primary start">
+                  <i class="glyphicon glyphicon-upload"></i>
+                  <span>Start</span>
+                </button>
+                <button data-dz-remove class="btn btn-warning cancel">
+                  <i class="glyphicon glyphicon-ban-circle"></i>
+                  <span>Cancel</span>
+                </button>
+                <button data-dz-remove class="btn btn-danger delete">
+                  <i class="glyphicon glyphicon-trash"></i>
+                  <span>Delete</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ========================================== -->
+
+          <!-- <form action="api/upload.php" class="dropzone">
             <div class="dz-message">
             ลากไฟล์เพื่ออัพโหลดหรือคลิกที่นี่<br>
               <span class="note">(อัพโหลดข้อมูลที่เป็นไฟล์ภาพเท่านั้น)</span>
             </div>
-          </form>
+            <img src="removebutton.png" alt="Click me to remove the file." data-dz-remove />
+          </form> -->
         </div>
       </div>
       <!-- </form> -->
@@ -305,12 +376,65 @@ if (0 == $row_data['check_data']) {
       google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
       markers.push(marker);
 
+
+      /** ============================= */
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+
+        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+          url: "api/upload.php", // Set the url
+          thumbnailWidth: 80,
+          thumbnailHeight: 80,
+          parallelUploads: 20,
+          previewTemplate: previewTemplate,
+          autoQueue: false, // Make sure the files aren't queued until manually added
+          previewsContainer: "#previews", // Define the container to display the previews
+          clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        });
+
+        myDropzone.on("addedfile", function(file) {
+          // Hookup the start button
+          file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
+        });
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function(progress) {
+          document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+        });
+
+        myDropzone.on("sending", function(file) {
+          // Show the total progress bar when upload starts
+          document.querySelector("#total-progress").style.opacity = "1";
+          // And disable the start button
+          file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+        });
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function(progress) {
+          document.querySelector("#total-progress").style.opacity = "0";
+        });
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function() {
+          myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        };
+        document.querySelector("#actions .cancel").onclick = function() {
+          myDropzone.removeAllFiles(true);
+        };
+
+      /** ============================= */
+
       //var myAwesomeDropzone = $(".uploadform").dropzone({ url: "api/upload.php" });
-      myDropzone = new Dropzone(".uploadform", { url: "api/upload.php"});
+      //myDropzone = new Dropzone(".uploadform", { url: "api/upload.php"});
 
     });
-    $('#myModal').modal("show");
-  }
+$('#myModal').modal("show");
+}
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
