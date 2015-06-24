@@ -6,6 +6,9 @@
         //echo $sql1;
         $query = $mysqli->query($sql1);
         $post_id = $mysqli->insert_id;
+//        $sql3 = "INSERT INTO `timeline_event`(id_event,type_event)"
+//                . "VALUES('".$post_id.",'post')";
+//        $query3 = $mysqli->query($sql3);
         if(isset($_POST["img"])!=""){
             foreach($_POST["img"] as $img){
 

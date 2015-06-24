@@ -14,22 +14,22 @@
         }
     }
     if($task=="addUserFind"){
-        
+
         $sqlUser = "SELECT * FROM `site_follow` WHERE site_id='".$_POST["site_id"]."' AND user_id='".$_POST["user_id"]."' AND delete_at>='' ";
-        
+
         $queryUser = $mysqli->query($sqlUser);
-        
+
         $numUser = $queryUser->num_rows;
-        
+
 
         if($numUser==1){
-            
+
             $sql1 = "UPDATE `site_follow`
                 SET create_at = NOW() , delete_at = NULL
                 WHERE site_id='".$_POST["site_id"]."' AND user_id = '".$_POST["user_id"]."'
             ";
             $query1 = $mysqli->query($sql1);
-            
+
         }else{
             $sqlUser2 = "SELECT * FROM `site_follow` WHERE site_id='".$_POST["site_id"]."' AND user_id='".$_POST["user_id"]."' ";
             $queryUser2 = $mysqli->query($sqlUser2);
@@ -43,16 +43,16 @@
             $query = $mysqli->query($sql2) or die(mysqli_error($mysqli));
             }
         }
-        
+
     }
     if($task=="saveSession"){
         $_SESSION["dtt_user_form"] = $_POST["user_id"];
     }
     if($task=="changeSession"){
-        $_SESSION["dtt_user_form"] = "";
+        $_SESSION["dtt_user_form"] = $_POST["dtt_puser_id"];
     }
     if($task=="outSite"){
-        
+
         $sql = "UPDATE `site_follow` SET delete_at=NOW() WHERE site_id='".$_POST["site_id"]."' AND user_id='".$_POST["user_id"]."' ";
 
         $query = $mysqli->query($sql) or die(mysql_error($mysqli));
