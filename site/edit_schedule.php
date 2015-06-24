@@ -12,6 +12,10 @@
 </script>
 <?php eb();?>
 
+<?php sb('notifications');?>
+<?php include_once '../notifications.php'; ?>
+<?php eb();?>
+
 <?php sb('content');?>
 <?php include_once "../_connection/db_base.php"; ?>
 <?php
@@ -152,6 +156,16 @@ $row = $result->fetch_assoc();
     //$("#scheduledate").datepicker({ dateFormat: 'dd/mm/yyyy', });
     //$("#scheduledateend").datepicker({ dateFormat: 'dd/mm/yyyy', });
     $('.datepicker').datepicker();
+
+    datepicker_hide('scheduledate');
+    datepicker_hide('scheduledateend');
+    function datepicker_hide(datePick){
+      $(function(){
+        $('#'+datePick).on('changeDate', function(ev){
+          $(this).datepicker('hide');
+        });
+      });
+    }
 
     $("#btnedit").click(function(){
 

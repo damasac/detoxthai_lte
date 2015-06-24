@@ -152,7 +152,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
               $result_check_edit = $result_check_edit->fetch_assoc();
 
               if (0 < $result_check_edit['edit_status']) {
-                $btn_edit = "<a type='button' href='site/site_schedule.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a>";
+                $btn_edit = "<a type='button' href='site_schedule.php?site_id=".$row['site_id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a>";
               } else {
                 $btn_edit = "";
               }

@@ -112,7 +112,7 @@ isset($_SESSION[SESSIONPREFIX.'puser_id']) ? $session = $_SESSION[SESSIONPREFIX.
           </select>
         </div>
         <p class="text-left col-xs-2" style="margin-left: -15px;">
-          <a class="btn btn-block btn-primary btn-flat" href="site/site_schedule_old.php">ดูหลังสูตรทั้งหมด</a>
+          <a class="btn btn-block btn-primary btn-flat" href="site/site_schedule_old.php">ดูหลักสูตรทั้งหมด</a>
         </p>
       </div>
       <p></p>

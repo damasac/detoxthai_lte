@@ -83,7 +83,7 @@ if (0 == $row_data['check_data']) {
         </tr>
         <?php
         $sql = "SELECT site_detail.id AS site_id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
-        site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
+        site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
         FROM site_detail
         LEFT JOIN const_district ON site_district = DISTRICT_ID
         LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID

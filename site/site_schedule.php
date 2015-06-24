@@ -316,6 +316,16 @@ if (0 == $row['check_secu'] && $check_point) {
     //$("#scheduledate").datepicker({ dateFormat: 'dd/mm/yyyy', });
     //$("#scheduledateend").datepicker({ dateFormat: 'dd/mm/yyyy', });
 
+    datepicker_hide('scheduledate');
+    datepicker_hide('scheduledateend');
+    function datepicker_hide(datePick){
+      $(function(){
+        $('#'+datePick).on('changeDate', function(ev){
+          $(this).datepicker('hide');
+        });
+      });
+    }
+
     $("#btadd").click(function(){
 
       var schedulename = $("#schedulename");

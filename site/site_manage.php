@@ -103,13 +103,12 @@
         $script_address = "";
 
         $result_site = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
-          site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
+          site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address, delete_at
           FROM site_detail
           LEFT JOIN const_district ON site_district = DISTRICT_ID
           LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
           LEFT JOIN const_province ON site_province = const_province.PROVINCE_ID
           WHERE create_user = ".$_SESSION[SESSIONPREFIX.'puser_id']."
-          AND site_detail.delete_at IS NULL
           ORDER BY id");
         //$result->execute();
         $count = 1;
@@ -117,21 +116,33 @@
         // display it
         if ($result_site->num_rows > 0) {
           while($row = $result_site->fetch_assoc()) {
-            //print_r($row);
+
+            if (NULL == $row['delete_at']) {
+              echo "<tr><td>".$count."</td>
+              <td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+              <td>".$row['site_name']."</td>
+              <td>".$row['address']."</td>
+              <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหน้าเว็บ</a></td>
+              <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a></td>
+              <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>
+              <td>
+                <div class='btn-group-vertical'>
+                  <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
+                  <a href='delete_site_confirm.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
+                </div>
+              </td>
+            </tr>";
+          } else {
             echo "<tr><td>".$count."</td>
-            <td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
-            <td>".$row['site_name']."</td>
-            <td>".$row['address']."</td>
-            <td><a href='index.php?id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหน้าเว็บ</a></td>
-            <td><a href='site_schedule.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>จัดการหลักสูตร</a></td>
-            <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>
-            <td>
-              <div class='btn-group-vertical'>
-                <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
-                <a href='delete_site.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
-              </div>
-            </td>
-          </tr>";
+              <td><a href='http://".$row['site_url'].".detoxthai.org/detoxthai_lte/' target='_blank'>http://".$row['site_url'].".detoxthai.org</a></td>
+              <td>".$row['site_name']."</td>
+              <td>".$row['address']."</td>
+              <td colspan='4'>
+                <a href='site_restore.php?site_id=".$row['id']."' class='btn btn-block btn-primary btn-flat'>ย้อนคืน</a>
+                <a href='site_delete_hide_confirm.php?site_id=".$row['id']."' class='btn btn-block btn-danger btn-flat'>ลบถาวร</a>
+              </td>
+            </tr>";
+          }
 
           // prepare and query (direct)
           $result = $mysqli->query('SELECT PROVINCE_ID, PROVINCE_NAME FROM const_province ORDER BY PROVINCE_NAME');
