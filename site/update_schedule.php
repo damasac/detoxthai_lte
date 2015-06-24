@@ -22,4 +22,12 @@
                     schedule_payment = '$payment',
                     schedule_after_payment = '$afterpayment'
                 WHERE id = '$id'");
+
+    $result = $mysqli->query("SELECT site_id
+        FROM site_schedule
+        WHERE id = '$id'");
+    $row = $result->fetch_assoc();
+
+    /** Update site_detail. */
+    $result = $mysqli->query("UPDATE site_detail SET update_at = NOW() WHERE id = '".$row['site_id']."'");
 ?>

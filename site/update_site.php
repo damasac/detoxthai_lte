@@ -49,5 +49,7 @@
                              SET site_name = '$site_name', site_url = '$site_url', site_province = '$site_province', site_amphur = '$site_amphur', site_district = '$site_district', site_house_no = '$site_house_no', site_village_no = '$site_village_no', site_muban = '$site_muban',
                             site_postal_code = '$site_postal_code', site_telephone = '$site_telephone', site_mobile = '$site_mobile'
                              WHERE id = '$site_id'");
-    //$result->execute();
+
+    /** Update site_detail. */
+    $result = $mysqli->query("UPDATE site_detail SET update_at = NOW() WHERE id = '$site_id'");
 ?>
