@@ -136,7 +136,6 @@ $num2 = $query2->num_rows;
               $txt_payment_upload_status = "<i class='fa fa-fw fa-remove'></i>";
             }
 
-
           echo "<tr>";
           echo "<td>".$count."</td>";
           echo "<td>".$row['fname']." ".$row['lname']."</td>";
@@ -148,7 +147,7 @@ $num2 = $query2->num_rows;
           <a class='btn btn-danger btn-flat' href='delete_join.php?schedule_id=".$row['schedule_id']."&user_id=".$row['user_id']."'>ยกเลิกการเข้าร่วม</a>
         </td>";
         echo "</tr>";
-
+        
         $count++;
       }
     }
