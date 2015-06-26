@@ -84,7 +84,7 @@
                 <li class="active"><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>" data-toggle="tooltip" data-placement="bottom" title="Home">หน้าแรก <span class="sr-only">(current)</span></a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sites.php" data-toggle="tooltip" data-placement="bottom" title="Site">ศูนย์สุขภาพ</a></li>
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>schedules.php" data-toggle="tooltip" data-placement="bottom" title="Course">หลักสูตรล้างพิษ</a></li>
-                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn/" data-toggle="tooltip" data-placement="bottom" title="Member">สมาชิก</a></li>
+                <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>report/" data-toggle="tooltip" data-placement="bottom" title="Member">รายงาน</a></li>
 		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>timeline/" data-toggle="tooltip" data-placement="bottom" title="News Feeds">กิจกรรม</a></li>
 <?php if ($_SESSION[SESSIONPREFIX.'puser_id']=="1") {	?>	<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/';?>gallery/" data-toggle="tooltip" data-placement="bottom" title="News Feeds">รวบรวมภาพ</a></li> <?php } ?>
             <?php /* ?>
