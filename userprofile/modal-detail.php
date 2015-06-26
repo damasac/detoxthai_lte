@@ -1,5 +1,5 @@
 <?php
-    session_start();    
+    session_start();
 
   require_once '../_theme/util.inc.php';
   $MasterPage = 'page_main.php';
@@ -7,7 +7,7 @@
 
 
     $sql = "SELECT * FROM `puser` WHERE id='".$_SESSION["dtt_puser_id"]."' ";
-
+    // echo $sql;
     $query = $mysqli->query($sql);
     $data = $query->fetch_assoc();
 
@@ -33,18 +33,18 @@
         รหัสผ่าน ::
         <code id="valPassword" style="display:none;"></code>
 
-    <input type="password" class="form-control" id="password" name="password" value="<?php echo $data["password"];?>" style="width:550px;">
+    <input type="password" class="form-control" id="password" name="password"  placeholder="กรุณากรอกเมื่อต้องการเปลี่ยนรหัสผ่าน" style="width:550px;">
     </p>
     <p>
         ยืนยันรหัสผ่าน ::
         <code id="valPassword2" style="display:none;"></code>
-    <input type="password" class="form-control" id="password2" name="password2" value="<?php echo $data["password"];?>" style="width:550px;">
+    <input type="password" class="form-control" id="password2" name="password2"  placeholder="กรุณากรอกเมื่อต้องการเปลี่ยนรหัสผ่าน" style="width:550px;">
     </p>
     <p style="font-size:16px;">
-        เบอร์โทรศัพท์ :: 
+        เบอร์โทรศัพท์ ::
         <code id="valTel" style="display:none;"></code>
         <input type="text" class="form-control" id="tel" name="tel"
-               
+
                value="<?php echo $data["tel"];?>" style="width:550px;"
                data-inputmask="'mask': ['9999999999']" data-mask
                >
@@ -93,7 +93,7 @@
     var password = $("#password").val();
     var password2 = $("#password2").val();
     var email = $("#email").val();
-    
+
     if (fname=="") {
       $("#valFname").show();
       $("#valFname").html("กรุณาระบุชื่อ");
@@ -115,32 +115,24 @@
     }else{
       $("#valTel").hide();
     }
-    if (password=="") {
-      $("#valPassword").show();
-      $("#valPassword").html("กรุณาระบุรหัสผ่าน");
-      return ;
-    }
-    else{
-      $("#valPassword").hide();
-    }
-    if (password<6) {
-      $("#valPassword").show();
-      $("#valPassword").html("กรุณาระบุรหัสผ่าน 6 ตัวขึ้นไป");
-      return ;
-    }else{
-      $("#valPassword").hide();
-    }
+
     if (password2!=password) {
         //code
         $("#valPassword2").show();
         $("#valPassword2").html("ระบุรหัสผ่านไม่ตรงกัน");
         return ;
     }
+    if(password===""){
+       passwordSend= "<?php echo $data["password"]?>";
+    }else{
+       passwordSend= $("#password").val();
+    }
+    // alert(passwordSend);
        $.ajax({
 		    url: "sql.php?task=edit",
 		    type: "post",
 		    data: {
-                      password:password,
+                      passwordSend:passwordSend,
                       tel:tel,
                       fname:fname,
                       lname:lname,

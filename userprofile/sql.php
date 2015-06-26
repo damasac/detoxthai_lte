@@ -1,9 +1,9 @@
 <?php
-    session_start();    
+    session_start();
     include_once "../_connection/db_base.php";
-    
+
     $task = $_GET["task"];
-    
+
     if($task=="skip"){
         $sql = "UPDATE
             `puser`
@@ -32,7 +32,7 @@
         }
     }
     if($task=="edit"){
-        $password = $_POST["password"];
+        $password = $_POST["passwordSend"];
         $sqlSelect = "SELECT * FROM `puser` WHERE `password`='".$password."' ";
         $querySelect = $mysqli->query($sqlSelect);
         $numSelect = $querySelect->num_rows;
@@ -51,9 +51,9 @@
             exit;
         }
         if($numSelect==1){
-            $password = $_POST["password"];
+            $password = $_POST["passwordSend"];
         }else{
-            $password = sha1(md5($_POST["password"]));
+            $password = sha1(md5($_POST["passwordSend"]));
         }
         $sql = "
         UPDATE `puser`
