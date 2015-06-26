@@ -44,7 +44,7 @@
           </div>
 
           <div class="box-body">
-       
+
             <!--<div class="pull-right">
               <div class="form-group">
                   <label for="exampleInputEmail2">เลือกหมวดภาพ</label>
@@ -57,15 +57,15 @@
                 </select>
                 </div>
             </div>-->
-            
+
             <br><br><br><br>
-            
-            
+
+
             <script>
             var ref_user ='<?php echo $_SESSION['dtt_user_form']; ?>';
             var file_type = 0;
             var status = 0;
-            
+
             $(document).ready(function(){
               $( "#status" ).change(function() {
                 file_type = $('#status').val();
@@ -76,9 +76,9 @@
                 alert( status );
               });
             });
-            
 
-            
+
+
             $(document).ready(function(){
                     $('#photo_upload').JSAjaxFileUploader({
                         uploadUrl:'upload-album.php',
@@ -97,22 +97,22 @@
                         }
                     });
             });
-                  
+
               </script>
             <h2><b>โพสต์รูปภาพ</b></h2><hr>
             <div class="form-group">
                   <div id='photo_upload'></div>
               </div>
-            
+
             <div id="post-photo" class="col-lg-12 col-md-12 col-sm-12" style="border: 2px solid green;padding:20px; display: none;">
-                
+
                 <form>
-                
+
                <div class="form-group">
                   <textarea id='detail' class="form-control" rows="3" placeholder="เขียนคำอธิบาย"></textarea>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                   <label for="exampleInputEmail2">เลือกหมวดภาพ</label>
                   <select id='file_type' class="form-control">
@@ -123,7 +123,7 @@
                   <option value='0' selected>อื่นๆ</option>
                 </select>
                 </div>
-                
+
                 <div class="form-group">
                   <label for="exampleInputEmail2">ประเภทการแชร์</label>
                   <select id='status' class="form-control">
@@ -135,12 +135,12 @@
                   <option value='5'>เฉพาะสมาชิกที่ระบุ...</option>
                 </select>
                 </div>
-                
+
                 <button type="button" class="btn btn-primary"><li class="fa fa-send"></li> โพสต์</button>
 
               </form>
             </div>
-            
+
             <hr>
             <div id="photo_upload_file" class="row">
               <?php
@@ -148,7 +148,7 @@
                   //echo $sql;
                   $result = $conn->query($sql);
                   while($dbarr = $result->fetch_assoc()){
-                          
+
                           if($dbarr['file_type'] =='mp4'){
                           echo '<div  id="divfile'.$dbarr['id'].'" class="col-lg-4 col-md-4 col-sm-4">
                     <a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a><br><br>
@@ -162,22 +162,22 @@
                     <img class="img-responsive img-thumbnail" src="file_upload/album/'.$dbarr['file_name'].'">
                     </a>
                     <br><br>
-                    <a class="btn btn-success" href="file_upload/video/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>
+                    <a class="btn btn-success" href="file_upload/album/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 </div>';
                           }
                   }
                   ?>
-                
-                
+
+
             </div>
-         
-            
+
+
           </div><!-- /.box-body -->
     </div><!-- /.box -->
 
   </section><!-- /.content -->'
-  
+
     <div id="blueimp-gallery" class="blueimp-gallery">
     <!-- The container for the modal slides -->
     <div class="slides"></div>
@@ -229,5 +229,5 @@
 </script>
 
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
