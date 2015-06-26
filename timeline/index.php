@@ -165,7 +165,7 @@ $MasterPage = 'page_main.php';?>
                                                             $queryImg = $mysqli->query($sqlImg);
                                                             while($dataImg = $queryImg->fetch_assoc()){
                                                                        ?>
-                                                                         <img src="img/<?php echo $dataImg["image"]?>"  class='margin' width='150' height='100'/>
+                                                                         <img src="img/<?php echo $dataImg["image"]?>"  class='margin'   height='100' />
                                                                        <?php
                                                             }
                                                 }
@@ -230,7 +230,7 @@ $MasterPage = 'page_main.php';?>
                   <i class="fa fa-book bg-teal"></i>
                   <div class="timeline-item">
                     <span class="time"><i class="fa fa-clock-o"></i> <?php echo TimeThai($dateJoin["create_at"]);?></span>
-                    <h3 class="timeline-header no-border"><a  ><?php echo lookUpUser($dateJoin["user_id"],$mysqli);?></a> ได้เข้าร่วมหลักสูตร <a>asdasd</a></h3>
+                    <h3 class="timeline-header no-border"><a  ><?php echo lookUpUser($dateJoin["user_id"],$mysqli);?></a> ได้เข้าร่วมหลักสูตร <a><?php  echo LookUpSchdule($dateJoin["schedule_id"],$mysqli)?></a></h3>
                   </div>
                 </li>
                  <?php }?>

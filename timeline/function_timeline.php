@@ -20,7 +20,7 @@
 		return "$strHour:$strMinute:$strSeconds";
 	}
         function formatDateThai($date){
-            
+
 	    $strDay= date("d",strtotime($date));
 	    $strYear = date("Y",strtotime($date))+543;
             $strMonth =  date("n",strtotime($date));
@@ -29,18 +29,31 @@
             return "$strDay $strMonthThai $strYear ";
         }
 	function lookUpUser($user_id,$mysqli){
-                $sql = "SELECT * FROM `puser` WHERE id='".$user_id."' ";
-                $query = $mysqli->query($sql);
-                $data = $query->fetch_assoc();
-                $dataFname = $data["fname"];
-                $dataLname = $data["lname"];
-                return $dataFname." ".$dataLname;
-        }
+      $sql = "SELECT * FROM `puser` WHERE id='".$user_id."' ";
+      $query = $mysqli->query($sql);
+      $data = $query->fetch_assoc();
+      $name = "";
+      if($data["nickname"]==""){
+        $name=$data["fname"]." ".$data["lname"];
+      }else{
+        $name=$data["nickname"];
+      }
+
+      return $name;
+
+  }
 	function lookUpSite($site_id,$mysqli){
 		$sql = "SELECT * FROM `site_detail` WHERE id='".$site_id."' ";
 		$query = $mysqli->query($sql);
 		$data = $query->fetch_assoc();
+    // print_r($data["sitename"]);
 		$dataSitename = $data["site_name"];
 		return $dataSitename;
 	}
+  function LookUpSchdule($schedule_id,$mysqli){
+    $sql = "SELECT * FROM `site_schedule` WHERE id='".$schedule_id."' ";
+    $query = $mysqli->query($sql);
+    $data = $query->fetch_assoc();
+    return $data["schedule_name"];
+  }
 ?>

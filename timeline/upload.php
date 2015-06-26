@@ -15,7 +15,6 @@ for ($i = 0; $i < count($filenames); $i++) {
     $target = "img" . DIRECTORY_SEPARATOR . md5(uniqid()) . "." . array_pop($ext);
     if(move_uploaded_file($images['tmp_name'][$i], $target)) {
         $newimage = explode('/',$target);
-        //print_r($newimage);
         $success = true;
         $paths[] = $target;
     } else {
