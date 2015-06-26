@@ -15,7 +15,7 @@
                 </tr>
                 <tr>
                   <td>
-                    
+
                     <?Php
                       $question = array(
                                         "1"=>"a) นอนหลังเที่ยงคืน",
@@ -37,35 +37,39 @@
                                         "17"=>'q) ออกกำลังกาย <br> <input placeholder="เช่น..." type="text" class="form-control" id="p3a17c1" value="'.$dataform['p3a17c1'].'">',
                                         "18"=>"r) นั่งสมาธิ",
                                         );
-                    
+
                     ?>
-                    
+
                                   <table class="table table-striped table-bordered table-hover" style="width:100%;">
                                     <thead>
                                         <tr>
                                             <th>พฤติกรรมในรอบหนึ่งเดือนที่ผ่านมา</th>
-                                            <th>บ่อยมาก</th>
-                                            <th >บางครั้ง</th>
-                                            <th >น้อยมาก</th>
-                                            <th >ไม่เคยเลย</th>
+                                            <th></th>
+                                            <th ></th>
+                                            <th ></th>
+                                            <th ></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      
+
                                     <?php for($i=1;$i<=18;$i++){?>
                                         <tr>
                                           <td><?php echo $question["$i"];?></td>
                                           <td >
                                             <input type="hidden" id="selectValue" value="<?php echo $dataform["p3a$i"];?>"/>
+                                            <label>บ่อยมาก</label><br>
                                             <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v1" value="1" <?php if($dataform["p3a$i"]==1){echo "checked";}else{echo "";}?>>
                                           </td>
                                           <td>
+                                            <label>บางครั้ง</label><br>
                                             <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v2" value="2" <?php if($dataform["p3a$i"]==2){echo "checked";}else{echo "";}?>>
                                           </td>
                                           <td>
+                                            <label>น้อยมาก</label><br>
                                             <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v3" value="3" <?php if($dataform["p3a$i"]==3){echo "checked";}else{echo "";}?>>
                                           </td>
                                           <td>
+                                            <label>ไม่เคยเลย</label><br>
                                             <input type="radio" name="p3a<?php echo$i;?>" id="p3a<?php echo$i;?>v4" value="4" <?php if($dataform["p3a$i"]==4){echo "checked";}else{echo "";}?>>
                                           </td>
                                         </tr>
