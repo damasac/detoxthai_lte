@@ -12,7 +12,7 @@
 
 <?php ?>
   <h4>&nbsp;กรุณาระบบัตรประชาชนก่อนโพสต์เพื่อยืนยันตัวตน</h4><br>
-  <button class="btn btn-block btn-success" onclick='location.href="../form/form_private.php"' >เริ่มกรอกข้อมูลเดี๋ยวนี้</button>
+  <button class="btn btn-block btn-success" onclick="location.href='../form/form_private.php'" >เริ่มกรอกข้อมูลเดี๋ยวนี้</button>
 <script>
 
 </script>
