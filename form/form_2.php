@@ -131,9 +131,8 @@
 					<script>
 
 						$(document).ready(function(){
-
+								var size_media = 5400900*40; //200MB
 								$('#section2_<?php echo $i; ?>').JSAjaxFileUploader({
-									var size_media = 5400900*40; //200MB
 									uploadUrl:'upload.php',
 									inputText:'<li class="fa fa-picture-o"></li> แนบรูปภาพหรือวิดีโอ สิ่งที่ออกมาจากการล้างพิษตับ',
 									fileName:'photo',
