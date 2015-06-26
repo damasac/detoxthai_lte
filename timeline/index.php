@@ -13,9 +13,10 @@ $MasterPage = 'page_main.php';?>
         <link href="../_plugins/js-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
         <script src="../_plugins/js-fileinput/js/fileinput.js" type="text/javascript"></script>
 <?php eb();?>
-
 <?php sb('content');?>
 <?php
+
+
             date_default_timezone_set("Asia/Bangkok");
             include_once "../_connection/db_base.php";
             include_once "function_timeline.php";
@@ -23,6 +24,9 @@ $MasterPage = 'page_main.php';?>
             $time = date("H:i:s");
             $dateNow = DateThai($date);
             $timeNow = TimeThai($time);
+            $sqlSelectUser = "SELECT * FROM `puser` WHERE id='".$_SESSION["dtt_puser_id"]."' ";
+            $querySelectUser = $mysqli->query($sqlSelectUser);
+            $dataSelectUser = $querySelectUser->fetch_assoc();
             $sqlDateUser = "SELECT  DATE_FORMAT(a.createdate, '%Y-%m-%d') AS date FROM puser AS a ORDER BY a.createdate DESC";
             $queryDateUser = $mysqli->query($sqlDateUser);
             $sqlDateFollow = "SELECT  DATE_FORMAT(a.create_at, '%Y-%m-%d') AS date1,DATE_FORMAT(a.delete_at, '%Y-%m-%d') AS date2 FROM site_follow AS a ORDER BY a.create_at DESC";
@@ -78,12 +82,11 @@ $MasterPage = 'page_main.php';?>
        <li class="active">Time Line</li>
     </ol>
   </section>
-<?php
-?>
+
   <!-- Main content -->
         <section class="content">
             <div class="box box-primary">
-            <?php if($_SESSION!=""){?>
+            <?php if($_SESSION["dtt_puser_id"]!=""){?>
                 <br>
                 <div class="container">
                     <div class="row">
@@ -102,6 +105,8 @@ $MasterPage = 'page_main.php';?>
 
                         </div>
                         <div class="col-md-2">
+                        <input type="hidden" id="cid" name="cid" value="<?php echo $dataSelectUser["cid"];?>">
+                        <input type="hidden" id="pid" name="pid" value="<?php echo $dataSelectUser["id"];?>">
                         <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-camera'> </i></button>
                         <button type="submit" class="btn btn-success" id="button_post"><i class="fa fa-pencil"></i> โพสต์</button>
                         </div>
@@ -251,7 +256,11 @@ $MasterPage = 'page_main.php';?>
 <?php eb();?>
 
 <?php sb('js_and_css_footer');?>
-
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<link rel="stylesheet" href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css">
+<script src="../_plugins/input-mask/jquery.inputmask.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="../_plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script>
 
 var $input = $("#file");
@@ -272,7 +281,13 @@ $input.fileinput("upload");
                         });
 
             $("#button_post").click(function(){
-
+                        var pid = $("#pid").val();
+                        var cid = $("#cid").val();
+                        if(cid==""){
+                          alert("กรุณาระบุบัตรประชาชนของท่านก่อนทำการโพสต์");
+                          cidDialog(pid);
+                          return ;
+                        }
                         var imgLength = $(".file-preview-image").length;
                         var imgQuery = [];
                         var post = $("#timeline_post").val();
@@ -308,7 +323,16 @@ $input.fileinput("upload");
                                     }
                                 });
                         });
-
+          function cidDialog(pid){
+              BootstrapDialog.show({
+                type: BootstrapDialog.TYPE_WARNING,
+                closable: true,
+                closeByBackdrop: false,
+                closeByKeyboard: false,
+                title: 'ระบุบัตรประชาชน',
+                message: $('<div></div>').load('modal-cid.php?pid='+pid)
+            });
+          }
 </script>
 <![endif]-->
 <?php eb();?>

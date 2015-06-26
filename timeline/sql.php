@@ -19,8 +19,18 @@
                 ";
 
                 $query2 = $mysqli->query($sql2);
-                
+
             }
         }
+    }
+    if($task=="cid"){
+      $sql = "UPDATE
+        `puser`
+        SET
+        `cid`='".$_POST["cid"]."'
+        WHERE
+        `id`='".$_POST["pid"]."'
+      ";
+      $query = $mysqli->query($sql);
     }
 ?>
