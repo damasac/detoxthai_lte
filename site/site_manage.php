@@ -103,7 +103,8 @@
         $script_address = "";
 
         $result_site = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
-          site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address, delete_at
+          site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address, delete_at,
+          lat, lng
           FROM site_detail
           LEFT JOIN const_district ON site_district = DISTRICT_ID
           LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
@@ -127,7 +128,7 @@
               <td><a href='site_manage_user.php?site_id=".$row['id']."' class='btn btn-primary btn-flat'>เพิ่มผู้ดูแล</a></td>
               <td>
                 <div class='btn-group-vertical'>
-                  <button class='btn btn-primary btn-flat' data-toggle='modal' data-target='#myModal".$count."'>แก้ไข</i></button>
+                  <button class='btn btn-primary btn-flat' onclick='showMap".$count."();'>แก้ไข</i></button>
                   <a href='delete_site_confirm.php?site_id=".$row['id']."' class='btn btn-danger btn-flat'>ลบ</i></a>
                 </div>
               </td>
@@ -210,6 +211,8 @@
                 site_telephone: $('#tel".$count."').val(),
                 site_mobile: $('#mobile".$count."').val(),
                 site_user: ".$_SESSION[SESSIONPREFIX.'puser_id'].",
+                lat: lat".$count.",
+                lng: lng".$count.",
               },
               function(data,status){
                 location.reload();
@@ -219,7 +222,48 @@
 </script>";
 
 $script_address .= '<script type="text/javascript">
+
+var map'.$count.';
+var markers'.$count.' = [];
+
+var lat'.$count.';
+var lng'.$count.';
+
+var locationName'.$count.';
+
+function showMap'.$count.'() {
+  var mapOptions'.$count.' = {
+      zoom: 5
+    };
+
+  map'.$count.' = new google.maps.Map(document.getElementById("map'.$count.'"),
+    mapOptions'.$count.');
+
+  $("#myModal'.$count.'").on("shown.bs.modal", function () {
+      google.maps.event.trigger(map'.$count.', "resize");
+      map'.$count.'.setCenter(new google.maps.LatLng('.$row['lat'].', '.$row['lng'].'));
+
+      var myLatlng'.$count.' = new google.maps.LatLng('.$row['lat'].', '.$row['lng'].');
+
+      var marker'.$count.' = new google.maps.Marker({
+        position: myLatlng'.$count.',
+        map: map'.$count.',
+        draggable:true
+      });
+
+      lat'.$count.' = '.$row['lat'].';
+      lng'.$count.' = '.$row['lng'].';
+
+      google.maps.event.addListener(marker'.$count.', "dragend", function(event) { lat'.$count.' = event.latLng.lat(); lng'.$count.' = event.latLng.lng(); } );
+      markers'.$count.'.push(marker'.$count.');
+
+    });
+
+  $("#myModal'.$count.'").modal("show");
+}
+
 $(document).ready(function(){
+
   $("#province'.$count.'").change(function() {
             //alert("Codeerror");
     $("#amphur'.$count.'").empty();
@@ -343,6 +387,13 @@ $box .= "<div class='modal fade' id='myModal".$count."' tabindex='-1' role='dial
             <input type='text' class='form-control' id='mobile".$count."' placeholder='มือถือ' value='".$row['site_mobile']."'>
           </div>
         </div>
+        <div class='form-group'>
+          <label for='mobile' class='col-sm-2 control-label'></label>
+          <div class='col-sm-10'>
+            <label for='mobile' class='control-label'>ตำแหน่ง : </label>
+            <div id='map".$count."' style='height:400px'></div>
+          </div>
+        </div>
       </form>
     </div>
     <div class='modal-footer'>
@@ -400,7 +451,7 @@ $manage_site_count = $result_count_manage->fetch_assoc();
     //foreach ($result_user_manage as $row_user_manage) {
 
       $result = $mysqli->query("SELECT id, site_name, site_url, site_province, site_amphur, site_district, site_house_no, site_village_no, site_muban,
-        site_postal_code, site_telephone, site_mobile, CONCAT(' บ้าน', site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
+        site_postal_code, site_telephone, site_mobile, CONCAT(site_muban, ' บ้านเลขที่ ', site_house_no, ' หมู่ ', site_village_no, ' ตำบล', DISTRICT_NAME, ' อำเภอ', AMPHUR_NAME, ' จังหวัด', PROVINCE_NAME) AS address
         FROM site_detail
         LEFT JOIN const_district ON site_district = DISTRICT_ID
         LEFT JOIN const_amphur ON site_amphur = const_amphur.AMPHUR_ID
@@ -676,7 +727,7 @@ $manage_site_count = $result_count_manage->fetch_assoc();
       lat = 13.736717;
       lng = 100.523186;
 
-      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
       markers.push(marker);
 
       /** ============================= */
@@ -781,7 +832,7 @@ $manage_site_count = $result_count_manage->fetch_assoc();
           lat = json.results[0].geometry.location.lat;
           lng = json.results[0].geometry.location.lng;
 
-          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
           markers.push(marker);
 
           map.setZoom(10)
@@ -827,7 +878,7 @@ $("#amphur").change(function() {
       lat = json.results[0].geometry.location.lat;
       lng = json.results[0].geometry.location.lng;
 
-      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
       markers.push(marker);
 
       map.setZoom(10)
@@ -864,7 +915,7 @@ $("#district").change(function() {
           lat = json.results[0].geometry.location.lat;
           lng = json.results[0].geometry.location.lng;
 
-          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
           markers.push(marker);
 
           map.setZoom(10)

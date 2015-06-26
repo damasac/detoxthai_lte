@@ -20,6 +20,8 @@
     $site_telephone = $_POST['site_telephone'];
     $site_mobile = $_POST['site_mobile'];
     $site_user = $_POST['site_user'];
+    $lat = $_POST['lat'];
+    $lng = $_POST['lng'];
 
     /** Check security. */
     $check_point = 0;
@@ -47,7 +49,7 @@
 
     $result = $mysqli->query("UPDATE site_detail
                              SET site_name = '$site_name', site_url = '$site_url', site_province = '$site_province', site_amphur = '$site_amphur', site_district = '$site_district', site_house_no = '$site_house_no', site_village_no = '$site_village_no', site_muban = '$site_muban',
-                            site_postal_code = '$site_postal_code', site_telephone = '$site_telephone', site_mobile = '$site_mobile'
+                            site_postal_code = '$site_postal_code', site_telephone = '$site_telephone', site_mobile = '$site_mobile', lat = '$lat', lng = '$lng'
                              WHERE id = '$site_id'");
 
     /** Update site_detail. */

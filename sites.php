@@ -373,7 +373,7 @@ if (0 == $row_data['check_data']) {
       lat = 13.736717;
       lng = 100.523186;
 
-      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
       markers.push(marker);
 
 
@@ -477,7 +477,7 @@ $('#myModal').modal("show");
           lat = json.results[0].geometry.location.lat;
           lng = json.results[0].geometry.location.lng;
 
-          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
           markers.push(marker);
 
           map.setZoom(10)
@@ -521,7 +521,7 @@ $("#amphur").change(function() {
       lat = json.results[0].geometry.location.lat;
       lng = json.results[0].geometry.location.lng;
 
-      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+      google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
       markers.push(marker);
 
       map.setZoom(10)
@@ -558,7 +558,7 @@ $("#district").change(function() {
           lat = json.results[0].geometry.location.lat;
           lng = json.results[0].geometry.location.lng;
 
-          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lat(); } );
+          google.maps.event.addListener(marker, 'dragend', function(event) { lat = event.latLng.lat(); lng = event.latLng.lng(); } );
           markers.push(marker);
 
           map.setZoom(10)
