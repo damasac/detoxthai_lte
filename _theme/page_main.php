@@ -87,17 +87,19 @@
                 <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>usermgn/" data-toggle="tooltip" data-placement="bottom" title="Member">สมาชิก</a></li>
 		<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>timeline/" data-toggle="tooltip" data-placement="bottom" title="News Feeds">กิจกรรม</a></li>
 <?php if ($_SESSION[SESSIONPREFIX.'puser_id']=="1") {	?>	<li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/';?>gallery/" data-toggle="tooltip" data-placement="bottom" title="News Feeds">รวบรวมภาพ</a></li> <?php } ?>
+            <?php /* ?>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cogs"></span><span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>dev_view.php">Dev View</a></li>
-                     <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html">Example</a></li 
+                     <li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>example_pages/widgets.html">Example</a></li
                      <!--< li class="divider"></li>-->
-                     <!--li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation">Document</a></li--> 
+                     <!--li><a target="_blank" href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>documentation">Document</a></li-->
                     <!-- li class="divider"></li -->
                     <!-- li><a href="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>sql.php">SQL</a></li -->
                   </ul>
                 </li>
+            <?php */ ?>
               </ul>
 
             </div><!-- /.navbar-collapse -->
