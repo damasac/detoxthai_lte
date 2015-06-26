@@ -5,7 +5,7 @@ if(empty($_SESSION)){
 //encoding to utf-8
 header("Content-type:text/html; charset=UTF-8");
 //for path directory
-define("APP_WEBROOT", "");
+define("APP_WEBROOT", "detoxthai_lte/");
 //Session Prefix
 if (!defined('SESSIONPREFIX')) define('SESSIONPREFIX', 'dtt_');
 

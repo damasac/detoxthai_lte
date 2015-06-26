@@ -172,6 +172,10 @@ $site_id_desc = $result_name_site->fetch_assoc();
       <a href="site/index.php?menu=<?php echo $menu ?>&id=1" class="btn btn-primary btn-flat">แก้ไขเนื้อหา</a>
   </div>
   <?php
+  } else {
+    echo "<div class='col-md-12 text-right'>";
+    echo "<a type='button' href='site/site_follow.php?site_id=".$site_id."' class='btn btn-primary btn-flat'><i class='fa fa-fw fa-heart'></i> ติดตาม</a>";
+    echo "</div>";
   }
   ?>
   <div class="row marketing" id="show_content">

@@ -1,5 +1,7 @@
 <?php require_once '_theme/util.inc.php'; $MasterPage = 'page_main.php';?>
-
+<?php sb('notifications');?>
+<?php include_once '../notifications.php'; ?>
+<?php eb();?>
 <?php sb('title');?> Liver flushing registry <?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
@@ -43,11 +45,11 @@
           </div><!-- /.error-page -->
 
   </section><!-- /.content -->'
-  
+
 <?php eb();?>
 
 
 <?php sb('js_and_css_footer');?>
 <?php eb();?>
- 
-<?php render($MasterPage);?>          
+
+<?php render($MasterPage);?>
