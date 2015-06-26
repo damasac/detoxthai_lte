@@ -80,6 +80,7 @@
 
 
             $(document).ready(function(){
+              var size_media = 5400900*40; //200MB
                     $('#photo_upload').JSAjaxFileUploader({
                         uploadUrl:'upload-album.php',
                         inputText:'<li class="fa fa-picture-o"></li> เลือกรูปภาพหรือวิดีโอ...',
@@ -87,7 +88,7 @@
                         allowExt:'gif|jpg|jpeg|png|bmp|mp4',
                         //autoSubmit:false,
                         formData:{ref_user:ref_user, file_type:file_type, status:status},
-                        maxFileSize:5400900,
+                        maxFileSize:size_media,
                         zoomPreview:true,
                         zoomWidth:260,
                         zoomHeight:260,

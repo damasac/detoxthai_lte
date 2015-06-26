@@ -154,6 +154,7 @@
                 <script>
 
 					$(document).ready(function(){
+              var size_media = 5400900*40; //200MB
 							$('#section4_20').JSAjaxFileUploader({
 								uploadUrl:'upload.php',
 								inputText:'<li class="fa fa-picture-o"></li> แนบรูปภาพหรือวิดีโอ ผลการตรวจ',
@@ -161,7 +162,7 @@
 								allowExt:'gif|jpg|jpeg|png|bmp|mp4',
 								//autoSubmit:false,
 								formData:{ref_form:'<?php echo $_GET['form_id']; ?>', ref_field:'p4a8', ref_user:'<?php echo $_SESSION['dtt_user_form']; ?>'},
-								maxFileSize:5400900,
+								maxFileSize:size_media,
 								zoomPreview:true,
 								zoomWidth:260,
 								zoomHeight:260,
