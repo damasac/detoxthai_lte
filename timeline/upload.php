@@ -1,4 +1,5 @@
 <?php
+//error_reporting(E_ALL);
 //$p1 = [];
 //$p2 = [];
 $images = $_FILES['images'];
@@ -21,14 +22,13 @@ for ($i = 0; $i < count($filenames); $i++) {
         $success = false;
         break;
     }
-    
-    $p1[$i] = "<img src='".$target."' data-id='$i' class='file-preview-image'>";
-    $p2[$i] = ['caption' => '', 'width' => '120px', 'url' => 'upload-delete.php', 'key' => $target];
-}
-echo json_encode([
-    'initialPreview' => $p1, 
-    'initialPreviewConfig' => $p2,   
-    'append' => true
 
- ]);
+    $p1[$i] = "<img src='".$target."' data-id='$i' class='file-preview-image'>";
+    $p2[$i] = array('caption' => '', 'width' => '120px', 'url' => 'upload-delete.php', 'key' => $target);
+}
+echo json_encode(array(
+    'initialPreview' => $p1,
+    'initialPreviewConfig' => $p2,
+    'append' => true
+ ));
 ?>
