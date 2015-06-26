@@ -154,7 +154,7 @@
                 <script>
 
 					$(document).ready(function(){
-              var size_media = 5400900*40; //200MB
+              // var size_media = 5400900*40; //200MB
 							$('#section4_20').JSAjaxFileUploader({
 								uploadUrl:'upload.php',
 								inputText:'<li class="fa fa-picture-o"></li> แนบรูปภาพหรือวิดีโอ ผลการตรวจ',

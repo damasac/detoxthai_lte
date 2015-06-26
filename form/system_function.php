@@ -19,7 +19,7 @@ function System_ShowDateLongTh($myDate) {
 			case "12" : $myMonth = "ธันวาคม";  break;
 		}
 		$myYear = sprintf("%d",$myDateArray[0]);
-        return($myDay . " " . $myMonth . " " . $myYear);
+        return($myDay . " " . $myMonth . " พ.ศ." . $myYear);
 }
 ###############################
 function System_ShowDateEn($myDate) {
@@ -63,6 +63,6 @@ function System_ShowDate($myDate) {
 			case "12" : $myMonth = "ธ.ค.";  break;
 		}
 		$myYear = substr(sprintf("%d",$myDateArray[0]),2,2);
-        return($myDay . " " . $myMonth . " " . $myYear);
+        return($myDay . " " . $myMonth . " พ.ศ." . $myYear);
 }
 ?>
