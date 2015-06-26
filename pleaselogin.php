@@ -22,7 +22,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content">
+  <section class="content" onclick="window.location.href='login.php?returnurl=<?php echo urlencode($returnurl);?>';">
     <div class="box box-default">
       <div class="box-body">
           <div class="error-page">
