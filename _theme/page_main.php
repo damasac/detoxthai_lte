@@ -65,7 +65,7 @@
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="skin-blue layout-top-nav">
+  <body class="skin-green layout-top-nav">
     <div class="wrapper">
 
       <header class="main-header">
