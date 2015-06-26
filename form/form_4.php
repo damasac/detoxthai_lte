@@ -1,6 +1,6 @@
 <style>
     .slider-handle{
-        width: 40px !important; 
+        width: 40px !important;
         height: 40px !important;
     }
     .slider.slider-horizontal .slider-handle {
@@ -22,13 +22,13 @@
                   <th  style="color: #FFF;"><b>ตอนที่ 4 การประเมินภาวะสุขภาพของท่าน <code>ในรอบหนึ่งเดือนที่ผ่านมา</code></b></th>
                 </tr>
               </thead>
-            
+
               <tbody>
-               
+
                 <tr>
                   <td><b>ขอให้ท่านประเมินภาวะสุขภาพของตนเองตามสุขภาพที่เป็นอยู่ตรงกับความเป็นจริงมากที่สุดไม่ใช่ประเมินจากความรู้สึก  เมื่อเสร็จข้อ 19 โปรดสไลด์ค่าคะแนนที่ตรงกับสภาวะสุขภาพของท่านมากที่สุด</b></td>
                 </tr>
-                
+
                 <tr>
                   <td>
                         <div class="from-group">
@@ -141,7 +141,7 @@
                   <td>
                         <div class="from-group">
                             <label for="name" style="font-weight: bold;">โปรดกำหนดค่าคะแนนที่ตรงกับสภาวะสุขภาพของท่านมากที่สุด จากคะแนน 1 - 100</label><br><br><br>
-                            
+
                             <div class="text-center">
 							<div class="pull-left"><b>แย่ที่สุด</b></div><div class="pull-right"><b>ดีที่สุด</b></div><br><br>
                               <input style="background: green;" class="from-control"
@@ -170,7 +170,7 @@
 								}
 							});
 					});
-					
+
 				</script>
                 <tr>
                   <td>
@@ -181,31 +181,31 @@
 							<hr>
 							<div id="section4_file_20">
 						<?php
-							$sql = "SELECT `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p4a8' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+							$sql = "SELECT `id`, `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p4a8' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
 							//echo $sql;
 							$result = $conn->query($sql);
 							while($dbarr = $result->fetch_assoc()){
-								
+
 								if($dbarr['file_type'] =='mp4'){
 								echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
 								}
 								else {
-								echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+								echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
 								}
-								
+
 							}
 						?>
 							</div>
                         </div>
                   </td>
                 </tr>
-              
+
               </tbody>
             </table>
   </div>
 
   </div>
-  
+
 </div>
 <style>
    #ex1Slider .slider-selection {

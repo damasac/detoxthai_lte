@@ -152,7 +152,6 @@
                           if($dbarr['file_type'] =='mp4'){
                           echo '<div  id="divfile'.$dbarr['id'].'" class="col-lg-4 col-md-4 col-sm-4">
                     <a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a><br><br>
-                    <a class="btn btn-success" target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 </div>';
                           }
@@ -162,7 +161,6 @@
                     <img class="img-responsive img-thumbnail" src="file_upload/album/'.$dbarr['file_name'].'">
                     </a>
                     <br><br>
-                    <a class="btn btn-success" href="file_upload/album/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 </div>';
                           }

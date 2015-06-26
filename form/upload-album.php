@@ -112,7 +112,6 @@
                     <img class="img-responsive img-thumbnail" src="file_upload/album/'.$filename.'">
                     </a>
                     <br><br>
-                    <a class="btn btn-success" href="file_upload/album/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 </div>';
     } else {
@@ -136,7 +135,6 @@
 		$last_id = $mysqli->insert_id;
          echo '<div  id="divfile'.$last_id.'" class="col-lg-4 col-md-4 col-sm-4">
                     <a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a><br><br>
-                    <a class="btn btn-success" target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 </div>';
 	} else {

@@ -104,7 +104,7 @@
 	$result = $mysqli->query($sql);
 	$last_id = $mysqli->insert_id;
 	//echo $last_idx; exit;
-	echo '<div id="divfile'.$last_id.'"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery>ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
+	echo '<div id="divfile'.$last_id.'"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
     } else {
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
     //

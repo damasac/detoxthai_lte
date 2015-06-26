@@ -68,7 +68,7 @@
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c5";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c5"];?> </textarea></td>
                                         </tr>
                                         <script>
-                    
+
                                             $(document).ready(function(){
                                                     $('#section5_<?php echo $i; ?>').JSAjaxFileUploader({
                                                         uploadUrl:'upload.php',
@@ -86,7 +86,7 @@
                                                         }
                                                     });
                                             });
-                                            
+
                                         </script>
                                         <tr class='<?php echo $classcss; echo " section5_",$i; ?>'>
                                             <td colspan="6"><div id="section5_<?php echo $i; ?>"></div></td>
@@ -94,18 +94,18 @@
                                         <tr class='<?php echo $classcss; echo " section5_",$i; ?>'>
                                             <td colspan="6"  id="section5_file<?php echo $i; ?>">
                                             <?php
-                                            $sql = "SELECT `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p5a21g".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+                                            $sql = "SELECT `id`, `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p5a21g".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
                                             //echo $sql;
                                             $result = $conn->query($sql);
                                             while($dbarr = $result->fetch_assoc()){
-                                                
+
                                               if($dbarr['file_type'] =='mp4'){
                                                 echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
                                                 }
                                                 else {
-                                                echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+                                                echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
                                                 }
-                                                
+
                                             }
                                             ?>
                                             </td>
@@ -146,7 +146,7 @@
                                     <div class="form-inline">
                                         <div class="form-group">
                                             <label>23. ท่าน<code>รู้สึกแย่มาก</code>กับผล หลังการดื่มน้ำมันมะกอก แก้วที่</label>
-                                           
+
                                             <select class="selectpicker" id="p5a23q1" onchange="AutoSave('p5a23q1',$('#form_id').val());">
                                                             <?php for($i=1;$i<=9;$i++){?>
                                                                 <option value="<?php echo $i?>"  <?php if($dataform["p5a23q1"]==$i){echo "selected";}else{echo "";}?>><?php echo $i?></option>
@@ -167,7 +167,7 @@
                     </tr>
                     <tr>
                         <td>
-                            
+
                                 <div class="col-lg-12" style="padding-left:0px;">
                                     <label>24. อาการทางกายที่มีการเปลี่ยนแปลงไปจากเดิม ที่ท่านรับรู้ได้ หลังจากทำการล้างพิษตับในครั้งนี้</label>
                                     <textarea id="p5a24q1" class="form-control" cols="30" onblur="AutoSave('p5a24q1',$('#form_id').val());"><?php echo $dataform["p5a24q1"]?></textarea>

@@ -94,7 +94,7 @@
                         }
 						$(document).ready(function(){
 							$('.section2_1').show();
-						});						
+						});
 					</script>
 					<?php
 		  			for($i = 1; $i < 19; $i++){
@@ -147,7 +147,7 @@
 									}
 								});
 						});
-						
+
 					</script>
 					<tr class='<?php echo $classcss; echo " section2_",$i; ?>'>
 						<td colspan="6"><div id="section2_<?php echo $i; ?>"></div></td>
@@ -155,16 +155,16 @@
 				    <tr class='<?php echo $classcss; echo " section2_",$i; ?>'>
 						<td colspan="6"  id="section2_file<?php echo $i; ?>">
 						<?php
-						$sql = "SELECT id, `file_name`, `file_type` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p2a13b1c".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+						$sql = "SELECT `id`, `file_name`, `file_type` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p2a13b1c".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
 						//echo $sql;
 						$result = $conn->query($sql);
 						while($dbarr = $result->fetch_assoc()){
-								
+
 								if($dbarr['file_type'] =='mp4'){
 								echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
 								}
 								else {
-								echo '<div id="divfile'.$dbarr['id'].'"><a href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery>ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+								echo '<div id="divfile'.$dbarr['id'].'"><a href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
 								}
 						}
 						?>
