@@ -5,9 +5,9 @@ if(empty($_SESSION)){
 //encoding to utf-8
 header("Content-type:text/html; charset=UTF-8");
 //for path directory
-define("APP_WEBROOT", "detoxthai_lte/");
+define("APP_WEBROOT", "");
 //Session Prefix
-define('SESSIONPREFIX' , "dtt_");
+if (!defined('SESSIONPREFIX')) define('SESSIONPREFIX', 'dtt_');
 
 /*set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
     // error was suppressed with the @-operator
@@ -34,10 +34,13 @@ function chk_login(){
 	} else {
 		/** Set cookie. */
 		//if (!isset($detoxthai)) {
-		  $domain='detoxthai.org';
-		  setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
+		  //$domain='detoxthai.org';
+		  //setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
 		//}
 	}
+
+    $domain='detoxthai.org';
+    setcookie("detoxthai", md5($_SESSION[SESSIONPREFIX.'puser_id'].'codeerrorDev444'), time() + (86400 * 30), '/', $domain, false);
 }
 
 $_vars = array();
