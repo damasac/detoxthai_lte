@@ -7,7 +7,7 @@
 		<form id="form_person">
 		<tr><td>
 		<strong>1. ข้อมูลที่อย่ของผู้ตอบแบบสอบถาม</strong>
-		
+
 		<div class="form-inline">
 			<input type="hidden" id="form_id" value="<?php echo $_SESSION['dtt_user_form'];?>" />
 			<br/>
@@ -54,7 +54,7 @@
 				$("#p0a1b3c5").select2();
 				$("#p0a1b3c6").select2();
 				$("#p0a1b3c7").select2();
-				
+
 				$("#p0a1b3c6").empty();
 			    	var option = new Option("เลือกอำเภอ/เขต", "");
     				$("#p0a1b3c6").append($(option));
@@ -171,7 +171,7 @@
 		  	</div>
 		  	<br/>
 		  	<div class="form-group paddingleft fix">
-			    <label for="p0a1b4">1.4 เบอร์โทรศัพท์ที่ติดต่อได้สะดวก
+			    <label for="p0a1b4">1.4 เบอร์โทรศัพท์บ้าน
 			    </label>
 			    <input type="text" class="form-control fix" id="p0a1b4" placeholder="000-0000000" onkeyup="formatNumber_private('p0a1b4',$('#form_id').val())" value="<?php echo $dataform["p0a1b4"]; ?>">
 		  	</div>
@@ -204,7 +204,7 @@
 			</div>
 			<br/>
 			<div class="form-group paddingleft fix">
-				    <label for="p0a2b2">2.2 เบอร์โทรศัพท์ที่ติดต่อได้สะดวก</label>
+				    <label for="p0a2b2">2.2 เบอร์โทรศัพท์บ้าน</label>
 				    <input type="text" class="form-control fix" id="p0a2b2" placeholder="000-0000000" onkeyup="formatNumber_private('p0a2b2',$('#form_id').val())" value="<?php echo $dataform["p0a2b2"]; ?>">
 			</div>
 			<br/>
@@ -218,7 +218,7 @@
 				    <input type="text" class="form-control fix" id="p0a2b4" placeholder="E-mail" value="<?php echo $dataform["p0a2b4"];?>" onblur="validateEmail_private('p0a2b4',$('#form_id').val());">
 			</div>
 		</div>
-		
+
 		</td></tr>
 		</form>
 		</table>
