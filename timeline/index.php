@@ -24,9 +24,11 @@ $MasterPage = 'page_main.php';?>
             $time = date("H:i:s");
             $dateNow = DateThai($date);
             $timeNow = TimeThai($time);
-            $sqlSelectUser = "SELECT * FROM `puser` WHERE id='".$_SESSION["dtt_puser_id"]."' ";
+            $sqlSelectUser = "SELECT * FROM `puser` INNER JOIN `tbl_surveyprivate` ON puser.id =tbl_surveyprivate.ref_id_user  WHERE id='".$_SESSION["dtt_puser_id"]."' ";
             $querySelectUser = $mysqli->query($sqlSelectUser);
             $dataSelectUser = $querySelectUser->fetch_assoc();
+            $cid = $dataSelectUser["p0a1b2"];
+            // echo $cid;
             $sqlDateUser = "SELECT  DATE_FORMAT(a.createdate, '%Y-%m-%d') AS date FROM puser AS a ORDER BY a.createdate DESC";
             $queryDateUser = $mysqli->query($sqlDateUser);
             $sqlDateFollow = "SELECT  DATE_FORMAT(a.create_at, '%Y-%m-%d') AS date1,DATE_FORMAT(a.delete_at, '%Y-%m-%d') AS date2 FROM site_follow AS a ORDER BY a.create_at DESC";
@@ -105,7 +107,7 @@ $MasterPage = 'page_main.php';?>
 
                         </div>
                         <div class="col-md-2">
-                        <input type="hidden" id="cid" name="cid" value="<?php echo $dataSelectUser["cid"];?>">
+                        <input type="hidden" id="cid" name="cid" value="<?php echo $cid;?>">
                         <input type="hidden" id="pid" name="pid" value="<?php echo $dataSelectUser["id"];?>">
                         <button type="submit" class="btn btn-primary" id="btn-form-upload"><i class='fa fa-camera'> </i></button>
                         <button type="submit" class="btn btn-success" id="button_post"><i class="fa fa-pencil"></i> โพสต์</button>
@@ -284,7 +286,7 @@ $input.fileinput("upload");
                         var pid = $("#pid").val();
                         var cid = $("#cid").val();
                         if(cid==""){
-                          alert("กรุณาระบุบัตรประชาชนของท่านก่อนทำการโพสต์");
+                          // alert("กรุณาระบุบัตรประชาชนของท่านก่อนทำการโพสต์");
                           cidDialog(pid);
                           return ;
                         }
@@ -329,7 +331,7 @@ $input.fileinput("upload");
                 closable: true,
                 closeByBackdrop: false,
                 closeByKeyboard: false,
-                title: 'ระบุบัตรประชาชน',
+                title: 'ยืนยันตัวตน',
                 message: $('<div></div>').load('modal-cid.php?pid='+pid)
             });
           }
