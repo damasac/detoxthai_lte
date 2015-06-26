@@ -54,7 +54,7 @@ $MasterPage = 'page_main.php';?>
                   <div class="row">
                     <div class="col-md-12">
                       <p class="text-center">
-                        <strong>ส่วนที่ 1: ภาพรวม</strong>
+                        <h3 class="box-title">ส่วนที่ 1: ภาพรวม</h3>
                       </p>
 
 
@@ -63,7 +63,7 @@ $MasterPage = 'page_main.php';?>
                           <h3 class="box-title">สถิติด้านจำนวน</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                          <table class="table table-bordered">
+                          <table class="table table-bordered table-striped">
                             <tr>
                               <th style="width: 10px">#</th>
                               <th>รายการ</th>
@@ -72,22 +72,22 @@ $MasterPage = 'page_main.php';?>
                             <tr>
                               <td>1.</td>
                               <td> จำนวนสมาชิกที่ลงทะเบียนใน DetoxThai</td>
-                              <td><span class="badge bg-red">55%</span></td>
+                              <td><span class="badge bg-red">55</span></td>
                             </tr>
                             <tr>
                               <td>2.</td>
                               <td>จำนวนสมาชิกที่บันทึกข้อมูลใน Liver Flushing Registry</td>
-                              <td><span class="badge bg-yellow">70%</span></td>
+                              <td><span class="badge bg-yellow">70</span></td>
                             </tr>
                             <tr>
                               <td>3.</td>
                               <td>จำนวนศูนย์สุขภาพองค์รวม</td>
-                              <td><span class="badge bg-light-blue">30%</span></td>
+                              <td><span class="badge bg-light-blue">30</span></td>
                             </tr>
                             <tr>
                               <td>4.</td>
                               <td> จำนวนหลักสูตรสุขภาพองค์รวม</td>
-                              <td><span class="badge bg-green">90%</span></td>
+                              <td><span class="badge bg-green">90</span></td>
                             </tr>
                           </table>
                         </div><!-- /.box-body -->
@@ -96,9 +96,9 @@ $MasterPage = 'page_main.php';?>
 
 
                     </div><!-- /.col -->
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                       <p class="text-center">
-                        <strong>ส่วนที่ 2: การล้างพิษตับ</strong>
+                        <h3 class="box-title">ส่วนที่ 2: การล้างพิษตับ</h3>
                       </p>
                           <script src="<?php echo 'http://',$_SERVER['SERVER_NAME'],'/',APP_WEBROOT;?>/_plugins/chartjs/Chart.min.js" type="text/javascript"></script>
                           <script>
@@ -204,24 +204,22 @@ $MasterPage = 'page_main.php';?>
                         </div><!-- /.box-body -->
                       </div><!-- /.box -->
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                       <p class="text-center">
-                        <strong>&nbsp;</strong>
+                         <h3 class="box-title">&nbsp;</h3>
                       </p>                        
                       <div class="box">
                         <div class="box-header with-border">
                           <h3 class="box-title">กราฟแท่งแนวนอนแสดงจำนวนผู้ล้างพิษตับ จำแนกตามจำนวนแก้ว</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
-                          <table class="table table-bordered">
+                          <table class="table table-bordered table-striped">
                             <tr>
-                              <th style="width: 10px">#</th>
                               <th style="width: 80px">จำนวนแก้ว</th>
                               <th>กราฟ</th>
                               <th style="width: 80px">จำนวนคน</th>
                             </tr>
                             <tr>
-                              <td>1.</td>
                               <td>1-10</td>
                               <td>
                                 <div class="progress progress-xs">
@@ -231,7 +229,6 @@ $MasterPage = 'page_main.php';?>
                               <td><span class="badge bg-red">xx</span></td>
                             </tr>
                             <tr>
-                              <td>2.</td>
                               <td>11-20</td>
                               <td>
                                 <div class="progress progress-xs">
@@ -241,7 +238,6 @@ $MasterPage = 'page_main.php';?>
                               <td><span class="badge bg-yellow">xx</span></td>
                             </tr>
                             <tr>
-                              <td>3.</td>
                               <td>21-30</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
@@ -251,7 +247,6 @@ $MasterPage = 'page_main.php';?>
                               <td><span class="badge bg-light-blue">xx</span></td>
                             </tr>
                             <tr>
-                              <td>4.</td>
                               <td>31-40</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
@@ -268,11 +263,11 @@ $MasterPage = 'page_main.php';?>
                   <div class="row">
                     <div class="col-md-12">
                       <p class="text-center">
-                        <strong>ส่วนที่ 3: แผนที่</strong>
+                        <h3 class="box-title">ส่วนที่ 3: แผนที่</h3>
                       </p>
                       <div class="box box-default">
                         <div class="box-header with-border">
-                          <h3 class="box-title">Browser Usage</h3>
+                          <h3 class="box-title">แผนที่ที่ตั้งศูนย์ล้างพิษ</h3>
                           <div class="box-tools pull-right">
                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -280,7 +275,31 @@ $MasterPage = 'page_main.php';?>
                         </div><!-- /.box-header -->
                         <div class="box-body">
                           <div class="row">
-                            <iframe src="../maps.php" scrolling="no" frameborder="no" width="100%" height="400"></iframe>
+                            <iframe src="../maps.php" scrolling="no" frameborder="no" width="100%" height="600"></iframe>
+                          </div><!-- /.row -->
+                        </div><!-- /.box-body -->
+                      </div><!-- /.box -->
+
+                    </div><!-- /.col -->
+
+
+                  </div><!-- /.row -->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="text-center">
+                        <strong>&nbsp;</strong>
+                      </p>
+                      <div class="box box-default">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">แผนที่ที่ตั้งสมาชิก</h3>
+                          <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                          </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                          <div class="row">
+                            <iframe src="../maps.php" scrolling="no" frameborder="no" width="100%" height="600"></iframe>
                           </div><!-- /.row -->
                         </div><!-- /.box-body -->
                       </div><!-- /.box -->
