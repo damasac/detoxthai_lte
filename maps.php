@@ -113,7 +113,7 @@ function setMarkers(map, locations) {
                     '</div>';
 
     var myinfowindow = new google.maps.InfoWindow({
-        content: content
+        content: beach[0]
     });
     
     var markers = new google.maps.Marker({

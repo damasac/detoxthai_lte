@@ -16,6 +16,8 @@ $MasterPage = 'page_main.php';?>
 
 <?php sb('content');?>
 
+<?php include_once "../_connection/db_base.php"; ?>
+
 <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -27,7 +29,22 @@ $MasterPage = 'page_main.php';?>
        <li class="active">รายงาน</li>
     </ol>
   </section>
+<?php
+    //ส่วนที่1
+   $result_total = $mysqli->query("SELECT COUNT(*) AS total FROM puser");
+    $row_total = $result_total->fetch_assoc();
+    $total = $row_total['total'];
+    $result_form = $mysqli->query("SELECT COUNT(DISTINCT a.id) AS form FROM puser AS a INNER JOIN tbl_surveyuser AS b ON a.id = b.user_id");
+    $row_form = $result_form->fetch_assoc();
+    $total_form = $row_form['form'];
+     $result_site = $mysqli->query("SELECT COUNT(*) AS site FROM puser AS a INNER JOIN site_detail AS b ON a.id = b.create_user");
+    $row_site = $result_site->fetch_assoc();
+    $total_site = $row_site['site'];
+    $result_schedule = $mysqli->query("SELECT COUNT(*) AS schedule FROM puser AS a INNER JOIN site_schedule AS b ON a.id = b.user_id");
+    $row_schedule = $result_schedule->fetch_assoc();
+    $total_schedule = $row_schedule['schedule'];
 
+?>
   <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -72,22 +89,22 @@ $MasterPage = 'page_main.php';?>
                             <tr>
                               <td>1.</td>
                               <td> จำนวนสมาชิกที่ลงทะเบียนใน DetoxThai</td>
-                              <td><span class="badge bg-red">55</span></td>
+                              <td><span class="badge bg-red"><?php echo $total; ?></span></td>
                             </tr>
                             <tr>
                               <td>2.</td>
                               <td>จำนวนสมาชิกที่บันทึกข้อมูลใน Liver Flushing Registry</td>
-                              <td><span class="badge bg-yellow">70</span></td>
+                              <td><span class="badge bg-yellow"><?php echo $total_form; ?></span></td>
                             </tr>
                             <tr>
                               <td>3.</td>
                               <td>จำนวนศูนย์สุขภาพองค์รวม</td>
-                              <td><span class="badge bg-light-blue">30</span></td>
+                              <td><span class="badge bg-light-blue"><?php echo $total_site; ?></span></td>
                             </tr>
                             <tr>
                               <td>4.</td>
                               <td> จำนวนหลักสูตรสุขภาพองค์รวม</td>
-                              <td><span class="badge bg-green">90</span></td>
+                              <td><span class="badge bg-green"><?php echo $total_schedule; ?></span></td>
                             </tr>
                           </table>
                         </div><!-- /.box-body -->
