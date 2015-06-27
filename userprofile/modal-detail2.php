@@ -23,7 +23,7 @@
             <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $data["lname"];?>" style="width:550px;">
     </p>
 
-    <p>
+    <!-- <p>
         รหัสผ่าน ::
         <code id="valPassword" style="display:none;"></code>
 
@@ -33,7 +33,7 @@
         ยืนยันรหัสผ่าน ::
         <code id="valPassword2" style="display:none;"></code>
     <input type="password" class="form-control" id="password2" name="password2" placeholder="กรอกเมื่อต้องการเปลี่ยนรหัสผ่าน" style="width:550px;">
-    </p>
+    </p> -->
     <p style="font-size:16px;">
         เบอร์โทรศัพท์ ::
         <code id="valTel" style="display:none;"></code>
