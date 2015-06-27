@@ -3,10 +3,10 @@
 //    echo "<hr>";
 //    print_r($_POST);
 	//exit;
-  set_time_limit(0);
-  ini_set('memory_limit', '128M');
-  ini_set('post_max_size', '200M');
-  ini_set('upload_max_filesize', '200M');
+  set_time_limit(36000000);
+  ini_set('memory_limit', '256M');
+  ini_set('post_max_size', '256M');
+  ini_set('upload_max_filesize', '256M');
 
 	header("Content-type:text/html; charset=UTF-8");
 
@@ -31,7 +31,7 @@
     }
 
     $ext = strtolower(end(explode('.', $photo_name)));
-    // id_photo ล่าสุด + นามสกุลไฟล์ = เป็นชื่อไฟล์รูป
+    // random string + timestamp + นามสกุลไฟล์ = เป็นชื่อไฟล์รูป
     $filename=random_string(10).'-'.$timestamp.".".$ext;
 
 	if ($ext == "jpg" or $ext == "jpeg" or $ext =="png" or $ext=="gif") {
@@ -51,10 +51,10 @@
 
     //small
     if ($ori_w>=$ori_h) {
-        $new_w = 300;
+        $new_w = 150;
         $new_h = round(($new_w/$ori_w) * $ori_h);
     } else {
-        $new_h =225;
+        $new_h =110;
         $new_w = round(($new_h/$ori_h) * $ori_w);
     }
 
@@ -104,7 +104,7 @@
 	$result = $mysqli->query($sql);
 	$last_id = $mysqli->insert_id;
 	//echo $last_idx; exit;
-	echo '<div id="divfile'.$last_id.'"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
+	echo '<div id="divfile'.$last_id.'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
     } else {
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
     //
@@ -118,7 +118,7 @@
 		//echo $sql; exit;
 		$result = $mysqli->query($sql);
 		$last_id = $mysqli->insert_id;
-		echo '<div id="divfile'.$last_id.'"><a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
+		echo '<div id="divfile'.$last_id.'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
 	} else {
 		echo "Possible file upload attack!\n";
 	}

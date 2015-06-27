@@ -3,10 +3,10 @@
 //    echo "<hr>";
 //    print_r($_POST);
 //	exit;
-    set_time_limit(0);
-    ini_set('memory_limit', '128M');
-    ini_set('post_max_size', '200M');
-    ini_set('upload_max_filesize', '200M');
+    set_time_limit(36000000);
+    ini_set('memory_limit', '256M');
+    ini_set('post_max_size', '256M');
+    ini_set('upload_max_filesize', '256M');
 
 	  header("Content-type:text/html; charset=UTF-8");
 

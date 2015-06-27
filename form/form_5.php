@@ -14,15 +14,47 @@
                     <tr>
                         <td>
                             <script>
+                              var glass5=0;
+                              function add_tr5(args) {
+                                  $('.section5_'+args).fadeIn();
+                                  args = parseInt(args);
+                                  glass5 = args;
+                              }
+
                                 $(document).ready(function(){
                                     $('.section5_1').show();
                                 });
-                                function add_tr5(args) {
-                                    $('.'+args).fadeIn();
+
+                                function add_glass5(args) {
+                                  args = parseInt(args);
+                                  if(glass5>=args){
+                                    glass5++;
+                                  }else{
+                                    glass5=args;
+                                  }
+
+                                  $('.section5_'+glass5).fadeIn();
+                      						if(glass5==9){
+                      							$('#section5_add_glass').hide();
+                      						}
+
                                 }
+
+
                             </script>
                                 <table class="table table-striped table-bordered table-hover" style="width:100%;">
-                                    <thead>
+
+                                    <?php
+                                    $classcss_addglass=0;
+                                    for($i=1;$i<=9;$i++){
+                                    if($dataform["p5a21g{$i}c1"] OR $dataform["p5a21g{$i}c2"] OR $dataform["p5a21g{$i}c3"] OR $dataform["p5a21g{$i}c4"] OR $dataform["p5a21g{$i}c5"]){
+                                        $classcss='';
+                                        $classcss_addglass++;
+                                    }else{
+                                        $classcss = "divhide";
+                                    }
+                                    ?>
+                                    <thead class="<?php echo $classcss; ?> section5_<?php echo $i; ?>">
                                         <tr>
                                             <th rowspan="2"  style="vertical-align: middle;text-align: center;width:120px;" >ดื่มน้ำมะกอก</th>
                                             <th colspan="3" class="text-center" style='background-color: #E8FFF2;'>โปรดระบุผลการตรวจถังอุจจาระ</th>
@@ -36,35 +68,28 @@
                                             <th class="text-center" style='background-color: #A1FFC9;'>หลังถ่าย</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                    <?php for($i=1;$i<=9;$i++){
-                                    if($dataform["p5a21g{$i}c1"] OR $dataform["p5a21g{$i}c2"] OR $dataform["p5a21g{$i}c3"] OR $dataform["p5a21g{$i}c4"] OR $dataform["p5a21g{$i}c5"]){
-                                        $classcss='';
-                                    }else{
-                                        $classcss = "divhide";
-                                    }
-                                    ?>
+
                                         <tr class='<?php echo $classcss, ' section5_',$i; ?>'>
                                             <td class="text-center">แก้วที่ <?php echo $i;?></td>
                                             <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c1" cols="10"
-                                                onclick="add_tr5('section5_<?php echo ($i+1); ?>');"
+                                                onclick="add_tr5('<?php echo ($i+1); ?>');"
                                                 onblur="AutoSave('<?php echo "p5a21g".$i."c1";?>',$('#form_id').val())"><?php echo $dataform["p5a21g".$i."c1"];?></textarea></td>
                                             <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c2" cols="10"
-                                                onclick="add_tr5('section5_<?php echo ($i+1); ?>');"
+                                                onclick="add_tr5('<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c2";?>',$('#form_id').val())"><?php echo $dataform["p5a21g".$i."c2"];?></textarea></td>
                                             <td  class="text-center" style='background-color: #E8FFF2;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c3" cols="10"
-                                                onclick="add_tr5('section5_<?php echo ($i+1); ?>');"
+                                                onclick="add_tr5('<?php echo ($i+1); ?>');"
                                                onblur="AutoSave('<?php echo "p5a21g".$i."c3";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c3"];?></textarea></td>
                                             <td  class="text-center" style='background-color: #A1FFC9;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c4" cols="10"
-                                                onclick="add_tr5('section5_<?php echo ($i+1); ?>');"
+                                                onclick="add_tr5('<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c4";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c4"];?></textarea></td>
                                             <td  class="text-center" style='background-color: #A1FFC9;'>
                                                 <textarea class="form-control" id="p5a21g<?php echo $i?>c5" cols="10"
-                                                onclick="add_tr5('section5_<?php echo ($i+1); ?>');"
+                                                onclick="add_tr5('<?php echo ($i+1); ?>');"
                                                  onblur="AutoSave('<?php echo "p5a21g".$i."c5";?>',$('#form_id').val())" ><?php echo $dataform["p5a21g".$i."c5"];?> </textarea></td>
                                         </tr>
                                         <script>
@@ -101,18 +126,23 @@
                                             while($dbarr = $result->fetch_assoc()){
 
                                               if($dbarr['file_type'] =='mp4'){
-                                                echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+                                                echo '<div id="divfile'.$dbarr['id'].'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
                                                 }
                                                 else {
-                                                echo '<div id="divfile'.$dbarr['id'].'"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+                                                echo '<div id="divfile'.$dbarr['id'].'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
                                                 }
 
                                             }
                                             ?>
                                             </td>
                                         </tr>
+
+
                                     <?php }?>
-                                    </tbody>
+                                    <tr id="section5_add_glass" style="display:<?php if($classcss_addglass==9) echo 'none'; ?>">
+                          						<td colspan="6" class="text-center bg-warning"><a onclick="add_glass5(<?php echo $classcss_addglass; ?>);" class="btn btn-warning btn-lg btn-block"><li class="fa fa-plus"></li> เพิ่มแก้ <li class="fa fa-coffee"></li></a></td>
+                          					</tr>
+
                                 </table>
                             </div>
                         </td>
