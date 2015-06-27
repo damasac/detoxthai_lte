@@ -79,12 +79,13 @@
 <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      บันทึกข้อมูลการล้างพิษตับ 
+      บันทึกข้อมูลการล้างพิษตับ
       <small>สำหรับฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">SITE NAME HERE</li>
+      <li><a href="../"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
+      <li><a href="index.php"><i class="fa fa-dashboard"></i> หน้าแรกบันทึกข้อมูล</a></li>
+      <li class="active">ฟอร์มบันทึกข้อมูล</li>
     </ol>
   </section>
 
@@ -102,16 +103,16 @@
           </div>
 
           <div class="box-body">
-            
+
             <div class="row">
                 <div class="col-lg-12">
                 <div class="alert alert-danger" id="showError" style="display:none;"></div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-12">
- 
+
                 <?php
                 if(isset($_GET["form_id"])){
                     $form_id =$_GET["form_id"];
@@ -130,11 +131,11 @@
                    $dbarr = $res->fetch_assoc();
                 }
                 ?>
-                
+
                 </div>
-            </div>            
-            
-            
+            </div>
+
+
             <input type="hidden" class="form-control" value="<?php echo $form_id;?>" id="form_id" />
             <?php
                 $sqlSelectValue =  "SELECT * FROM `tbl_surveyform` WHERE ref_id_create='".$form_id."' ";
@@ -147,9 +148,9 @@
                 $sqlx =  "SELECT MIN(b.id) as min FROM `tbl_surveyform` AS a INNER JOIN  tbl_surveyuser AS b ON a.ref_id_create=b.id WHERE b.user_id = '".$_SESSION['dtt_user_form']."';";
                 $queryx = $conn->query($sqlx);
                 $resx = $queryx->fetch_assoc();
-                
+
                 include_once "form_1.php";
-                
+
                 if($form_id == $resx['min'])
                     include_once "form_2.php";
                 else{ ?>
@@ -160,14 +161,14 @@
 				</td>
 			</tr>
                 </table>
-                <?php    
+                <?php
                 }
             ?>
-            
+
             <!-------------------------- form 3-4-->
             <?php include_once "form_3.php"; ?>
             <?php include_once "form_4.php"; ?>
-            
+
             <!-------------------------- form 5-6-->
             <?php include_once "form_5.php"; ?>
             <?php include_once "form_6.php"; ?>
@@ -183,8 +184,8 @@
     </div><!-- /.box -->
 
 
-  </section><!-- /.content -->'
-  
+  </section><!-- /.content -->
+
   <div id="blueimp-gallery" class="blueimp-gallery">
     <!-- The container for the modal slides -->
     <div class="slides"></div>
@@ -218,7 +219,7 @@
         </div>
     </div>
 </div>
-  
+
 <?php eb();?>
 
 
@@ -241,7 +242,7 @@
     $("#p4a7").slider({
             tooltip: 'always'
     });
-    
+
     $("#p1a10").click(function(){
     if ($("#p1a10").is(":checked")) {
       $("#tableHide1").fadeOut();
@@ -294,7 +295,7 @@ function datepicker_hide(datePick){
   $(function(){
 	  $('#'+datePick).on('changeDate', function(ev){
 		$(this).datepicker('hide');
-		
+
 	});
 });
 }
@@ -312,5 +313,5 @@ function del_file(file_id, div) {
 
 
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>

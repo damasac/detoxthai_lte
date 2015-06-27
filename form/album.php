@@ -25,8 +25,9 @@
       <small> เพื่อร่วมสร้างองค์ความรู้ ในฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">SITE NAME HERE</li>
+      <li><a href="../"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
+      <li><a href="index.php"><i class="fa fa-dashboard"></i> หน้าแรกบันทึกข้อมูล</a></li>
+      <li class="active">อัลบั้มรูปภาพ</li>
     </ol>
   </section>
 
@@ -175,7 +176,7 @@
           </div><!-- /.box-body -->
     </div><!-- /.box -->
 
-  </section><!-- /.content -->'
+  </section><!-- /.content -->
 
     <div id="blueimp-gallery" class="blueimp-gallery">
     <!-- The container for the modal slides -->

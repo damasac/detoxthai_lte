@@ -5,7 +5,7 @@
 <?php sb('js_and_css_head'); ?>
 <link rel="stylesheet" href="script/bootstrap-slider.css">
 <link rel="stylesheet" href="css/datepicker.css">
-  
+
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -22,8 +22,8 @@
       <small> เพื่อร่วมสร้างองค์ความรู้ ในฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">SITE NAME HERE</li>
+      <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">บันทึกข้อมูลการล้างพิษตับ</li>
     </ol>
   </section>
 
@@ -33,7 +33,7 @@
     include_once("system_function.php");
     //session user
     if(isset($_SESSION['dtt_user_form'])){
-        $user_id = $_SESSION['dtt_user_form'];         
+        $user_id = $_SESSION['dtt_user_form'];
     }else{
         $user_id = $_SESSION['dtt_puser_id'];
         $_SESSION['dtt_user_form']=$_SESSION['dtt_puser_id'];
@@ -41,7 +41,7 @@
     $sql = "SELECT fname, lname FROM `puser` WHERE id='".$user_id."';";
     $query = $conn->query($sql);
     $data = $query->fetch_assoc();
-    
+
     $user_name = $data['fname'].'  '.$data['lname'];
     $sql = "SELECT * FROM `tbl_surveyuser` WHERE (user_id='".$user_id."' AND status='0') ORDER BY id ASC";
     //echo $sql;
@@ -51,7 +51,7 @@
     $sqlSelectValue =  "SELECT status FROM `tbl_surveyprivate` WHERE ref_id_user='".$_SESSION['dtt_user_form']."' ";
     $querySelectValue = $conn->query($sqlSelectValue);
     $dataform = $querySelectValue->fetch_assoc();
-    
+
 if($dataform['status']+0) { ?>
     <div class="box box-primary">
           <div class="box-header with-border">
@@ -64,29 +64,29 @@ if($dataform['status']+0) { ?>
           </div>
 
           <div class="box-body">
-            
+
             <div class="row">
                 <div class="col-lg-12">
                 <h3>
                     บันทึกผลการล้างพิษตับของ &nbsp<code><?php echo $user_name?></code>
                 </h3>
-                
-                        
+
+
 <!--                <div class="form-inline alert alert-success">
-                    
+
                     <hr />
                     <div class="row">
                         <div class="col-lg-8 form-inline">
                             <div class="form-group">
                             <label for="name" style="font-weight: bold;" class="control-label"><h4>สถานที่ &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h4></label>
                             </div>
-                            
+
                         </div>
                     </div>
                     <hr>
                     <div class="form-group">
                         <div class="col-sm-12" style="padding-left: 140px;">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ if($dataform['status']+0) { ?>
                 <hr>
                <h3>จำนวนการล้างพิษตับทั้งหมด <code id="numForm"><?php echo $query->num_rows; ?></code> ครั้ง</h3>
                 <hr>
-                
+
                 <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                   <thead>
@@ -106,9 +106,9 @@ if($dataform['status']+0) { ?>
                       <th>การจัดการ</th>
                     </tr>
                   </thead>
-                  
+
                   <tbody>
-                    
+
                     <?php
                     $i=1;
                     while($data = $query->fetch_assoc()){?>
@@ -124,8 +124,8 @@ if($dataform['status']+0) { ?>
                       <td><?php echo System_showDate($data["createdate"]);?></td>
                       <td><button class="btn btn-primary" onclick='window.location.href="input.php?form_id=<?php echo $data["id"]; ?>"'> ตรวจสอบ </button>
                       <button class="btn btn-danger" onclick='deleteForm(<?php echo $data["id"];?>);'> ลบ </button></td>
-                      
-                    </tr> 
+
+                    </tr>
                     <?php $i++; }?>
                     <tr style="background-color: #D4FFDE;">
                       <td><?php echo $i;?></td>
@@ -158,10 +158,10 @@ if($dataform['status']+0) { ?>
                   </tbody>
                 </table>
                 </div>
-                
+
                 </div>
-            </div>            
-            
+            </div>
+
             <div class="row">
                 <div class="col-lg-12">
                 <div class="alert alert-danger" id="showDelete"style="display:none;">
@@ -173,13 +173,13 @@ if($dataform['status']+0) { ?>
                   </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-lg-12">
                 <div class="alert alert-danger" id="showError" style="display:none;"></div>
                 </div>
             </div>
-            
+
           </div><!-- /.box-body -->
     </div><!-- /.box -->
 <?php } else { ?>
@@ -197,8 +197,8 @@ if($dataform['status']+0) { ?>
           </div>
  </div>
 <?php } ?>
-  </section><!-- /.content -->'
-  
+  </section><!-- /.content -->
+
 <?php eb();?>
 
 
@@ -215,7 +215,7 @@ if($dataform['status']+0) { ?>
         if ($("#form_id").val()!="") {
           $("#formsurvey").show();
         }
-               
+
       });
     $("#p1a10").click(function(){
         if ($("#p1a10").is(":checked")) {
@@ -258,7 +258,7 @@ if($dataform['status']+0) { ?>
         var startdate = startDateSplit[2]+"/"+startDateSplit[1]+"/"+startDateSplit[0];
         var enddate = endDateSplit[2]+"/"+endDateSplit[1]+"/"+endDateSplit[0];
         var user_id = $("#user_id").val();
-        
+
         //console.log(startDate+endDate);
         if (startDate=="" || endDate=="" || location=="") {
             $('#showError').show('fast').delay(2000).fadeOut(300);
@@ -289,7 +289,7 @@ if($dataform['status']+0) { ?>
                     //$("#formsurvey").show();
                     parent.location='input.php?form_id='+returndata;
                 }
-            }); 
+            });
           }
       });
     function deleteForm(form_id) {
@@ -308,7 +308,7 @@ if($dataform['status']+0) { ?>
                     $("#showDelete").hide();
                     $("#trForm_"+form_id).fadeOut();
                 }
-            }); 
+            });
         });
       $("#cancerDelete").click(function(){
           $("#showDelete").hide();
@@ -327,11 +327,11 @@ if($dataform['status']+0) { ?>
 		  $(function(){
 			  $('#'+datePick).on('changeDate', function(ev){
 				$(this).datepicker('hide');
-				
+
 			});
 		});
 	  }
-   
+
   </script>
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
@@ -339,7 +339,7 @@ if($dataform['status']+0) { ?>
     $( document ).ready(function() {
         //---
         $("#location").select2();
-        
+
         $(".select2-input").keyup(function(event){
             var jsonAPI = "ajax-search-site.php?task=site&key=";
             var key = $(this).val();
@@ -365,5 +365,5 @@ if($dataform['status']+0) { ?>
         //---
 </script>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>

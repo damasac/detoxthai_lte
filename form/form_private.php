@@ -53,7 +53,7 @@
       color:white;
     }
 </style>
-  
+
 <?php eb();?>
 
 <?php sb('notifications');?>
@@ -66,12 +66,13 @@
 <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      บันทึกข้อมูลการล้างพิษตับ 
+      บันทึกข้อมูลการล้างพิษตับ
       <small>สำหรับฐานข้อมูลทะเบียนผู้ล้างพิษตับ (Liver Flushing Registry)</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">SITE NAME HERE</li>
+      <li><a href="../"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
+      <li><a href="index.php"><i class="fa fa-dashboard"></i> หน้าแรกบันทึกข้อมูล</a></li>
+      <li class="active">ฟอร์มบันทึกข้อมูล</li>
     </ol>
   </section>
 
@@ -79,7 +80,7 @@
   <section class="content">
 
     <div class="box box-primary">
-       
+
             <div class="box-header with-border">
             <h3 class="box-title"></h3>
             <div class="pull-right">
@@ -90,24 +91,24 @@
           </div>
 
           <div class="box-body">
-            
+
             <div class="row">
                 <div class="col-lg-12">
                 <div class="showError" id="showError" style="display:none;"></div>
                 </div>
             </div>
-            
+
             <input type="hidden" class="form-control" value="<?php echo $_SESSION['dtt_user_form'];?>" id="form_id" />
             <?php
             $sql = "SELECT ref_id_user FROM tbl_surveyprivate WHERE ref_id_user = '".$_SESSION['dtt_user_form']."';";
             $query = $conn->query($sql) or die($conn->error());
             $data = $query->fetch_assoc();
-            
+
             if(!$data['ref_id_user']){
                 $sql = "INSERT INTO `tbl_surveyprivate`(`ref_id_user`) VALUES('".$_SESSION['dtt_user_form']."')";
                 $query = $conn->query($sql) or die($conn->error());
             }
-            
+
                 $sqlSelectValue =  "SELECT * FROM `tbl_surveyprivate` WHERE ref_id_user='".$_SESSION['dtt_user_form']."' ";
                 $querySelectValue = $conn->query($sqlSelectValue);
                 $dataform = $querySelectValue->fetch_assoc();
@@ -115,7 +116,7 @@
             <div id="formsurvey">
             <!-------------------------- form 1-2-->
             <?php include_once "form_consent.php"; include_once "form_person.php";?>
-            
+
             <hr>
             <h3><b>*หมายเหตุ เมื่อท่านกดปุ่ม "<u>ข้อมูลทั้งหมดถูกต้อง</u>" ข้อมูลจะถูกจัดเก็บเป็นความลับ และจะแก้ไขไม่ได้ (ถ้าจำเป็นต้องแก้ไข ต้องส่งคำขอแก้ข้อมูล เพื่อเสนอแก้ไขต่อไป)</b></h3>
             <div class="pull-right">
@@ -128,7 +129,7 @@
             </div>
             <br><br>
             <hr>
-            
+
             </div>
 
 
@@ -137,8 +138,8 @@
     </div><!-- /.box -->
 
 
-  </section><!-- /.content -->'
-  
+  </section><!-- /.content -->
+
 <?php eb();?>
 
 
@@ -163,7 +164,7 @@
                     parent.location='index.php';
                 });
         }
-        
+
     });
 	//
 	$( "#btnFormEdit" ).click(function() {
@@ -176,7 +177,7 @@
                     parent.location='form_private.php';
                 });
         }
-        
+
     });
 </script>
 <script type='text/javascript' src="script/bootstrap-slider.js"></script>
@@ -185,5 +186,5 @@
 <link rel="stylesheet" href="../_plugins/js-select2/select2.css">
 <script type="text/javascript" src="../_plugins/js-select2/select2.js"></script>
 <?php eb();?>
- 
+
 <?php render($MasterPage);?>
