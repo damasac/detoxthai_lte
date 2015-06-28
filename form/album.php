@@ -3,11 +3,10 @@
 <?php sb('title');?>ศูนย์สุขภาพองค์รวม<?php eb();?>
 
 <?php sb('js_and_css_head'); ?>
-<link rel="stylesheet" href="gallery-js/css/blueimp-gallery.min.css">
-<link rel="stylesheet" href="gallery-js/css/bootstrap-image-gallery.min.css">
 
 <script type="text/javascript" src="ajax-upload/JQuery.JSAjaxFileUploader.js"></script>
 <link href="ajax-upload/JQuery.JSAjaxFileUploader.css" rel="stylesheet" type="text/css" />
+<link href="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
 
 <?php eb();?>
 
@@ -45,40 +44,54 @@
           </div>
 
           <div class="box-body">
-
-            <!--<div class="pull-right">
+<?php
+// echo $_SESSION['dtt_album_phototype'];
+// echo "<hr>";
+// echo $_SESSION['dtt_album_status'];
+if(empty($_SESSION['dtt_album_phototype']))
+  $_SESSION['dtt_album_phototype']='';
+if(empty($_SESSION['dtt_album_status']))
+  $_SESSION['dtt_album_status']='';
+ ?>
+            <div class="pull-right">
               <div class="form-group">
-                  <label for="exampleInputEmail2">เลือกหมวดภาพ</label>
-                  <select class="form-control">
-                  <option>สิ่งที่ออกมาจากการสวนล้างลำไส้</option>
-                  <option>สภาพร่างกาย</option>
-                  <option>หลักฐานผลการตรวจร่างกาย</option>
-                  <option>อาหาร ยา หรือสิ่งต่างๆที่ใช้</option>
-                  <option>อื่นๆ</option>
-                </select>
-                </div>
-            </div>-->
+                <label for="exampleInputEmail2">เลือกหมวด</label>
+                <select id='photo_type' class="form-control" onchange="album_set_session('dtt_album_phototype', $(this).val());">
+                <option value='1' <?php if($_SESSION['dtt_album_phototype']==1) echo ' selected'; ?>>สิ่งที่ออกมาจากการสวนล้างลำไส้</option>
+                <option value='2' <?php if($_SESSION['dtt_album_phototype']==2) echo ' selected'; ?>>สภาพร่างกาย</option>
+                <option value='3' <?php if($_SESSION['dtt_album_phototype']==3) echo ' selected'; ?>>หลักฐานผลการตรวจร่างกาย</option>
+                <option value='4' <?php if($_SESSION['dtt_album_phototype']==4) echo ' selected'; ?>>อาหาร ยา หรือสิ่งต่างๆที่ใช้</option>
+                <option value='99' <?php if($_SESSION['dtt_album_phototype']==99) echo ' selected'; ?>>อื่นๆ</option>
+                <option value='' <?php if($_SESSION['dtt_album_phototype']=='') echo ' selected'; ?>>เลือกทั้งหมด</option>
+              </select>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail2">ประเภทการแชร์</label>
+                <select id='status' class="form-control" onchange="album_set_session('dtt_album_status', $(this).val());">
+                <option value='1' <?php if($_SESSION['dtt_album_status']==1) echo ' selected'; ?>>เป็นความลับส่วนตัวของฉัน</option>
+                <option value='2' <?php if($_SESSION['dtt_album_status']==2) echo ' selected'; ?>>แชร์เพื่อให้นักวิจัยสามารถดูได้</option>
+                <option value='' <?php if($_SESSION['dtt_album_status']=='') echo ' selected'; ?>>เลือกทั้งหมด</option>
+              </select>
+              </div>
+            </div>
+
+            <script type="text/javascript">
+
+            function album_set_session(ss_name, val){
+                $.post( "album-set-session.php?task=set-session", { ss_name:ss_name, val:val },  function( data ) {
+                  var url = "album.php";
+                  $(location).attr('href',url);
+                });
+            }
+
+            </script>
 
             <br><br><br><br>
 
 
             <script>
             var ref_user ='<?php echo $_SESSION['dtt_user_form']; ?>';
-            var file_type = 0;
-            var status = 0;
-
-            $(document).ready(function(){
-              $( "#status" ).change(function() {
-                file_type = $('#status').val();
-                alert( file_type );
-              });
-              $( "#file_type" ).change(function() {
-                status = $('#status').val();
-                alert( status );
-              });
-            });
-
-
 
             $(document).ready(function(){
               var size_media = 5400900*40; //200MB
@@ -88,7 +101,7 @@
                         fileName:'photo',
                         allowExt:'gif|jpg|jpeg|png|bmp|mp4',
                         //autoSubmit:false,
-                        formData:{ref_user:ref_user, file_type:file_type, status:status},
+                        formData:{ref_user:ref_user},
                         maxFileSize:size_media,
                         zoomPreview:true,
                         zoomWidth:260,
@@ -106,64 +119,55 @@
                   <div id='photo_upload'></div>
               </div>
 
-            <div id="post-photo" class="col-lg-12 col-md-12 col-sm-12" style="border: 2px solid green;padding:20px; display: none;">
 
-                <form>
-
-               <div class="form-group">
-                  <textarea id='detail' class="form-control" rows="3" placeholder="เขียนคำอธิบาย"></textarea>
-                </div>
-
-
-                <div class="form-group">
-                  <label for="exampleInputEmail2">เลือกหมวดภาพ</label>
-                  <select id='file_type' class="form-control">
-                  <option value='1'>สิ่งที่ออกมาจากการสวนล้างลำไส้</option>
-                  <option value='2'>สภาพร่างกาย</option>
-                  <option value='3'>หลักฐานผลการตรวจร่างกาย</option>
-                  <option value='4'>อาหาร ยา หรือสิ่งต่างๆที่ใช้</option>
-                  <option value='0' selected>อื่นๆ</option>
-                </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="exampleInputEmail2">ประเภทการแชร์</label>
-                  <select id='status' class="form-control">
-                  <option value='0'>เป็นความลับส่วนตัวของฉัน</option>
-                  <option value='1'>สาธารณะ</option>
-                  <option value='2'>เฉพาะสมาชิก DetoxThai</option>
-                  <option value='3'>เฉพาะเพื่อนที่ติดตาม</option>
-                  <option value='4'>เฉพาะ Admin DetoxThai</option>
-                  <option value='5'>เฉพาะสมาชิกที่ระบุ...</option>
-                </select>
-                </div>
-
-                <button type="button" class="btn btn-primary"><li class="fa fa-send"></li> โพสต์</button>
-
-              </form>
-            </div>
-
-            <hr>
-            <div id="photo_upload_file" class="row">
+            <div id="photo_upload_file">
               <?php
-                  $sql = "SELECT id, `file_name`, `file_type` FROM tbl_surveyalbum WHERE ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+
+
+                  $sql = "SELECT id, `file_name`, `file_type`, detail,  photo_type, status  FROM tbl_surveyalbum WHERE ref_user='".$_SESSION['dtt_user_form']."'";
+                  if($_SESSION['dtt_album_phototype']<>''){
+                    $sql .= " AND photo_type='".$_SESSION['dtt_album_phototype']."'";
+                  }
+                  if($_SESSION['dtt_album_status']<>''){
+                    $sql .= " AND status='".$_SESSION['dtt_album_status']."'";
+                  }
+                  $sql .= " ORDER BY id DESC;";
                   //echo $sql;
                   $result = $conn->query($sql);
                   while($dbarr = $result->fetch_assoc()){
-
+                    if($dbarr['detail']==''){
+                      $dbarr['detail'] = 'ยังไม่ได้ระบุคำอธิบาย';
+                    }
                           if($dbarr['file_type'] =='mp4'){
-                          echo '<div  id="divfile'.$dbarr['id'].'" class="col-lg-4 col-md-4 col-sm-4">
-                    <a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a><br><br>
+                          echo '<div class="row" id="divfile'.$dbarr['id'].'">
+                          <hr>
+                          <div class="col-lg-3 col-md-3 col-sm-3 text-center" style="height:120px;">
+                    <a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a>
+                    <h4>คลิกเพื่อชมวิดีโอคลิป</h4>
+                    </div>
+                    <div class="col-md-9">
+                    '.$dbarr['detail'].'
+                    <hr>
+                    <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                    </div>
                 </div>';
                           }
                           else {
-                             echo '<div  id="divfile'.$dbarr['id'].'" class="col-lg-4 col-md-4 col-sm-4">
-                    <a target="_blank" href="file_upload/album/'.$dbarr['file_name'].'" data-gallery>
-                    <img class="img-responsive img-thumbnail" src="file_upload/album/'.$dbarr['file_name'].'">
+                             echo '<div class="row" id="divfile'.$dbarr['id'].'">
+                             <hr>
+                             <div class="col-lg-3 col-md-3 col-sm-3">
+                    <a onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')">
+                    <img class="img-responsive img-thumbnail" src="file_upload/album/small/'.$dbarr['file_name'].'">
                     </a>
-                    <br><br>
+
+                    </div>
+                    <div class="col-md-9">
+                    '.$dbarr['detail'].'
+                    <hr>
+                    <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                    </div>
                 </div>';
                           }
                   }
@@ -178,46 +182,9 @@
 
   </section><!-- /.content -->
 
-    <div id="blueimp-gallery" class="blueimp-gallery">
-    <!-- The container for the modal slides -->
-    <div class="slides"></div>
-    <!-- Controls for the borderless lightbox -->
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
-    <!-- The modal dialog, which will be used to wrap the lightbox content -->
-    <div class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body next"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left prev">
-                        <i class="glyphicon glyphicon-chevron-left"></i>
-                        Previous
-                    </button>
-                    <button type="button" class="btn btn-primary next">
-                        Next
-                        <i class="glyphicon glyphicon-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-
 <?php eb();?>
 
-
 <?php sb('js_and_css_footer');?>
-<script src="gallery-js/js/jquery.blueimp-gallery.min.js"></script>
-<script src="gallery-js/js/bootstrap-image-gallery.min.js"></script>
 
 <script>
   function del_file(file_id, div) {
@@ -226,6 +193,30 @@
       $('#'+div).fadeOut();
     });
 }
+</script>
+
+<script type="text/javascript" src="../_plugins/bootstrap3-dialog/bootstrap-dialog.min.js"></script>
+<script type="text/javascript">
+function popup_album(task, id) {
+
+	dialogPopWindow = BootstrapDialog.show({
+		title: 'Photo',
+		cssClass: 'popup-dialog',
+		size:'size-wide',
+		draggable: false,
+		message: $('<div></div>').load("album-loadimg.php?task="+task+"&id="+id, function(data){
+			//runSomeScript();
+		}),
+		onshown: function(dialogRef){
+            //$("#ezfrom").select2();
+            //(".select2-input").attr("id","ezfrom");
+		},
+		onhidden: function(dialogRef){
+			//alert('onhidden');
+		}
+	});
+}
+
 </script>
 
 <?php eb();?>

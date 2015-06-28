@@ -74,19 +74,19 @@
     imagecopyresized($ori_img_new,$ori_img,0,0,0,0,$new_w2, $new_h2,$ori_w,$ori_h);
 
     if ($ext =="jpg" or $ext =="jpeg") {
-        imagejpeg($new_img,"file_upload/album/$filename");
+        imagejpeg($new_img,"file_upload/album/small/$filename");
     } else if ($ext =="png") {
-        imagepng($new_img,"file_upload/album/$filename");
+        imagepng($new_img,"file_upload/album/small/$filename");
     } else if ($ext =="gif") {
-        imagegif($new_img,"file_upload/album/$filename");
+        imagegif($new_img,"file_upload/album/small/$filename");
     }
 
     if ($ext =="jpg" or $ext =="jpeg") {
-        imagejpeg($ori_img_new,"file_upload/album/$filename");
+        imagejpeg($ori_img_new,"file_upload/album/large/$filename");
     } else if ($ext =="png") {
-        imagepng($ori_img_new,"file_upload/album/$filename");
+        imagepng($ori_img_new,"file_upload/album/large/$filename");
     } else if ($ext =="gif") {
-        imagegif($ori_img_new,"file_upload/album/$filename");
+        imagegif($ori_img_new,"file_upload/album/large/$filename");
     }
     // ทำลาย buffer
     imagedestroy($ori_img);
@@ -95,25 +95,30 @@
     // บันทึกชื่อไฟล์รูป
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
 	//
-    $detailx = $_POST['detail'];
-	  $statusx = $_POST['status'];
-    $file_typex = $_POST['file_type'];
+
+
     $ref_userx = $_POST['ref_user'];
     $createtime = date('Y-m-d H:i:s');
 	//
-    $sql="INSERT INTO `tbl_surveyalbum` (`detail`, `ref_user`, `file_name`, `file_name_org`, `file_type`, `photo_type`, `status`, `createtime`)
-    VALUES ('$detailx', '$ref_userx', '$filename', '$filename_org', '$ext', '$statusx', '$file_typex', '$createtime');";
+    $sql="INSERT INTO `tbl_surveyalbum` (`ref_user`, `file_name`, `file_name_org`, `file_type`, `createtime`)
+    VALUES ('$ref_userx', '$filename', '$filename_org', '$ext',  '$createtime');";
 	//echo $sql;
 	$result = $mysqli->query($sql);
 	$last_id = $mysqli->insert_id;
 	//echo $last_idx; exit;
-    echo '<div  id="divfile'.$last_id.'" class="col-lg-4 col-md-4 col-sm-4">
-                    <a target="_blank" href="file_upload/album/'.$filename.'" data-gallery>
-                    <img class="img-responsive img-thumbnail" src="file_upload/album/'.$filename.'">
+    echo '<div class="row"  id="divfile'.$last_id.'">
+            <hr>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                    <a target="_blank" href="file_upload/album/large/'.$filename.'" data-gallery>
+                    <img class="img-responsive img-thumbnail" src="file_upload/album/small/'.$filename.'">
                     </a>
                     <br><br>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
-                </div>';
+              </div>
+              <div class="col-md-9">
+              test
+              </div>
+            </div>';
     } else {
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
 
@@ -122,21 +127,26 @@
 	if (move_uploaded_file($_FILES['photo']['tmp_name'], "file_upload/video/$filename")) {
 
 		//
-        $detailx = $_POST['detail'];
-        $statusx = $_POST['status'];
-        $file_typex = $_POST['file_type'];
+
         $ref_userx = $_POST['ref_user'];
         $createtime = date('Y-m-d H:i:s');
         //
-        $sql="INSERT INTO `tbl_surveyalbum` (`detail`, `ref_user`, `file_name`, `file_name_org`, `file_type`, `photo_type`, `status`, `createtime`)
-        VALUES ('$detailx', '$ref_userx', '$filename', '$filename_org', '$ext', '$statusx', '$file_typex', '$createtime');";
+        $sql="INSERT INTO `tbl_surveyalbum` (`ref_user`, `file_name`, `file_name_org`, `file_type`, `createtime`)
+        VALUES ('$ref_userx', '$filename', '$filename_org', '$ext',  '$createtime');";
 
 		$result = $mysqli->query($sql);
 		$last_id = $mysqli->insert_id;
-         echo '<div  id="divfile'.$last_id.'" class="col-lg-4 col-md-4 col-sm-4">
+         echo '<div class="row" id="divfile'.$last_id.'">
+         <hr>
+         <div class="col-lg-3 col-md-3 col-sm-3 text-center" style="height:120px;">
                     <a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a><br><br>
-                    <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
-                </div>';
+                    <h4>คลิกเพื่อชมวิดีโอคลิป</h4>
+                </div>
+                <div class="col-md-9">
+                <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$last_id.'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
+                <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                </div>
+            </div>';
 	} else {
 		echo "Possible file upload attack!\n";
 	}
