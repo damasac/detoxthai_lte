@@ -18,7 +18,7 @@ if($_GET['task']=="manage"){
       Your browser does not support the video tag.
       </video>';
     }  else{
-      echo '<img class="img-responsive" src="file_upload/album/large/'.$result['file_name'].'">';
+      echo '<a target="_blank" href="file_upload/album/large/'.$result['file_name'].'"><img class="img-responsive" src="file_upload/album/large/'.$result['file_name'].'"></a>';
       echo "[คลิกที่รูปภาพเพื่อดูขนาดเต็ม]";
     }
 

@@ -97,7 +97,7 @@ if(empty($_SESSION['dtt_album_status']))
               var size_media = 5400900*40; //200MB
                     $('#photo_upload').JSAjaxFileUploader({
                         uploadUrl:'upload-album.php',
-                        inputText:'<li class="fa fa-picture-o"></li> เลือกรูปภาพหรือวิดีโอ...',
+                        inputText:'<span style="font-size:30px !important";><li class="fa fa-picture-o"></li> เลือกรูปภาพหรือวิดีโอ...</span>',
                         fileName:'photo',
                         allowExt:'gif|jpg|jpeg|png|bmp|mp4',
                         //autoSubmit:false,
@@ -114,7 +114,7 @@ if(empty($_SESSION['dtt_album_status']))
             });
 
               </script>
-            <h2><b>โพสต์รูปภาพ</b></h2><hr>
+            <h2><b>อัลบั้มรูปภาพ</b></h2><hr>
             <div class="form-group">
                   <div id='photo_upload'></div>
               </div>
@@ -138,6 +138,11 @@ if(empty($_SESSION['dtt_album_status']))
                     if($dbarr['detail']==''){
                       $dbarr['detail'] = 'ยังไม่ได้ระบุคำอธิบาย';
                     }
+                    if($dbarr['status']==1){
+                      $dbarr['status'] = 'ส่วนตัว เห็นแค่ฉันเท่านั้น) <li class="text-danger fa fa-lock fa-2x"></li>';
+                    }else{
+                      $dbarr['status'] = '(เปิด ให้แสดงข้อมูลเฉพาะนักวิจัย) <li class="text-success fa fa-unlock fa-2x"></li>';
+                    }
                           if($dbarr['file_type'] =='mp4'){
                           echo '<div class="row" id="divfile'.$dbarr['id'].'">
                           <hr>
@@ -150,6 +155,9 @@ if(empty($_SESSION['dtt_album_status']))
                     <hr>
                     <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                    <div class="pull-right">
+                    '.$dbarr['status'].'
+                    </div>
                     </div>
                 </div>';
                           }
@@ -167,6 +175,9 @@ if(empty($_SESSION['dtt_album_status']))
                     <hr>
                     <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
                     <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                    <div class="pull-right">
+                    '.$dbarr['status'].'
+                    </div>
                     </div>
                 </div>';
                           }
