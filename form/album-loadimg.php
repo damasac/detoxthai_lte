@@ -44,7 +44,7 @@ if($_GET['task']=="manage"){
           $sql = "SELECT id, name FROM tbl_surveyalbum_type WHERE ref_user ='".$_SESSION['dtt_user_form']."';";
           $query = $mysqli->query($sql);
           while($dbarr = $query->fetch_assoc()){?>
-               <option value="<?php echo $dbarr['id']; ?>"><?php echo $dbarr['name']; ?></option>
+               <option value="<?php echo $dbarr['id']; ?>" <?php if($dbarr['id']==$result['photo_type']) echo ' selected'; ?>><?php echo $dbarr['name']; ?></option>
           <?php } ?>
 
           <option value='add'>+ เพิ่มหมวด</option>

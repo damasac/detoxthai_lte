@@ -118,7 +118,7 @@
               ยังไม่ได้ระบุคำอธิบาย
               <hr>
               <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$last_id.'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
-              <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+              <a  style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$last_id.'\', \'divfile'.$last_id.'\') : \'\';" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
               <div class="pull-right">
               ส่วนตัว เห็นแค่ฉันเท่านั้น) <li class="text-danger fa fa-lock fa-2x"></li>
               </div>
@@ -151,7 +151,7 @@
                 ยังไม่ได้ระบุคำอธิบาย
                 <hr>
                 <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$last_id.'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
-                <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                <a  style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$last_id.'\', \'divfile'.$last_id.'\') : \'\';" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 <div class="pull-right">
                 ส่วนตัว เห็นแค่ฉันเท่านั้น) <li class="text-danger fa fa-lock fa-2x"></li>
                 </div>

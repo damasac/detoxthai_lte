@@ -104,7 +104,7 @@
 	$result = $mysqli->query($sql);
 	$last_id = $mysqli->insert_id;
 	//echo $last_idx; exit;
-	echo '<div id="divfile'.$last_id.'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
+	echo '<div id="divfile'.$last_id.'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/images_large/'.$filename.'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$filename.'"></a> [<a style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$last_id.'\', \'divfile'.$last_id.'\') : \'\';">ลบ</a>]</div>';
     } else {
 	$filename_org = preg_replace("[^\w\s\d\.\-_~,;:\[\]\(\]]", '',  $photo_name);
     //
@@ -118,7 +118,7 @@
 		//echo $sql; exit;
 		$result = $mysqli->query($sql);
 		$last_id = $mysqli->insert_id;
-		echo '<div id="divfile'.$last_id.'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');">ลบ</a>]</div>';
+		echo '<div id="divfile'.$last_id.'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/video/'.$filename.'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$filename.'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$last_id.'\', \'divfile'.$last_id.'\') : \'\';">ลบ</a>]</div>';
 	} else {
 		echo "Possible file upload attack!\n";
 	}

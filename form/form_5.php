@@ -103,7 +103,7 @@
                                                         allowExt:'gif|jpg|jpeg|png|bmp|mp4',
                                                         //autoSubmit:false,
                                                         formData:{ref_form:'<?php echo $_GET['form_id']; ?>', ref_field:'p5a21g<?php echo $i; ?>', ref_user:'<?php echo $_SESSION['dtt_user_form']; ?>'},
-                                                        maxFileSize:5400900,
+                                                        maxFileSize:size_media,
                                                         zoomPreview:true,
                                                         zoomWidth:260,
                                                         zoomHeight:260,
@@ -120,16 +120,16 @@
                                         <tr class='<?php echo $classcss; echo " section5_",$i; ?>'>
                                             <td colspan="6"  id="section5_file<?php echo $i; ?>">
                                             <?php
-                                            $sql = "SELECT `id`, `file_name` FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p5a21g".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
+                                            $sql = "SELECT `id`, `file_name`, file_type FROM tbl_surveyfile WHERE ref_form='".$_GET['form_id']."' AND ref_field='p5a21g".$i."' AND ref_user='".$_SESSION['dtt_user_form']."' ORDER BY id DESC;";
                                             //echo $sql;
                                             $result = $conn->query($sql);
                                             while($dbarr = $result->fetch_assoc()){
 
                                               if($dbarr['file_type'] =='mp4'){
-                                                echo '<div id="divfile'.$dbarr['id'].'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+                                                echo '<div id="divfile'.$dbarr['id'].'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'"><i class="fa fa-file-video-o fa-5x"></i></a> <br>[<a target="_blank" href="file_upload/video/'.$dbarr['file_name'].'">ดูขนาดใหญ่</a>] [<a style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\') : \'\';">ลบ</a>]</div>';
                                                 }
                                                 else {
-                                                echo '<div id="divfile'.$dbarr['id'].'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');">ลบ</a>]</div>';
+                                                echo '<div id="divfile'.$dbarr['id'].'" class="col-md-2" style="height:150px;"><a target="_blank" href="file_upload/images_large/'.$dbarr['file_name'].'" data-gallery><img class="img-responsive" src="file_upload/images_small/'.$dbarr['file_name'].'"></a> [<a style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\') : \'\';">ลบ</a>]</div>';
                                                 }
 
                                             }

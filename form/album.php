@@ -161,7 +161,7 @@ if(empty($_SESSION['dtt_album_status']))
                     '.$dbarr['detail'].'
                     <hr>
                     <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
-                    <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                    <a  style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\') : \'\';" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                     <div class="pull-right">
                     '.$dbarr['status'].'
                     </div>
@@ -181,7 +181,7 @@ if(empty($_SESSION['dtt_album_status']))
                     '.$dbarr['detail'].'
                     <hr>
                     <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$dbarr['id'].'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
-                    <a  style="cursor : pointer;" onclick="del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+                    <a  style="cursor : pointer;" onclick="return confirm(\'ยืนยันการลบ ?\') ? del_file(\''.$dbarr['id'].'\', \'divfile'.$dbarr['id'].'\') : \'\';" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                     <div class="pull-right">
                     '.$dbarr['status'].'
                     </div>
