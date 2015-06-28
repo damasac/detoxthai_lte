@@ -15,7 +15,7 @@
 <?php eb();?>
 
 <?php sb('content');?>
-<?php include_once "../_connection/db_form.php"; ?>
+<?php include_once "../_connection/db_form.php"; include_once("system_function.php"); ?>
 
 <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -44,9 +44,42 @@
           </div>
 
           <div class="box-body">
+          <div>
+            <a href="album.php" class="text-left btn btn-lg btn-primary"><li class="fa fa-chevron-left fa-1x"></li> กลับหน้าอัลบั้มรูปภาพ</a>
+            <a onclick="popup_album('add', '');"class="pull-right btn btn-lg btn-success"><li class="fa fa-plus fa-1x"></li> เพิ่มหมวดใหม่</a><hr>
+          </div>
 
-  test
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr class="h4" style="background-color: #c0c0c0; color: #00; font-weight: 900;">
+                  <th>#</th>
+                  <th>ชื่อหมวด</th>
+                  <th>รายละเอียด</th>
+                  <th>วันที่สร้าง</th>
+                  <th>การจัดการ</th>
+                </tr>
+              </thead>
 
+              <tbody>
+                <?php
+                $sql = "SELECT id, name, detail, createtime FROM tbl_surveyalbum_type WHERE ref_user ='".$_SESSION['dtt_user_form']."';";
+                $result = $conn->query($sql);
+                $i=1;
+                while($dbarr = $result->fetch_assoc()){
+                ?>
+                <tr>
+                    <td><?php echo $i++; ?></td>
+                    <td><?php echo $dbarr['name']; ?></td>
+                    <td><?php echo $dbarr['name']; ?></td>
+                    <td><?php $obdate = new DateTime($dbarr['createtime']); echo $obdate->format('d/m').'/'.($obdate->format('Y')+543); ?></td>
+                    <td><a class="btn btn-success" onclick="popup_album('add', '<?php echo $dbarr['id']; ?>')"><li class="fa fa-edit"></li></a>
+                        <a class="btn btn-danger" onclick="return confirm('ยืนยันการลบ ?');" href="album-category-ajax.php?task=remove&id=<?php echo $dbarr['id']; ?>"><li class="fa fa-times"></li></a></td>
+                </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
 
 
           </div><!-- /.box-body -->
@@ -65,11 +98,11 @@
 function popup_album(task, id) {
 
 	dialogPopWindow = BootstrapDialog.show({
-		title: 'Photo',
+		title: 'Add Category Photo',
 		cssClass: 'popup-dialog',
 		size:'size-wide',
 		draggable: false,
-		message: $('<div></div>').load("album-loadimg.php?task="+task+"&id="+id, function(data){
+		message: $('<div></div>').load("album-category-ajax.php?task="+task+"&id="+id, function(data){
 			//runSomeScript();
 		}),
 		onshown: function(dialogRef){

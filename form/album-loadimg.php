@@ -40,6 +40,13 @@ if($_GET['task']=="manage"){
           <option value='3' <?php if($result['photo_type']==3) echo ' selected'; ?>>หลักฐานผลการตรวจร่างกาย</option>
           <option value='4' <?php if($result['photo_type']==4) echo ' selected'; ?>>อาหาร ยา หรือสิ่งต่างๆที่ใช้</option>
           <option value='99' <?php if($result['photo_type']==99) echo ' selected'; ?>>อื่นๆ</option>
+          <?php
+          $sql = "SELECT id, name FROM tbl_surveyalbum_type WHERE ref_user ='".$_SESSION['dtt_user_form']."';";
+          $query = $mysqli->query($sql);
+          while($dbarr = $query->fetch_assoc()){?>
+               <option value="<?php echo $dbarr['id']; ?>"><?php echo $dbarr['name']; ?></option>
+          <?php } ?>
+
           <option value='add'>+ เพิ่มหมวด</option>
         </select>
         </div>

@@ -26,7 +26,7 @@
     <ol class="breadcrumb">
       <li><a href="../"><i class="fa fa-dashboard"></i> หน้าแรก</a></li>
       <li><a href="index.php"><i class="fa fa-dashboard"></i> หน้าแรกบันทึกข้อมูล</a></li>
-      <li class="active">อัลบั้มรูปภาพ</li>
+      <li class="active">อัลบั้มรูปภาพของฉัน</li>
     </ol>
   </section>
 
@@ -57,12 +57,19 @@ if(empty($_SESSION['dtt_album_status']))
               <div class="form-group">
                 <label for="exampleInputEmail2">เลือกหมวด</label>
                 <select id='photo_type' class="form-control" onchange="album_set_session('dtt_album_phototype', $(this).val());">
+                <option value='' <?php if($_SESSION['dtt_album_phototype']=='') echo ' selected'; ?>>เลือกทั้งหมด</option>
                 <option value='1' <?php if($_SESSION['dtt_album_phototype']==1) echo ' selected'; ?>>สิ่งที่ออกมาจากการสวนล้างลำไส้</option>
                 <option value='2' <?php if($_SESSION['dtt_album_phototype']==2) echo ' selected'; ?>>สภาพร่างกาย</option>
                 <option value='3' <?php if($_SESSION['dtt_album_phototype']==3) echo ' selected'; ?>>หลักฐานผลการตรวจร่างกาย</option>
                 <option value='4' <?php if($_SESSION['dtt_album_phototype']==4) echo ' selected'; ?>>อาหาร ยา หรือสิ่งต่างๆที่ใช้</option>
                 <option value='99' <?php if($_SESSION['dtt_album_phototype']==99) echo ' selected'; ?>>อื่นๆ</option>
-                <option value='' <?php if($_SESSION['dtt_album_phototype']=='') echo ' selected'; ?>>เลือกทั้งหมด</option>
+
+                <?php
+                $sql = "SELECT id, name FROM tbl_surveyalbum_type WHERE ref_user ='".$_SESSION['dtt_user_form']."';";
+                $result = $conn->query($sql);
+                while($dbarr = $result->fetch_assoc()){?>
+                     <option value="<?php echo $dbarr['id']; ?>" <?php if($dbarr['id']==$_SESSION['dtt_album_phototype']) echo ' selected'; ?>><?php echo $dbarr['name']; ?></option>
+                <?php } ?>
               </select>
               </div>
 
@@ -114,7 +121,7 @@ if(empty($_SESSION['dtt_album_status']))
             });
 
               </script>
-            <h2><b>อัลบั้มรูปภาพ</b></h2><hr>
+            <h2><b>อัลบั้มรูปภาพของฉัน</b></h2><hr>
             <div class="form-group">
                   <div id='photo_upload'></div>
               </div>
