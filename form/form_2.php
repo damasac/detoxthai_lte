@@ -98,7 +98,7 @@
 						<thead class="<?php echo $classcss; ?> section2_<?php echo $i; ?>">
 						<tr>
 							<th rowspan="2"  style="vertical-align: middle;text-align: center;width:120px;" >
-								ดื่มน้ำมันมะกอก<?php echo $i; ?>
+								ดื่มน้ำมันมะกอก
 							</th>
 							<th colspan="3" class="text-center" style="background-color: #E8FFF2;">
 								โปรดระบุผลการตรวจถังอุจจาระ
