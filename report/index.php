@@ -119,6 +119,54 @@ $MasterPage = 'page_main.php';?>
     $job20 = $row['job20'];
     $job21 = $row['job21'];
     $job22 = $row['job22'];
+
+        $sql="SELECT b.user_id
+    ,SUM(p2a13b1c1>0) AS part2g1
+    ,SUM(p2a13b1c2>0) AS part2g2
+    ,SUM(p2a13b1c3>0) AS part2g3
+    ,SUM(p2a13b1c4>0) AS part2g4
+    ,SUM(p2a13b1c5>0) AS part2g5
+    ,SUM(p2a13b1c6>0) AS part2g6
+    ,SUM(p2a13b1c7>0) AS part2g7
+    ,SUM(p2a13b1c8>0) AS part2g8
+    ,SUM(p2a13b1c9>0) AS part2g9
+    ,SUM(p2a13b1c10>0) AS part2g10
+    ,SUM(p2a13b1c11>0) AS part2g11
+    ,SUM(p2a13b1c12>0) AS part2g12
+    ,SUM(p2a13b1c13>0) AS part2g13
+    ,SUM(p2a13b1c14>0) AS part2g14
+    ,SUM(p2a13b1c15>0) AS part2g15
+    ,SUM(p2a13b1c16>0) AS part2g16
+    ,SUM(p2a13b1c17>0) AS part2g17
+    ,SUM(p2a13b1c18>0) AS part2g18
+    ,SUM(p2a13b1c19>0) AS part2g19
+    ,SUM(LENGTH(p5a21g1c1)>0 OR LENGTH(p5a21g1c2)>0 OR LENGTH(p5a21g1c3)>0 OR LENGTH(p5a21g1c4)>0 OR LENGTH(p5a21g1c5)>0) AS part5g1
+    ,SUM(LENGTH(p5a21g2c1)>0 OR LENGTH(p5a21g2c2)>0 OR LENGTH(p5a21g2c3)>0 OR LENGTH(p5a21g2c4)>0 OR LENGTH(p5a21g2c5)>0) AS part5g2
+    ,SUM(LENGTH(p5a21g3c1)>0 OR LENGTH(p5a21g3c2)>0 OR LENGTH(p5a21g3c3)>0 OR LENGTH(p5a21g3c4)>0 OR LENGTH(p5a21g3c5)>0) AS part5g3
+    ,SUM(LENGTH(p5a21g4c1)>0 OR LENGTH(p5a21g4c2)>0 OR LENGTH(p5a21g4c3)>0 OR LENGTH(p5a21g4c4)>0 OR LENGTH(p5a21g4c5)>0) AS part5g4
+    ,SUM(LENGTH(p5a21g5c1)>0 OR LENGTH(p5a21g5c2)>0 OR LENGTH(p5a21g5c3)>0 OR LENGTH(p5a21g5c4)>0 OR LENGTH(p5a21g5c5)>0) AS part5g5
+    ,SUM(LENGTH(p5a21g6c1)>0 OR LENGTH(p5a21g6c2)>0 OR LENGTH(p5a21g6c3)>0 OR LENGTH(p5a21g6c4)>0 OR LENGTH(p5a21g6c5)>0) AS part5g6
+    ,SUM(LENGTH(p5a21g7c1)>0 OR LENGTH(p5a21g7c2)>0 OR LENGTH(p5a21g7c3)>0 OR LENGTH(p5a21g7c4)>0 OR LENGTH(p5a21g7c5)>0) AS part5g7
+    ,SUM(LENGTH(p5a21g8c1)>0 OR LENGTH(p5a21g8c2)>0 OR LENGTH(p5a21g8c3)>0 OR LENGTH(p5a21g8c4)>0 OR LENGTH(p5a21g8c5)>0) AS part5g8
+    ,SUM(LENGTH(p5a21g9c1)>0 OR LENGTH(p5a21g9c2)>0 OR LENGTH(p5a21g9c3)>0 OR LENGTH(p5a21g9c4)>0 OR LENGTH(p5a21g9c5)>0) AS part5g9
+    FROM `tbl_surveyform` AS a INNER JOIN `tbl_surveyuser` AS b ON a.ref_id_create=b.id GROUP BY b.user_id  ";
+    $result=$mysqli->query($sql);
+    $sum1=0;
+    $sum2=0;
+    $sum3=0;
+    $sum4=0;
+    while($row=$result->fetch_assoc()){
+    $sum = $row['part2g1']+$row['part2g2']+$row['part2g3']+$row['part2g4']+$row['part2g5']+$row['part2g6']+$row['part2g7']+$row['part2g8']+$row['part2g9']+$row['part2g10']+$row['part2g11']+$row['part2g12']+$row['part2g13']+$row['part2g14']+$row['part2g15']+$row['part2g16']+$row['part2g17']+$row['part2g18']+$row['part2g19']+$row['part5g1']+$row['part5g2']+$row['part5g3']+$row['part5g4']+$row['part5g5']+$row['part5g6']+$row['part5g7']+$row['part5g8']+$row['part5g9'];
+    if($sum>=31 && $sum<=40){
+      $sum4++;
+    }else if($sum>=21 && $sum<=30){
+      $sum3++;
+    }else if($sum>=11 && $sum<=20){
+      $sum2++;
+    }else if($sum>=1 && $sum<=10){
+      $sum1++;
+    }
+    }
 ?>
   <!-- Main content -->
         <section class="content">
@@ -320,37 +368,37 @@ $MasterPage = 'page_main.php';?>
                               <td>1-10</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+                                  <div class="progress-bar progress-bar-danger" style="width: <?php echo $sum1."%"; ?>"></div>
                                 </div>
                               </td>
-                              <td><span class="badge bg-red">xx</span></td>
+                              <td><span class="badge bg-red"><?php echo $sum1; ?></span></td>
                             </tr>
                             <tr>
                               <td>11-20</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                                  <div class="progress-bar progress-bar-yellow" style="width: <?php echo $sum2."%"; ?>"></div>
                                 </div>
                               </td>
-                              <td><span class="badge bg-yellow">xx</span></td>
+                              <td><span class="badge bg-yellow"><?php echo $sum2; ?></span></td>
                             </tr>
                             <tr>
                               <td>21-30</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                                  <div class="progress-bar progress-bar-primary" style="width: <?php echo $sum3."%"; ?>"></div>
                                 </div>
                               </td>
-                              <td><span class="badge bg-light-blue">xx</span></td>
+                              <td><span class="badge bg-light-blue"><?php echo $sum3; ?></span></td>
                             </tr>
                             <tr>
                               <td>31-40</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                                  <div class="progress-bar progress-bar-success" style="width: <?php echo $sum4."%"; ?>"></div>
                                 </div>
                               </td>
-                              <td><span class="badge bg-green">xx</span></td>
+                              <td><span class="badge bg-green"><?php echo $sum4; ?></span></td>
                             </tr>
                           </table>
                         </div><!-- /.box-body -->
