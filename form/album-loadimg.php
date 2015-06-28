@@ -52,7 +52,7 @@ if($_GET['task']=="manage"){
         </select>
         </div>
 
-        <button type="button" class="btn btn-primary btn-block" onclick="location.href='album.php';"><li class="fa fa-edit"></li> เสร็จแล้ว</button>
+        <a href="album.php" target="_parent" class="btn btn-primary btn-block"><li class="fa fa-edit"></li> เสร็จแล้ว</a>
 
       </form>
       <script type="text/javascript">

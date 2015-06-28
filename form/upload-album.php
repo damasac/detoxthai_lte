@@ -112,11 +112,13 @@
                     <a target="_blank" href="file_upload/album/large/'.$filename.'" data-gallery>
                     <img class="img-responsive img-thumbnail" src="file_upload/album/small/'.$filename.'">
                     </a>
-                    <br><br>
-                    <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
+
               </div>
               <div class="col-md-9">
-              test
+              ยังไม่ได้ระบุคำอธิบาย
+              <hr>
+              <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$last_id.'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
+              <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
               </div>
             </div>';
     } else {
@@ -143,6 +145,8 @@
                     <h4>คลิกเพื่อชมวิดีโอคลิป</h4>
                 </div>
                 <div class="col-md-9">
+                ยังไม่ได้ระบุคำอธิบาย
+                <hr>
                 <a  style="cursor : pointer;" onclick="popup_album(\'manage\', \''.$last_id.'\')" class="btn btn-success"><li class="fa fa-edit"></li> แก้ไข</a>
                 <a  style="cursor : pointer;" onclick="del_file(\''.$last_id.'\', \'divfile'.$last_id.'\');" class="btn btn-danger"><li class="fa fa-picture-o"></li> ลบ</a>
                 </div>
