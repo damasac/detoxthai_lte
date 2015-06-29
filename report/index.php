@@ -155,6 +155,7 @@ $MasterPage = 'page_main.php';?>
     $sum2=0;
     $sum3=0;
     $sum4=0;
+    $count=0;
     while($row=$result->fetch_assoc()){
     $sum = $row['part2g1']+$row['part2g2']+$row['part2g3']+$row['part2g4']+$row['part2g5']+$row['part2g6']+$row['part2g7']+$row['part2g8']+$row['part2g9']+$row['part2g10']+$row['part2g11']+$row['part2g12']+$row['part2g13']+$row['part2g14']+$row['part2g15']+$row['part2g16']+$row['part2g17']+$row['part2g18']+$row['part2g19']+$row['part5g1']+$row['part5g2']+$row['part5g3']+$row['part5g4']+$row['part5g5']+$row['part5g6']+$row['part5g7']+$row['part5g8']+$row['part5g9'];
     if($sum>=31 && $sum<=40){
@@ -166,7 +167,13 @@ $MasterPage = 'page_main.php';?>
     }else if($sum>=1 && $sum<=10){
       $sum1++;
     }
+    $count++;
     }
+ $sump1= ($sum1/$count)*100;
+  $sump2= ($sum2/$count)*100;
+   $sump3= ($sum3/$count)*100;
+    $sump4= ($sum4/$count)*100;
+
 ?>
   <!-- Main content -->
         <section class="content">
@@ -368,7 +375,7 @@ $MasterPage = 'page_main.php';?>
                               <td>1-10</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-danger" style="width: <?php echo $sum1."%"; ?>"></div>
+                                  <div class="progress-bar progress-bar-danger" style="width: <?php echo $sump1."%"; ?>"></div>
                                 </div>
                               </td>
                               <td><span class="badge bg-red"><?php echo $sum1; ?></span></td>
@@ -377,7 +384,7 @@ $MasterPage = 'page_main.php';?>
                               <td>11-20</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-yellow" style="width: <?php echo $sum2."%"; ?>"></div>
+                                  <div class="progress-bar progress-bar-yellow" style="width: <?php echo $sump2."%"; ?>"></div>
                                 </div>
                               </td>
                               <td><span class="badge bg-yellow"><?php echo $sum2; ?></span></td>
@@ -386,7 +393,7 @@ $MasterPage = 'page_main.php';?>
                               <td>21-30</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-primary" style="width: <?php echo $sum3."%"; ?>"></div>
+                                  <div class="progress-bar progress-bar-primary" style="width: <?php echo $sump3."%"; ?>"></div>
                                 </div>
                               </td>
                               <td><span class="badge bg-light-blue"><?php echo $sum3; ?></span></td>
@@ -395,7 +402,7 @@ $MasterPage = 'page_main.php';?>
                               <td>31-40</td>
                               <td>
                                 <div class="progress progress-xs progress-striped active">
-                                  <div class="progress-bar progress-bar-success" style="width: <?php echo $sum4."%"; ?>"></div>
+                                  <div class="progress-bar progress-bar-success" style="width: <?php echo $sump4."%"; ?>"></div>
                                 </div>
                               </td>
                               <td><span class="badge bg-green"><?php echo $sum4; ?></span></td>
