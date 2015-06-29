@@ -63,10 +63,13 @@
 					var glass=0;
 
 						function add_tr(args) {
-                $('.section2_'+args).fadeIn();
+						$('.section2_'+args).fadeIn();
 								args = parseInt(args);
 								glass = args;
-            }
+						if(glass==19){
+								$('#section2_add_glass').hide();
+							}
+						}
 
 						function add_glass(args) {
 							args = parseInt(args);
@@ -74,6 +77,7 @@
 								glass++;
 							}else{
 								glass=args;
+								glass++;
 							}
 
 							$('.section2_'+glass).fadeIn();
@@ -201,7 +205,7 @@
 					}
 					?>
 					<tr id="section2_add_glass" style="display:<?php if($classcss_addglass==19) echo 'none'; ?>">
-						<td colspan="6" class="text-center bg-warning"><a onclick="add_glass(<?php echo $classcss_addglass; ?>);" class="btn btn-warning btn-lg btn-block"><li class="fa fa-plus"></li> เพิ่มแก้ <li class="fa fa-coffee"></li></a></td>
+						<td colspan="6" class="text-center bg-warning"><a onclick="add_glass(<?php echo $classcss_addglass; ?>);" class="btn btn-warning btn-lg btn-block"><li class="fa fa-plus"></li> เพิ่มแก้ว <li class="fa fa-coffee"></li></a></td>
 					</tr>
 
 					</table>

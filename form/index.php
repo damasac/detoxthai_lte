@@ -32,8 +32,13 @@
 <?php
     include_once("system_function.php");
     //session user
-    if(isset($_SESSION['dtt_user_form'])){
-        $user_id = $_SESSION['dtt_user_form'];
+    //if click กลับไปเป็นตัวเอง
+    if($_GET['task']=='switch_to_me'){
+      $user_id = $_SESSION['dtt_puser_id'];
+      $_SESSION['dtt_user_form']=$_SESSION['dtt_puser_id'];
+    }
+    else if(isset($_SESSION['dtt_user_form'])){
+        $user_id = $_SESSION['dtt_user_form'];         
     }else{
         $user_id = $_SESSION['dtt_puser_id'];
         $_SESSION['dtt_user_form']=$_SESSION['dtt_puser_id'];
@@ -68,7 +73,7 @@ if($dataform['status']+0) { ?>
             <div class="row">
                 <div class="col-lg-12">
                 <h3>
-                    บันทึกผลการล้างพิษตับของ &nbsp<code><?php echo $user_name?></code>
+                    บันทึกผลการล้างพิษตับของ &nbsp<code><?php echo $user_name; ?></code><?php if($_SESSION['dtt_puser_id'] <> $_SESSION['dtt_user_form']) { ?> <a href="?task=switch_to_me" class="btn btn-info btn-flat"><li class="fa fa-share"></li> กลับไปเป็นตัวเอง</a><?php } ?>
                 </h3>
 
 

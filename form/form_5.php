@@ -19,6 +19,10 @@
                                   $('.section5_'+args).fadeIn();
                                   args = parseInt(args);
                                   glass5 = args;
+								  
+								  if(glass5==9){
+										$('#section5_add_glass').hide();
+									}
                               }
 
                                 $(document).ready(function(){
@@ -31,12 +35,13 @@
                                     glass5++;
                                   }else{
                                     glass5=args;
+									glass5++;
                                   }
 
                                   $('.section5_'+glass5).fadeIn();
-                      						if(glass5==9){
-                      							$('#section5_add_glass').hide();
-                      						}
+									if(glass5==9){
+										$('#section5_add_glass').hide();
+									}
 
                                 }
 
@@ -140,7 +145,7 @@
 
                                     <?php }?>
                                     <tr id="section5_add_glass" style="display:<?php if($classcss_addglass==9) echo 'none'; ?>">
-                          						<td colspan="6" class="text-center bg-warning"><a onclick="add_glass5(<?php echo $classcss_addglass; ?>);" class="btn btn-warning btn-lg btn-block"><li class="fa fa-plus"></li> เพิ่มแก้ <li class="fa fa-coffee"></li></a></td>
+                          						<td colspan="6" class="text-center bg-warning"><a onclick="add_glass5(<?php echo $classcss_addglass; ?>);" class="btn btn-warning btn-lg btn-block"><li class="fa fa-plus"></li> เพิ่มแก้ว <li class="fa fa-coffee"></li></a></td>
                           					</tr>
 
                                 </table>
