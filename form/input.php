@@ -145,7 +145,7 @@
             <div id="formsurvey">
             <!-------------------------- form 1-2-->
             <?php
-                $sqlx =  "SELECT MIN(b.id) as min FROM `tbl_surveyform` AS a INNER JOIN  tbl_surveyuser AS b ON a.ref_id_create=b.id WHERE b.user_id = '".$_SESSION['dtt_user_form']."';";
+                $sqlx =  "SELECT b.id as min FROM `tbl_surveyform` AS a INNER JOIN  tbl_surveyuser AS b ON a.ref_id_create=b.id WHERE b.user_id = '".$_SESSION['dtt_user_form']."' AND b.status='0' ORDER BY b.id ASC;";
                 $queryx = $conn->query($sqlx);
                 $resx = $queryx->fetch_assoc();
 

@@ -267,7 +267,7 @@
 					  	<input type="checkbox" id="p1a10" value="<?php echo $dataform["p1a10"]; ?>" <?php if($dataform["p1a10"]==1){echo "checked";} ?>> &nbsp;&nbsp;ไม่มีอาการป่วยใดๆ
 					</label>
 					<div class="form-group">
-					    <code>--> ข้ามไปตอบข้อ 11</code>
+					    <code>--> ข้ามไปตอบข้อ <?php echo $num_index+1; ?></code>
 		  			</div>
 					<script>
 						$(function(){
